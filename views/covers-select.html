@@ -1,0 +1,61 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Select a book cover" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	<p>{% trans "Select the book cover you want to use for:" %} <strong>{{ usage }}</strong></p>
+	<p>{% trans 'Make your selection by clicking on a cover' %}</p>
+	<h2>{% trans "Your private book covers" %}</h2>
+	<div class="coverGallery">
+		{% for cover in yourPrivateCovers %}
+			<div class="cover">
+				<a href='{{ redirect }}?selected={{ cover.key }}'>
+					<img src='/Covers/Thumbnail/{{ cover.key }}'>
+					{% if cover.isReusable %}
+						<span class="coverTitle" {% if cover.TitleColor %}style="color: {{ cover.TitleColor }}"{% endif %} >{{ cover.SampleTitle }}</span> 
+					{% endif %}
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+	<h2>{% trans "Your shared book covers" %}</h2>
+	<div class="coverGallery">
+		{% for cover in yourSharedCovers %}
+			<div class="cover">
+				<a href='{{ redirect }}?selected={{ cover.key }}'>
+					<img src='/Covers/Thumbnail/{{ cover.key }}'>
+					{% if cover.isReusable %}
+						<span class="coverTitle" {% if cover.TitleColor %}style="color: {{ cover.TitleColor }}"{% endif %} >{{ cover.SampleTitle }}</span> 
+					{% endif %}
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+	<h2>{% trans "All shared book covers" %}</h2>
+	<div class="coverGallery">
+		{% for cover in allSharedCovers %}
+			<div class="cover">
+				<a href='{{ redirect }}?selected={{ cover.key }}'>
+					<img src='/Covers/Thumbnail/{{ cover.key }}'>
+					{% if cover.isReusable %}
+						<span class="coverTitle" {% if cover.TitleColor %}style="color: {{ cover.TitleColor }}"{% endif %} >{{ cover.SampleTitle }}</span> 
+					{% endif %}
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
+
+{% block sidebar %}
+	<div class="sidebarPanel">
+		<h3>{% trans "Options" %}</h3>
+		<div class="sidebarMenu">
+			<ul>
+				<li><a href="/Covers/Edit/">{% trans "Add a new cover" %}</a></li>
+			</ul>
+		</div>
+	</div>
+{% endblock %}

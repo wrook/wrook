@@ -1,0 +1,161 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{{ book.Title }} <span style="font-weight: normal; font-size: 0.7em;"> {% trans "by " %} {{ book.authorName }}</span>
+	</h1>
+{% endblock %}
+{% block notices %}
+	{% ifnotequal book.Stage "final" %}
+		<div class="notice">
+			<strong>{% trans "Notice:" %}</strong>
+			{% ifequal book.Stage "planning" %}{% trans "This book is only in the planning stage." %}{% endifequal %}
+			{% ifequal book.Stage "drafting" %}{% trans "This book is only a draft." %}{% endifequal %}
+			{% ifequal book.Stage "writing" %}{% trans "This book is in the process of being writen." %}{% endifequal %}
+			{% ifequal book.Stage "proofing" %}{% trans "This book is still in proofing." %}{% endifequal %}
+		</div>
+	{% endifnotequal %}
+{% endblock %}
+{% block content %}
+	<div style="width: 190px; float:right; z-index: 1000; position: relative; margin-left: 20px;">
+		{% if firstChapter %}
+			<div class="buttonBar" style="margin-bottom: 10px;">
+				<ul>
+					<li><a href="/ViewChapter/{{ firstChapter.key }}"><span>{% trans "Start reading" %}</span></a></li>
+				</ul>
+			</div>
+		{% endif %}
+		{% if book.getCover %}
+			<div class="cover width180">
+				<img src='/Covers/Thumbnail/{{ book.getCover.key }}?width=180'>
+				{% if book.getCover.isReusable %}
+					<span class="coverTitle" {% if book.getCover.TitleColor %}style="color: {{ book.getCover.TitleColor }}"{% endif %} >{{ book.Title }}</span> 
+				{% endif %}
+			</div>
+		{% endif %}
+		<h3>
+			{% trans "About this book" %}
+		</h3>
+		<ul>
+			<li>
+				{{ book.Bookmarks.count }} <a href="/Readers/Book/{{ book.key }}">{% trans "Readers" %}</a>
+			</li>
+			<li>
+				{{ book.Feedback.count }} <a href="/Feedback/Book/{{ book.key }}">{% trans "Feedbacks" %}</a>
+			</li>
+			<li>
+				{{ book.wordCount }} words
+			</li>
+		</ul>
+		<h3>
+			{% trans "License and attribution" %}
+		</h3>
+		{% if book.License %}
+			<p>
+				<a href="{{ book.License.URL }}">{{ book.License.Title }}</a>
+			</p>
+			{% if book.AttribDetailed %}
+				<p>
+					{{ book.markdownAttribDetailed }}
+				</p>
+			{% endif %}
+		{% else %}
+			<p>
+				{% trans "No license or copyright has been specified" %}</a>
+			</p>
+		{% endif %}
+	</div>
+	{% if book.Synopsis %}
+		<h3>
+			{% trans "Synopsis" %}
+		</h3>
+		<div class="Synopsis">
+			"&#160;{{ book.Synopsis|escape }}&#160;"
+		</div>
+	{% endif %}
+	{% if book.Author.About %}
+		<h3>
+			{% trans "Contributed by" %}
+		</h3>
+		<div style="position: relative">
+			<div class="avatar" style="float: left; margin: 0px 5px 5px 0px;"><a href="/Member/{{ book.Author.key }}"><img src="{{ book.Author.gravatar50 }}" width="50" height="50" /></a></div>
+			<p>
+				<a href="/Member/{{ book.Author.key }}">{{ book.Author.fullname }}</a>
+				<br />
+				{{ book.Author.About }}
+			</p>
+		</div>
+	{% endif %}
+	<div style="clear:left"></div>
+	{% if book.NoteFromAuthor %}
+		<h3>
+			{% trans "A note from the contributor" %}
+		</h3>
+		<div class="NoteFromAuthor">
+			{{ book.NoteFromAuthor|escape }}
+		</div>
+	{% endif %}
+	<h3 id="ChapterList">
+		Chapters
+	</h3>
+	<div class="chapterList">
+		<ul>
+			{% for chapter in chapters %}
+				<li>
+					<a href="/ViewChapter/{{ chapter.key }}">
+						{% if chapter.Name %}
+							{{ chapter.Name|escape }}
+						{% endif %}
+						{% if chapter.Title and chapter.Name %}
+							:
+						{% endif %}
+						{% if chapter.Title %}
+							{{ chapter.Title|escape }}
+						{% endif %}
+					</a>
+					{% ifequal book.Stage "planning" %}({% trans "Planning" %}){% endifequal %}
+					{% ifequal book.Stage "drafting" %}({% trans "Drafting" %}){% endifequal %}
+					{% ifequal book.Stage "writing" %}({% trans "Writing" %}){% endifequal %}
+					{% ifequal book.Stage "proofing" %}({% trans "Proofing" %}){% endifequal %}
+				</li>
+			{% endfor %}
+		</ul>
+		<div class="clearfix"></div>
+	</div>
+{% endblock content %}
+
+{% block sidebar %}
+		<div class="sidebarPanel">
+			<h3>Community</h3>
+			<div class="sidebarMenu">
+				<ul>
+					<li><a href="/Feedback/Book/{{ book.key }}">{% trans "Leave feedback or comments" %}</a></li>
+					<li><a href="/Invites/">{% trans "Invite a friend!" %}</a></li>
+				</ul>
+			</div>
+		</div>
+		{% if userCanEdit %}
+			<div class="sidebarPanel">
+				<h3>
+					{% trans "Writing and Editing" %}
+				</h3>
+				<div class="sidebarMenu">
+					<ul>
+						{% if userIsAuthor %}
+							{% if book.lastRevisedChapter %}
+								<li><a href="/Typewriter/{{ book.lastRevisedChapter.key }}">{% trans "Resume writing" %}</a></li>
+							{% endif %}
+							<li><a href="/NewChapter/{{ book.key }}">{% trans "Start a new chapter" %}</a></li>
+						{% endif %}
+						{% if userCanEdit %}
+							<li><a href="/Books/Edit/{{ book.key }}">{% trans "Edit book options" %}</a></li>
+							<li><a href="/Books/ReorderChapters/{{ book.key }}">{% trans "Reorder chapters" %}</a></li>
+							<li><a href="/Books/Edit/License/{{ book.key }}">{% trans "Edit license options" %}</a></li>
+							<li><a href="/Covers/Select?usage={{ book.Title }}&redirect=/Books/SetCover/{{ book.key }}">{% trans "Change book cover" %}</a></li>
+							<li><a href="/Books/Delete/{{ book.key }}">{% trans "Delete whole book" %}</a></li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		{% endif %}
+{% endblock sidebar %}

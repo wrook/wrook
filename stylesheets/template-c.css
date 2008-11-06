@@ -1,0 +1,391 @@
+html, div, p, table, tr, td, th, ul, ol, li {
+	font-size: 12px; /* To prevent OS Screen DPI settings to affect the layout */
+}
+
+body {
+	text-align: center;
+	background: #f2f2f2;
+	font-family: "Courier New", Courier, monospace;
+	font-family: Verdana;
+	font-family: Arial Narrow;
+	font-family: Tahoma;
+	margin: 0px;
+	padding: 0px;
+	font-size: 1em;
+}
+
+h1 {
+	margin: 0px 0px 10px 0px;
+	padding: 0px;
+	font-size: 1.7em;
+	color: #000;
+	clear: both;
+}
+
+h2 {
+	margin: 10px 0px 10px 0px;
+	padding: 0px;
+	font-size: 1.4em;
+	color: #000000;
+	clear: both;
+	font-weight: normal;
+}
+
+h3 {
+}
+
+#page {
+	background: #ffffff;
+	width: 1024px;
+	margin: 0px auto 0px auto;
+}
+
+#pageInner {
+	position: relative;
+	text-align: left;
+	width: 840px;
+	margin: 0px auto 0px auto;
+	padding: 20px 0px 20px 0px;
+}
+
+#pageTitle {
+}
+
+
+
+#footer {
+	position: relative;
+	text-align: left;
+	width: 1024px;
+	padding: 10px auto 100px auto;
+	background: #000;
+	color: #000000;
+	clear: both;
+}
+#footerContent {
+	margin: 0px auto;
+}
+
+#logo {
+	position: absolute;
+	top: 47px;
+	left: -39px;
+}
+#logo a:link,
+#logo a:visited {
+	text-decoration: none !important;
+}
+
+
+#currentUserAvatar {
+	position: absolute;
+	top: 0px;
+	left: 37px;
+	height: 80px;
+	width: 80px;
+	border: 2px solid #000;
+	background: #000;
+}
+
+#logo #logoText {
+	display: block;
+	position: absolute;
+	width: 700px;
+	left: 37px;
+	top: 7px;
+	color: #000;
+}
+
+
+.withAvatar #logo #logoText {
+	margin-left: 98px;
+}
+
+
+#logo #welcomeSalutation {
+	position: relative;
+	margin-left: 2.5px;
+	font-size: 3em !important;
+}
+
+
+#logo #logoTextShadow {
+	display: block;
+	position: absolute;
+	width: 700px;
+	left: 35px;
+	top: 5px;
+	color: #fff;
+}
+
+#logo #logoTextShadow #welcomeSalutationUp{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	margin-left: 2.5px;
+	font-size: 3em !important;
+	color: #fff !important;
+}
+#logo #logoTextShadow #welcomeSalutationDown {
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	margin-left: 2.5px;
+	font-size: 3em !important;
+	color: #fff !important;
+}
+
+
+
+#header {
+}
+
+#headerContent {
+	position: relative;
+	text-align: left;
+	width: 840px;
+	margin: 0px auto 0px auto;
+	height: 140px;
+}
+
+
+#pageFooter {
+	clear: both;
+	height: 1px;
+	position: relative;
+}
+
+
+
+#memberMenu {
+	position: absolute;
+	left: 10px;
+	top: 105px;
+}
+
+.withAvatar #memberMenu {
+	margin-left: 95px;
+}
+
+#memberMenu ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	font-size: 1.2em;
+}
+
+#memberMenu ul li{
+	display: inline;
+	float: left;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	text-indent: 0px;
+	font-size: 1.2em;
+}
+
+#memberMenu ul li a {
+	display: block;
+	margin: 0px 5px 0px 0px;
+	padding: 2px 8px 2px 8px;
+	color: #fff;
+	background: #000;
+	text-decoration: none;
+}
+#memberMenu ul li .separator {
+	display: block;
+	margin: 0px 5px 0px 0px;
+	padding: 2px 2px 2px 2px;
+	color: #000;
+}
+
+#memberMenu ul li a:hover {
+	background: #000;
+	color: #fff;
+}
+
+.sidebarNotice,
+.genericNotice,
+.stageNotice {
+	width: 540px;
+	padding: 3px 5px 3px;
+	background: #FFFFDD;
+	border: 1px solid #999966;
+	position: relative;
+	top: -10px;
+	left: -5px;
+	margin-bottom: 5px;
+}
+.sidebarNotice {
+	width: 100%;
+}
+
+#bookPage {
+	background: #dbdbdb;
+	width: 550px;
+	margin-bottom: 20px;
+}
+#bookPageInner {
+	position: relative;
+	top: -5px;
+	left: -5px;
+	width: 550px;
+	border: 1px solid #b5b5b5;
+	background: #ffffff;
+	min-height: 400px;
+}
+
+#bookPageContent {
+	padding: 20px;
+}
+#bookPageContent .chapterInfo{
+	text-align: center;
+}
+
+#bookPage .chapterInfo .bookTitle {
+	position: absolute;
+	top: 10px;
+	left: 20px;
+	color: #888888;
+}
+#bookPage .chapterNumber {
+	margin-top: 40px;
+}
+
+#bookPage .chapterInfo .authorName {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	text-decoration: none;
+}
+
+#bookPage .chapterInfo .bookTitle a:visited,
+#bookPage .chapterInfo .bookTitle a:link,
+#bookPage .chapterInfo .authorName a:link,
+#bookPage .chapterInfo .authorName a:visited {
+	color: #888888;
+	text-decoration: none;
+}
+
+#bookPage .authorName a {
+	color: #000;
+	text-decoration: none;
+}
+
+#bookPage .chapterText {
+	text-align: left;
+	font-size: 1.1em;
+	padding: 20px;
+}
+
+#bookPage .Synopsis {
+	font-size: 1em;
+	color: #666666;
+}
+#bookPage .h1 {
+	margin-top: 40px;
+}
+
+
+#bookSide {
+	width: 280px;
+	padding-left: 20px;
+}
+
+
+#bookSide ul {
+	list-style: none;
+	text-indent: 0;
+	margin: 0px;
+	padding: 0px;
+}
+
+#bookSide ul li {
+	text-indent: 0;
+	margin: 0px;
+	padding: 0px;
+}
+
+.columnOneThird {
+	float: left;
+	width: 280px;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+.columnTwoThird {
+	float: left;
+	width: 550px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.withAvatar #logo #logoText {
+	margin-left: 100px;
+}
+.withAvatar #logo #logoTextShadow {
+	margin-left: 100px;
+}
+
+#siteBar {
+	position: relative;
+	background: #000000;
+	color: #FFFFFF;
+	height: 52px;
+	background: url(/images/sitebar-swoosh.png) no-repeat;
+}
+#siteBarContent {
+	position: relative;
+	width: 840px;
+	margin: 0px auto;
+}
+
+#currentMemberAvatar {
+	position: absolute;
+	top: 12px;
+	left: 0px;
+}
+
+#siteName {
+	position: absolute;
+	font-family: courier new, courier, serif;
+	font-size: 3.5em;
+	font-weight: bold;
+	top: 4px;
+	left: 0px;
+}
+#siteName a:visited,
+#siteName a:link {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+#siteName.withAvatar {
+	left: 40px;
+}
+
+ul#siteMenu {
+	position: absolute;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	top: 10px;
+	left: 250px;
+	font-size: 1em;
+}
+ul#siteMenu li {
+	position: relative;
+	display: block;
+	float: left;
+	margin-right: 8px;
+	font-size: 1em;
+}
+ul#siteMenu li a:visited,
+ul#siteMenu li a:link {
+	color: #ffffff;
+	position: relative;
+	display: block;
+	float: left;
+	text-decoration: none;
+}
+

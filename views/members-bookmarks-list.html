@@ -1,0 +1,43 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Readings" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	<div class="bookmarkGallery">
+		<table>
+			<tr>
+				{% for bookmark in bookmarks %}
+					<td>
+					<div class="bookmark">
+						<div style="display:none">{% cycle 0,0,1 as rowChange %}</div>
+						<div class="cover">
+							<a href="/Books/{{ bookmark.Book.key }}">
+								<img src='/Covers/Thumbnail/{{ bookmark.Book.getCover.key }}' title="{{ bookmark.Book.Title }}" alt="{{ bookmark.Book.Title }}">
+								{% if bookmark.Book.getCover.isReusable %}
+									<span class="coverTitle" {% if bookmark.Book.Cover.TitleColor %}style="color: {{ bookmark.Book.getCover.TitleColor }}"{% endif %} >{{ bookmark.Book.Title }}</span> 
+								{% endif %}
+							</a>
+						</div>
+						{% ifequal bookmark.Book.Stage "planning" %}{% trans "Only planning" %}, {% endifequal %}
+						{% ifequal bookmark.Book.Stage "drafting" %}{% trans "Still in drafting" %}, {% endifequal %}
+						{% ifequal bookmark.Book.Stage "writing" %}{% trans "Still in writing" %}, {% endifequal %}
+						{% ifequal bookmark.Book.Stage "proofing" %}{% trans "Still in proofing" %}, {% endifequal %}
+						<br />
+						{% trans "By" %} {{ bookmark.Book.authorName }}
+					</div>
+					</td>
+					{% ifequal rowChange "1" %}
+						</tr>
+						<tr>
+					{% endifequal %}
+				{% endfor %}
+			</tr>
+		<table>
+	</div>
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}

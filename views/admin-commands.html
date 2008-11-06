@@ -1,0 +1,53 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Labs: Admin commands" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	{% if operationResults %}
+		{% ifequal operationResults.ErrorCode 0 %}
+			<div style="padding: 5px 20px; border:2px solid #00FF00; background: #CCFFCC">
+				<h3>Success!</h3>
+				<p>
+					{{ operationResults.Message }}
+				</p>
+			</div>
+			<br/>
+		{% else %}
+			<div style="padding: 5px 20px; border:2px solid #FF0000; background: #FFCCCC">
+				<h3>Error code: {{ operationResults.ErrorCode }} </h3>
+				<p>
+					{{ operationResults.Message }}
+				</p>
+			</div>
+			<br/>
+		{% endifequal %}
+	{% endif %}
+	{% if currentMember.isAdmin %}
+		<form action="/Admin/Commands/doDefaultAllBookStatus" method="post">
+			<input type="submit" value="Default All Book Status" />
+		</form>
+		<form action="/Admin/Commands/doDefaultAllChapterNumberTo0" method="post">
+			<input type="submit" value="Default all chapter numbers to 0" />
+		</form>							
+		<form action="/Admin/Commands/doLoadLicenseTypes" method="post">
+			<input type="submit" value="Load License Types" />
+		</form>							
+	{% else %}
+		<p>
+			{% trans "This page is restricted to the site administrators" %}
+	{% endif %}
+{% endblock %}
+
+{% block sidebar %}
+	<div class="sidebarPanel">
+		<h3>{% trans "Options" %}</h3>
+		<div class="sidebarMenu">
+			<ul>
+				<li><a href="/Labs">{% trans "Back to the labs" %}</a></li>
+			</ul>
+		</div>
+	</div>
+{% endblock %}

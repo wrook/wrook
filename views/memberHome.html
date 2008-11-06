@@ -1,0 +1,28 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block pageId %}home-member{% endblock %}
+{% block pageTitle %}{% trans "Home" %}{% endblock %}
+{% block title %}
+{% endblock %}
+{% block content %}
+	{% include "template-part-newMemberWelcome.html" %}
+	<h2>
+		{% trans "What's new" %}
+	</h2>
+	<div class="storyPosts">
+		{% for post in posts %}{% include "part-stories.html" %}{% endfor %}
+	</div>
+{% endblock %}
+
+{% block sidebar %}
+	<div class="sidebarPanel">
+		<h3>{% trans "Your options" %}</h3>
+		<div class="sidebarMenu">
+			<ul>
+				<li><a href="/Books/Edit/">{% trans "Start a new book" %}</a></li>
+				<li><a href="/Members/{{ currentMember.key }}">{% trans "Your public profile" %}</a></li>
+				<li><a href="/Account/View">{% trans "Your account settings" %}</a></li>
+			</ul>
+		</div>
+	</div>
+{% endblock %}

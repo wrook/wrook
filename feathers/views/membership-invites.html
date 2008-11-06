@@ -1,0 +1,113 @@
+﻿{% extends masterTemplate %}
+{% load i18n %}
+{% block pageId %}invites{% endblock %}
+{% block pageTitle %}{% trans "Invites" %}{% endblock %}
+{% block title %}
+	<h1>
+		{% trans "Invites" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	<p>
+		{% trans 'To send an invitation, go to a book and click on the "Invite someone" button.' %}
+	</p>
+	<h2 style="text-align: left;">
+		{% trans "Invites you have sent" %}
+	</h2>
+	{% ifnotequal invites.count 0 %}
+		<table width="50%">
+			<thead>
+				<tr>
+					<th>
+						{% trans "Name" %}
+					</th>
+					<th>
+						{% trans "Email adress" %}
+					</th>
+					<th>
+						{% trans "Status" %}
+					</th>
+			</thead>
+			<tbody>
+				{% for invite in invites %}
+					{% ifnotequal invite.Status "discarded" %}
+						<tr>
+							<td>
+								<h4>
+									<a href="/Invites/{{ invite.key }}">{{ invite.Firstname }} {{ invite.Lastname }}</a>
+								</h4>
+							</td>
+							<td>
+								{{ invite.Email }}
+							</td>
+							<td>
+								{{ invite.Status }}
+							</td>
+						</tr>
+					{% endifnotequal %}
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<div>
+			{% trans "It seems that you havent invited anyone! Dont you have any friends to spam?" %}
+		</div>
+	{% endifnotequal %}
+
+
+	{% ifnotequal allInvites.count 0 %}
+		<h2 style="text-align: left;">
+			{% trans "All invites" %}
+		</h2>
+		<table width="50%">
+			<thead>
+				<tr>
+					<th>
+						{% trans "From" %}
+					</th>
+					<th>
+						{% trans "To" %}
+					</th>
+					<th>
+						{% trans "Email adress" %}
+					</th>
+					<th>
+						{% trans "Status" %}
+					</th>
+			</thead>
+			<tbody>
+				{% for invite in allInvites %}
+					<tr>
+						<td>
+							<h4>
+								<a href="/Member/{{ invite.FromMember.key }}">{{ invite.FromMember.fullname }}</a>
+							</h4>
+						</td>
+						<td>
+							<h4>
+								<a href="/Invites/{{ invite.key }}">{{ invite.Firstname }} {{ invite.Lastname }}</a>
+							</h4>
+						</td>
+						<td>
+							{{ invite.Email }}
+						</td>
+						<td>
+							{{ invite.Status }}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endifnotequal %}
+{% endblock %}
+
+{% block sidebar %}
+		<div class="sidebarPanel">
+			<h3>Options</h3>
+			<div class="sidebarMenu">
+				<ul>
+					<li><a href="/Invites/">{% trans "Invite a friend" %}</a></li>
+				</ul>
+			</div>
+		</div>
+{% endblock %}

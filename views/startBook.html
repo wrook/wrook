@@ -1,0 +1,20 @@
+﻿{% extends "template-main.html" %}
+{% load i18n %}
+{% block content %}
+
+		<h2>{% trans "Start a new book" %}</h2>
+		<form method="post" action="/StartBook">
+			<div>
+				<label for="Title">{% trans "Title" %}</label><br/>
+				<input type="text" name="Title" />
+			</div>
+			<div>
+				<label for="Synopsis">{% trans "Synopsis" %}</label><br/>
+				<textarea name="Synopsis"></textarea>
+			</div>
+			<div>
+				<input type="submit" name="action" value="{% trans "Start" %}" />
+			</div>
+		</form>
+
+{% endblock %}

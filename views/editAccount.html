@@ -1,0 +1,77 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block pageId %}account-edit{% endblock %}
+{% block pageTitle %}{% trans "Edit your account" %}{% endblock %}
+{% block title %}
+	<h1>
+		{% trans "Edit your account" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	{% if error %}
+		<div class="error">
+			{{ error }}
+		</div>
+	{% endif %}
+	<form method="post" action="/EditAccount">
+		<table>
+			<tbody>
+				<tr>
+					<th>
+						<label for="Firstname">{% trans "Firstname *" %}</label>
+					</th>
+					<td>
+						<input type="text" name="Firstname" value="{{ firstname|escape }}" />
+					<td>
+				</tr>
+				<tr>
+					<th>
+						<label for="Lastname">{% trans "Lastname *" %}</label>
+					</th>
+					<td>
+						<input type="text" name="Lastname" value="{{ lastname|escape }}" />
+					<td>
+				</tr>
+				<tr>
+					<th>
+						<label for="PreferedLanguage">{% trans "Prefered language" %}</label>
+					</th>
+					<td>
+						<select name="PreferedLanguage">
+							<option {% ifequal preferedLanguage "en" %}selected="selected"{% endifequal %} value="en">English</option>
+							<option {% ifequal preferedLanguage "fr" %}selected="selected"{% endifequal %} value="fr">Français</option>
+						</select>
+					<td>
+				</tr>
+				<tr>
+					<th>
+						<label for="Gender">{% trans "Gender" %}</label>
+					</th>
+					<td>
+						<select name="Gender">
+							<option {% ifequal gender "" %}selected="selected"{% endifequal %} value="">{% trans "Select one..." %}</option>
+							<option {% ifequal gender "male" %}selected="selected"{% endifequal %} value="male">{% trans "Male" %}</option>
+							<option {% ifequal gender "female" %}selected="selected"{% endifequal %} value="female">{% trans "Female" %}</option>
+						</select>
+					<td>
+				</tr>
+				<tr>
+					<th>
+						<label for="About">{% trans "A few words about you" %}</label>
+					</th>
+					<td>
+						<textarea style="width:400px; height: 100px;" name="About">{% if about %}{{ about|escape }}{% endif %}</textarea>
+					<td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<input type="submit" name="action" value="{% trans 'Save' %}" />
+					<td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+
+{% endblock %}

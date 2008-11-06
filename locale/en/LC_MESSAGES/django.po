@@ -1,0 +1,1653 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-05 16:13-0500\n"
+"PO-Revision-Date: 2008-09-21 14:40-0500\n"
+"Last-Translator: Mathieu Sylvain <mathieu@ti-coco.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\wrook.py:50
+msgid "Moments"
+msgstr ""
+
+#: .\wrook.py:57
+msgid "Image"
+msgstr ""
+
+#: .\wrook.py:59
+msgid "Created by"
+msgstr ""
+
+#: .\wrook.py:60
+msgid "Is this cover reusable for other books?"
+msgstr ""
+
+#: .\wrook.py:61 .\feathers\customize.py:35
+msgid "Share with everyone"
+msgstr ""
+
+#: .\wrook.py:76
+msgid "New book..."
+msgstr ""
+
+#: .\wrook.py:76 .\feathers\views\labs.html.py:38 .\views\startBook.html.py:8
+msgid "Title"
+msgstr ""
+
+#: .\wrook.py:77
+msgid "Author"
+msgstr ""
+
+#: .\wrook.py:78
+msgid "Slug"
+msgstr ""
+
+#: .\wrook.py:79
+msgid "Stage"
+msgstr ""
+
+#: .\wrook.py:80
+msgid "Cover"
+msgstr ""
+
+#: .\wrook.py:81 .\views\books-view.html.py:70 .\views\startBook.html.py:12
+msgid "Synopsis"
+msgstr ""
+
+#: .\wrook.py:82 .\views\viewChapter.html.py:144
+msgid "Note from the author"
+msgstr ""
+
+#: .\wrook.py:83
+msgid "License"
+msgstr ""
+
+#: .\wrook.py:84
+msgid "Attribution"
+msgstr ""
+
+#: .\wrook.py:85
+msgid "Are you the author"
+msgstr ""
+
+#: .\wrook.py:86
+msgid "Author's name"
+msgstr ""
+
+#: .\wrook.py:107
+msgid "Mr. Unknown"
+msgstr ""
+
+#: .\wrook.py:145
+msgid "Chapter X"
+msgstr ""
+
+#: .\wrook.py:311
+msgid "The default cover has been set!"
+msgstr ""
+
+#: .\wrook.py:313
+msgid "Back to the covers"
+msgstr ""
+
+#: .\wrook.py:332
+msgid "The cover has been changed!"
+msgstr ""
+
+#: .\wrook.py:334
+msgid "Back to the book"
+msgstr ""
+
+#: .\wrook.py:361
+msgid "This cover is already in use by other book. It was not deleted"
+msgstr ""
+
+#: .\wrook.py:540
+msgid "<strong>Login failed:</strong> "
+msgstr ""
+
+#: .\wrook.py:542
+msgid ""
+"<strong>Login failed:</strong> Username and password are both mandatory!"
+msgstr ""
+
+#: .\wrook.py:591
+msgid "Username, email, firstname and lastname are madatory!"
+msgstr ""
+
+#: .\wrook.py:663
+msgid ""
+"Firstname and lastname are madatory! You will also have to re-upload your "
+"photo!"
+msgstr ""
+
+#: .\wrook.py:698
+msgid "No file were uploaded!"
+msgstr ""
+
+#: .\wrook.py:729
+msgid ""
+"Changing password failed! You have either not entered a new password or the "
+"old one does not match."
+msgstr ""
+
+#: .\wrook.py:901 .\wrook.py:904
+msgid "No member found with this username or email address!"
+msgstr ""
+
+#: .\wrook.py:1373
+msgid "No commands have been processed. Missing parameters!"
+msgstr ""
+
+#: .\wrook.py:1385
+msgid "Empty status properties of all books and chapters have been defaulted!"
+msgstr ""
+
+#: .\wrook.py:1390
+msgid "All license types have been loaded into the database!"
+msgstr ""
+
+#: .\wrook.py:1397
+msgid "All chapter numbers have been reseted to 0!"
+msgstr ""
+
+#: .\wrook.py:1415
+msgid "Congratulations... you flushed the cache!"
+msgstr ""
+
+#: .\wrook.py:1458
+msgid ""
+"<a href=\"/Members/$MemberKey\">$MemberFullname</a> started reading <a href="
+"\"/Books/$BookKey\">$BookTitle</a>"
+msgstr ""
+
+#: .\wrook.py:1482
+msgid ""
+"<a href=\"/Members/$MemberKey\">$MemberFullname</a> left a comment on <a "
+"href=\"/Books/$BookKey\">$BookTitle</a>"
+msgstr ""
+
+#: .\wrook.py:1483
+msgid ""
+"\n"
+"<a href=\"/Feedback/Book/$BookKey\" style=\"float: right; margin-left: 15px;"
+"\">\n"
+"\t<img width=\"45\" src=\"$CoverImage\"/>\n"
+"</a>\n"
+"<a href=\"/Members/$MemberKey\" style=\"float: left; margin-right: 15px;\">\n"
+"\t<img width=\"30\" src=\"$MemberAvatar\"/>\n"
+"</a>\n"
+"<strong><a href=\"/Feedback/Book/$BookKey\">The message</a> said: "
+"$MessageTitle </strong><br />\"&#160;$MessageBody&#160;\"\n"
+msgstr ""
+
+#: .\wrook.py:1532
+msgid ""
+"<a href=\"/Members/$MemberKey\">$MemberFullname</a> has flushed the site "
+"cache"
+msgstr ""
+
+#: .\wrook.py:1636
+msgid "Default cover"
+msgstr ""
+
+#: .\feathers\customize.py:27
+msgid "New theme"
+msgstr ""
+
+#: .\feathers\customize.py:28 .\feathers\views\labs-viewFeature.html.py:33
+#: .\feathers\views\labs.html.py:46 .\feathers\views\labs.html.py:73
+#: .\feathers\views\labs.html.py:116 .\feathers\views\labs.html.py:158
+msgid "Description"
+msgstr ""
+
+#: .\feathers\customize.py:29
+msgid "Created"
+msgstr ""
+
+#: .\feathers\customize.py:30
+msgid "Default theme"
+msgstr ""
+
+#: .\feathers\customize.py:31
+msgid "Submitd by"
+msgstr ""
+
+#: .\feathers\customize.py:33
+msgid "Background color"
+msgstr ""
+
+#: .\feathers\customize.py:34
+msgid "Style source code"
+msgstr ""
+
+#: .\feathers\customize.py:76
+msgid "When selected"
+msgstr ""
+
+#: .\feathers\customize.py:77
+msgid "Member"
+msgstr ""
+
+#: .\feathers\customize.py:78
+msgid "Theme"
+msgstr ""
+
+#: .\feathers\membership.py:65 .\feathers\membership.py:71
+msgid "Wrong username or bad password."
+msgstr ""
+
+#: .\feathers\membership.py:68
+msgid ""
+"Your account does not have a password. Use the \"Reset password\" option to "
+"create a new one."
+msgstr ""
+
+#: .\feathers\membership.py:108
+msgid "English"
+msgstr ""
+
+#: .\feathers\membership.py:109
+msgid "French"
+msgstr ""
+
+#: .\feathers\membership.py:113 .\views\editAccount.html.py:53
+#: .\views\join.html.py:75
+msgid "Male"
+msgstr ""
+
+#: .\feathers\membership.py:114 .\views\editAccount.html.py:54
+#: .\views\join.html.py:76
+msgid "Female"
+msgstr ""
+
+#: .\feathers\membership.py:132
+msgid ""
+"\n"
+"Hello $firstname $lastname,\n"
+"\n"
+"Here is your Wrook password: $password\n"
+"\n"
+"We sent you this new password because you just joined Wrook or because you "
+"asked for a \"reset password\".\n"
+"\n"
+"If you have any questions, dont hesitate to contact us by email at "
+"admin@wrook.org\n"
+"\n"
+"Have a good day!\n"
+"The Wrook Team\n"
+"http://www.wrook.org\n"
+"\n"
+msgstr ""
+
+#: .\feathers\membership.py:148
+msgid "About your Wrook.org account!"
+msgstr ""
+
+#: .\feathers\membership.py:205
+#, python-format
+msgid "%s invites you to read a book!"
+msgstr ""
+
+#: .\feathers\membership.py:235
+msgid ""
+"\n"
+"Hello $firstname $lastname,\n"
+"\n"
+"$senderName is inviting you to join the Wrook community.\n"
+"\n"
+"Wrook is a community of writers and readers of all genre of literature. Read "
+"free books,\n"
+"participate in the writting process of authors or publish and share your own "
+"writings.\n"
+"\n"
+"A message from $senderName:\n"
+"\"$senderMessage\"\n"
+"\n"
+"To join, simply follow this link:\n"
+"http://www.wrook.org/Join/$inviteKey\n"
+"\n"
+"Thank you,\n"
+"The Wrook Team\n"
+msgstr ""
+
+#: .\feathers\membership.py:253
+msgid ""
+"\n"
+"Hello $firstname $lastname,\n"
+"\n"
+"$senderName is inviting you to join the Wrook community.\n"
+"\n"
+"Wrook is a community of writers and readers of all genre of literature. Read "
+"free books,\n"
+"participate in the writting process of authors or publish and share your own "
+"writings.\n"
+"\n"
+"To join, simply follow this link:\n"
+"http://www.wrook.org/Join/$inviteKey\n"
+"\n"
+"Thank you,\n"
+"The Wrook Team\n"
+msgstr ""
+
+#: .\feathers\stories.py:176
+msgid "Sorry, you do not have the right to delete this item."
+msgstr ""
+
+#: .\feathers\stories.py:177
+msgid ""
+"The item you tried to delete could not be found. Maybe it was already "
+"deleted."
+msgstr ""
+
+#: .\feathers\stories.py:178
+msgid "You must be logged in to delete this item."
+msgstr ""
+
+#: .\feathers\talk.py:47
+msgid "You must be logged in to post a comment."
+msgstr ""
+
+#: .\feathers\views\customize-selectTheme.html.py:5
+msgid "Select a theme"
+msgstr ""
+
+#: .\feathers\views\customize-selectTheme.html.py:26
+#: .\feathers\views\customize-viewThemes.html.py:34
+#: .\views\customize.html.py:36
+msgid "Sorry, no themes have been created!"
+msgstr ""
+
+#: .\feathers\views\customize-selectTheme.html.py:45
+#: .\feathers\views\customize-viewThemes.html.py:45
+#: .\views\customize.html.py:70
+msgid "Create a new theme"
+msgstr ""
+
+#: .\feathers\views\customize-selectTheme.html.py:49
+msgid "About themes"
+msgstr ""
+
+#: .\feathers\views\customize-selectTheme.html.py:51
+msgid ""
+" \n"
+"Here you can browse the various themes used throughout the site. You can "
+"select themes for your\n"
+"profile or for your books. You can also share the themes you create.\n"
+msgstr ""
+
+#: .\feathers\views\customize-themeEdit.html.py:5
+msgid "Edit Theme"
+msgstr ""
+
+#: .\feathers\views\customize-themeEdit.html.py:13
+msgid "Background image"
+msgstr ""
+
+#: .\feathers\views\customize-themeEdit.html.py:20
+#: .\views\covers-edit.html.py:25
+msgid "Current image"
+msgstr ""
+
+#: .\feathers\views\customize-themeEdit.html.py:29
+#: .\views\account-changePassword.html.py:39
+#: .\views\books-chapter-edit.html.py:16 .\views\books-edit-license.html.py:16
+#: .\views\books-edit.html.py:15 .\views\covers-edit.html.py:35
+#: .\views\editAccount.html.py:70
+msgid "Save"
+msgstr ""
+
+#: .\feathers\views\customize-themeEdit.html.py:30
+msgid " Save as default"
+msgstr ""
+
+#: .\feathers\views\customize-themeEdit.html.py:32
+#: .\feathers\views\membership-inviteNew-preview.html.py:33
+#: .\feathers\views\membership-inviteNew.html.py:19
+#: .\views\books-chapter-edit.html.py:18 .\views\covers-edit.html.py:37
+#: .\views\deleteBook.html.py:28 .\views\deleteChapter.html.py:29
+msgid "Delete"
+msgstr ""
+
+#: .\feathers\views\customize-viewTheme.html.py:5
+msgid "Theme: "
+msgstr ""
+
+#: .\feathers\views\customize-viewTheme.html.py:33
+msgid "Edit theme"
+msgstr ""
+
+#: .\feathers\views\customize-viewTheme.html.py:35
+msgid "Select for profile"
+msgstr ""
+
+#: .\feathers\views\customize-viewThemes.html.py:5
+msgid "Themes"
+msgstr ""
+
+#: .\feathers\views\customize-viewThemes.html.py:19
+msgid "default"
+msgstr ""
+
+#: .\feathers\views\customize-viewThemes.html.py:21 .\views\books.html.py:59
+#: .\views\members-bookmarks-list.html.py:29
+#: .\views\members-books-list.html.py:30 .\views\viewMember.html.py:37
+#: .\views\viewMember.html.py:69
+msgid "By"
+msgstr ""
+
+#: .\feathers\views\labs-submit.html.py:5 .\feathers\views\labs.html.py:4
+#: .\feathers\views\labs.html.py:7
+msgid "Wrook Labs"
+msgstr ""
+
+#: .\feathers\views\labs-submit.html.py:14
+#: .\feathers\views\labs-viewFeature.html.py:17
+msgid "Done!"
+msgstr ""
+
+#: .\feathers\views\labs-submit.html.py:16
+msgid "Your submission has been added to the list. Thank you!"
+msgstr ""
+
+#: .\feathers\views\labs-submit.html.py:21
+#: .\feathers\views\labs-viewFeature.html.py:94
+#: .\views\admin-commands.html.py:49
+msgid "Back to the labs"
+msgstr ""
+
+#: .\feathers\views\labs-viewFeature.html.py:5
+msgid "Lab request:"
+msgstr ""
+
+#: .\feathers\views\labs-viewFeature.html.py:13
+#: .\feathers\views\membership-invites.html.py:28
+#: .\feathers\views\membership-invites.html.py:75
+msgid "Status"
+msgstr ""
+
+#: .\feathers\views\labs-viewFeature.html.py:19
+msgid "Not done yet!"
+msgstr ""
+
+#: .\feathers\views\labs-viewFeature.html.py:25
+msgid "Type"
+msgstr ""
+
+#: .\feathers\views\labs-viewFeature.html.py:43
+#: .\feathers\views\labs.html.py:76 .\feathers\views\labs.html.py:119
+#: .\feathers\views\labs.html.py:161
+msgid "Votes"
+msgstr ""
+
+#: .\feathers\views\labs-viewFeature.html.py:53
+msgid "Voting members"
+msgstr ""
+
+#: .\feathers\views\labs-viewFeature.html.py:73
+#: .\feathers\views\labs.html.py:191 .\views\admin-commands.html.py:46
+#: .\views\covers-list.html.py:52 .\views\covers-select.html.py:54
+#: .\views\covers-view.html.py:15 .\views\members-books-list.html.py:52
+#: .\views\members-covers-list.html.py:47 .\views\revisions-list.html.py:33
+#: .\views\revisions-view.html.py:37 .\views\viewAccount.html.py:57
+#: .\views\viewChapter.html.py:88
+msgid "Options"
+msgstr ""
+
+#: .\feathers\views\labs-viewFeature.html.py:76
+msgid "You have no votes left. Members are currently limited to 3 votes."
+msgstr ""
+
+#: .\feathers\views\labs-viewFeature.html.py:82
+msgid "Delete this request"
+msgstr ""
+
+#: .\feathers\views\labs-viewFeature.html.py:84
+msgid "Mark as done"
+msgstr ""
+
+#: .\feathers\views\labs-viewFeature.html.py:88
+msgid "Retract my vote!"
+msgstr ""
+
+#: .\feathers\views\labs-viewFeature.html.py:91
+msgid "Vote for this request!"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:12
+msgid "About the Wrook Labs"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:14
+msgid ""
+" \n"
+"In the Wrook labs you can <strong>report bugs</strong>, <strong>suggest</"
+"strong> features\n"
+"and improvement, and <strong>vote</strong> for what you believe we should do "
+"first!\n"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:20
+msgid "Feature requests and bug Submission form"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:26
+msgid "Request type"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:30
+msgid "New feature"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:31
+msgid "Improvement"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:32
+msgid "Bug fix"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:56
+msgid "Submit"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:63
+msgid "Your votes"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:66
+#, python-format
+msgid "You have %(memberVotesLeft)s votes left"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:104
+msgid "It seems that you havent voted for anything yet!"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:110
+msgid "Requests open for voting"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:146 .\feathers\views\labs.html.py:181
+msgid "Sorry, nothing is currently cooking in the labs!"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:152
+msgid "Requests completed"
+msgstr ""
+
+#: .\feathers\views\labs.html.py:194
+msgid "Admin commands"
+msgstr ""
+
+#: .\feathers\views\membership-inviteNew-preview.html.py:5
+msgid "Confirm the invitation"
+msgstr ""
+
+#: .\feathers\views\membership-inviteNew-preview.html.py:10
+msgid ""
+"\n"
+"<p>\n"
+"Here is a preview of the message which will be sent on your behalf.\n"
+"</p>\n"
+"<p>\n"
+"You must <strong>read and click confirm</strong> before we send the "
+"message.\n"
+"</p>\n"
+msgstr ""
+
+#: .\feathers\views\membership-inviteNew-preview.html.py:29
+msgid "Save & Resend"
+msgstr ""
+
+#: .\feathers\views\membership-inviteNew-preview.html.py:30
+#: .\feathers\views\membership-inviteNew-preview.html.py:36
+msgid "Modify"
+msgstr ""
+
+#: .\feathers\views\membership-inviteNew-preview.html.py:31
+msgid "Discard this invitation"
+msgstr ""
+
+#: .\feathers\views\membership-inviteNew-preview.html.py:37
+msgid "Send invite"
+msgstr ""
+
+#: .\feathers\views\membership-inviteNew.html.py:5
+msgid "Invite someone"
+msgstr ""
+
+#: .\feathers\views\membership-inviteNew.html.py:15
+msgid "Preview invite"
+msgstr ""
+
+#: .\feathers\views\membership-inviteNew.html.py:17
+msgid "Discard"
+msgstr ""
+
+#: .\feathers\views\membership-invites.html.py:4
+#: .\feathers\views\membership-invites.html.py:7
+#: .\views\template-main-d.html.py:70
+msgid "Invites"
+msgstr ""
+
+#: .\feathers\views\membership-invites.html.py:12
+msgid ""
+"To send an invitation, go to a book and click on the \"Invite someone\" "
+"button."
+msgstr ""
+
+#: .\feathers\views\membership-invites.html.py:15
+msgid "Invites you have sent"
+msgstr ""
+
+#: .\feathers\views\membership-invites.html.py:22
+msgid "Name"
+msgstr ""
+
+#: .\feathers\views\membership-invites.html.py:25
+#: .\feathers\views\membership-invites.html.py:72
+msgid "Email adress"
+msgstr ""
+
+#: .\feathers\views\membership-invites.html.py:53
+msgid ""
+"It seems that you havent invited anyone! Dont you have any friends to spam?"
+msgstr ""
+
+#: .\feathers\views\membership-invites.html.py:60
+msgid "All invites"
+msgstr ""
+
+#: .\feathers\views\membership-invites.html.py:66
+msgid "From"
+msgstr ""
+
+#: .\feathers\views\membership-invites.html.py:69
+msgid "To"
+msgstr ""
+
+#: .\feathers\views\membership-invites.html.py:109
+msgid "Invite a friend"
+msgstr ""
+
+#: .\feathers\views\proforma-confirm.html.py:5
+msgid "Please confirm"
+msgstr ""
+
+#: .\feathers\views\proforma-confirm.html.py:9
+msgid "Please confirm the following:"
+msgstr ""
+
+#: .\feathers\views\proforma-success.html.py:5
+msgid "Success!"
+msgstr ""
+
+#: .\feathers\views\proforma-success.html.py:12
+msgid "Congratulation, the operation was a success!"
+msgstr ""
+
+#: .\feathers\views\proforma-success.html.py:23
+msgid "Continue"
+msgstr ""
+
+#: .\feathers\views\talk-comment-miniForm.html.py:11
+#: .\views\messages.html.py:42
+msgid "Post"
+msgstr ""
+
+#: .\feathers\views\talk-comment-miniForm.html.py:12
+msgid "Cancel"
+msgstr ""
+
+#: .\views\MembersProfile.html.py:6
+msgid "Profile "
+msgstr ""
+
+#: .\views\MembersProfile.html.py:14 .\views\viewMember.html.py:9
+msgid "About "
+msgstr ""
+
+#: .\views\MembersProfile.html.py:21
+msgid "Some details about "
+msgstr ""
+
+#: .\views\MembersProfile.html.py:27 .\views\editAccount.html.py:48
+#: .\views\join.html.py:70
+msgid "Gender"
+msgstr ""
+
+#: .\views\MembersProfile.html.py:32
+msgid "Birth date"
+msgstr ""
+
+#: .\views\MembersProfile.html.py:36
+msgid "Member since"
+msgstr ""
+
+#: .\views\MembersProfile.html.py:39 .\views\editAccount.html.py:37
+#: .\views\join.html.py:59
+msgid "Prefered language"
+msgstr ""
+
+#: .\views\MembersProfile.html.py:43
+msgid "Member status:"
+msgstr ""
+
+#: .\views\MembersProfile.html.py:43
+msgid "Administrator"
+msgstr ""
+
+#: .\views\account-changePassword.html.py:4
+#: .\views\account-changePassword.html.py:7
+msgid "Change your password"
+msgstr ""
+
+#: .\views\account-changePassword.html.py:21
+msgid "Old password"
+msgstr ""
+
+#: .\views\account-changePassword.html.py:29
+msgid "New password"
+msgstr ""
+
+#: .\views\account-changePhoto.html.py:4 .\views\account-changePhoto.html.py:7
+msgid "Change your account photo"
+msgstr ""
+
+#: .\views\account-changePhoto.html.py:22
+msgid "Current photo"
+msgstr ""
+
+#: .\views\account-changePhoto.html.py:33
+msgid "Upload photo"
+msgstr ""
+
+#: .\views\account-changePhoto.html.py:38
+msgid "Must be a square image!"
+msgstr ""
+
+#: .\views\account-changePhoto.html.py:45
+msgid "Upload"
+msgstr ""
+
+#: .\views\admin-commands.html.py:5
+msgid "Labs: Admin commands"
+msgstr ""
+
+#: .\views\admin-commands.html.py:40
+msgid "This page is restricted to the site administrators"
+msgstr ""
+
+#: .\views\books-chapter-edit.html.py:5
+msgid "Edit chapter from "
+msgstr ""
+
+#: .\views\books-chapter-new.html.py:5
+msgid "New chapter for"
+msgstr ""
+
+#: .\views\books-chapter-new.html.py:16
+msgid "Start writing"
+msgstr ""
+
+#: .\views\books-edit-license.html.py:5
+msgid "Edit book licensing options"
+msgstr ""
+
+#: .\views\books-edit.html.py:5
+msgid "Edit book"
+msgstr ""
+
+#: .\views\books-reorderChapters.html.py:5 .\views\books-view.html.py:5
+msgid "by "
+msgstr ""
+
+#: .\views\books-reorderChapters.html.py:10 .\views\books-view.html.py:152
+msgid "Reorder chapters"
+msgstr ""
+
+#: .\views\books-reorderChapters.html.py:35
+msgid "Update"
+msgstr ""
+
+#: .\views\books-reorderChapters.html.py:36
+msgid "Finished"
+msgstr ""
+
+#: .\views\books-view.html.py:11
+msgid "Notice:"
+msgstr ""
+
+#: .\views\books-view.html.py:12
+msgid "This book is only in the planning stage."
+msgstr ""
+
+#: .\views\books-view.html.py:13
+msgid "This book is only a draft."
+msgstr ""
+
+#: .\views\books-view.html.py:14
+msgid "This book is in the process of being writen."
+msgstr ""
+
+#: .\views\books-view.html.py:15
+msgid "This book is still in proofing."
+msgstr ""
+
+#: .\views\books-view.html.py:24
+msgid "Start reading"
+msgstr ""
+
+#: .\views\books-view.html.py:37 .\views\viewChapter.html.py:129
+msgid "About this book"
+msgstr ""
+
+#: .\views\books-view.html.py:41 .\views\main.html.py:19
+#: .\views\readers.html.py:8 .\views\readers.html.py:16
+#: .\views\viewChapter.html.py:133
+msgid "Readers"
+msgstr ""
+
+#: .\views\books-view.html.py:44
+msgid "Feedbacks"
+msgstr ""
+
+#: .\views\books-view.html.py:51
+msgid "License and attribution"
+msgstr ""
+
+#: .\views\books-view.html.py:64
+msgid "No license or copyright has been specified"
+msgstr ""
+
+#: .\views\books-view.html.py:78
+msgid "Contributed by"
+msgstr ""
+
+#: .\views\books-view.html.py:92
+msgid "A note from the contributor"
+msgstr ""
+
+#: .\views\books-view.html.py:116
+msgid "Planning"
+msgstr ""
+
+#: .\views\books-view.html.py:117
+msgid "Drafting"
+msgstr ""
+
+#: .\views\books-view.html.py:118
+msgid "Writing"
+msgstr ""
+
+#: .\views\books-view.html.py:119
+msgid "Proofing"
+msgstr ""
+
+#: .\views\books-view.html.py:132
+msgid "Leave feedback or comments"
+msgstr ""
+
+#: .\views\books-view.html.py:133
+msgid "Invite a friend!"
+msgstr ""
+
+#: .\views\books-view.html.py:140
+msgid "Writing and Editing"
+msgstr ""
+
+#: .\views\books-view.html.py:146
+msgid "Resume writing"
+msgstr ""
+
+#: .\views\books-view.html.py:148 .\views\viewChapter.html.py:109
+msgid "Start a new chapter"
+msgstr ""
+
+#: .\views\books-view.html.py:151
+msgid "Edit book options"
+msgstr ""
+
+#: .\views\books-view.html.py:153
+msgid "Edit license options"
+msgstr ""
+
+#: .\views\books-view.html.py:154
+msgid "Change book cover"
+msgstr ""
+
+#: .\views\books-view.html.py:155
+msgid "Delete whole book"
+msgstr ""
+
+#: .\views\books.html.py:4 .\views\books.html.py:7 .\views\main.html.py:17
+#: .\views\members-books-list.html.py:5 .\views\template-main-d.html.py:43
+#: .\views\template-main-d.html.py:66 .\views\viewMember.html.py:15
+msgid "Books"
+msgstr ""
+
+#: .\views\books.html.py:12
+msgid "Show: "
+msgstr ""
+
+#: .\views\books.html.py:14
+msgid "All books"
+msgstr ""
+
+#: .\views\books.html.py:15
+msgid "Books in planning"
+msgstr ""
+
+#: .\views\books.html.py:16
+msgid "Books in drafting"
+msgstr ""
+
+#: .\views\books.html.py:17
+msgid "Books in writing"
+msgstr ""
+
+#: .\views\books.html.py:18
+msgid "Books in proofing"
+msgstr ""
+
+#: .\views\books.html.py:19
+msgid "Finished books"
+msgstr ""
+
+#: .\views\books.html.py:21
+msgid "Filter"
+msgstr ""
+
+#: .\views\books.html.py:29
+msgid " in the planning stage"
+msgstr ""
+
+#: .\views\books.html.py:30
+msgid " in the drafting stage"
+msgstr ""
+
+#: .\views\books.html.py:31
+msgid " in the writting stage"
+msgstr ""
+
+#: .\views\books.html.py:32
+msgid " in the proofing stage"
+msgstr ""
+
+#: .\views\books.html.py:33
+msgid " finished"
+msgstr ""
+
+#: .\views\books.html.py:54 .\views\members-bookmarks-list.html.py:24
+#: .\views\members-books-list.html.py:25 .\views\viewMember.html.py:32
+#: .\views\viewMember.html.py:64
+msgid "Only planning"
+msgstr ""
+
+#: .\views\books.html.py:55 .\views\members-bookmarks-list.html.py:25
+#: .\views\members-books-list.html.py:26 .\views\viewMember.html.py:33
+#: .\views\viewMember.html.py:65
+msgid "Still in drafting"
+msgstr ""
+
+#: .\views\books.html.py:56 .\views\members-bookmarks-list.html.py:26
+#: .\views\members-books-list.html.py:27 .\views\viewMember.html.py:34
+#: .\views\viewMember.html.py:66
+msgid "Still in writing"
+msgstr ""
+
+#: .\views\books.html.py:57 .\views\members-bookmarks-list.html.py:27
+#: .\views\members-books-list.html.py:28 .\views\viewMember.html.py:35
+#: .\views\viewMember.html.py:67
+msgid "Still in proofing"
+msgstr ""
+
+#: .\views\covers-edit.html.py:5
+msgid "Edit Book Cover"
+msgstr ""
+
+#: .\views\covers-edit.html.py:16
+msgid "Thumbnail image"
+msgstr ""
+
+#: .\views\covers-list.html.py:5 .\views\members-covers-list.html.py:5
+msgid "Book covers"
+msgstr ""
+
+#: .\views\covers-list.html.py:9 .\views\covers-select.html.py:11
+msgid "Your private book covers"
+msgstr ""
+
+#: .\views\covers-list.html.py:22 .\views\covers-select.html.py:24
+msgid "Your shared book covers"
+msgstr ""
+
+#: .\views\covers-list.html.py:35 .\views\covers-select.html.py:37
+msgid "All shared book covers"
+msgstr ""
+
+#: .\views\covers-list.html.py:55 .\views\covers-select.html.py:57
+msgid "Add a new cover"
+msgstr ""
+
+#: .\views\covers-list.html.py:60 .\views\covers-view.html.py:41
+#: .\views\members-covers-list.html.py:57
+msgid "Admin options"
+msgstr ""
+
+#: .\views\covers-list.html.py:63 .\views\members-covers-list.html.py:60
+msgid "Select the default cover"
+msgstr ""
+
+#: .\views\covers-select.html.py:5
+msgid "Select a book cover"
+msgstr ""
+
+#: .\views\covers-select.html.py:9
+msgid "Select the book cover you want to use for:"
+msgstr ""
+
+#: .\views\covers-select.html.py:10
+msgid "Make your selection by clicking on a cover"
+msgstr ""
+
+#: .\views\covers-view.html.py:5
+msgid "Book Cover"
+msgstr ""
+
+#: .\views\covers-view.html.py:19
+msgid "Edit cover options"
+msgstr ""
+
+#: .\views\covers-view.html.py:23
+msgid "Stop sharing this cover"
+msgstr ""
+
+#: .\views\covers-view.html.py:27
+msgid "Share it with everyone"
+msgstr ""
+
+#: .\views\covers-view.html.py:31
+msgid "Edit Image with Picnik"
+msgstr ""
+
+#: .\views\covers-view.html.py:34 .\views\revisions-view.html.py:29
+msgid "Back"
+msgstr ""
+
+#: .\views\covers-view.html.py:44
+msgid "Choose as the default"
+msgstr ""
+
+#: .\views\customize.html.py:5 .\views\template-main-d.html.py:45
+msgid "Customize"
+msgstr ""
+
+#: .\views\customize.html.py:10
+msgid ""
+" \n"
+"<p>Here you have access to the themes and book covers that are used to "
+"personnalize your reading and browsing experience.</p>\n"
+msgstr ""
+
+#: .\views\customize.html.py:15
+msgid "Latest themes"
+msgstr ""
+
+#: .\views\customize.html.py:18
+msgid ""
+" \n"
+"<p>You can create your own theme and then choose to share is with other "
+"members. Themes can be applied to you profile page or to a specific books.</"
+"p>\n"
+msgstr ""
+
+#: .\views\customize.html.py:31
+msgid "Browse all themes"
+msgstr ""
+
+#: .\views\customize.html.py:41
+msgid "Latest covers"
+msgstr ""
+
+#: .\views\customize.html.py:43
+msgid ""
+" \n"
+"<p>Every book in our library has a cover to represent it. You can either "
+"create your cover with custom artwork or create reusable covers to be shared "
+"with other authors.</p>\n"
+msgstr ""
+
+#: .\views\customize.html.py:59 .\views\members-covers-list.html.py:51
+msgid "Browse all covers"
+msgstr ""
+
+#: .\views\deleteBook.html.py:6
+msgid "Delete a book"
+msgstr ""
+
+#: .\views\deleteBook.html.py:10
+msgid ""
+"\n"
+"<p>\n"
+"Are you <strong>absolutely</strong> sure that you want to delete this book?\n"
+"</p>\n"
+"<p>\n"
+"This will also delete all chapters, feedback and bookmarks associated with "
+"the book.\n"
+"</p>\n"
+"<p>\n"
+"Once delete, it cannot be undeleted.\n"
+"</p>\n"
+msgstr ""
+
+#: .\views\deleteBook.html.py:22 .\views\deleteChapter.html.py:23
+msgid "Cancel and go back"
+msgstr ""
+
+#: .\views\deleteBook.html.py:25 .\views\deleteChapter.html.py:26
+msgid "I have read the warning and confirm"
+msgstr ""
+
+#: .\views\deleteChapter.html.py:6
+msgid "Delete a chapter"
+msgstr ""
+
+#: .\views\deleteChapter.html.py:11
+msgid ""
+"\n"
+"<p>\n"
+"Are you <strong>absolutely</strong> sure that you want to delete this "
+"chapter?\n"
+"</p>\n"
+"<p>\n"
+"This will also delete all revisions, feedback and bookmarks associated with "
+"the chapter.\n"
+"</p>\n"
+"<p>\n"
+"Once delete, it cannot be undeleted.\n"
+"</p>\n"
+msgstr ""
+
+#: .\views\editAccount.html.py:4 .\views\editAccount.html.py:7
+msgid "Edit your account"
+msgstr ""
+
+#: .\views\editAccount.html.py:21
+msgid "Firstname *"
+msgstr ""
+
+#: .\views\editAccount.html.py:29
+msgid "Lastname *"
+msgstr ""
+
+#: .\views\editAccount.html.py:52 .\views\join.html.py:74
+msgid "Select one..."
+msgstr ""
+
+#: .\views\editAccount.html.py:60
+msgid "A few words about you"
+msgstr ""
+
+#: .\views\error.html.py:6
+msgid "An error occured"
+msgstr ""
+
+#: .\views\error.html.py:8
+msgid ""
+"Hu... we're sorry! Like really really sorry. The truth is that we dont "
+"really know what we're doing!"
+msgstr ""
+
+#: .\views\join.html.py:5
+msgid "Join Wrook"
+msgstr ""
+
+#: .\views\join.html.py:15
+msgid ""
+"\n"
+"<p>\n"
+"Before you join Wrook, we need to learn a few things about you. After you "
+"filled out this form, <strong>we will send you a password by email</"
+"strong>.\n"
+"</p>\n"
+msgstr ""
+
+#: .\views\join.html.py:27
+msgid "Username"
+msgstr ""
+
+#: .\views\join.html.py:35
+msgid "Email"
+msgstr ""
+
+#: .\views\join.html.py:43
+msgid "Firstname"
+msgstr ""
+
+#: .\views\join.html.py:51
+msgid "Lastname"
+msgstr ""
+
+#: .\views\join.html.py:84 .\views\template-main-d.html.py:51
+msgid "Join"
+msgstr ""
+
+#: .\views\login.html.py:4 .\views\login.html.py:7 .\views\login.html.py:34
+#: .\views\passwordSent.html.py:14 .\views\template-main-d.html.py:53
+msgid "Login"
+msgstr ""
+
+#: .\views\login.html.py:20 .\views\resetPassword.html.py:23
+msgid "Username or Email"
+msgstr ""
+
+#: .\views\login.html.py:27
+msgid "Password"
+msgstr ""
+
+#: .\views\login.html.py:41 .\views\resetPassword.html.py:36
+msgid ""
+"If you have any difficulties logging in, you can contact the janitor at <a "
+"href=\"mailto:admin@wrook.org\">admin@wrook.org</a>."
+msgstr ""
+
+#: .\views\main.html.py:16 .\views\memberHome.html.py:4
+#: .\views\template-main-d.html.py:42 .\views\template-main-d.html.py:50
+msgid "Home"
+msgstr ""
+
+#: .\views\main.html.py:18
+msgid "Authors"
+msgstr ""
+
+#: .\views\main.html.py:20 .\views\template-main-d.html.py:46
+msgid "Labs"
+msgstr ""
+
+#: .\views\main.html.py:25 .\views\part-newMemberWelcome.html.py:6
+#: .\views\visitorHome.html.py:4
+msgid "Welcome"
+msgstr ""
+
+#: .\views\main.html.py:26
+msgid "Account"
+msgstr ""
+
+#: .\views\main.html.py:27 .\views\template-main-d.html.py:48
+msgid "Logout"
+msgstr ""
+
+#: .\views\memberHome.html.py:10 .\views\members-stories.html.py:4
+#: .\views\members-stories.html.py:9
+msgid "What's new"
+msgstr ""
+
+#: .\views\memberHome.html.py:19 .\views\members-stories.html.py:18
+msgid "Your options"
+msgstr ""
+
+#: .\views\memberHome.html.py:22 .\views\members-books-list.html.py:56
+#: .\views\startBook.html.py:5
+msgid "Start a new book"
+msgstr ""
+
+#: .\views\memberHome.html.py:23
+msgid "Your public profile"
+msgstr ""
+
+#: .\views\memberHome.html.py:24
+msgid "Your account settings"
+msgstr ""
+
+#: .\views\members-bookmarks-list.html.py:5 .\views\template-main-d.html.py:67
+#: .\views\viewMember.html.py:44
+msgid "Readings"
+msgstr ""
+
+#: .\views\members-books-list.html.py:40
+msgid ""
+"You have not saved any bookmarks yet. We invite you to choose one from <a "
+"href='/Books'>all the books</a> which have been contributed by other members."
+msgstr ""
+
+#: .\views\members-books-list.html.py:42
+msgid "This member has not saved any bookmarks yet."
+msgstr ""
+
+#: .\views\members-covers-list.html.py:10
+msgid "Your shared covers"
+msgstr ""
+
+#: .\views\members-covers-list.html.py:26
+msgid "Your private covers"
+msgstr ""
+
+#: .\views\members-covers-list.html.py:28
+msgid "Private covers"
+msgstr ""
+
+#: .\views\members-covers-list.html.py:50
+msgid "Create a new cover"
+msgstr ""
+
+#: .\views\members.html.py:5 .\views\members.html.py:9
+#: .\views\template-main-d.html.py:44
+msgid "Members"
+msgstr ""
+
+#: .\views\members.html.py:23 .\views\readers.html.py:45
+msgid "Latest bookmarks:"
+msgstr ""
+
+#: .\views\messages.html.py:5
+msgid "Feedback & Discussions for:"
+msgstr ""
+
+#: .\views\messages.html.py:15
+msgid "Post a message"
+msgstr ""
+
+#: .\views\messages.html.py:24
+msgid "Topic"
+msgstr ""
+
+#: .\views\messages.html.py:32
+msgid "Your message"
+msgstr ""
+
+#: .\views\messages.html.py:45
+msgid "Only for the author"
+msgstr ""
+
+#: .\views\messages.html.py:54
+msgid "Other messages"
+msgstr ""
+
+#: .\views\messages.html.py:70
+msgid "delete"
+msgstr ""
+
+#: .\views\messages.html.py:85
+msgid "No other messages have been posted yet!"
+msgstr ""
+
+#: .\views\part-newMemberWelcome.html.py:8
+msgid ""
+"\n"
+"<strong>New to wrook?</strong> We invite all our new members to learn about "
+"Wrook by reading <a href=\"/Books/wrook-for-beginners\">Wrook for beginners</"
+"a>. This introduction is actually a short book hosted on wrook as any other "
+"book would be. Reading this, will both be informative and let you experience "
+"how to read books on Wrook. So, go ahead and <a href=\"/Books/wrook-for-"
+"beginners\">Start reading</a>!\n"
+msgstr ""
+
+#: .\views\part-replies.html.py:9 .\views\part-stories.html.py:9
+#, python-format
+msgid " %(timeAgo)s ago "
+msgstr ""
+
+#: .\views\part-replies.html.py:10
+msgid "by"
+msgstr ""
+
+#: .\views\part-stories.html.py:22 .\views\part-stories.html.py:26
+#, python-format
+msgid "%(replyCount)s replies"
+msgstr ""
+
+#: .\views\part-stories.html.py:22
+msgid "Show"
+msgstr ""
+
+#: .\views\part-stories.html.py:26
+msgid "Mark as read"
+msgstr ""
+
+#: .\views\passwordSent.html.py:5
+msgid "Password sent!"
+msgstr ""
+
+#: .\views\passwordSent.html.py:10
+msgid "The password has been sent to: "
+msgstr ""
+
+#: .\views\passwordSent.html.py:15
+msgid "Send again"
+msgstr ""
+
+#: .\views\readers.html.py:6 .\views\readers.html.py:14
+msgid "Readers of"
+msgstr ""
+
+#: .\views\readers.html.py:32
+msgid "Latest chapter:"
+msgstr ""
+
+#: .\views\resetPassword.html.py:4 .\views\resetPassword.html.py:7
+msgid "Reset your password"
+msgstr ""
+
+#: .\views\resetPassword.html.py:18
+msgid "A new password will be sent to your email address."
+msgstr ""
+
+#: .\views\resetPassword.html.py:30
+msgid "Reset password"
+msgstr ""
+
+#: .\views\revisions-list.html.py:5 .\views\revisions-list.html.py:11
+#: .\views\revisions-view.html.py:5 .\views\revisions-view.html.py:11
+msgid "Revisions for "
+msgstr ""
+
+#: .\views\revisions-list.html.py:20 .\views\revisions-view.html.py:18
+msgid "Revision"
+msgstr ""
+
+#: .\views\revisions-list.html.py:25 .\views\revisions-view.html.py:24
+msgid "Sorry, no revisions have been posted yet!"
+msgstr ""
+
+#: .\views\revisions-list.html.py:36
+msgid "Back to chapter"
+msgstr ""
+
+#: .\views\revisions-view.html.py:40
+msgid "Back to revisions"
+msgstr ""
+
+#: .\views\startBook.html.py:16
+msgid "Start"
+msgstr ""
+
+#: .\views\template-main-d.html.py:64
+msgid "Feed"
+msgstr ""
+
+#: .\views\template-main-d.html.py:65
+msgid "Profile"
+msgstr ""
+
+#: .\views\template-main-d.html.py:68
+msgid "Covers"
+msgstr ""
+
+#: .\views\typewriter.html.py:24
+msgid "[Esc=Menu]"
+msgstr ""
+
+#: .\views\typewriter.html.py:29
+msgid "Revision "
+msgstr ""
+
+#: .\views\typewriter.html.py:31
+msgid "Revision 0"
+msgstr ""
+
+#: .\views\typewriter.html.py:40
+msgid "<span class=\"shortcutKey\">S</span>ave and exit"
+msgstr ""
+
+#: .\views\typewriter.html.py:53
+msgid "Start writing your chapter here..."
+msgstr ""
+
+#: .\views\viewAccount.html.py:4 .\views\viewAccount.html.py:7
+msgid "Your account"
+msgstr ""
+
+#: .\views\viewAccount.html.py:60
+msgid "Change password"
+msgstr ""
+
+#: .\views\viewAccount.html.py:61
+msgid "Change profile photo"
+msgstr ""
+
+#: .\views\viewChapter.html.py:7 .\views\viewChapter.html.py:16
+msgid "Note:"
+msgstr ""
+
+#: .\views\viewChapter.html.py:8
+msgid "This chapter is only in the planning stage."
+msgstr ""
+
+#: .\views\viewChapter.html.py:9
+msgid "This chapter is only a draft."
+msgstr ""
+
+#: .\views\viewChapter.html.py:10
+msgid "This chapter is in the process of being writen."
+msgstr ""
+
+#: .\views\viewChapter.html.py:11
+msgid "This chapter is still in proofing."
+msgstr ""
+
+#: .\views\viewChapter.html.py:17
+msgid "Altough this book is not finished, this chapter is final."
+msgstr ""
+
+#: .\views\viewChapter.html.py:56
+msgid "This was the last chapter!"
+msgstr ""
+
+#: .\views\viewChapter.html.py:63
+msgid "Open next chapter"
+msgstr ""
+
+#: .\views\viewChapter.html.py:66 .\views\viewChapter.html.py:95
+msgid "Previous chapter"
+msgstr ""
+
+#: .\views\viewChapter.html.py:68 .\views\viewChapter.html.py:98
+msgid "Back to cover"
+msgstr ""
+
+#: .\views\viewChapter.html.py:92
+msgid "Next chapter"
+msgstr ""
+
+#: .\views\viewChapter.html.py:97
+msgid "Invite your friends!"
+msgstr ""
+
+#: .\views\viewChapter.html.py:104
+msgid "Editing"
+msgstr ""
+
+#: .\views\viewChapter.html.py:108
+msgid "Write chapter"
+msgstr ""
+
+#: .\views\viewChapter.html.py:110
+msgid "Edit chapter options"
+msgstr ""
+
+#: .\views\viewChapter.html.py:111
+msgid "Delete chapter"
+msgstr ""
+
+#: .\views\viewChapter.html.py:118
+msgid "About this chapter"
+msgstr ""
+
+#: .\views\viewChapter.html.py:122
+msgid "Revisions"
+msgstr ""
+
+#: .\views\viewChapter.html.py:136
+msgid "Book feedback"
+msgstr ""
+
+#: .\views\visitorHome.html.py:7
+msgid "Read Write Share!"
+msgstr ""
+
+#: .\views\visitorHome.html.py:15
+msgid ""
+"\n"
+"<h2>Our motto</h2>\n"
+"<p>When lovers of the written words get together, wonderful things are bound "
+"to happen!</p>\n"
+msgstr ""
+
+#: .\views\visitorHome.html.py:20
+msgid ""
+"\n"
+"<p>Wrook is a community for readers and writers who share a passion for "
+"literatures of all kinds.</p>\n"
+"<ul>\n"
+"<li><strong>Read free litterature</strong> submitted by members: Stories, "
+"Novels, Poetry and more.</li>\n"
+"<li><strong>Write, publish and share</strong> your own writtings with your "
+"fans and other members.</li>\n"
+"<li>Get access to <strong>usefull tools</strong> for reading, writing and "
+"publishing litterature.</li>\n"
+"</ul>\n"
+msgstr ""
+
+#: .\views\visitorHome.html.py:41
+msgid ""
+"\n"
+"<p>Wrook is adding features as fast as possible to gear up for the "
+"<em>National Novel Writing Month 2008</em></p>\n"
+"<p>Join Nanowrimo 2008 by visiting: <a href=\"http://nanowrimo.org\">http://"
+"nanowrimo.org</a></p>\n"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Has read %(bookmarkChapterTitle)s"
+#~ msgstr ""
+#~ "\n"
+#~ "\t\t\t\t\t\t\t\tHas read %(bookmark.Chapter.Title)s\n"
+#~ "\t\t\t\t\t\t\t\tfrom <em>%(bookmark.Book.Title)s</em>\n"
+#~ "\t\t\t\t\t\t\t"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "%(counter)s reader\n"
+#~ msgid_plural ""
+#~ "\n"
+#~ "%(counter)s readers\n"
+#~ msgstr[0] ""
+#~ "\n"
+#~ "\t\t\t\t\t\t\t\t%(counter)s reader\n"
+#~ "\t\t\t\t\t\t\t"
+#~ msgstr[1] ""
+#~ "\n"
+#~ "\t\t\t\t\t\t\t\t%(counter)s readers\n"
+#~ "\t\t\t\t\t\t\t"

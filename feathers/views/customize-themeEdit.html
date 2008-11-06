@@ -1,0 +1,38 @@
+﻿{% extends masterTemplate %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Edit Theme" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	<form method="post" action"."  enctype="multipart/form-data">
+		<table>
+			{{ form }}
+			<tr>
+				<th>{% trans "Background image" %}</th>
+				<td>
+					<input type="file" name="backgroundImageProxy" />
+				</td>
+			</tr>
+			{% if form.instance.is_saved %}
+				<tr>
+					<th>{% trans "Current image" %}</th>
+					<td>
+						<img style="margin-top: 10px" src='/Themes/Theme/BackgroundImage/{{ form.instance.key }}'>
+					</td>
+				</tr>
+			{% endif %}
+			<tr>
+				<td></td>
+				<td>
+					<input type="submit" name="doSave" value="{% trans 'Save' %}" />
+					<input type="submit" name="doSaveSetAsDefault" value="{% trans ' Save as default' %}" />
+					{% if theme.is_saved %}
+						<input type="submit" name="doDelete" value="{% trans 'Delete' %}" />
+					{% endif %}
+				</td>
+			</tr>
+		</table>
+	</form>
+{% endblock %}

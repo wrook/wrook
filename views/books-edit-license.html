@@ -1,0 +1,22 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Edit book licensing options" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	<form method="post">
+		<table>
+			<tbody>
+				{{ form }}
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" name="doSave" value="{% trans 'Save' %}" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+{% endblock %}

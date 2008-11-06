@@ -1,0 +1,45 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block pageId %}revisions{% endblock %}
+{% block pageTitle %}
+		{% trans "Revisions for " %}
+		{% if chapter.Name %}{{ chapter.Name }}{% endif %}
+		{% if chapter.Title %}{{ chapter.Title }}{% endif %}
+{% endblock %}
+{% block title %}
+	<h1>
+		{% trans "Revisions for " %}
+		"&#160;{% if chapter.Name %}{{ chapter.Name }}{% endif %}
+		{% if chapter.Title %}{{ chapter.Title }}{% endif %}&#160;"
+	</h1>
+{% endblock %}
+{% block content %}
+	{% ifnotequal chapter.Revisions.count 0 %}
+		<h2>{% trans "Revision" %} {{ revision.Version }} - {{ revision.Created }}</h2>
+		<div class="chapterText">
+			{{ revision.diffFromPrevious|linebreaks }}
+		</div>
+	{% else %}
+		<div>
+			{% trans "Sorry, no revisions have been posted yet!" %}
+		</div>
+	{% endifnotequal %}
+	<div class="buttonBar">
+		<ul>
+			<li><a href="/Books/Chapters/{{ chapter.key }}/Rev"><span>{% trans "Back" %}</span></a></li>
+		</ul>
+	</div>
+{% endblock %}
+
+	
+{% block sidebar%}
+	<div class="sidebarPanel">
+		<h3>{% trans "Options" %}</h3>
+		<div class="sidebarMenu">
+			<ul>
+				<li><a href="/Books/Chapters/{{ chapter.key }}/Rev">{% trans "Back to revisions" %}</a></li>
+			</ul>
+		</div>
+	</div>
+{% endblock %}
+

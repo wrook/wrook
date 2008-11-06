@@ -1,0 +1,46 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block pageId %}home-visitor{% endblock %}
+{% block pageTitle %}{% trans "Welcome" %}{% endblock %}
+{% block title %}
+	<h1>
+		{% trans "Read Write Share!" %}
+	</h1>
+{% endblock %}
+
+{% block content %}
+<div style="font-size: 1.2em;">
+	<div style="float: right; width: 300px; margin-left: 20px; position: relative; top: -33px">
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="300" height="200" id="viddler"><param name="movie" value="http://www.viddler.com/simple_on_site/8bb67e83" /><param name="allowScriptAccess" value="always" /><param name="allowFullScreen" value="true" /><param name="wmode" value="transparent" /> <embed src="http://www.viddler.com/simple_on_site/8bb67e83" width="300" height="200" type="application/x-shockwave-flash" allowScriptAccess="always" allowFullScreen="true" wmode="transparent" name="viddler" ></embed></object>
+{% blocktrans %}
+<h2>Our motto</h2>
+<p>When lovers of the written words get together, wonderful things are bound to happen!</p>
+{% endblocktrans %}
+	</div>
+{% blocktrans %}
+<p>Wrook is a community for readers and writers who share a passion for literatures of all kinds.</p>
+<ul>
+<li><strong>Read free litterature</strong> submitted by members: Stories, Novels, Poetry and more.</li>
+<li><strong>Write, publish and share</strong> your own writtings with your fans and other members.</li>
+<li>Get access to <strong>usefull tools</strong> for reading, writing and publishing litterature.</li>
+</ul>
+{% endblocktrans %}
+<div class="buttonBar" style="clear:none; margin-top: 30px">
+	<ul>
+		<li><a href="/Join/"><span>Join Wrook</span></a></li>
+	</ul>
+</div>
+
+	</div>
+{% endblock %}
+{% block sidebar %}
+	<div class="sidebarPanel">
+		<div style="text-align: center; margin-top: 20px;">
+			<a href="http://nanowrimo.org"><img src="/images/NaNoNovember120x238.png"></a>
+		</div>
+{% blocktrans %}
+<p>Wrook is adding features as fast as possible to gear up for the <em>National Novel Writing Month 2008</em></p>
+<p>Join Nanowrimo 2008 by visiting: <a href="http://nanowrimo.org">http://nanowrimo.org</a></p>
+{% endblocktrans %}
+	</div>
+{% endblock %}

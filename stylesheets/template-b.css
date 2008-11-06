@@ -1,0 +1,254 @@
+body {
+	text-align: center;
+	background: #f2f2f2;
+	font-family: "Courier New", Courier, monospace;
+	margin: 0px;
+	padding: 0px;
+	border-top: 5px solid #278AC5;
+	font-size: 0.75em;
+}
+
+h1 {
+	margin: 0px 0px 20px 0px;
+	padding: 0px;
+	font-size: 1.7em;
+	color: #278AC5;
+}
+
+h2 {
+	margin: 10px 0px 10px 0px;
+	padding: 0px;
+	font-size: 1.2em;
+}
+
+#page {
+	position: relative;
+	text-align: left;
+	width: 840px;
+	margin: 0px auto;
+	padding: 0px 0px 20px 0px;
+}
+
+#offstage {
+	position: relative;
+	text-align: left;
+	width:100%;
+	padding: 10px 0px;
+	color: #FFFFFF;
+	clear: both;
+	background: #278AC5;
+}
+
+#offstageContent {
+	width: 840px;
+	margin: 0px auto;
+}
+
+#offstageMenu {
+	position: relative;
+	left: 0px;
+}
+
+#offstageMenu ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+#offstageMenu ul li{
+	display: inline;
+	list-style: none;
+	margin: 0px 20px 0px 0px;
+	padding: 0px;
+	text-indent: 0px;
+}
+
+#offstageMenu ul li a {
+	margin: 0px 0px 0px 0px;
+	color: #FFF;
+	text-decoration: none;
+}
+
+#offstageMenu ul li a:hover {
+	color: #fff;
+}
+
+
+#footer {
+	position: relative;
+	text-align: left;
+	width: 100%;
+	padding: 10px 40px 300px 40px;
+	background: #1d6692;
+	color: #FFFFFF;
+	clear: both;
+}
+#footerContent {
+	width: 840px;
+	margin: 0px auto;
+}
+
+#logo {
+	width: 163px;
+	height: 50px;
+	background: url(../images/logo-b.png) no-repeat;
+	position: absolute;
+	top: 20px;
+	left: 0px;
+}
+
+#pageHeader {
+	height: 90px;
+	position: relative;
+}
+
+
+#PageFooter {
+	clear: both;
+	height: 1px;
+	position: relative;
+}
+
+
+
+
+#mainMenu {
+	position: absolute;
+	left: 170px;
+	top: 42px;
+}
+
+#mainMenu ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#mainMenu ul li{
+	display: inline;
+	float: left;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	text-indent: 0px;
+}
+
+#mainMenu ul li a {
+	display: block;
+	margin: 0px 10px 0px 0px;
+	padding: 2px 8px 2px 8px;
+	color: #278AC5;
+	text-decoration: none;
+}
+
+#mainMenu ul li a:hover {
+	background: #278AC5;
+	color: #fff;
+}
+
+
+
+
+#bookPage {
+	background: #dbdbdb;
+	width: 550px;
+	margin-bottom: 20px;
+}
+#bookPageInner {
+	position: relative;
+	top: -5px;
+	left: -5px;
+	width: 550px;
+	border: 1px solid #b5b5b5;
+	background: #ffffff;
+	min-height: 400px;
+}
+
+#bookPageContent {
+	padding: 20px;
+}
+#bookPageContent .chapterInfo{
+	text-align: center;
+}
+
+#bookPage .chapterInfo .bookTitle {
+	position: absolute;
+	top: 10px;
+	left: 20px;
+	color: #888888;
+}
+#bookPage .chapterNumber {
+	margin-top: 40px;
+}
+
+#bookPage .chapterInfo .authorName {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	text-decoration: none;
+}
+
+#bookPage .chapterInfo .bookTitle a:visited,
+#bookPage .chapterInfo .bookTitle a:link,
+#bookPage .chapterInfo .authorName a:link,
+#bookPage .chapterInfo .authorName a:visited {
+	color: #888888;
+	text-decoration: none;
+}
+
+#bookPage .authorName a {
+	color: #000;
+	text-decoration: none;
+}
+
+#bookPage .chapterText {
+	text-align: left;
+	font-size: 1.1em;
+	padding: 20px;
+}
+
+#bookPage .Synopsis {
+	width: 470px;
+	font-size: 1.2em;
+	margin-top: 40px;
+	color: #888888;
+	
+}
+#bookPage .h1 {
+	margin-top: 40px;
+}
+
+
+#bookSide {
+	width: 280px;
+	padding-left: 20px;
+}
+
+
+#bookSide ul {
+	list-style: none;
+	text-indent: 0;
+	margin: 0px;
+	padding: 0px;
+}
+
+#bookSide ul li {
+	text-indent: 0;
+	margin: 0px;
+	padding: 0px;
+}
+
+.columnOneThird {
+	float: left;
+	width: 280px;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	border-right: 3px solid #F2F2F2;
+}
+
+.columnTwoThird {
+	float: left;
+	width: 550px;
+	margin: 0px;
+	padding: 0px;
+	border-right: 3px solid #F2F2F2;
+}

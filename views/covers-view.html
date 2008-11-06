@@ -1,0 +1,49 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Book Cover" %}: {{ cover.SampleTitle }}
+	</h1>
+{% endblock %}
+{% block content %}
+	<div style="margin-top: 40px; text-align: center">
+		<img width="400" src='/Covers/Image/{{ cover.key }}' />
+	</div>
+{% endblock %}
+{% block sidebar %}
+	<div class="sidebarPanel">
+		<h3>{% trans "Options" %}</h3>
+		<div class="sidebarMenu">
+			<ul>
+				<li><a href="/Covers/Edit/{{ cover.key }}">
+					{% trans "Edit cover options" %}
+				</a></li>
+				{% if cover.isSharedWithEveryone %}
+					<li><a href="/Covers/Unshare/{{ cover.key }}">
+						{% trans "Stop sharing this cover" %}
+					</a></li>
+				{% else %}
+					<li><a href="/Covers/Share/{{ cover.key }}">
+						{% trans "Share it with everyone" %}
+					</a></li>
+				{% endif %}
+				<li><a href="http://www.picnik.com/service/?_apikey={{ picnikKey }}&_import={{ cover.imageURL }}&_export={{ cover.imageURL }}&_export_field=imageData&_redirect=http://www.wrook.org/Covers/{{ cover.key }}">
+					{% trans "Edit Image with Picnik" %}
+				</a></li>
+				<li><a href="/Covers/">
+					{% trans "Back" %}
+				</a></li>
+			</ul>
+		</div>
+	</div>
+	{% if currentMember.isAdmin %}
+		<div class="sidebarPanel">
+			<h3>{% trans "Admin options" %}</h3>
+			<div class="sidebarMenu">
+				<ul>
+					<li><a href="/Covers/SetDefault?selected={{ cover.key }}">{% trans "Choose as the default" %}</a></li>
+				</ul>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

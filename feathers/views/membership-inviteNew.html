@@ -1,0 +1,26 @@
+﻿{% extends masterTemplate %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Invite someone" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	<form method="post">
+		<table>
+			{{ form }}
+			<tr>
+				<td></td>
+				<td>
+				<input type="submit" name="doPreview" value="{% trans 'Preview invite' %}" />
+				{% if invite.is_saved %}
+					<input type="submit" name="doDiscard" value="{% trans 'Discard' %}" />
+					{% if session.Member.isAdmin %}
+						<input type="submit" name="doDelete" value="{% trans 'Delete' %}" />
+					{% endif %}
+				{% endif %}
+				</td>
+			</tr>
+		</table>
+	</form>
+{% endblock %}

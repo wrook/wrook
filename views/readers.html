@@ -1,0 +1,56 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block pageId %}readers{% endblock %}
+{% block pageTitle %}
+		{% if book %}
+			{% trans "Readers of" %} <em>{{ book.Title }}</em>
+		{% else %}
+			{% trans "Readers" %}
+		{% endif %}
+{% endblock %}
+{% block title %}
+	<h1>
+		{% if book %}
+			{% trans "Readers of" %} <em>{{ book.Title }}</em>
+		{% else %}
+			{% trans "Readers" %}
+		{% endif %}
+	</h1>
+{% endblock %}
+{% block content %}
+
+	<div class="memberList">
+		<ul>
+			{% if book %}
+				{% for bookmark in book.Bookmarks %}
+					<li>
+						<div class="avatar"><a href="/Member/{{ bookmark.Reader.key }}"><img src="{{ bookmark.Reader.gravatar50 }}" /></a></div>
+						<h3>
+							<a href="/Member/{{ bookmark.Reader.key }}">{{ bookmark.Reader.fullname }}</a>
+						</h3>
+						<div class="memberDetails">
+							{% trans "Latest chapter:" %}
+							<a href="/ViewChapter/{{ bookmark.Chapter.key }}">{{ bookmark.Chapter.Title }}</a>
+						</div>
+					</li>
+				{% endfor %}
+			{% else %}
+				{% for member in readers %}
+					<li>
+						<div class="avatar"><a href="/Member/{{ member.key }}"><img src="{{ member.gravatar50 }}" /></a></div>
+						<h3>
+							<a href="/Member/{{ member.key }}">{{ member.fullname }}</a>
+						</h3>
+						<div class="memberDetails">
+							{% trans "Latest bookmarks:" %} 
+							{% for bookmark in member.Bookmarks %}
+								<a href="/Books/{{ bookmark.Book.key }}">{{ bookmark.Book.Title }}</a>{% if forloop.last %}.{% else %}, {% endif %}
+							{% endfor %}
+						</div>
+					</li>
+				{% endfor %}
+			{% endif %}
+		</ul>
+	</div>
+
+{% endblock %}

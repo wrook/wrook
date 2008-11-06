@@ -1,0 +1,44 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Edit Book Cover" %}
+	</h1>
+{% endblock %}
+{% block content %}
+
+	<form method="post" enctype="multipart/form-data">
+		<table>
+			<tbody>
+				{{ form }}
+				<tr>
+					<th>
+						<label for="thumbnailImageProxy">{% trans "Thumbnail image" %}</label>
+					</th>
+					<td>
+						<input type="file" name="thumbnailImageProxy" />
+					</td>
+				</tr>
+				{% if form.instance.is_saved %}
+					<tr>
+						<th>
+							{% trans "Current image" %}
+						</th>
+						<td>
+							<img style="margin-top: 10px" src='/Covers/Thumbnail/{{ form.instance.key }}'>
+						</td>
+					</tr>
+				{% endif %}
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" name="doSave" value="{% trans 'Save' %}" />
+						{% if form.instance.is_saved %}
+							<input type="submit" name="doDelete" value="{% trans 'Delete' %}" />
+						{% endif %}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+{% endblock %}

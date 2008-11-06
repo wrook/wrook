@@ -1,0 +1,52 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% get_available_languages as LANGUAGES %}
+{% block title %}
+	<h1>
+		{% trans "Profile " %}
+	</h1>
+{% endblock %}
+{% block content %}
+	{% if visitedMember.About %}
+		<div>
+			{% if member.About %}
+				<h2>
+					{% trans "About " %} {{ visitedMember.fullname }}
+				</h2>
+				<div>
+					"&#160;{{ member.About|escape }}&#160;"
+				</div>
+			{% endif %}
+			<h2>
+				{% trans "Some details about " %} {{ visitedMember.fullname }}
+			</h2>
+			<table>
+				<tbody>
+					{% if visitedMember.Gender %}
+						<tr>
+							<th>{% trans "Gender" %}:</th><td>{{ visitedMember.genderName }}</td>
+						</tr>
+					{% endif %}
+					{% if visitedMember.Birthdate %}
+						<tr>
+							<th>{% trans "Birth date" %}:</th><td>{{ visitedMember.Birthdate|date:"d M Y" }}</td>
+						</tr>
+					{% endif %}
+					<tr>
+						<th>{% trans "Member since" %}:</th><td>{{ now|timesince:visitedMember.Created }}</td>
+					</tr>
+					<tr>
+						<th>{% trans "Prefered language" %}:</th><td>{{ visitedMember.preferedLanguageName }}</td>
+					</tr>
+					{% if visitedMember.isAdmin %}
+						<tr>
+							<th>{% trans "Member status:" %}</th><td>{% trans "Administrator" %}</td>
+						</tr>
+					{% endif %}
+				</tbody>
+			</table>
+		</div>
+	{% endif %}
+
+{% endblock content %}
+

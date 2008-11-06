@@ -1,0 +1,49 @@
+﻿{% extends masterTemplate %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Themes" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	{% ifnotequal themes.count 0 %}
+		<table>
+			<tbody>
+				<tr>
+					{% for theme in themes %}
+						<td>
+							<div style="display:none">{% cycle 0,0,1 as rowChange %}</div>
+							<a href="/Themes/{{ theme.key }}"><img style="width: 160px; height: 120px;" src="/Themes/Theme/BackgroundImage/{{ theme.key }}" /></a>
+							<div style="margin-top: 5px;">
+								<a href="/Members/{{ theme.SubmitedBy.key }}"><img width="30" style="float: left; margin-right: 5px;" src="{{ theme.SubmitedBy.gravatar30 }}" /></a>
+								<a href="/Themes/{{ theme.key }}" style="font-weight: bold; text-decoration: none;">{{ theme.Title }}</a>{% if theme.isDefault %}({% trans "default" %}){% endif %}
+								<br />
+								{% trans "By" %} {{ theme.SubmitedBy.fullname }}
+							</div>
+						</td>
+						{% ifequal rowChange "1" %}
+							</tr>
+							<tr>
+						{% endifequal %}
+					{% endfor %}
+				</tr>
+			</tbody>
+		</table>
+	{% else %}
+		<div>
+			{% trans "Sorry, no themes have been created!" %}
+		</div>
+	{% endifnotequal %}
+
+{% endblock %}
+
+{% block sidebar %}
+	<div class="sidebarPanel">
+		<h3>Options</h3>
+		<div class="sidebarMenu">
+			<ul>
+				<li><a href="/Themes/Theme/Edit/">{% trans "Create a new theme" %}</a></li>
+			</ul>
+		</div>
+	</div>
+{% endblock %}

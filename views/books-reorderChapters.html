@@ -1,0 +1,43 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{{ book.Title }} <span style="font-weight: normal; font-size: 0.7em;"> {% trans "by " %} {{ book.authorName }}</span>
+	</h1>
+{% endblock %}
+{% block content %}
+	<h2>
+		{% trans "Reorder chapters" %}
+	</h2>
+	<div class="chapterList">
+		<form method="post">
+			<table>
+			{% for chapter in chapters %}
+				<tr>
+					<td>
+						<input type="hidden" name="chapter.{{ chapter.key }}" value="True" />
+						<input style="width: 120px" type="text" name="chapter.{{ chapter.key }}.name" value="{{ chapter.Name }}" />
+					</td>
+					<td>
+						<input style="width: 300px" type="text" name="chapter.{{ chapter.key }}.title" value="{{ chapter.Title }}" />
+					</td>
+					<td>
+						<select style="width: 50px" name="chapter.{{ chapter.key }}.order" value="{{ chapter.Number }}">
+							{% for number in chapterCount %}
+								<option {% ifequal number chapter.Number %}selected="selected"{% endifequal %} value="{{ number }}">{{ number }}</option>
+							{% endfor %}
+						</select>
+					</td>
+				</td>
+			{% endfor %}
+				<tr>
+					<td colspan="3">
+						<input type="submit" name="update" value="{% trans 'Update' %}" />
+						<input type="submit" name="done" value="{% trans 'Finished' %}" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+{% endblock %}
+

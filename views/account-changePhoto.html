@@ -1,0 +1,52 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block pageId %}account-changePhoto{% endblock %}
+{% block pageTitle %}{% trans "Change your account photo" %}{% endblock %}
+{% block title %}
+	<h1>
+		{% trans "Change your account photo" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	{% if error %}
+		<div class="error">
+			{{ error }}
+		</div>
+	{% endif %}
+	<form method="post" enctype="multipart/form-data">
+		<table>
+			<tbody>
+				{% if member.ProfilePhoto %}
+					<tr>
+						<th>
+							{% trans "Current photo" %}
+						</th>
+						<td>
+							<a href="/Membership/ProfilePhoto/Image/{{ member.key }}?width=original">
+								<img style="margin-top: 10px" src='{{ member.gravatar120 }}'>
+							</a>
+						<td>
+					</tr>
+				{% endif %}
+				<tr>
+					<th>
+						<label for="profilePhotoProxy">{% trans "Upload photo" %}</label>
+					</th>
+					<td>
+						<input type="file" name="profilePhotoProxy" />
+						<br/>
+						{% trans "Must be a square image!" %}
+					<td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<input type="submit" name="upload" value="{% trans 'Upload' %}" />
+					<td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+
+{% endblock %}

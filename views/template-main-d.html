@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+{% load i18n %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Wrook: {% block pageTitle %}Readers, Writers, Words{% endblock %}</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
+		<meta http-equiv="pragma" content="no-cache"></meta>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"></link>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/template-d.css"></link>
+		{% if currentTheme %}
+			<link rel="stylesheet" type="text/css" href="/Themes/Theme/Stylesheet/{{ currentTheme.key }}"></link>
+		{% endif %}
+		{% if currentTheme %}
+		<style>
+/* theme: {{ currentTheme.Title }} **/
+body {
+	background: {{ currentTheme.BackgroundColor }};
+}
+#page {
+	background: url(/Themes/Theme/BackgroundImage/{{ currentTheme.key }}?width=1024) top center no-repeat;
+}
+		{% endif %}
+		</style>
+		{% block htmlHead %}{% endblock %}
+	</head>
+	<body id="page-{% block pageId %}none{% endblock %}">
+		<div id="spritesPreload"></div>
+		<div id="page">
+			<div id="header">
+				<div id="siteBar">
+					<div id="siteBarContent">
+						{% if currentMember %}
+							<a href="/" id="currentMemberAvatar"><img width="30" src="{{ currentMember.gravatar30 }}" /></a>
+							<div id="siteName" class="withAvatar">
+								<a href="/">Wrook</a>
+							</div>
+						{% else %}
+							<div id="siteName"><a href="/">Wrook</a></div>
+						{% endif %}
+						<ul id="siteMenu">
+							{% if currentMember %}
+								<li><a id="menu-home" href="/">{% trans "Home" %}</a></li>
+								<li><a id="menu-books" href="/Books">{% trans "Books" %}</a></li>
+								<li><a id="menu-readers" href="/Members">{% trans "Members" %}</a></li>
+								<li><a id="menu-customize" href="/Customize">{% trans "Customize" %}</a></li>
+								<li><a id="menu-labs" href="/Labs">{% trans "Labs" %}</a></li>
+								<li><span class="separator">|</span></li>
+								<li><a id="menu-logout" href="/Logout">{% trans "Logout" %}</a></li>
+							{% else %}
+								<li><a id="menu-home" href="/">{% trans "Home" %}</a></li>
+								<li><a id="menu-join" href="/Join/">{% trans "Join" %}</a></li>
+								<li><span class="separator">|</span></li>
+								<li><a id="menu-login" href="/Login">{% trans "Login" %}</a></li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+				{% if visitedMember %}
+					<div id="headerContent" class="withAvatar">
+						<div id="memberAvatar"><a href="/Members/{{ visitedMember.key}}"><img width="50" src="{{ visitedMember.gravatar50 }}" /></a></div>
+						<div id="memberName"><a href="/Members/{{ visitedMember.key}}">{{ visitedMember.fullname }}</a></div>
+						<div id="memberMenu">
+							<ul>
+								<li><a id="menu-memberFeed" href="/Members/{{ visitedMember.key }}">{% trans "Feed" %}</a></li>
+								<li><a id="menu-memberProfile" href="/Members/{{ visitedMember.key }}/Profile">{% trans "Profile" %}</a></li>
+								<li><a id="menu-memberBooks" href="/Members/{{ visitedMember.key }}/Books">{% trans "Books" %}</a></li>
+								<li><a id="menu-memberReadings" href="/Members/{{ visitedMember.key }}/Readings">{% trans "Readings" %}</a></li>
+								<li><a id="menu-memberCovers" href="/Members/{{ visitedMember.key }}/Covers">{% trans "Covers" %}</a></li>
+								{% ifequal visitedMember.key currentMember.key %}
+								<li><a id="menu-memberInvites" href="/Invites">{% trans "Invites" %}</a></li>
+								{% endifequal %}
+							</ul>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+			<div id="pageInner">
+				<div id="sidebar">
+					{% block sidebar %}{% endblock %}
+				</div>
+				<div id="pageContent">
+					<div id="notices">
+						{% block notices %}{% endblock %}
+					</div>
+					<div id="pageTitle">
+						{% block title %}{% endblock %}
+					</div>
+					{% block content %}{% endblock %}
+					<div class="clearfix"></div>
+				</div>
+				<div id="pageFooter">
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<div id="footerContent">
+			{% block footer %} {% endblock %}
+			</div>
+		</div>
+		<script type="text/javascript" src="/scripts/jquery/jquery.js"></script>
+		<script type="text/javascript" src="/scripts/jquery/dimensions/jquery.dimensions.pack.js"></script>
+		<script type="text/javascript" src="/scripts/main.js"></script>
+		{% include "analytics.html" %}
+	</body>
+</html>

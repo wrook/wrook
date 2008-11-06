@@ -1,0 +1,31 @@
+﻿{% extends masterTemplate %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Success!" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	{% if statement %}
+		<p>{{ statement }}</p>
+	{% else %}
+		<p>{% trans "Congratulation, the operation was a success!" %}</p>
+	{% endif %}
+	{% if continueURL %}
+		<div class="buttonBar">
+			<ul>
+				<li>
+					<a href="{{ continueURL }}">
+						<span>
+							{% if continueLabel %}
+								{{ continueLabel }}
+							{% else %}
+								{% trans "Continue" %}
+							{% endif %}
+						</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,61 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Books" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	<div class="bookGallery">
+		<table>
+			<tr>
+				{% if books %}
+					{% for book in books %}
+						<td>
+						<div class="book">
+							<div style="display:none">{% cycle 0,0,1 as rowChange %}</div>
+							<div class="cover">
+								<a href="/Books/{{ book.key }}">
+									<img src='/Covers/Thumbnail/{{ book.getCover.key }}' title="{{ book.Title }}" alt="{{ book.Title }}">
+									{% if book.getCover.isReusable %}
+										<span class="coverTitle" {% if book.getCover.TitleColor %}style="color: {{ book.getCover.TitleColor }}"{% endif %} >{{ book.Title }}</span> 
+									{% endif %}
+								</a>
+							</div>
+							{% ifequal book.Stage "planning" %}{% trans "Only planning" %}, {% endifequal %}
+							{% ifequal book.Stage "drafting" %}{% trans "Still in drafting" %}, {% endifequal %}
+							{% ifequal book.Stage "writing" %}{% trans "Still in writing" %}, {% endifequal %}
+							{% ifequal book.Stage "proofing" %}{% trans "Still in proofing" %}, {% endifequal %}
+							<br />
+							{% trans "By" %} {{ book.authorName }}
+						</div>
+						</td>
+						{% ifequal rowChange "1" %}
+							</tr>
+							<tr>
+						{% endifequal %}
+					{% endfor %}
+				{% else %}
+					{% ifequal visitedMember.key currentMember.key %}
+						<p>{% trans "You have not saved any bookmarks yet. We invite you to choose one from <a href='/Books'>all the books</a> which have been contributed by other members." %}</p>
+					{% else %}
+						<p>{% trans "This member has not saved any bookmarks yet." %}</p>
+					{% endifequal %}
+				{% endif %}
+			</tr>
+		<table>
+	</div>
+{% endblock %}
+
+{% block sidebar %}
+	<div class="sidebarPanel">
+		<h3>{% trans "Options" %}</h3>
+		<div class="sidebarMenu">
+			<ul>
+				{% ifequal visitedMember.key currentMember.key %}
+					<li><a href="/Books/Edit/">{% trans "Start a new book" %}</a></li>
+				{% endifequal %}
+			</ul>
+		</div>
+	</div>
+{% endblock %}

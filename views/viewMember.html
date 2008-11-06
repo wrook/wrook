@@ -1,0 +1,78 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block title %}
+{% endblock %}
+{% block content %}
+	{% if member.About %}
+		<div>
+			<h2>
+				{% trans "About " %} {{ member.fullname }}
+			</h2>
+			"&#160;{{ member.About|escape }}&#160;"
+		</div>
+	{% endif %}
+	{% ifnotequal member.Books.count 0 %}
+		<h2>{% trans "Books" %}</h2>
+		<div class="bookGallery">
+			{% for book in member.Books %}
+				<div class="book">
+					<div class="cover">
+						{% if book.Cover %}
+							<a href="/Books/{{ book.key }}">
+								<img src='/Covers/Thumbnail/{{ book.Cover.key }}'>
+								<span class="coverTitle" {% if book.Cover.TitleColor %}style="color: {{ book.Cover.TitleColor }}"{% endif %} >{{ book.Title }}</span> 
+							</a>
+						{% else %}
+							<a href="/Books/{{ book.key }}">
+								<img src='/images/default-cover.jpg'>
+								<span class="coverTitle" {% if book.Cover.TitleColor %}style="color: {{ book.Cover.TitleColor }}"{% endif %} >{{ book.Title }}</span> 
+							</a>
+						{% endif %}
+					</div>
+					{% ifequal book.Stage "planning" %}{% trans "Only planning" %}, {% endifequal %}
+					{% ifequal book.Stage "drafting" %}{% trans "Still in drafting" %}, {% endifequal %}
+					{% ifequal book.Stage "writing" %}{% trans "Still in writing" %}, {% endifequal %}
+					{% ifequal book.Stage "proofing" %}{% trans "Still in proofing" %}, {% endifequal %}
+					<br />
+					{% trans "By" %} {{ book.Author.fullname }}
+				</div>
+			{% endfor %}
+		</div>
+	{% endifnotequal %}
+	<br style="clear: both"/>
+	{% ifnotequal member.Bookmarks.count 0 %}
+		<h2>{% trans "Readings" %}</h2>
+		<div class="bookGallery">
+			{% for bookmark in member.Bookmarks %}
+
+				<div class="book">
+					<div class="cover">
+						{% if bookmark.Book.Cover %}
+							<a href="/ViewChapter/{{ bookmark.Chapter.key }}">
+								<img src='/Covers/Thumbnail/{{ bookmark.Book.Cover.key }}'>
+								<span class="coverTitle" {% if bookmark.Book.Cover.TitleColor %}style="color: {{ bookmark.Book.Cover.TitleColor }}"{% endif %} >{{ bookmark.Book.Title }}</span> 
+							</a>
+						{% else %}
+							<a href="/ViewChapter/{{ bookmark.Chapter.key }}">
+								<img src='/images/default-cover.jpg'>
+								<span class="coverTitle" {% if bookmark.Book.Cover.TitleColor %}style="color: {{ bookmark.Book.Cover.TitleColor }}"{% endif %} >{{ bookmark.Book.Title }}</span> 
+							</a>
+						{% endif %}
+					</div>
+					<strong>{{ bookmark.Chapter.Title }}</strong>
+					<br/>
+					{% ifequal bookmark.Book.Stage "planning" %}{% trans "Only planning" %}, {% endifequal %}
+					{% ifequal bookmark.Book.Stage "drafting" %}{% trans "Still in drafting" %}, {% endifequal %}
+					{% ifequal bookmark.Book.Stage "writing" %}{% trans "Still in writing" %}, {% endifequal %}
+					{% ifequal bookmark.Book.Stage "proofing" %}{% trans "Still in proofing" %}, {% endifequal %}
+					<br />
+					{% trans "By" %} {{ bookmark.Book.Author.fullname }}
+				</div>
+
+			{% endfor %}
+			<br style="clear: both"/>
+		</div>
+	{% endifnotequal %}
+
+{% endblock content %}
+

@@ -1,0 +1,41 @@
+﻿{% extends masterTemplate %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Confirm the invitation" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	<form method="post">
+{% blocktrans %}
+<p>
+Here is a preview of the message which will be sent on your behalf.
+</p>
+<p>
+You must <strong>read and click confirm</strong> before we send the message.
+</p>
+{% endblocktrans %}
+		<div>
+			<h2>
+			Preview:
+			</h2>
+			<div style="display: none">{{ form }}</div>
+			<div style="background: #EEEEEE; border: 2px solid #CCCCCC; padding: 20px;">
+				{{ messagePreview|linebreaks }}
+			</div>
+		</div>
+		<br/>
+		{% if invite.is_saved %}
+			<input type="submit" name="doSend" value="{% trans 'Save & Resend' %}" />
+			<input type="submit" name="doModify" value="{% trans 'Modify' %}" />
+			<input type="submit" name="doDiscard" value="{% trans 'Discard this invitation' %}" />
+			{% if session.Member.isAdmin %}
+				<input type="submit" name="doDelete" value="{% trans 'Delete' %}" />
+			{% endif %}
+		{% else %}
+			<input type="submit" name="doModify" value="{% trans 'Modify' %}" />
+			<input type="submit" name="doSend" value="{% trans 'Send invite' %}" />
+		{% endif %}
+	</form>
+	
+{% endblock %}

@@ -1,0 +1,65 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Book covers" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	{% ifequal currentMember.key visitedMember.key %}
+		<h2>{% trans "Your shared covers" %}</h2>
+	{% endifequal %}
+	<div class="coverGallery">
+		{% for cover in sharedCovers %}
+			<div class="cover">
+				<a href='/Covers/{{ cover.key }}'>
+					<img src='/Covers/Thumbnail/{{ cover.key }}'>
+					{% if cover.isReusable %}
+						<span class="coverTitle" {% if cover.TitleColor %}style="color: {{ cover.TitleColor }}"{% endif %} >{{ cover.SampleTitle }}</span> 
+					{% endif %}
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+	{% if permissionMemberCanSeePrivateCovers %}
+		{% ifequal currentMember.key visitedMember.key %}
+			<h2>{% trans "Your private covers" %}</h2>
+		{% else %}
+			<h2>{% trans "Private covers" %}</h2>
+		{% endifequal %}
+		<div class="coverGallery">
+			{% for cover in privateCovers %}
+				<div class="cover">
+					<a href='/Covers/{{ cover.key }}'>
+						<img src='/Covers/Thumbnail/{{ cover.key }}'>
+						{% if cover.isReusable %}
+							<span class="coverTitle" {% if cover.TitleColor %}style="color: {{ cover.TitleColor }}"{% endif %} >{{ cover.SampleTitle }}</span> 
+						{% endif %}
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+	{% endif %}
+{% endblock %}
+
+{% block sidebar %}
+	<div class="sidebarPanel">
+		<h3>{% trans "Options" %}</h3>
+		<div class="sidebarMenu">
+			<ul>
+				<li><a href="/Covers/Edit/">{% trans "Create a new cover" %}</a></li>
+				<li><a href="/Covers/">{% trans "Browse all covers" %}</a></li>
+			</ul>
+		</div>
+	</div>
+	{% if currentMember.isAdmin %}
+		<div class="sidebarPanel">
+			<h3>{% trans "Admin options" %}</h3>
+			<div class="sidebarMenu">
+				<ul>
+					<li><a href="/Covers/Select?usage=Books without a cover&redirect=/Covers/SetDefault">{% trans "Select the default cover" %}</a></li>
+				</ul>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

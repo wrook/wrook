@@ -1,0 +1,13 @@
+﻿<div class="cover">
+	{% if book.Cover %}
+		<a href="/Books/{{ book.key }}">
+			<img src='/Covers/Thumbnail/{{ book.Cover.key }}'>
+			<span class="coverTitle" {% if book.Cover.TitleColor %}style="color: {{ book.Cover.TitleColor }}"{% endif %} >{{ book.Title }}</span> 
+		</a>
+	{% else %}
+		<a href="/Books/{{ book.key }}">
+			<img src='/images/default-cover.jpg'>
+			<span class="coverTitle" {% if book.Cover.TitleColor %}style="color: {{ book.Cover.TitleColor }}"{% endif %} >{{ book.Title }}</span> 
+		</a>
+	{% endif %}
+</div>

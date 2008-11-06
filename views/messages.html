@@ -1,0 +1,91 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Feedback & Discussions for:" %}
+		{% ifequal targetType "book" %}
+			{{ book.Title|escape }}
+		{% endifequal %}
+	</h1>
+{% endblock %}
+{% block content %}
+
+
+
+	<h2>{% trans "Post a message" %}</h2>
+	<form method="post" action="/PostMessage">
+		<input type="hidden" name="ComebackUrl" value="/Feedback/Book/{{ book.key }}" />
+		<input type="hidden" name="Book" value="{{ book.key }}" />
+		<input type="hidden" name="TargetType" value="book" />
+		<table>
+			<tbody>
+				<tr>
+					<th>
+						<label for="Topic">{% trans "Topic" %} </label>
+					</th>
+					<td>
+						<input type="text" name="Topic" />
+					<td>
+				</tr>
+				<tr>
+					<th>
+						<label for="Text">{% trans "Your message" %} </label>
+					</th>
+					<td>
+						<textarea name="Text" style="height: 60px"></textarea>
+					<td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<input type="submit" name="Action" value="{% trans 'Post' %}" />
+<!--
+						<input type="checkbox" name="isPrivate" value="true" style="margin-left:10px; position: relative; top: 3px" />
+						<label for="isPrivate">{% trans "Only for the author" %}</label><br/>
+-->
+					<td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+
+	<h2>
+		{% trans "Other messages" %}
+	</h2>
+	{% ifnotequal messages.count 0 %}
+		<div class="messageList">
+			<ul>
+				{% for message in messages %}
+					<li>
+						<div class="avatar"><a href="/Member/{{ message.From.key }}"><img width="50" src="{{ message.From.gravatar50 }}" /></a></div>
+						<div class="message">
+							<h3>
+								{% if message.Topic %}
+									{{ message.Topic }} -
+								{% endif %}
+								<span class="messageLinks">
+									<a href="/Member/{{ message.From.key }}">{{ message.From.fullname }}</a>
+									{% ifequal message.From.key session.Member.key %}
+										- <a href="/Feedback/Delete/{{ message.key }}?ComebackUrl=/Feedback/Book/{{ book.key }}">{% trans "delete" %}</a>
+									{% endifequal %}
+								</span>
+							</h3>
+							<div class="messageText">
+								{{ message.Text|linebreaks }} <!-- <em class="messageSent">({{ message.Sent }})</em>-->
+							</div>
+						</div>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+		
+	{% else %}
+		<div class="preButtonsNotice">
+			{% trans "No other messages have been posted yet!" %}
+		</div>
+	{% endifnotequal %}
+
+
+{% endblock content %}
+

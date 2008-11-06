@@ -1,0 +1,37 @@
+﻿{% extends masterTemplate %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Wrook Labs" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	<div class="columns">
+		<div class="columnTwoThird">
+			<div id="bookPage">
+				<div id="bookPageInner">
+					<div id="bookPageContent" style="text-align: left;">
+						<h2 style="text-align: left;">{% trans "Done!" %}</h2>
+						<p>
+							{% trans "Your submission has been added to the list. Thank you!" %}
+						</p>
+						<div "buttonBar">
+							<ul>
+								<li>
+									<a href="/Labs">{% trans "Back to the labs" %}</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+{% endblock %}
+{% block offstage %}
+	<div id="offstageMenu">
+		<ul>
+		</ul>
+	</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+{% load i18n %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
+		<meta http-equiv="pragma" content="no-cache"></meta>
+		<link rel="stylesheet" type="text/css" href="/scripts/WrookTypewriter/WrookTypewriter.css"></link>
+		<script src="/scripts/jquery/jquery.js" type="text/javascript"></script>
+		<script src="/scripts/jquery/dimensions/jquery.dimensions.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var wrookEditor = WrookEditor();
+				var windowHeight = $(window).height();
+				$("#wtw-page")[0].style.height=(windowHeight-35)+"px"
+				$("#wtw-text")[0].focus()
+			})
+		</script>
+		<script src="/scripts/WrookTypewriter/WrookTypewriter.js" type="text/javascript"></script>
+	</head>
+	<body id="page-typewriter">
+		<div id="wtw-body">
+			<div id="wtw-header">
+				<div id="wtw-name">
+					<strong>Wrook</strong><em>Typewriter</em> <span style="font-size: 0.6em;">{% trans "[Esc=Menu]" %}</span>
+				</div>
+				<div id="wtw-chapterName">
+					{{ chapter.Title }} 
+					{% if chapter.getLatestRevision %}
+						({% trans "Revision " %}{{ chapter.getLatestRevision.Version }})
+					{% else %}
+						({% trans "Revision 0" %}{{ chapter.getLatestRevision.Version }})
+					{% endif %}
+				</div>
+			</div>
+			<div id="wtw-page">
+
+				<div id="wtw-menu">
+					<div id="wtw-menu-content">
+						<ul>
+							<li><a id="mnu-saveAndExit" href="#">{% trans '<span class="shortcutKey">S</span>ave and exit' %}</a></li>
+<!--
+							<li><a id="mnu-exit" href="#">E<span class="shortcutKey">x</span>it</a></li>
+							<li><a id="mnu-save" href="#">Sa<span class="shortcutKey">v</span>e</a></li>
+-->
+						</ul>
+					</div>
+				</div>
+
+				<form id="wtw-form" method="post">
+					{% if chapter.getLatestRevision  %}
+						<textarea name="text" id="wtw-text">{{ chapter.getLatestRevision.Text }}</textarea>
+					{% else %}
+						<textarea name="text" id="wtw-text">{% trans "Start writing your chapter here..." %}</textarea>
+					{% endif %}
+				</form>
+
+				<div id="wtw-help">
+					<div id="wtw-help-content">
+						<h2>Syntax:</h2>
+						<div>
+							Italic:
+						</div>
+						<div>
+							Bold:
+						</div>
+						<div>
+							Bullets:
+						</div>
+						<div>
+							Dialogues:
+						</div>
+						<div>
+							Headings: 
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		{% include "template-analytics.html" %}
+	</body>
+</html>

@@ -1,0 +1,33 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block pageId %}members{% endblock %}
+{% block pageTitle %}
+	{% trans "Members" %}
+{% endblock %}
+{% block title %}
+	<h1>
+		{% trans "Members" %}
+	</h1>
+{% endblock %}
+{% block content %}
+
+	<div class="memberList">
+		<ul>
+			{% for member in members %}
+				<li>
+					<div class="avatar"><a href="/Member/{{ member.key }}"><img width="50" src="{{ member.gravatar50 }}" /></a></div>
+					<h3>
+						<a href="/Members/{{ member.key }}">{{ member.fullname }}</a>
+					</h3>
+					<div class="memberDetails">
+						{% trans "Latest bookmarks:" %} 
+						{% for bookmark in member.Bookmarks %}
+							<a href="/Books/{{ bookmark.Book.key }}">{{ bookmark.Book.Title }}</a>{% if forloop.last %}.{% else %}, {% endif %}
+						{% endfor %}
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+
+{% endblock %}

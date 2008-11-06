@@ -1,0 +1,32 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block pageName %}ViewChapter{% endblock %}
+{% block title %}
+	<h1>
+		{% trans "Delete a chapter" %}
+	</h1>
+{% endblock %}
+{% block content %}
+
+{% blocktrans %}
+<p>
+Are you <strong>absolutely</strong> sure that you want to delete this chapter?
+</p>
+<p>
+This will also delete all revisions, feedback and bookmarks associated with the chapter.
+</p>
+<p>
+Once delete, it cannot be undeleted.
+</p>
+{% endblocktrans %}
+	<p>
+		<a href="/ViewChapter/{{ chapter.key }}">{% trans "Cancel and go back" %}</a>
+	</p>
+	<form method="post">
+		<input type="checkbox" value="yes" name="confirmDelete" /><label for="confirmDelete">{% trans "I have read the warning and confirm" %}</label>
+		<br/>
+		<br/>
+		<input type="submit" name="doDelete" value="{% trans "Delete" %}"/>
+	</form>
+
+{% endblock %}

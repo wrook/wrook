@@ -1,0 +1,716 @@
+h1 {
+	font-size: 2em;
+	font-weight: normal;
+}
+
+.clearfix { 
+	clear: both;
+	height: 1px;
+}
+
+a, a:link, a:visited {
+	color: #5454c7; /* palette */
+}
+
+ul {
+	margin: 0px 0px 0.4em 0px;
+	padding: 0px;
+}
+
+ul li {
+	list-style-type: square;
+	margin: 0px 0px 0.4em 1.1em;
+	padding: 0px;
+}
+
+
+link {
+	display: none;
+}
+
+a img {
+	border: none;
+}
+
+
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+	background: #F6F6F6 url(/images/input-field-background.png);
+	border: 1px solid #bbbbbb;
+	padding: 4px 5px 2px 5px;
+}
+
+option {
+	background: #ffffff;
+}
+
+input[type='text'],
+select {
+	width: 300px;
+}
+textarea {
+	width: 360px;
+	height: 120px;
+}
+
+table {
+	width: 100%;
+}
+
+table tr {
+}
+
+table tr td {
+	vertical-align: top;
+}
+table tr th {
+	vertical-align: top;
+}
+table tr td p {
+	margin: 0px 0px 10px 0px;
+}
+table tr td h4 {
+	margin: 0px;
+	padding: 0px;
+}
+table tr td ul {
+	margin: 0px;
+	padding: 0px 0px 0px 14px;
+}
+table tr td ul li {
+	margin: 0px;
+	padding: 0px;
+	text-indent: 0px;
+}
+
+.columns {
+}
+.column h2 {
+	margin-bottom: 20px;
+}
+
+.column.third {
+	float: left;
+	width: 250px;
+	margin: 0px 20px 0px 0px;
+	padding: 0px 20px 0px 0px;
+	border-right: 3px solid #F2F2F2; /* palette */
+}
+.column.third.last {
+	border-right: none;
+	margin-right: 0px;
+	padding-right: 0px;
+}
+
+
+
+.buttonBar {
+	position: relative;
+	height: 24px;
+	margin-top: 10px;
+	clear: both;
+}
+
+.buttonBar.Stacked ul,
+.buttonBar.Stacked {
+	height: auto;
+}
+
+.buttonBar ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	height: 24px;
+}
+
+.buttonBar ul li {
+	display: inline;
+	float: left;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	text-indent: 0px;
+}
+.buttonBar.Stacked ul li {
+	display: block;
+	float: none;
+	margin-bottom: 5px !important;
+}
+
+.buttonBar ul li a {
+	display: block;
+	margin: 0px 10px 0px 0px;
+	padding: 2px 8px 2px 8px;
+	background: #888;
+	color: #ffffff; /* paeltte */
+	text-decoration: none;
+}
+
+.buttonBar ul li a:hover {
+	background: #888; /* palette */
+	color: #fff; /* palette */
+}
+
+
+#profileMenu {
+	position: absolute;
+	right: 00px;
+	top: 10px;
+}
+
+#profileMenu ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+#profileMenu ul li{
+	display: inline;
+	float: left;
+	list-style: none;
+	margin: 0px 0px 0px 20px;
+	padding: 0px;
+	text-indent: 0px;
+}
+
+#profileMenu ul li a {
+	display: block;
+	margin: 0px 0px 0px 0px;
+	color: #888;
+}
+
+#profileMenu ul li a:hover {
+	background: #888;
+	color: #fff;
+}
+
+.chapterText {
+	margin: 10px 0px;
+	padding: 20px 40px 20px 40px;
+	font-size: 1.3em;
+	background: #FFF;
+	line-height: 1.7em;
+}
+
+#page-ViewChapter .chapterInfo h1 {
+	text-align: center;
+	margin: 20px 0px 0px 0px;
+	font-size: 2em;
+}
+
+#page-ViewChapter .bookInfo {
+	text-align: center;
+}
+
+.preButtonsNotice {
+	font-size: 1.3em;
+	color: #888888;
+	margin: 10px 0px 10px 0px;
+}
+
+.bookList {
+}
+
+.bookList h3 {
+	font-size: 0.9em;
+	margin: 0px;
+	padding: 0px;
+}
+.bookList .bookDetails {
+	font-size: 1em !important;
+}
+
+.bookList ul {
+	text-indent: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.bookList ul li {
+	list-style: none;
+	margin: 0px 0px 0px 0px;
+	padding: 2px 0px 18px 34px;
+	background: url(../images/icon-book.png) no-repeat;
+	font-size: 1em;
+}
+
+.bookList ul li a {
+	font-size: 1.2em;
+}
+
+
+
+.bookmarkList {
+}
+
+.bookmarkList ul {
+	text-indent: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.bookmarkList ul li {
+	list-style: none;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 16px 26px;
+	background: url(../images/icon-bookmark.png) no-repeat;
+	font-size: 1.0em;
+}
+
+.bookmarkList ul li a {
+}
+
+.infoBlock {
+	background: #F4F4F4;
+	padding: 10px;
+}
+
+#page-ViewChapter  .Synopsis {
+	border: none;
+	width: 500px;
+	margin: 20px auto 20px auto;
+	font-size: 1em;
+	color: #666666;
+}
+
+.error {
+	padding: 10px;
+	margin: 15px 0px;
+	border: 2px solid #FF0000;
+	background: #FEFF93
+}
+
+
+.messageList {
+
+}
+
+.messageList ul {
+	text-indent: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.messageList ul li {
+	position: relative;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	min-height: 90px;
+}
+
+.messageList ul li .avatar {
+	background: #f7f7f7;
+	padding: 3px;
+}
+
+.messageList ul li .avatar a {
+	text-decoration: none;
+	font-size: 0.8em;
+}
+
+.messageList ul li .avatar img {
+	border: none;
+}
+
+.messageList ul li h3 {
+	margin: 0px;
+	padding: 0px;
+	font-size: 1em;
+}
+
+.messageList ul li .message {
+	margin: 0px 0px 0px 70px;
+	padding: 0px;
+	font-size: 1.1em;
+}
+
+.messageList .messageText {
+	margin-top: 5px;
+}
+.messageList .messageLinks {
+	font-weight: normal;
+	font-size: 0.8em;
+}
+
+.messageList ul li .messageSent{
+	font-size: 0.8em;
+	color: #999999;
+}
+
+.messageList ul .avatar {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+
+
+.messageList {
+
+}
+
+.memberList ul {
+	text-indent: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.memberList ul li {
+	position: relative;
+	list-style: none;
+	margin: 0px;
+	padding: 0px 0px 0px 70px;
+	min-height: 90px;
+}
+
+.memberList ul li .avatar {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background: #f7f7f7;
+	padding: 3px;
+}
+
+
+.memberList ul li .avatar img {
+	border: none;
+}
+
+.memberList ul li h3 {
+	margin: 0px;
+	padding: 0px;
+	font-size: 1em;
+}
+
+.memberList .memberDetails {
+	font-weight: normal;
+	font-size: 0.9em;
+	margin: 5px 0px 0px 0px;
+	padding: 0px;
+}
+
+.cover img {
+	width: 120px;
+}
+.cover.width180 img {
+	width: 180px;
+	margin: 0px 10px 10px 0px;
+}
+.cover.width180 .coverTitle {
+	width: 150px;
+	left: 15px;
+	padding: 45px 0px 0px 0px;
+	font-size: 22px;
+}
+.cover.width90 img {
+	width: 90px;
+}
+.cover.width90 img {
+	width: 90px;
+}
+
+
+.cover {
+	position: relative;
+}
+
+.cover a:visited,
+.cover a:link{
+	text-decoration: none;
+}
+
+.coverGallery .cover {
+	position: relative;
+	float: left;
+	margin: 0px 20px 10px 0px;
+	padding: 0px 22px 0px 0px;
+	background: url(../images/cover-shadow.png) bottom right no-repeat;
+}
+.cover {
+	position: relative;
+	width: 120px;
+	margin: 0px 20px 10px 0px;
+	padding: 0px 22px 0px 0px;
+	background: url(../images/cover-shadow.png) bottom right no-repeat;
+}
+.cover.width180 {
+	width: 180px;
+}
+.cover.width90 {
+	width: 90px;
+}
+.bookGallery .book .cover {
+	margin: 0px 0px 0px 0px;
+}
+.bookGallery .book {
+	position: relative;
+	width:140px;
+	margin: 0px 20px 10px 0px;
+}
+
+.coverTitle {
+	position: absolute;
+	display: block;
+	width: 100px;
+	top: 0px;
+	left: 10px;
+	padding: 30px 0px 0px 0px;
+	font-size: 14px;
+	text-align: center;
+	color: #FFFFFF;
+	font-family: "Times new roman", Serif;
+}
+
+
+
+
+.buttonBar {
+	clear: both;
+	padding: 0;
+	font-size: .8em;
+	height: 28px;
+}
+.buttonBar ul {
+	list-style-type: none;
+	list-style: none;
+	margin: 0 !important;
+	padding: 0 !important;
+	float: left;
+}
+.buttonBar ul li {
+	margin: 0 !important;
+	padding: 0 !important;
+	float: left;
+	background: none !important;
+	font-size: 1em !important;
+}
+
+.buttonBar ul li a:visited,
+.buttonBar ul li a:link {
+	float: left;
+	display: block;
+	background: url(../images/button.png) 0 0px no-repeat;
+	color: #fff;
+	text-decoration: none;
+	padding: 0px;
+}
+
+.buttonBar ul li a span {
+	display: block;
+	float: left;
+	height: 22px;
+	margin: 0 0 0 16px;
+	padding: 6px 16px 0 0;
+	background: url(../images/button.png) right 0px repeat-x;
+	text-align: center;
+	cursor: pointer;
+}
+
+.buttonBar ul li a:hover {
+	background-position: left -28px!important;
+}
+
+.buttonBar ul li a:hover span {
+	background-position: right -28px !important;
+}
+
+
+
+.storyPosts {
+	white-space: pre-line;
+}
+
+.storyPosts-item {
+	position: relative;
+	padding: 7px 5px 7px 25px;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+
+.storyPosts-item.odd {
+}
+
+.storyPosts-item .icon {
+	position: absolute;
+	left: 2px;
+	top: 6px;
+}
+
+.storyPosts-item h4 {
+	position: relative;
+	font-weight: normal;
+	margin: 0px;
+	padding: 0px;
+}
+
+.storyPosts-item a:visited,
+.storyPosts-item a:link {
+	text-decoration: none;
+}
+
+.storyPosts-item h4 .title {
+}
+
+.storyPosts-item h4 .when {
+	color: #999999;
+	font-size: 0.9em;
+	margin: 0px 0px 0px 5px;
+}
+
+.storyPosts-item .body {
+	margin: 5px 0px 5px 0px;
+}
+
+.storyPosts-item .more {
+	position: relative;
+	padding: 0px 110px 0px 0px;
+}
+
+.storyPosts-item .menu {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	width: 100px;
+	border-left: 1px solid #DDDDDD;
+}
+
+.storyPosts-item .menu ul {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	font-size: 0.8em;
+}
+
+.storyPosts-item .menu ul li {
+	margin: 0px;
+	padding: 0px;
+}
+
+
+
+
+
+.replies h4 {
+	margin: 0px 0px 5px 0px;
+	padding: 0px 0px 0px 0px;
+	font-weight: bold;
+}
+
+.reply {
+	position: relative;
+	padding: 0px 45px 0px 0px;
+	margin: 5px 0px 10px 0px;
+}
+
+.reply-avatar {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+
+.reply-title {
+	font-size: 0.85em;
+	text-align: right;
+	color: #999999;
+	margin-top: 2px;
+}
+
+.reply-fullname {
+	
+}
+
+.reply-tip {
+	position: absolute;
+	top: 10px;
+	right: 33px;
+	background: url(../images/reply-tip.png) no-repeat;
+	width: 13px;
+	height: 10px;
+}
+.reply-when {
+	margin: 0px 0px 0px 5px;
+}
+
+.reply-body {
+	padding: 10px 5px 10px 10px;
+	border: 1px solid #DDDDDD;
+	background: #F6F6F6;
+}
+
+.miniMenuAnchor {
+	height: 20px;
+	width: 20px;
+	background: none;
+	cursor: pointer;
+}
+
+
+.miniMenuAnchor.hover {
+	background: url(../images/sprites.png) 0px 0px no-repeat;
+}
+
+.miniMenuAnchor.on,
+.miniMenuAnchor.stayOn {
+	background: url(../images/sprites.png) 0px -20px no-repeat !important;
+}
+
+
+#spritesPreload {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	width: 1px;
+	height: 1px;
+	background: url(../images/sprites.png) no-repeat;
+}
+
+#miniMenu {
+	width: 100px;
+	display: none;
+	position:absolute;
+	background: #fffd6c;
+	border: 2px solid #d9d75c;
+	z-index: 10000;
+}
+
+#miniMenu ul {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+#miniMenu ul li {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	text-align: left;
+}
+
+#miniMenu ul li a:visited,
+#miniMenu ul li a:link {
+	padding: 5px;
+	display: block;
+	text-decoration: none;
+	color: #000;
+	font-size: 0.9em;
+}
+
+#miniMenu ul li a:hover {
+	background: #d9d75c;
+}
+
+
+.talk-replyMiniForm {
+	background: #fffd6c;
+	padding: 10px;
+}
+
+.talk-replyMiniForm-body {
+	height:50px;
+	width: 90%;
+}
+.talk-replyMiniForm-body a {
+	color: #000;
+}

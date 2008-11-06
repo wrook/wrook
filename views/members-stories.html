@@ -1,0 +1,24 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block pageId %}members-stories{% endblock %}
+{% block pageTitle %}{% trans "What's new" %}{% endblock %}
+{% block title %}
+{% endblock %}
+{% block content %}
+	<h2>
+		{% trans "What's new" %}
+	</h2>
+	<div class="storyPosts">
+		{% for post in posts %}{% include "part-stories.html" %}{% endfor %}
+	</div>
+{% endblock %}
+
+{% block sidebar %}
+	<div class="sidebarPanel">
+		<h3>{% trans "Your options" %}</h3>
+		<div class="sidebarMenu">
+			<ul>
+			</ul>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+{% load i18n %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"></link>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/template-a.css"></link>
+		{% block htmlHead %}{% endblock %}
+	</head>
+	<body id="page-{% block pageName %}PageName{% endblock %}">
+		<div id="page">
+			<div id="logo"></div>
+			<div id="pageHeader">
+				<div id="mainMenu">
+					<ul>
+						<li><a href="/">{% trans "Home" %}</a></li>
+						<li><a href="/Books">{% trans "Books" %}</a></li>
+						<li><a href="/Authors">{% trans "Authors" %}</a></li>
+						<li><a href="/Readers">{% trans "Readers" %}</a></li>
+						<li><a href="/Labs">{% trans "Labs" %}</a></li>
+					</ul>
+				</div>
+				<div id="profileMenu">
+					<ul>
+						<li>{% trans "Welcome" %} {{ session.Member.fullname }}</li>
+						<li><a href="/EditAccount">{% trans "Account" %}</a></li>
+						<li><a href="/Logout">{% trans "Logout" %}</a></li>
+					</ul>
+				</div>
+			</div>
+			<div id="pageContent">
+				{% block content %} {% endblock %}
+			</div>
+			<div id="pageFooter">
+			</div>
+		</div>
+		<div id="offstage">
+			{% block offstage %} {% endblock %}
+		</div>
+		<div id="footer">
+			{% block footer %} {% endblock %}
+		</div>
+		{% block bodyEnd %}{% endblock %}
+	</body>
+</html>

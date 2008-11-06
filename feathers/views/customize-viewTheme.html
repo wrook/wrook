@@ -1,0 +1,43 @@
+﻿{% extends masterTemplate %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Theme: " %} {{ theme.Title }}
+	</h1>
+{% endblock %}
+{% block content %}
+	<table>
+		<tbody>
+			<tr>
+				<th>Submitted by</th>
+				<td><img width="30" style="margin-right:10px; align: middle;" src="{{ theme.SubmitedBy.gravatar30 }}" /><a href="/Members/{{ theme.SubmitedBy.key }}">{{ theme.SubmitedBy.fullname }}</a></td>
+			</tr>
+			<tr>
+				<th>Title</th>
+				<td>{{ theme.Title }}</td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td>{{ theme.Description }}</td>
+			</tr>
+			<tr>
+				<th>Shared with everyone</th>
+				<td>{{ theme.isSharedWithEveryone }}</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<div class="buttonBar">
+						<ul>
+							{% if canEditTheme %}
+								<li><a href="/Themes/Theme/Edit/{{ theme.key }}"><span>{% trans "Edit theme" %}</span></a></li>
+							{% endif %}
+							<li><a href="/Themes/{{ theme.key }}/MemberSelect"><span>{% trans "Select for profile" %}</span></a></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+{% endblock %}
+

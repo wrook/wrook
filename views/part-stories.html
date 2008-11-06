@@ -1,0 +1,34 @@
+{% load i18n %}
+<div id="{{ post.key }}" class='storyPosts-item {% cycle even,odd as alternate %} miniMenuContext'>
+	<div>
+		<div style="position: absolute; top: 5px; right: 3px; z-index: 1000" class="miniMenuAnchor" id="storyPost-{{ post.key }}"></div>
+		{% if post.Icon %}<span class="icon"><img src="/images/storyIcons/{{ post.Icon }}" /></span>{% endif %}
+		<span class="moreLink"></span>
+		<h4>
+			<span class="title">{{ post.Title }}</span>
+			<span class="when">{% blocktrans with now|timesince:post.WhenOccured as timeAgo %} {{timeAgo}} ago {% endblocktrans %}</span>
+		</h4>
+	</div>
+	<div class="more">
+		{% if post.Body %}
+			<div class="body">
+				{{ post.Body }}
+				<div class="clearfix"></div>
+			</div>
+		{% endif %}
+		{% if post.Topic %}
+			{% if post.Topic.isRead %}
+				<div class="replies">
+					<h4>{% blocktrans with post.Topic.Replies.count as replyCount %}{{replyCount}} replies{% endblocktrans %} - <a href="#">{% trans "Show" %}</a></h4>
+				</div>
+			{% else %}
+				<div class="replies">
+					<h4>{% blocktrans with post.Topic.Replies.count as replyCount %}{{replyCount}} replies{% endblocktrans %} - <a href="#">{% trans "Mark as read" %}</a></h4>
+					{% for reply in post.Topic.unreadReplies %}
+						{% include "part-replies.html" %}
+					{% endfor %}
+				</div>
+			{% endif %}
+		{% endif %}
+	</div>
+</div>

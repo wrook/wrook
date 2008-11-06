@@ -1,0 +1,14 @@
+{% load i18n %}
+<script>
+	function talkPostComent(id, url) {
+		body = $("#" + id + " .talk-replyMiniForm-body")[0].value;
+		console.debug(id, body, url);
+	}
+</script>
+<div id="talk-replyMiniForm-{{ key }}" class="talk-replyMiniForm">
+	<textarea class="talk-replyMiniForm-body" type="text" name="comment"></textarea>
+	<div class="talk-buttons">
+		<button type="button" onclick="talkPostComent('talk-replyMiniForm-{{ key }}', '{{ postURL }}')">{% trans 'Post' %}</button>
+		<a onclick="$('#talk-replyMiniForm-{{ key }}').remove()">{% trans "Cancel" %}</a>
+	</div>
+</div>
