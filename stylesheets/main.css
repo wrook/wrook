@@ -714,3 +714,7 @@ table tr td ul li {
 .talk-replyMiniForm-body a {
 	color: #000;
 }
+
+.legal {
+	line-height: 1.3em;
+}

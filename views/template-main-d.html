@@ -77,6 +77,15 @@ body {
 			<div id="pageInner">
 				<div id="sidebar">
 					{% block sidebar %}{% endblock %}
+					<div class="sidebarPanel">
+						<h3>{% trans "About" %}</h3>
+						<div class="sidebarMenu">
+							<ul>
+								<li><a href="/About/OpenSourceLicense">{% trans "Open source license" %}</a></li>
+							</ul>
+						</div>
+					</div>
+					
 				</div>
 				<div id="pageContent">
 					<div id="notices">

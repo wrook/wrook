@@ -1,0 +1,35 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block pageId %}about-openSourceAttribution{% endblock %}
+{% block pageTitle %}{% trans "Attribution to Wrook" %}{% endblock %}
+{% block title %}
+	<h1>
+		{% trans "Attribution to Wrook" %}
+	</h1>
+{% endblock %}
+
+{% block content %}
+	<p>
+		If you are using portions or the totality of the Wrook source code in your application or service,
+		our <a href="/About/OpenSourceLicense">Open Source License</a> states that you must provide your
+		users with a clearly visible attribution explaining that your service is derived from Wrook. 
+	</p>
+	<p>
+		We ask for the following graphical attribution, simply select the size needed and dont forget to provide
+		a working hyperlink on the button:
+	</p>
+	<p>
+		<a href="http://www.wrook.org"><img src="/images/attribution/wrook-attrib-200.png" alt="Powered by Wrook" /></a>
+		<a href="http://www.wrook.org"><img src="/images/attribution/wrook-attrib-120.png" alt="Powered by Wrook" /></a>
+		<a href="http://www.wrook.org"><img src="/images/attribution/wrook-attrib-80.png" alt="Powered by Wrook" /></a>
+	</p>
+	<p>
+		For more details on Wrook's open source innitiative, visit the "<a href='/About/OpenSourceLicense'>Wrook is Open Source</a>" page.
+	</p>
+
+
+{% endblock %}
+
+{% block sidebar %}
+	{% include "panels-aboutOpenSource.html" %}
+{% endblock %}

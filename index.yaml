@@ -72,7 +72,7 @@ indexes:
   - name: Sent
     direction: desc
 
-# Used 2648 times in query history.
+# Used 2654 times in query history.
 - kind: Moment
   properties:
   - name: isDefault
@@ -135,7 +135,7 @@ indexes:
   - name: WhenOccured
     direction: desc
 
-# Used 279 times in query history.
+# Used 285 times in query history.
 - kind: StoryPost
   properties:
   - name: Member
@@ -150,7 +150,7 @@ indexes:
   - name: WhenOccured
     direction: desc
 
-# Used 445 times in query history.
+# Used 450 times in query history.
 - kind: ThemeMemberSelection
   properties:
   - name: Member

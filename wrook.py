@@ -1451,6 +1451,25 @@ class WrookApplication(webapp.Application): # decouppling for future use
 	pass
 
 #============================================================================
+# ABOUT
+
+class About_OpenSoureLicense(WrookRequestHandler):
+	def get(self):
+		onRequest(self)
+		self.render("views/about-openSourceLicense.html")
+
+class About_OpenSoureAttribution(WrookRequestHandler):
+	def get(self):
+		onRequest(self)
+		self.render("views/about-openSourceAttribution.html")
+
+class About_CPAL(WrookRequestHandler):
+	def get(self):
+		onRequest(self)
+		self.render("views/about-CPAL.html")
+
+
+#============================================================================
 # STORIES
 
 class StoryMemberStartReadingBook(stories.Story):
@@ -1599,6 +1618,9 @@ URLMappings = [
 	(r'/PasswordSent/(.*)', PasswordSent),
 	(r'/ResetPassword/(.*)', ResetPassword),
 	(r'/SendPassword/(.*)', SendPassword),
+	( '/About/OpenSourceAttribution', About_OpenSoureAttribution),
+	( '/About/OpenSourceLicense', About_OpenSoureLicense),
+	( '/About/CPAL', About_CPAL),
 	(r'/Admin/Commands/(.*)', AdminCommands), # Refactor: move to an admin module?
 	( '/FlushCache', FlushCache) # Refactor: move to an admin module?
 ]
