@@ -96,11 +96,21 @@ class Member(db.Model):
 	Created = db.DateTimeProperty(auto_now_add=True)
 	isAdmin = db.BooleanProperty(default=False)
 
+	def flushCache(self):
+		memcache.delete("wrookMember-%s" % self.Username)
+		memcache.delete("profilePhotoThumb30-%s" % self.key())
+		memcache.delete("profilePhotoThumb50-%s" % self.key())
+		memcache.delete("profilePhotoThumb80-%s" % self.key())
+		memcache.delete("profilePhotoThumb100-%s" % self.key())
+		memcache.delete("profilePhotoThumb120-%s" % self.key())
+
 	def currentThemeSelection(self):
 		cacheKey = "wrookMemberThemeSelection-%s" % self.key()
 		selection = memcache.get(cacheKey)
 		if not selection:
-			selection = self.ThemeSelections.order("-WhenSelected").fetch(1)[0]
+			firstThemeSelection = self.ThemeSelections.order("-WhenSelected").fetch(1)
+			if len(firstThemeSelection): selection = firstThemeSelection[0]
+			else: selection = None
 			memcache.add(cacheKey, selection)
 		return selection
 

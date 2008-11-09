@@ -6,62 +6,19 @@
 	</h1>
 {% endblock %}
 {% block content %}
-	<div class="columns">
-		<div class="columnTwoThird">
-			<div id="bookPage">
-				<div id="bookPageInner">
-					<div id="bookPageContent" style="text-align: left;">
-						<p>Select the theme you want to use for "<strong>{{ themeUsage }}</strong>"</p>
-						{% ifnotequal themes.count 0 %}
-							<div>
-								{% for theme in themes %}
-									<a style="float:left; margin: 0px 10px 10px 0px" href="{{ redirect }}?selectedTheme={{ theme.key }}" title="{{ theme.Title }}">
-										<img style="width: 240px; height: 180px;" alt="{{ theme.Title }}" src="/Themes/Theme/BackgroundImage/{{ theme.key }}?width=240" />
-									</a>
-								{% endfor %}
-								<div class="clearfix"></div>
-							</div>
-						{% else %}
-							<div>
-								{% trans "Sorry, no themes have been created!" %}
-							</div>
-						{% endifnotequal %}
-					</div>
-				</div>
-			</div>
-
-			
-			<div class="buttonBar">
-				<ul>
-				</ul>
-			</div>
+	<p>Select the theme you want to use for "<strong>{{ themeUsage }}</strong>"</p>
+	{% ifnotequal themes.count 0 %}
+		<div>
+			{% for theme in themes %}
+				<a style="float:left; margin: 0px 10px 10px 0px" href="{{ redirect }}?selectedTheme={{ theme.key }}" title="{{ theme.Title }}">
+					<img style="width: 240px; height: 180px;" alt="{{ theme.Title }}" src="/Themes/Theme/BackgroundImage/{{ theme.key }}?width=240" />
+				</a>
+			{% endfor %}
+			<div class="clearfix"></div>
 		</div>
-
-		<div class="columnOneThird">
-			<div id="bookSide">
-
-				<div class="buttonBar Stacked">
-					<ul>
-						<li><a href="/Themes/Theme/Edit/">{% trans "Create a new theme" %}</a></li>
-					</ul>
-				</div>
-
-				<h3> {% trans "About themes" %}</h3>
-				<p>
-{% blocktrans %} 
-Here you can browse the various themes used throughout the site. You can select themes for your
-profile or for your books. You can also share the themes you create.
-{% endblocktrans %} 
-				</p>
-
-			</div>
+	{% else %}
+		<div>
+			{% trans "Sorry, no themes have been created!" %}
 		</div>
-	</div>
-	
-{% endblock %}
-{% block offstage %}
-	<div id="offstageMenu">
-		<ul>
-		</ul>
-	</div>
+	{% endifnotequal %}
 {% endblock %}

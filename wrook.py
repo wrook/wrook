@@ -27,7 +27,7 @@ class WrookRequestHandler(webapp.RequestHandler):
 
 def onRequest(self):
 	self.Model = {}
-	self.MasterTemplate = os.path.join(os.path.dirname(__file__), "views\\template-main-d.html") # Sets the default template to be used by hosted modules
+	self.MasterTemplate = os.path.join(os.path.dirname(__file__), "views/template-main-d.html") # Sets the default template to be used by hosted modules
 	self.CurrentMember = membership.loginFromCookies(self) # Load the current member from the google authentication and add it to the requesthandler
 	self.CurrentTheme = getDefaultTheme() # Set the default theme as the current theme
 	self.AppConfig = getWrookAppConfig() # Load the application config from the database
@@ -702,6 +702,7 @@ class AccountChangeProfilePhoto(WrookRequestHandler):
 				member = self.CurrentMember
 				member.ProfilePhoto = profilePhoto
 				member.put()
+				member.flushCache()
 				self.redirect("/Account/View")
 		else: self.requestLogin()
 
@@ -723,6 +724,7 @@ class AccountChangePassword(WrookRequestHandler):
 			if oldPassword == self.CurrentMember.Password and newPassword:
 				self.CurrentMember.Password = newPassword
 				self.CurrentMember.put()
+				self.CurrentMember.flushCache()
 				self.redirect("/Account/View")
 			else:
 				self.Model.update({
@@ -1419,7 +1421,7 @@ class FlushCache(WrookRequestHandler):
 			occurence.publish()			
 		else: self.requestLogin()
 
-def getDefaultTheme():
+def getDefaultTheme(): #Refactor: Move back to the Customize module??
 	defaultTheme = memcache.get("wrookDefaultTheme")
 	if not defaultTheme:
 		defaultMoments = Moment.all().filter("isDefault =", True).order("-Priority").fetch(limit=1)
@@ -1430,12 +1432,12 @@ def getDefaultTheme():
 			memcache.add("wrookDefaultTheme", defaultTheme)
 	return defaultTheme
 
-class SetDefaultTheme(WrookRequestHandler):
+class SetDefaultTheme(WrookRequestHandler): #Refactor: Move back to the Customize module
 	def get(self):
 		onRequest(self)
 		if self.CurrentMember:
 			theme = customize.Theme.get(self.request.get("selectedTheme"))
-			if theme:
+			if theme and self.CurrentMember.isAdmin:
 				db.delete(Moment.all().filter("isDefault =", True)) # Removes the current default moments
 				moment = Moment(
 					Title = "Default moment",
@@ -1443,7 +1445,8 @@ class SetDefaultTheme(WrookRequestHandler):
 					isDefault = True
 					)
 				moment.put()
-				self.redirect("/")
+				memcache.delete("wrookDefaultTheme") # Invalidates the cached default theme
+				self.redirect("/Themes")
 			else: self.error(500)
 		else: self.requestLogin()
 

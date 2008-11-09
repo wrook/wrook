@@ -67,6 +67,9 @@
 		<h3>Options</h3>
 		<div class="sidebarMenu">
 			<ul>
+				{% if currentMember.isAdmin %}
+					<li><a href="/Themes/Select?redirect=/SetDefaultTheme&themeUsage={% trans "Default" %}">{% trans "Select the default theme" %}</a></li>
+				{% endif %}
 				<li><a href="/Themes/Theme/Edit/">{% trans "Create a new theme" %}</a></li>
 			</ul>
 		</div>

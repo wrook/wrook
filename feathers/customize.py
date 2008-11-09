@@ -13,7 +13,7 @@ def URLMappings():
 		(r'/Themes/Theme/BackgroundImage/(.*)', ThemeBackgroundImage),
 		(r'/Themes/Theme/Stylesheet/(.*)', ThemeStylesheet),
 		(r'/Themes/(.*)/MemberSelect', ThemeMemberSelect),
-		(r'/Themes/(.*)', ThemeView),
+		(r'/Themes/(.*)', ThemeView)
 	]
 
 	def __unicode__(self):
@@ -51,23 +51,8 @@ class Theme(db.Model):
 	def __unicode__(self):
 		return self.Title
 
-	def setAsDefault(self):
-		defaultThemes = Theme.all().filter("isDefault =", True).fetch(limit=999)
-		for theme in defaultThemes:
-			theme.isDefault = False
-			theme.put()
-		self.isDefault = True
-		self.put()
-		return None;
-
 	def GetStyle(self):
 		return None;
-		
-def getDefaultTheme():
-	defaultThemes = Theme.all().filter("isDefault =", True).fetch(limit=1)
-	if defaultThemes: return defaultThemes[0]
-	else: return None
-
 
 def onRequest(request): # Event triggering to let the host application intervene
 	pass
@@ -147,8 +132,6 @@ class ThemeEdit(webapp.RequestHandler):
 			if form.is_valid():
 				# Save the form, and redirect to the view page
 				entity = form.save(commit=False)
-				if self.request.get("doSaveSetAsDefault"):
-					theme.setAsDefault()
 				entity.put()
 				self.redirect('/Themes')
 			else:
@@ -187,8 +170,6 @@ class ThemeEditWithImageUpload(webapp.RequestHandler):
 				imageData = self.request.get('backgroundImageProxy')
 				# Save the form, and redirect to the view page
 				entity = form.save(commit=False)
-				if self.request.get("doSaveSetAsDefault"):
-					theme.setAsDefault()
 				if imageData:
 					entity.BackgroundImage = db.Blob(imageData)
 				entity.put()

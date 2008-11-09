@@ -43,14 +43,14 @@ indexes:
   - name: Created
     direction: desc
 
-# Used 42 times in query history.
+# Used 44 times in query history.
 - kind: Feature
   properties:
   - name: isDone
   - name: Done
     direction: desc
 
-# Used 80 times in query history.
+# Used 82 times in query history.
 - kind: Feature
   properties:
   - name: isDone
@@ -72,7 +72,7 @@ indexes:
   - name: Sent
     direction: desc
 
-# Used 2654 times in query history.
+# Used 2659 times in query history.
 - kind: Moment
   properties:
   - name: isDefault
@@ -127,7 +127,7 @@ indexes:
   - name: Version
     direction: desc
 
-# Used 74 times in query history.
+# Used 76 times in query history.
 - kind: StoryPost
   properties:
   - name: Member
@@ -135,7 +135,7 @@ indexes:
   - name: WhenOccured
     direction: desc
 
-# Used 285 times in query history.
+# Used 287 times in query history.
 - kind: StoryPost
   properties:
   - name: Member
@@ -150,14 +150,14 @@ indexes:
   - name: WhenOccured
     direction: desc
 
-# Used 450 times in query history.
+# Used 452 times in query history.
 - kind: ThemeMemberSelection
   properties:
   - name: Member
   - name: WhenSelected
     direction: desc
 
-# Used 50 times in query history.
+# Used 51 times in query history.
 - kind: Vote
   properties:
   - name: Member

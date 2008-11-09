@@ -12,7 +12,7 @@ handlers:
 
 - url: /scripts
   static_dir: scripts
-  expiration: "1s"
+  expiration: "21d"
 
 - url: /images
   static_dir: images
