@@ -327,6 +327,7 @@ class BookSetCover(WrookRequestHandler):
 				cover = Cover.get(selected)
 				if cover:
 					book.Cover = cover
+					book.put()
 					page = proforma.SuccessPage()
 					page.Model={
 						"Statement": _("The cover has been changed!"),
