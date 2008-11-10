@@ -1,0 +1,43 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block pageId %}about-who{% endblock %}
+{% block pageTitle %}{% trans "Who is behind Wrook?" %}{% endblock %}
+{% block title %}
+	<h1>
+		{% trans "Who is behind Wrook?" %}
+	</h1>
+{% endblock %}
+
+{% block content %}
+
+{% blocktrans %}
+<div style="float:right; margin: 0px 0px 20px 20px"><img src="/images/mathieu.jpg" alt="Mathieu Sylvain" /></div>
+<p>
+My name is Mathieu Sylvain, and I'm a web developper in his thirties with a marvelous girlfriend, a two year-old girl and a day job.
+</p>
+<p>
+I do not have a dozen code ninjas or web monkeys working for me and I have no venture capital investor showering me with money.
+</p>
+<p>
+I'm building Wrook mostly alone, out of my free time and with no budget.
+</p>
+<p>
+I've been coding since the age of 15 and building web sites since Internet Explorer 2.
+For me, wrook is a way to have fun while building something which I believe is for a "greater good".
+</p>
+<p>
+I'd welcome any help and would relish the possibility of getting sponsors, but until then I'm still having a lot of fun!
+</p>
+<p>
+<strong>Cheers!</strong>
+</p>
+<p>
+My LinkedIn profile: <a href="http://www.linkedin.com/in/masyl">http://www.linkedin.com/in/masyl</a>
+</p>
+{% endblocktrans %}
+
+{% endblock %}
+
+{% block sidebar %}
+	{% include "panels-aboutOpenSource.html" %}
+{% endblock %}

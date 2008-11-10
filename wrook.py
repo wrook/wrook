@@ -1473,6 +1473,11 @@ class About_CPAL(WrookRequestHandler):
 		onRequest(self)
 		self.render("views/about-CPAL.html")
 
+class About_who(WrookRequestHandler):
+	def get(self):
+		onRequest(self)
+		self.render("views/about-who.html")
+
 
 #============================================================================
 # STORIES
@@ -1626,6 +1631,7 @@ URLMappings = [
 	( '/About/OpenSourceAttribution', About_OpenSoureAttribution),
 	( '/About/OpenSourceLicense', About_OpenSoureLicense),
 	( '/About/CPAL', About_CPAL),
+	( '/About/Who', About_who),
 	(r'/Admin/Commands/(.*)', AdminCommands), # Refactor: move to an admin module?
 	( '/FlushCache', FlushCache) # Refactor: move to an admin module?
 ]
