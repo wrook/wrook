@@ -31,7 +31,8 @@ msgstr "Créer"
 msgid "Is this cover reusable for other books?"
 msgstr ""
 
-#: .\wrook.py:61 .\feathers\customize.py:35
+#: .\wrook.py:61
+#: .\feathers\customize.py:35
 msgid "Share with everyone"
 msgstr ""
 
@@ -39,7 +40,9 @@ msgstr ""
 msgid "New book..."
 msgstr ""
 
-#: .\wrook.py:76 .\feathers\views\labs.html.py:38 .\views\startBook.html.py:8
+#: .\wrook.py:76
+#: .\feathers\views\labs.html.py:38
+#: .\views\startBook.html.py:8
 msgid "Title"
 msgstr "Titre"
 
@@ -62,11 +65,14 @@ msgstr "Sauvegarder"
 msgid "Cover"
 msgstr "Couvertures"
 
-#: .\wrook.py:81 .\views\books-view.html.py:70 .\views\startBook.html.py:12
+#: .\wrook.py:81
+#: .\views\books-view.html.py:70
+#: .\views\startBook.html.py:12
 msgid "Synopsis"
 msgstr "Synopsis"
 
-#: .\wrook.py:82 .\views\viewChapter.html.py:144
+#: .\wrook.py:82
+#: .\views\viewChapter.html.py:144
 #, fuzzy
 msgid "Note from the author"
 msgstr "Note de l'auteur:"
@@ -100,7 +106,7 @@ msgstr "Chapitre"
 
 #: .\wrook.py:311
 msgid "The default cover has been set!"
-msgstr ""
+msgstr "The default cover has been set!"
 
 #: .\wrook.py:313
 #, fuzzy
@@ -125,8 +131,7 @@ msgid "<strong>Login failed:</strong> "
 msgstr ""
 
 #: .\wrook.py:542
-msgid ""
-"<strong>Login failed:</strong> Username and password are both mandatory!"
+msgid "<strong>Login failed:</strong> Username and password are both mandatory!"
 msgstr ""
 
 #: .\wrook.py:591
@@ -134,9 +139,7 @@ msgid "Username, email, firstname and lastname are madatory!"
 msgstr ""
 
 #: .\wrook.py:663
-msgid ""
-"Firstname and lastname are madatory! You will also have to re-upload your "
-"photo!"
+msgid "Firstname and lastname are madatory! You will also have to re-upload your photo!"
 msgstr ""
 
 #: .\wrook.py:698
@@ -144,12 +147,11 @@ msgid "No file were uploaded!"
 msgstr ""
 
 #: .\wrook.py:729
-msgid ""
-"Changing password failed! You have either not entered a new password or the "
-"old one does not match."
+msgid "Changing password failed! You have either not entered a new password or the old one does not match."
 msgstr ""
 
-#: .\wrook.py:901 .\wrook.py:904
+#: .\wrook.py:901
+#: .\wrook.py:904
 msgid "No member found with this username or email address!"
 msgstr ""
 
@@ -175,35 +177,27 @@ msgid "Congratulations... you flushed the cache!"
 msgstr ""
 
 #: .\wrook.py:1458
-msgid ""
-"<a href=\"/Members/$MemberKey\">$MemberFullname</a> started reading <a href="
-"\"/Books/$BookKey\">$BookTitle</a>"
+msgid "<a href=\"/Members/$MemberKey\">$MemberFullname</a> started reading <a href=\"/Books/$BookKey\">$BookTitle</a>"
 msgstr ""
 
 #: .\wrook.py:1482
-msgid ""
-"<a href=\"/Members/$MemberKey\">$MemberFullname</a> left a comment on <a "
-"href=\"/Books/$BookKey\">$BookTitle</a>"
+msgid "<a href=\"/Members/$MemberKey\">$MemberFullname</a> left a comment on <a href=\"/Books/$BookKey\">$BookTitle</a>"
 msgstr ""
 
 #: .\wrook.py:1483
 msgid ""
 "\n"
-"<a href=\"/Feedback/Book/$BookKey\" style=\"float: right; margin-left: 15px;"
-"\">\n"
+"<a href=\"/Feedback/Book/$BookKey\" style=\"float: right; margin-left: 15px;\">\n"
 "\t<img width=\"45\" src=\"$CoverImage\"/>\n"
 "</a>\n"
 "<a href=\"/Members/$MemberKey\" style=\"float: left; margin-right: 15px;\">\n"
 "\t<img width=\"30\" src=\"$MemberAvatar\"/>\n"
 "</a>\n"
-"<strong><a href=\"/Feedback/Book/$BookKey\">The message</a> said: "
-"$MessageTitle </strong><br />\"&#160;$MessageBody&#160;\"\n"
+"<strong><a href=\"/Feedback/Book/$BookKey\">The message</a> said: $MessageTitle </strong><br />\"&#160;$MessageBody&#160;\"\n"
 msgstr ""
 
 #: .\wrook.py:1532
-msgid ""
-"<a href=\"/Members/$MemberKey\">$MemberFullname</a> has flushed the site "
-"cache"
+msgid "<a href=\"/Members/$MemberKey\">$MemberFullname</a> has flushed the site cache"
 msgstr ""
 
 #: .\wrook.py:1636
@@ -216,9 +210,12 @@ msgstr "Sélectionnez une couverture"
 msgid "New theme"
 msgstr "Labos: Thèmes"
 
-#: .\feathers\customize.py:28 .\feathers\views\labs-viewFeature.html.py:33
-#: .\feathers\views\labs.html.py:46 .\feathers\views\labs.html.py:73
-#: .\feathers\views\labs.html.py:116 .\feathers\views\labs.html.py:158
+#: .\feathers\customize.py:28
+#: .\feathers\views\labs-viewFeature.html.py:33
+#: .\feathers\views\labs.html.py:46
+#: .\feathers\views\labs.html.py:73
+#: .\feathers\views\labs.html.py:116
+#: .\feathers\views\labs.html.py:158
 msgid "Description"
 msgstr "Description"
 
@@ -260,14 +257,13 @@ msgstr "Thèmes"
 msgid "Theme"
 msgstr "Thèmes"
 
-#: .\feathers\membership.py:65 .\feathers\membership.py:71
+#: .\feathers\membership.py:65
+#: .\feathers\membership.py:71
 msgid "Wrong username or bad password."
 msgstr ""
 
 #: .\feathers\membership.py:68
-msgid ""
-"Your account does not have a password. Use the \"Reset password\" option to "
-"create a new one."
+msgid "Your account does not have a password. Use the \"Reset password\" option to create a new one."
 msgstr ""
 
 #: .\feathers\membership.py:108
@@ -278,12 +274,14 @@ msgstr ""
 msgid "French"
 msgstr ""
 
-#: .\feathers\membership.py:113 .\views\editAccount.html.py:53
+#: .\feathers\membership.py:113
+#: .\views\editAccount.html.py:53
 #: .\views\join.html.py:75
 msgid "Male"
 msgstr ""
 
-#: .\feathers\membership.py:114 .\views\editAccount.html.py:54
+#: .\feathers\membership.py:114
+#: .\views\editAccount.html.py:54
 #: .\views\join.html.py:76
 msgid "Female"
 msgstr ""
@@ -295,11 +293,9 @@ msgid ""
 "\n"
 "Here is your Wrook password: $password\n"
 "\n"
-"We sent you this new password because you just joined Wrook or because you "
-"asked for a \"reset password\".\n"
+"We sent you this new password because you just joined Wrook or because you asked for a \"reset password\".\n"
 "\n"
-"If you have any questions, dont hesitate to contact us by email at "
-"admin@wrook.org\n"
+"If you have any questions, dont hesitate to contact us by email at admin@wrook.org\n"
 "\n"
 "Have a good day!\n"
 "The Wrook Team\n"
@@ -324,10 +320,8 @@ msgid ""
 "\n"
 "$senderName is inviting you to join the Wrook community.\n"
 "\n"
-"Wrook is a community of writers and readers of all genre of literature. Read "
-"free books,\n"
-"participate in the writting process of authors or publish and share your own "
-"writings.\n"
+"Wrook is a community of writers and readers of all genre of literature. Read free books,\n"
+"participate in the writting process of authors or publish and share your own writings.\n"
 "\n"
 "A message from $senderName:\n"
 "\"$senderMessage\"\n"
@@ -346,10 +340,8 @@ msgid ""
 "\n"
 "$senderName is inviting you to join the Wrook community.\n"
 "\n"
-"Wrook is a community of writers and readers of all genre of literature. Read "
-"free books,\n"
-"participate in the writting process of authors or publish and share your own "
-"writings.\n"
+"Wrook is a community of writers and readers of all genre of literature. Read free books,\n"
+"participate in the writting process of authors or publish and share your own writings.\n"
 "\n"
 "To join, simply follow this link:\n"
 "http://www.wrook.org/Join/$inviteKey\n"
@@ -363,9 +355,7 @@ msgid "Sorry, you do not have the right to delete this item."
 msgstr ""
 
 #: .\feathers\stories.py:177
-msgid ""
-"The item you tried to delete could not be found. Maybe it was already "
-"deleted."
+msgid "The item you tried to delete could not be found. Maybe it was already deleted."
 msgstr ""
 
 #: .\feathers\stories.py:178
@@ -401,8 +391,7 @@ msgstr "À propos de moi :"
 #: .\feathers\views\customize-selectTheme.html.py:51
 msgid ""
 " \n"
-"Here you can browse the various themes used throughout the site. You can "
-"select themes for your\n"
+"Here you can browse the various themes used throughout the site. You can select themes for your\n"
 "profile or for your books. You can also share the themes you create.\n"
 msgstr ""
 
@@ -422,8 +411,10 @@ msgstr "Image actuel"
 
 #: .\feathers\views\customize-themeEdit.html.py:29
 #: .\views\account-changePassword.html.py:39
-#: .\views\books-chapter-edit.html.py:16 .\views\books-edit-license.html.py:16
-#: .\views\books-edit.html.py:15 .\views\covers-edit.html.py:35
+#: .\views\books-chapter-edit.html.py:16
+#: .\views\books-edit-license.html.py:16
+#: .\views\books-edit.html.py:15
+#: .\views\covers-edit.html.py:35
 #: .\views\editAccount.html.py:70
 msgid "Save"
 msgstr "Sauvegarder"
@@ -435,8 +426,10 @@ msgstr "Sauvegarder en defaut"
 #: .\feathers\views\customize-themeEdit.html.py:32
 #: .\feathers\views\membership-inviteNew-preview.html.py:33
 #: .\feathers\views\membership-inviteNew.html.py:19
-#: .\views\books-chapter-edit.html.py:18 .\views\covers-edit.html.py:37
-#: .\views\deleteBook.html.py:28 .\views\deleteChapter.html.py:29
+#: .\views\books-chapter-edit.html.py:18
+#: .\views\covers-edit.html.py:37
+#: .\views\deleteBook.html.py:28
+#: .\views\deleteChapter.html.py:29
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -461,14 +454,17 @@ msgstr "Thèmes"
 msgid "default"
 msgstr "défaut"
 
-#: .\feathers\views\customize-viewThemes.html.py:21 .\views\books.html.py:59
+#: .\feathers\views\customize-viewThemes.html.py:21
+#: .\views\books.html.py:59
 #: .\views\members-bookmarks-list.html.py:29
-#: .\views\members-books-list.html.py:30 .\views\viewMember.html.py:37
+#: .\views\members-books-list.html.py:30
+#: .\views\viewMember.html.py:37
 #: .\views\viewMember.html.py:69
 msgid "By"
 msgstr "Par"
 
-#: .\feathers\views\labs-submit.html.py:5 .\feathers\views\labs.html.py:4
+#: .\feathers\views\labs-submit.html.py:5
+#: .\feathers\views\labs.html.py:4
 #: .\feathers\views\labs.html.py:7
 msgid "Wrook Labs"
 msgstr "Laboratoires Wrook"
@@ -509,7 +505,8 @@ msgid "Type"
 msgstr "Type:"
 
 #: .\feathers\views\labs-viewFeature.html.py:43
-#: .\feathers\views\labs.html.py:76 .\feathers\views\labs.html.py:119
+#: .\feathers\views\labs.html.py:76
+#: .\feathers\views\labs.html.py:119
 #: .\feathers\views\labs.html.py:161
 msgid "Votes"
 msgstr "Votes"
@@ -519,11 +516,16 @@ msgid "Voting members"
 msgstr ""
 
 #: .\feathers\views\labs-viewFeature.html.py:73
-#: .\feathers\views\labs.html.py:191 .\views\admin-commands.html.py:46
-#: .\views\covers-list.html.py:52 .\views\covers-select.html.py:54
-#: .\views\covers-view.html.py:15 .\views\members-books-list.html.py:52
-#: .\views\members-covers-list.html.py:47 .\views\revisions-list.html.py:33
-#: .\views\revisions-view.html.py:37 .\views\viewAccount.html.py:57
+#: .\feathers\views\labs.html.py:191
+#: .\views\admin-commands.html.py:46
+#: .\views\covers-list.html.py:52
+#: .\views\covers-select.html.py:54
+#: .\views\covers-view.html.py:15
+#: .\views\members-books-list.html.py:52
+#: .\views\members-covers-list.html.py:47
+#: .\views\revisions-list.html.py:33
+#: .\views\revisions-view.html.py:37
+#: .\views\viewAccount.html.py:57
 #: .\views\viewChapter.html.py:88
 msgid "Options"
 msgstr ""
@@ -555,16 +557,12 @@ msgstr "À propos des laboratoires"
 #: .\feathers\views\labs.html.py:14
 msgid ""
 " \n"
-"In the Wrook labs you can <strong>report bugs</strong>, <strong>suggest</"
-"strong> features\n"
-"and improvement, and <strong>vote</strong> for what you believe we should do "
-"first!\n"
+"In the Wrook labs you can <strong>report bugs</strong>, <strong>suggest</strong> features\n"
+"and improvement, and <strong>vote</strong> for what you believe we should do first!\n"
 msgstr ""
 " \n"
-"Dans les labos de Wrook vous pouvez <strong>rapporter des bugs</strong>, "
-"<strong>suggérer</strong> des nouvelles fonctionnalités\n"
-"ou améliorations, et <strong>voter</strong> pour ce qui devrait être fait en "
-"premier selon vous!\n"
+"Dans les labos de Wrook vous pouvez <strong>rapporter des bugs</strong>, <strong>suggérer</strong> des nouvelles fonctionnalités\n"
+"ou améliorations, et <strong>voter</strong> pour ce qui devrait être fait en premier selon vous!\n"
 
 #: .\feathers\views\labs.html.py:20
 msgid "Feature requests and bug Submission form"
@@ -608,7 +606,8 @@ msgstr "Il semble que vous n'avez pas encore voté!"
 msgid "Requests open for voting"
 msgstr "Requêtes ouvertes au vote"
 
-#: .\feathers\views\labs.html.py:146 .\feathers\views\labs.html.py:181
+#: .\feathers\views\labs.html.py:146
+#: .\feathers\views\labs.html.py:181
 msgid "Sorry, nothing is currently cooking in the labs!"
 msgstr "Désolé, rien n'est en préparation dans nos labos!"
 
@@ -632,8 +631,7 @@ msgid ""
 "Here is a preview of the message which will be sent on your behalf.\n"
 "</p>\n"
 "<p>\n"
-"You must <strong>read and click confirm</strong> before we send the "
-"message.\n"
+"You must <strong>read and click confirm</strong> before we send the message.\n"
 "</p>\n"
 msgstr ""
 
@@ -674,12 +672,8 @@ msgid "Invites"
 msgstr "Invitations"
 
 #: .\feathers\views\membership-invites.html.py:12
-msgid ""
-"To send an invitation, go to a book and click on the \"Invite someone\" "
-"button."
-msgstr ""
-"Pour envoyer une invitation, ouvrez un livre et cliquez sur le bouton "
-"\"Inviter un ami\"."
+msgid "To send an invitation, go to a book and click on the \"Invite someone\" button."
+msgstr "Pour envoyer une invitation, ouvrez un livre et cliquez sur le bouton \"Inviter un ami\"."
 
 #: .\feathers\views\membership-invites.html.py:15
 msgid "Invites you have sent"
@@ -695,11 +689,8 @@ msgid "Email adress"
 msgstr "Courriel"
 
 #: .\feathers\views\membership-invites.html.py:53
-msgid ""
-"It seems that you havent invited anyone! Dont you have any friends to spam?"
-msgstr ""
-"Il semble que vous n'avez invité personne! N'avez vous pas d'amis à "
-"achaller ?"
+msgid "It seems that you havent invited anyone! Dont you have any friends to spam?"
+msgstr "Il semble que vous n'avez invité personne! N'avez vous pas d'amis à achaller ?"
 
 #: .\feathers\views\membership-invites.html.py:60
 msgid "All invites"
@@ -753,7 +744,8 @@ msgstr ""
 msgid "Profile "
 msgstr "Correction"
 
-#: .\views\MembersProfile.html.py:14 .\views\viewMember.html.py:9
+#: .\views\MembersProfile.html.py:14
+#: .\views\viewMember.html.py:9
 #, fuzzy
 msgid "About "
 msgstr "À propos de moi :"
@@ -762,7 +754,8 @@ msgstr "À propos de moi :"
 msgid "Some details about "
 msgstr ""
 
-#: .\views\MembersProfile.html.py:27 .\views\editAccount.html.py:48
+#: .\views\MembersProfile.html.py:27
+#: .\views\editAccount.html.py:48
 #: .\views\join.html.py:70
 #, fuzzy
 msgid "Gender"
@@ -776,7 +769,8 @@ msgstr ""
 msgid "Member since"
 msgstr ""
 
-#: .\views\MembersProfile.html.py:39 .\views\editAccount.html.py:37
+#: .\views\MembersProfile.html.py:39
+#: .\views\editAccount.html.py:37
 #: .\views\join.html.py:59
 msgid "Prefered language"
 msgstr ""
@@ -802,7 +796,8 @@ msgstr ""
 msgid "New password"
 msgstr ""
 
-#: .\views\account-changePhoto.html.py:4 .\views\account-changePhoto.html.py:7
+#: .\views\account-changePhoto.html.py:4
+#: .\views\account-changePhoto.html.py:7
 msgid "Change your account photo"
 msgstr ""
 
@@ -853,11 +848,13 @@ msgstr "Options du livre"
 msgid "Edit book"
 msgstr "Editer cette oeuvre"
 
-#: .\views\books-reorderChapters.html.py:5 .\views\books-view.html.py:5
+#: .\views\books-reorderChapters.html.py:5
+#: .\views\books-view.html.py:5
 msgid "by "
 msgstr "par"
 
-#: .\views\books-reorderChapters.html.py:10 .\views\books-view.html.py:152
+#: .\views\books-reorderChapters.html.py:10
+#: .\views\books-view.html.py:152
 #, fuzzy
 msgid "Reorder chapters"
 msgstr "Écrire ce chapitre"
@@ -896,12 +893,15 @@ msgstr "Ce oeuvre est encore en correction"
 msgid "Start reading"
 msgstr "Commencez la lecture"
 
-#: .\views\books-view.html.py:37 .\views\viewChapter.html.py:129
+#: .\views\books-view.html.py:37
+#: .\views\viewChapter.html.py:129
 msgid "About this book"
 msgstr "À propos de ce livre"
 
-#: .\views\books-view.html.py:41 .\views\main.html.py:19
-#: .\views\readers.html.py:8 .\views\readers.html.py:16
+#: .\views\books-view.html.py:41
+#: .\views\main.html.py:19
+#: .\views\readers.html.py:8
+#: .\views\readers.html.py:16
 #: .\views\viewChapter.html.py:133
 msgid "Readers"
 msgstr "Lecteurs"
@@ -960,7 +960,8 @@ msgstr ""
 msgid "Resume writing"
 msgstr "Continuer à écrire"
 
-#: .\views\books-view.html.py:148 .\views\viewChapter.html.py:109
+#: .\views\books-view.html.py:148
+#: .\views\viewChapter.html.py:109
 msgid "Start a new chapter"
 msgstr "Commencer un nouveau chapitre"
 
@@ -982,9 +983,13 @@ msgstr "Changer la couverture"
 msgid "Delete whole book"
 msgstr "Supprimez un livre"
 
-#: .\views\books.html.py:4 .\views\books.html.py:7 .\views\main.html.py:17
-#: .\views\members-books-list.html.py:5 .\views\template-main-d.html.py:43
-#: .\views\template-main-d.html.py:66 .\views\viewMember.html.py:15
+#: .\views\books.html.py:4
+#: .\views\books.html.py:7
+#: .\views\main.html.py:17
+#: .\views\members-books-list.html.py:5
+#: .\views\template-main-d.html.py:43
+#: .\views\template-main-d.html.py:66
+#: .\views\viewMember.html.py:15
 msgid "Books"
 msgstr "Oeuvres"
 
@@ -1041,26 +1046,34 @@ msgstr "au stade de correction"
 msgid " finished"
 msgstr "terminé"
 
-#: .\views\books.html.py:54 .\views\members-bookmarks-list.html.py:24
-#: .\views\members-books-list.html.py:25 .\views\viewMember.html.py:32
+#: .\views\books.html.py:54
+#: .\views\members-bookmarks-list.html.py:24
+#: .\views\members-books-list.html.py:25
+#: .\views\viewMember.html.py:32
 #: .\views\viewMember.html.py:64
 msgid "Only planning"
 msgstr "En planification"
 
-#: .\views\books.html.py:55 .\views\members-bookmarks-list.html.py:25
-#: .\views\members-books-list.html.py:26 .\views\viewMember.html.py:33
+#: .\views\books.html.py:55
+#: .\views\members-bookmarks-list.html.py:25
+#: .\views\members-books-list.html.py:26
+#: .\views\viewMember.html.py:33
 #: .\views\viewMember.html.py:65
 msgid "Still in drafting"
 msgstr "Encore en ébauche"
 
-#: .\views\books.html.py:56 .\views\members-bookmarks-list.html.py:26
-#: .\views\members-books-list.html.py:27 .\views\viewMember.html.py:34
+#: .\views\books.html.py:56
+#: .\views\members-bookmarks-list.html.py:26
+#: .\views\members-books-list.html.py:27
+#: .\views\viewMember.html.py:34
 #: .\views\viewMember.html.py:66
 msgid "Still in writing"
 msgstr "Encore en écriture"
 
-#: .\views\books.html.py:57 .\views\members-bookmarks-list.html.py:27
-#: .\views\members-books-list.html.py:28 .\views\viewMember.html.py:35
+#: .\views\books.html.py:57
+#: .\views\members-bookmarks-list.html.py:27
+#: .\views\members-books-list.html.py:28
+#: .\views\viewMember.html.py:35
 #: .\views\viewMember.html.py:67
 msgid "Still in proofing"
 msgstr "Encore en correction"
@@ -1073,36 +1086,43 @@ msgstr "Éditer une Couverture"
 msgid "Thumbnail image"
 msgstr "Image vignette"
 
-#: .\views\covers-list.html.py:5 .\views\members-covers-list.html.py:5
+#: .\views\covers-list.html.py:5
+#: .\views\members-covers-list.html.py:5
 msgid "Book covers"
 msgstr "Couvertures"
 
-#: .\views\covers-list.html.py:9 .\views\covers-select.html.py:11
+#: .\views\covers-list.html.py:9
+#: .\views\covers-select.html.py:11
 #, fuzzy
 msgid "Your private book covers"
 msgstr "Changer la couverture"
 
-#: .\views\covers-list.html.py:22 .\views\covers-select.html.py:24
+#: .\views\covers-list.html.py:22
+#: .\views\covers-select.html.py:24
 #, fuzzy
 msgid "Your shared book covers"
 msgstr "Changer la couverture"
 
-#: .\views\covers-list.html.py:35 .\views\covers-select.html.py:37
+#: .\views\covers-list.html.py:35
+#: .\views\covers-select.html.py:37
 #, fuzzy
 msgid "All shared book covers"
 msgstr "Changer la couverture"
 
-#: .\views\covers-list.html.py:55 .\views\covers-select.html.py:57
+#: .\views\covers-list.html.py:55
+#: .\views\covers-select.html.py:57
 msgid "Add a new cover"
 msgstr "Ajouter une couverture"
 
-#: .\views\covers-list.html.py:60 .\views\covers-view.html.py:41
+#: .\views\covers-list.html.py:60
+#: .\views\covers-view.html.py:41
 #: .\views\members-covers-list.html.py:57
 #, fuzzy
 msgid "Admin options"
 msgstr "Options du livre"
 
-#: .\views\covers-list.html.py:63 .\views\members-covers-list.html.py:60
+#: .\views\covers-list.html.py:63
+#: .\views\members-covers-list.html.py:60
 #, fuzzy
 msgid "Select the default cover"
 msgstr "Sélectionnez une couverture"
@@ -1142,7 +1162,8 @@ msgstr ""
 msgid "Edit Image with Picnik"
 msgstr ""
 
-#: .\views\covers-view.html.py:34 .\views\revisions-view.html.py:29
+#: .\views\covers-view.html.py:34
+#: .\views\revisions-view.html.py:29
 msgid "Back"
 msgstr "Retour"
 
@@ -1151,15 +1172,15 @@ msgstr "Retour"
 msgid "Choose as the default"
 msgstr "Sauvegarder en defaut"
 
-#: .\views\customize.html.py:5 .\views\template-main-d.html.py:45
+#: .\views\customize.html.py:5
+#: .\views\template-main-d.html.py:45
 msgid "Customize"
 msgstr ""
 
 #: .\views\customize.html.py:10
 msgid ""
 " \n"
-"<p>Here you have access to the themes and book covers that are used to "
-"personnalize your reading and browsing experience.</p>\n"
+"<p>Here you have access to the themes and book covers that are used to personnalize your reading and browsing experience.</p>\n"
 msgstr ""
 
 #: .\views\customize.html.py:15
@@ -1170,9 +1191,7 @@ msgstr "Labos: Thèmes"
 #: .\views\customize.html.py:18
 msgid ""
 " \n"
-"<p>You can create your own theme and then choose to share is with other "
-"members. Themes can be applied to you profile page or to a specific books.</"
-"p>\n"
+"<p>You can create your own theme and then choose to share is with other members. Themes can be applied to you profile page or to a specific books.</p>\n"
 msgstr ""
 
 #: .\views\customize.html.py:31
@@ -1187,12 +1206,11 @@ msgstr "Dernier chapitre:"
 #: .\views\customize.html.py:43
 msgid ""
 " \n"
-"<p>Every book in our library has a cover to represent it. You can either "
-"create your cover with custom artwork or create reusable covers to be shared "
-"with other authors.</p>\n"
+"<p>Every book in our library has a cover to represent it. You can either create your cover with custom artwork or create reusable covers to be shared with other authors.</p>\n"
 msgstr ""
 
-#: .\views\customize.html.py:59 .\views\members-covers-list.html.py:51
+#: .\views\customize.html.py:59
+#: .\views\members-covers-list.html.py:51
 #, fuzzy
 msgid "Browse all covers"
 msgstr "Couvertures"
@@ -1208,8 +1226,7 @@ msgid ""
 "Are you <strong>absolutely</strong> sure that you want to delete this book?\n"
 "</p>\n"
 "<p>\n"
-"This will also delete all chapters, feedback and bookmarks associated with "
-"the book.\n"
+"This will also delete all chapters, feedback and bookmarks associated with the book.\n"
 "</p>\n"
 "<p>\n"
 "Once delete, it cannot be undeleted.\n"
@@ -1217,22 +1234,22 @@ msgid ""
 msgstr ""
 "\n"
 "<p>\n"
-"Êtes-vous <strong>absolument</strong> certains de vouloir effacer cet "
-"oeuvre?\n"
+"Êtes-vous <strong>absolument</strong> certains de vouloir effacer cet oeuvre?\n"
 "</p>\n"
 "<p>\n"
-"Cet action va aussi éffacer toutes les chapitres, les commentaires et les "
-"signets associés à cet oeuvre.\n"
+"Cet action va aussi éffacer toutes les chapitres, les commentaires et les signets associés à cet oeuvre.\n"
 "</p>\n"
 "<p>\n"
 "Une fois effacé, il est impossible de le récussiter.\n"
 "</p>\n"
 
-#: .\views\deleteBook.html.py:22 .\views\deleteChapter.html.py:23
+#: .\views\deleteBook.html.py:22
+#: .\views\deleteChapter.html.py:23
 msgid "Cancel and go back"
 msgstr "Annuler et retourner en arrière"
 
-#: .\views\deleteBook.html.py:25 .\views\deleteChapter.html.py:26
+#: .\views\deleteBook.html.py:25
+#: .\views\deleteChapter.html.py:26
 msgid "I have read the warning and confirm"
 msgstr "J'ai lu l'avertissement et je confirme"
 
@@ -1244,12 +1261,10 @@ msgstr "Suprimmer un chapitre"
 msgid ""
 "\n"
 "<p>\n"
-"Are you <strong>absolutely</strong> sure that you want to delete this "
-"chapter?\n"
+"Are you <strong>absolutely</strong> sure that you want to delete this chapter?\n"
 "</p>\n"
 "<p>\n"
-"This will also delete all revisions, feedback and bookmarks associated with "
-"the chapter.\n"
+"This will also delete all revisions, feedback and bookmarks associated with the chapter.\n"
 "</p>\n"
 "<p>\n"
 "Once delete, it cannot be undeleted.\n"
@@ -1257,18 +1272,17 @@ msgid ""
 msgstr ""
 "\n"
 "<p>\n"
-"Êtes-vous <strong>absolument</strong> certains de vouloir effacer ce "
-"chapitre?\n"
+"Êtes-vous <strong>absolument</strong> certains de vouloir effacer ce chapitre?\n"
 "</p>\n"
 "<p>\n"
-"Cet action va aussi éffacer toutes les révisions, les commentaires et les "
-"signets associés à ce livre.\n"
+"Cet action va aussi éffacer toutes les révisions, les commentaires et les signets associés à ce livre.\n"
 "</p>\n"
 "<p>\n"
 "Une fois effacé, il est impossible de le récussiter.\n"
 "</p>\n"
 
-#: .\views\editAccount.html.py:4 .\views\editAccount.html.py:7
+#: .\views\editAccount.html.py:4
+#: .\views\editAccount.html.py:7
 #, fuzzy
 msgid "Edit your account"
 msgstr "Votre compte"
@@ -1281,7 +1295,8 @@ msgstr "Prénom *"
 msgid "Lastname *"
 msgstr "Nom de famille *"
 
-#: .\views\editAccount.html.py:52 .\views\join.html.py:74
+#: .\views\editAccount.html.py:52
+#: .\views\join.html.py:74
 msgid "Select one..."
 msgstr ""
 
@@ -1294,12 +1309,8 @@ msgid "An error occured"
 msgstr "Une erreur s'est produite"
 
 #: .\views\error.html.py:8
-msgid ""
-"Hu... we're sorry! Like really really sorry. The truth is that we dont "
-"really know what we're doing!"
-msgstr ""
-"Oups... nous sommes désolés! Genre très très désolés. En réalité on est des "
-"amateurs et on sait pas trop ce qu'ont est en train de faire."
+msgid "Hu... we're sorry! Like really really sorry. The truth is that we dont really know what we're doing!"
+msgstr "Oups... nous sommes désolés! Genre très très désolés. En réalité on est des amateurs et on sait pas trop ce qu'ont est en train de faire."
 
 #: .\views\join.html.py:5
 #, fuzzy
@@ -1310,9 +1321,7 @@ msgstr "Joindre Wrook"
 msgid ""
 "\n"
 "<p>\n"
-"Before you join Wrook, we need to learn a few things about you. After you "
-"filled out this form, <strong>we will send you a password by email</"
-"strong>.\n"
+"Before you join Wrook, we need to learn a few things about you. After you filled out this form, <strong>we will send you a password by email</strong>.\n"
 "</p>\n"
 msgstr ""
 
@@ -1333,16 +1342,21 @@ msgstr "Prénom"
 msgid "Lastname"
 msgstr "Nom de famille"
 
-#: .\views\join.html.py:84 .\views\template-main-d.html.py:51
+#: .\views\join.html.py:84
+#: .\views\template-main-d.html.py:51
 msgid "Join"
 msgstr "Inscription"
 
-#: .\views\login.html.py:4 .\views\login.html.py:7 .\views\login.html.py:34
-#: .\views\passwordSent.html.py:14 .\views\template-main-d.html.py:53
+#: .\views\login.html.py:4
+#: .\views\login.html.py:7
+#: .\views\login.html.py:34
+#: .\views\passwordSent.html.py:14
+#: .\views\template-main-d.html.py:53
 msgid "Login"
 msgstr "Connexion"
 
-#: .\views\login.html.py:20 .\views\resetPassword.html.py:23
+#: .\views\login.html.py:20
+#: .\views\resetPassword.html.py:23
 msgid "Username or Email"
 msgstr ""
 
@@ -1350,14 +1364,15 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: .\views\login.html.py:41 .\views\resetPassword.html.py:36
-msgid ""
-"If you have any difficulties logging in, you can contact the janitor at <a "
-"href=\"mailto:admin@wrook.org\">admin@wrook.org</a>."
+#: .\views\login.html.py:41
+#: .\views\resetPassword.html.py:36
+msgid "If you have any difficulties logging in, you can contact the janitor at <a href=\"mailto:admin@wrook.org\">admin@wrook.org</a>."
 msgstr ""
 
-#: .\views\main.html.py:16 .\views\memberHome.html.py:4
-#: .\views\template-main-d.html.py:42 .\views\template-main-d.html.py:50
+#: .\views\main.html.py:16
+#: .\views\memberHome.html.py:4
+#: .\views\template-main-d.html.py:42
+#: .\views\template-main-d.html.py:50
 msgid "Home"
 msgstr "Accueil"
 
@@ -1365,11 +1380,13 @@ msgstr "Accueil"
 msgid "Authors"
 msgstr "Auteurs"
 
-#: .\views\main.html.py:20 .\views\template-main-d.html.py:46
+#: .\views\main.html.py:20
+#: .\views\template-main-d.html.py:46
 msgid "Labs"
 msgstr "Labos"
 
-#: .\views\main.html.py:25 .\views\part-newMemberWelcome.html.py:6
+#: .\views\main.html.py:25
+#: .\views\part-newMemberWelcome.html.py:6
 #: .\views\visitorHome.html.py:4
 msgid "Welcome"
 msgstr "Bienvenue"
@@ -1378,21 +1395,25 @@ msgstr "Bienvenue"
 msgid "Account"
 msgstr "Compte"
 
-#: .\views\main.html.py:27 .\views\template-main-d.html.py:48
+#: .\views\main.html.py:27
+#: .\views\template-main-d.html.py:48
 msgid "Logout"
 msgstr "Déconnexion"
 
-#: .\views\memberHome.html.py:10 .\views\members-stories.html.py:4
+#: .\views\memberHome.html.py:10
+#: .\views\members-stories.html.py:4
 #: .\views\members-stories.html.py:9
 msgid "What's new"
 msgstr ""
 
-#: .\views\memberHome.html.py:19 .\views\members-stories.html.py:18
+#: .\views\memberHome.html.py:19
+#: .\views\members-stories.html.py:18
 #, fuzzy
 msgid "Your options"
 msgstr "Vos votes"
 
-#: .\views\memberHome.html.py:22 .\views\members-books-list.html.py:56
+#: .\views\memberHome.html.py:22
+#: .\views\members-books-list.html.py:56
 #: .\views\startBook.html.py:5
 msgid "Start a new book"
 msgstr "Commencer une nouvelle oeuvre"
@@ -1406,16 +1427,15 @@ msgstr "Votre profile publique"
 msgid "Your account settings"
 msgstr "Votre compte"
 
-#: .\views\members-bookmarks-list.html.py:5 .\views\template-main-d.html.py:67
+#: .\views\members-bookmarks-list.html.py:5
+#: .\views\template-main-d.html.py:67
 #: .\views\viewMember.html.py:44
 #, fuzzy
 msgid "Readings"
 msgstr "Vos lectures"
 
 #: .\views\members-books-list.html.py:40
-msgid ""
-"You have not saved any bookmarks yet. We invite you to choose one from <a "
-"href='/Books'>all the books</a> which have been contributed by other members."
+msgid "You have not saved any bookmarks yet. We invite you to choose one from <a href='/Books'>all the books</a> which have been contributed by other members."
 msgstr ""
 
 #: .\views\members-books-list.html.py:42
@@ -1441,13 +1461,15 @@ msgstr ""
 msgid "Create a new cover"
 msgstr "Créer un nouveau thème"
 
-#: .\views\members.html.py:5 .\views\members.html.py:9
+#: .\views\members.html.py:5
+#: .\views\members.html.py:9
 #: .\views\template-main-d.html.py:44
 #, fuzzy
 msgid "Members"
 msgstr "Thèmes"
 
-#: .\views\members.html.py:23 .\views\readers.html.py:45
+#: .\views\members.html.py:23
+#: .\views\readers.html.py:45
 msgid "Latest bookmarks:"
 msgstr "Récents signets"
 
@@ -1489,24 +1511,13 @@ msgstr "Désolé, aucuns messages n'ont étés publiés"
 #, fuzzy
 msgid ""
 "\n"
-"<strong>New to wrook?</strong> We invite all our new members to learn about "
-"Wrook by reading <a href=\"/Books/wrook-for-beginners\">Wrook for beginners</"
-"a>. This introduction is actually a short book hosted on wrook as any other "
-"book would be. Reading this, will both be informative and let you experience "
-"how to read books on Wrook. So, go ahead and <a href=\"/Books/wrook-for-"
-"beginners\">Start reading</a>!\n"
+"<strong>New to wrook?</strong> We invite all our new members to learn about Wrook by reading <a href=\"/Books/wrook-for-beginners\">Wrook for beginners</a>. This introduction is actually a short book hosted on wrook as any other book would be. Reading this, will both be informative and let you experience how to read books on Wrook. So, go ahead and <a href=\"/Books/wrook-for-beginners\">Start reading</a>!\n"
 msgstr ""
 "\n"
-"<strong>Nouveau venu sur Wrook?</strong> Nous invitons tous les nouveaux "
-"membres à lire le livre d'introduction intitulé <a href=\"/ViewBook/wrook-"
-"for-beginners\">Wrook for beginners</a> (sera bientôt traduit). Cette "
-"introduction à Wrook est un livre en soit qui est hébergé ici au même titre "
-"que tous nos autres oeuvres. Lire ce petit bouquin vous sera à la fois "
-"informatif et vous permettra de constater comment la lecture fonctionne sur "
-"Wrook. Alors allez-y, et <a href=\"/ViewBook/wrook-for-beginners\">Commençez "
-"votre lecture</a>!\n"
+"<strong>Nouveau venu sur Wrook?</strong> Nous invitons tous les nouveaux membres à lire le livre d'introduction intitulé <a href=\"/ViewBook/wrook-for-beginners\">Wrook for beginners</a> (sera bientôt traduit). Cette introduction à Wrook est un livre en soit qui est hébergé ici au même titre que tous nos autres oeuvres. Lire ce petit bouquin vous sera à la fois informatif et vous permettra de constater comment la lecture fonctionne sur Wrook. Alors allez-y, et <a href=\"/ViewBook/wrook-for-beginners\">Commençez votre lecture</a>!\n"
 
-#: .\views\part-replies.html.py:9 .\views\part-stories.html.py:9
+#: .\views\part-replies.html.py:9
+#: .\views\part-stories.html.py:9
 #, python-format
 msgid " %(timeAgo)s ago "
 msgstr ""
@@ -1515,7 +1526,8 @@ msgstr ""
 msgid "by"
 msgstr "par"
 
-#: .\views\part-stories.html.py:22 .\views\part-stories.html.py:26
+#: .\views\part-stories.html.py:22
+#: .\views\part-stories.html.py:26
 #, python-format
 msgid "%(replyCount)s replies"
 msgstr ""
@@ -1543,7 +1555,8 @@ msgstr ""
 msgid "Send again"
 msgstr "Envoyer l'invitation"
 
-#: .\views\readers.html.py:6 .\views\readers.html.py:14
+#: .\views\readers.html.py:6
+#: .\views\readers.html.py:14
 msgid "Readers of"
 msgstr "Lecteurs de "
 
@@ -1551,7 +1564,8 @@ msgstr "Lecteurs de "
 msgid "Latest chapter:"
 msgstr "Dernier chapitre:"
 
-#: .\views\resetPassword.html.py:4 .\views\resetPassword.html.py:7
+#: .\views\resetPassword.html.py:4
+#: .\views\resetPassword.html.py:7
 msgid "Reset your password"
 msgstr ""
 
@@ -1563,16 +1577,20 @@ msgstr ""
 msgid "Reset password"
 msgstr ""
 
-#: .\views\revisions-list.html.py:5 .\views\revisions-list.html.py:11
-#: .\views\revisions-view.html.py:5 .\views\revisions-view.html.py:11
+#: .\views\revisions-list.html.py:5
+#: .\views\revisions-list.html.py:11
+#: .\views\revisions-view.html.py:5
+#: .\views\revisions-view.html.py:11
 msgid "Revisions for "
 msgstr "Révisions pour"
 
-#: .\views\revisions-list.html.py:20 .\views\revisions-view.html.py:18
+#: .\views\revisions-list.html.py:20
+#: .\views\revisions-view.html.py:18
 msgid "Revision"
 msgstr "Révision"
 
-#: .\views\revisions-list.html.py:25 .\views\revisions-view.html.py:24
+#: .\views\revisions-list.html.py:25
+#: .\views\revisions-view.html.py:24
 msgid "Sorry, no revisions have been posted yet!"
 msgstr "Désolé, aucuns révisions n'ont étés publiés"
 
@@ -1623,7 +1641,8 @@ msgstr "<span class=\"shortcutKey\">S</span>auvegarder et quitter"
 msgid "Start writing your chapter here..."
 msgstr "Commencez à écrire votre chapitre ici..."
 
-#: .\views\viewAccount.html.py:4 .\views\viewAccount.html.py:7
+#: .\views\viewAccount.html.py:4
+#: .\views\viewAccount.html.py:7
 msgid "Your account"
 msgstr "Votre compte"
 
@@ -1635,7 +1654,8 @@ msgstr ""
 msgid "Change profile photo"
 msgstr ""
 
-#: .\views\viewChapter.html.py:7 .\views\viewChapter.html.py:16
+#: .\views\viewChapter.html.py:7
+#: .\views\viewChapter.html.py:16
 msgid "Note:"
 msgstr "Note:"
 
@@ -1668,11 +1688,13 @@ msgstr "C'est le dernier chapitre"
 msgid "Open next chapter"
 msgstr "Ouvrir le prochain chapitre"
 
-#: .\views\viewChapter.html.py:66 .\views\viewChapter.html.py:95
+#: .\views\viewChapter.html.py:66
+#: .\views\viewChapter.html.py:95
 msgid "Previous chapter"
 msgstr "Chapitre précédent"
 
-#: .\views\viewChapter.html.py:68 .\views\viewChapter.html.py:98
+#: .\views\viewChapter.html.py:68
+#: .\views\viewChapter.html.py:98
 msgid "Back to cover"
 msgstr "Retour à la couverture"
 
@@ -1722,95 +1744,69 @@ msgstr "Écrire ce chapitre"
 msgid ""
 "\n"
 "<h2>Our motto</h2>\n"
-"<p>When lovers of the written words get together, wonderful things are bound "
-"to happen!</p>\n"
+"<p>When lovers of the written words get together, wonderful things are bound to happen!</p>\n"
 msgstr ""
 
 #: .\views\visitorHome.html.py:20
 msgid ""
 "\n"
-"<p>Wrook is a community for readers and writers who share a passion for "
-"literatures of all kinds.</p>\n"
+"<p>Wrook is a community for readers and writers who share a passion for literatures of all kinds.</p>\n"
 "<ul>\n"
-"<li><strong>Read free litterature</strong> submitted by members: Stories, "
-"Novels, Poetry and more.</li>\n"
-"<li><strong>Write, publish and share</strong> your own writtings with your "
-"fans and other members.</li>\n"
-"<li>Get access to <strong>usefull tools</strong> for reading, writing and "
-"publishing litterature.</li>\n"
+"<li><strong>Read free litterature</strong> submitted by members: Stories, Novels, Poetry and more.</li>\n"
+"<li><strong>Write, publish and share</strong> your own writtings with your fans and other members.</li>\n"
+"<li>Get access to <strong>usefull tools</strong> for reading, writing and publishing litterature.</li>\n"
 "</ul>\n"
 msgstr ""
 
 #: .\views\visitorHome.html.py:41
 msgid ""
 "\n"
-"<p>Wrook is adding features as fast as possible to gear up for the "
-"<em>National Novel Writing Month 2008</em></p>\n"
-"<p>Join Nanowrimo 2008 by visiting: <a href=\"http://nanowrimo.org\">http://"
-"nanowrimo.org</a></p>\n"
+"<p>Wrook is adding features as fast as possible to gear up for the <em>National Novel Writing Month 2008</em></p>\n"
+"<p>Join Nanowrimo 2008 by visiting: <a href=\"http://nanowrimo.org\">http://nanowrimo.org</a></p>\n"
 msgstr ""
 
 #~ msgid "Your latest readers"
 #~ msgstr "Vos lecteurs récents"
-
 #~ msgid "Has read"
 #~ msgstr "À lu"
-
 #~ msgid "from"
 #~ msgstr "de"
-
 #~ msgid "Save and Continue Writing"
 #~ msgstr "Sauver et continuer à écrire"
-
 #~ msgid "Submission form"
 #~ msgstr "Suggestions"
-
 #~ msgid "Books by"
 #~ msgstr "Oeuvres par "
-
 #~ msgid "Books:"
 #~ msgstr "Oeuvres:"
-
 #~ msgid "You have started a new book entitled:"
 #~ msgstr "Vous avez commencé une nouvelle oeuvre intitulé :"
-
 #~ msgid ""
 #~ "This new book will not be visible until you add new chapters and \"publish"
 #~ "\" them."
 #~ msgstr ""
 #~ "Ce livre sera visible seulement lorceque vous aurez publié votre premier "
 #~ "chapitre."
-
 #~ msgid "Start writing the first chapter"
 #~ msgstr "Commencez le premier chapitre"
-
 #~ msgid "Cover image of "
 #~ msgstr "Image de couverture pour "
-
 #~ msgid "Filter results"
 #~ msgstr "Filtrer les résultats"
-
 #~ msgid "Labs: Themes: Palette"
 #~ msgstr "Labos: Thèmes: Palette"
-
 #~ msgid "Edit color palette"
 #~ msgstr "Modifier la palette"
-
 #~ msgid "Labs: Themes: Theme"
 #~ msgstr "Labos: Thèmes: Thème"
-
 #~ msgid "Color palettes"
 #~ msgstr "Palettes de couleur"
-
 #~ msgid "Sorry, no color palettes have been created!"
 #~ msgstr "Désolé, aucune palette n'a été créé"
-
 #~ msgid "Create a new color palette"
 #~ msgstr "Créer une nouvelle palette"
-
 #~ msgid "About themes and color palettes"
 #~ msgstr "À propos des thèmes et des palettes"
-
 #~ msgid ""
 #~ " \n"
 #~ "Here you can browse the various themes and color palettes used for "
@@ -1821,21 +1817,16 @@ msgstr ""
 #~ "Ici vous pouvez consulter les themes et les palettes de couleurs utilisés "
 #~ "pour les promotions saisonières\n"
 #~ "et pour la personnalisation des pages des membres et de oeuvres\n"
-
 #~ msgid "Prefered language (for the site interface)"
 #~ msgstr "Langue de préférence (pour l'interface du site)"
-
 #~ msgid "This form will send an invitation to join Wrook and read: "
 #~ msgstr ""
 #~ "Ce formulaire vous permet d'envoyer une invitation a joindre Wrook et "
 #~ "lire:"
-
 #~ msgid "Invitation form:"
 #~ msgstr "Invitation pour:"
-
 #~ msgid "Join Wrook by Invitation"
 #~ msgstr "Joindre Wrook sur invitation"
-
 #~ msgid ""
 #~ "\n"
 #~ "<p>\n"
@@ -1870,75 +1861,52 @@ msgstr ""
 #~ "Merci!<br/>\n"
 #~ "<em>L'équipe de Wrook</em>\n"
 #~ "</p>\n"
-
 #~ msgid "Status:"
 #~ msgstr "État:"
-
 #~ msgid "Your books"
 #~ msgstr "Vos oeuvres"
-
 #~ msgid "Topic (optional)"
 #~ msgstr "Sujet (optionnel)"
-
 #~ msgid "Recent messages"
 #~ msgstr "Messages récents"
-
 #~ msgid "Cover image of"
 #~ msgstr "Image de couverture pour"
-
 #~ msgid "Invite a friend to read!"
 #~ msgstr "Invitez un ami a lire!"
-
 #~ msgid "Chapters"
 #~ msgstr "Chapitres"
-
 #~ msgid "No chapters yet!"
 #~ msgstr "Pas encore de chapitre!"
-
 #~ msgid "From the author"
 #~ msgstr "De l'auteur"
-
 #~ msgid "Chapter feedback"
 #~ msgstr "Commentaires de chapitre"
-
 #~ msgid "Bookmarks"
 #~ msgstr "Signets"
-
 #~ msgid "of"
 #~ msgstr "de"
-
 #~ msgid "Welcome to Wrook"
 #~ msgstr "Bienvenue sur Wrook"
-
 #~ msgid "readers"
 #~ msgstr "lecteurs"
-
 #~ msgid "feedbacks"
 #~ msgstr "commentaires"
-
 #~ msgid "Your bookmarks"
 #~ msgstr "Vos signets"
-
 #~ msgid "Sign Up"
 #~ msgstr "Inscription"
-
 #~ msgid "Tell us a few words about you (will be shown in your profile)"
 #~ msgstr "Quelques mots à votre propos (sera affiché dans votre profile)"
-
 #~ msgid "Cover image (image URL)"
 #~ msgstr "IMage de couverture (URL de l'image)"
-
 #~ msgid "Note from author"
 #~ msgstr "Note de l'auteur"
-
 #~ msgid "Text"
 #~ msgstr "Texte"
-
 #~ msgid "Chapter list"
 #~ msgstr "Liste des chapitres"
-
 #~ msgid "No chapter yet!"
 #~ msgstr "Aucun chapitre jusqu'à maintenant!"
-
 #~ msgid "Things to work on"
 #~ msgstr "Choses à faire"
+

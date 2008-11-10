@@ -9,6 +9,7 @@ from google.appengine.ext import db
 from google.appengine.ext.db import djangoforms
 
 from django.utils import translation
+from django.utils.translation import gettext
 from django.conf import settings
 from django.db import models
 from django import newforms as forms 
@@ -303,16 +304,15 @@ class CoverSetDefault(WrookRequestHandler):
 			if key:
 				cover = Cover.get(key)
 				if cover:
-					if self.AppConfig:
-						self.AppConfig.DefaultCover = cover
-						self.AppConfig.put()
-						page = proforma.SuccessPage()
-						page.Model={
-							"Statement": _("The default cover has been set!"),
-							"ContinueURL": "/Covers",
-							"ContinueLabel": _("Back to the covers")}
-						self.redirect(page.url())
-					else: self.error(500)
+					if not self.AppConfig: self.AppConfig = WrookAppConfig()
+					self.AppConfig.DefaultCover = cover
+					self.AppConfig.put()
+					page = proforma.SuccessPage()
+					page.Model={
+						"Statement": _("The default cover has been set!"),
+						"ContinueURL": "/Covers/",
+						"ContinueLabel": _("Back to the covers")}
+					self.redirect(page.url())
 				else: self.error(404)
 			else: self.error(500)
 		else: self.requestLogin()
@@ -368,7 +368,8 @@ class CoverEdit(WrookRequestHandler):
 			if form.is_valid():
 				# Save the form, and redirect to the view page
 				entity = form.save(commit=False)
-				entity.ThumbnailImage = db.Blob(self.request.get('thumbnailImageProxy'))
+				thumbnailImageProxy = self.request.get('thumbnailImageProxy')
+				if thumbnailImageProxy: entity.ThumbnailImage = db.Blob(thumbnailImageProxy)
 				entity.put()
 				self.redirect('/Covers/')
 			else:
