@@ -77,6 +77,20 @@ def logout(requestHandler):
 	requestHandler.response.headers.add_header('Set-Cookie', 'credentialsHash=%s; expires=Fri, 31-Dec-2020 23:59:59 GMT' % "")
 	requestHandler.response.headers.add_header('Set-Cookie', 'username=%s; expires=Fri, 31-Dec-2020 23:59:59 GMT' % "")
 
+class MemberConversionAct:
+	Id = ""
+	BeforeLabel = ""
+	AfterLabel = ""
+	Points = 0
+	Done = False
+
+	def __init__(self, id, beforeLabel, afterLabel, points, done):
+		self.Id = id
+		self.BeforeLabel = beforeLabel
+		self.AfterLabel = afterLabel
+		self.Points = points
+		self.Done = done
+
 class Member(db.Model):
 	User = db.UserProperty()
 	Username = db.StringProperty(default="...", required=True)
@@ -95,6 +109,68 @@ class Member(db.Model):
 	isAuthor = db.BooleanProperty(default=False)
 	Created = db.DateTimeProperty(auto_now_add=True)
 	isAdmin = db.BooleanProperty(default=False)
+
+	def memberConversionLevel(self):
+		progress = self.getConversionProgress()
+		if progress == 100: return "complete"
+		if progress > 80: return "hight"
+		if progress > 40: return "medium"
+		if progress > 0: return "low"
+		return "none"
+
+	def getConversionActs(self):
+		acts = []
+		cacheKey = "wrookMemberConversionActs-%s" % self.key()
+		acts = memcache.get(cacheKey)
+		if acts == None:
+			acts = []
+			acts.append(MemberConversionAct(
+				"uploadedProfilePhoto",
+				"Upload a profile photo",
+				"You uploaded a profile photo",
+				10,
+				(self.ProfilePhoto != None)))
+			acts.append(MemberConversionAct(
+				"startedReadingABook",
+				"Start reading a book",
+				"You started reading a book",
+				7,
+				(len(self.Bookmarks.fetch(1))>0)))
+			acts.append(MemberConversionAct(
+				"wroteAboutHimself",
+				"Say a few words about yourself in your profile",
+				"You said a few things about yourself",
+				4,
+				(self.About != None)))
+			acts.append(MemberConversionAct(
+				"inviteSomeone",
+				"Invite a friend to join Wrook",
+				"You invited a friend to join Wrook",
+				4,
+				(len(self.SentInvites.fetch(1))>0)))
+			memcache.add(cacheKey, acts)
+		return acts
+
+	def getConversionProgressLeft(self):
+		return 100 - self.getConversionProgress()
+
+	def getConversionProgress(self):
+		cacheKey = "wrookMemberConversionProgress-%s" % self.key()
+		progress = memcache.get(cacheKey)
+		if progress == None:
+			progress = 99
+			totalProgress = 0
+			maxProgress = 0
+			acts = self.getConversionActs()
+			for act in acts:
+				maxProgress = maxProgress + act.Points
+				if act.Done: totalProgress = totalProgress + act.Points
+			if maxProgress > 0: progress = (totalProgress*100) / maxProgress
+			else: progress = 100
+			progress = progress
+			memcache.add(cacheKey, progress)
+		return progress
+		
 
 	def flushCache(self):
 		memcache.delete("wrookMember-%s" % self.Username)
@@ -225,7 +301,7 @@ class Invite(db.Expando):
 			self.Status = "sent"
 		self.WhenSent = datetime.datetime.now()
 		self.put()
-		return self;
+		return self
 
 	def getMessage(self):
 		if self.is_saved(): key = self.key()

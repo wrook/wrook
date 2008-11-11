@@ -1,0 +1,83 @@
+
+	{% ifequal currentMember.memberConversionLevel "none" %}
+		<h3>
+			Welcome! As a new member here's a few thing you might find interesting.
+		</h3>
+		<p>
+			To help our member discover our features we ave provided a set of interactive suggestions accompanied
+			by a progress percentage. So here's a few of those suggestions to get started:
+		</p>
+		<ul>
+			{% for act in currentMember.getConversionActs %}
+				{% if not act.Done %}
+					<li>{{act.BeforeLabel}}</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	{% endifequal %}
+	{% ifequal currentMember.memberConversionLevel "low" %}
+		<h3>
+			Up to now you have tried <strong>{{ currentMember.getConversionProgress }}%</strong> of our features!
+		</h3>
+		<p>
+			Here is a few more suggestions of what you could try:
+		</p>
+		<ul>
+			{% for act in currentMember.getConversionActs %}
+				{% if not act.Done %}
+					<li>{{act.BeforeLabel}}</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	{% endifequal %}
+	{% ifequal currentMember.memberConversionLevel "medium" %}
+		<h3>
+			Your making progress! Your have already used <strong>{{ currentMember.getConversionProgress }}%</strong> of wrook!
+		</h3>
+		<p>
+			Here's a few more things, you could try:
+		</p>
+		<ul>
+			{% for act in currentMember.getConversionActs %}
+				{% if not act.Done %}
+					<li>{{act.BeforeLabel}}</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	{% endifequal %}
+	{% ifequal currentMember.memberConversionLevel "high" %}
+		<h3>
+			Excellent! You only have <strong>{{ currentMember.getConversionProgressLeft }}%</strong> left to try!
+		</h3>
+		<p>
+			Here's a few last things for you to try:
+		</p>
+		<ul>
+			{% for act in currentMember.getConversionActs %}
+				{% if not act.Done %}
+					<li>{{act.BeforeLabel}}</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	{% endifequal %}
+	{% ifequal currentMember.memberConversionLevel "complete" %}
+		<h3>
+			Wow! Thank you {{ currentMember.Firstname }}, your seem to have tried all of our features!
+		</h3>
+		<p>
+			We appreciate very much your involvement in Wrook. We need more members like you!
+		</p>
+		<p>
+			Currently we dont have anything new for you to try! But dont worry, as we build new features, we'll
+			be sure to post them here for you to discover and try.
+		</p>
+		<p>
+			Until then, you can always go to the Labs and make your own suggestions about which new features we should add next.
+		</p>
+		<p>
+			[.... insert link to labs and contact form , and maybe a few permanent suggestions... ]
+		</p>
+		<p>
+			Thanks again!
+		</p>
+	{% endifequal %}

@@ -1,0 +1,38 @@
+<style>
+	.memberConversion {
+		border: 2px solid #ccc;
+		background: #eee;
+		padding: 10px;
+	}
+	.memberConversion h3 {
+		margin: 0px;
+	}
+</style>
+
+<div class="memberConversion">
+	{% ifequal currentMember.memberConversionLevel "none" %}
+		<h3>
+			Welcome! As a new member we have a few suggestions you might find interesting. <a href="/Suggestions">Read more...</a>
+		</h3>
+	{% endifequal %}
+	{% ifequal currentMember.memberConversionLevel "low" %}
+		<h3>
+			Up to now you have tried <strong>{{ currentMember.getConversionProgress }}%</strong> of our features! <a href="/Suggestions">Try more...</a>
+		</h3>
+	{% endifequal %}
+	{% ifequal currentMember.memberConversionLevel "medium" %}
+		<h3>
+			Your making progress! Your have already used <strong>{{ currentMember.getConversionProgress }}%</strong> of wrook! <a href="/Suggestions">Try a few more...</a>
+		</h3>
+	{% endifequal %}
+	{% ifequal currentMember.memberConversionLevel "high" %}
+		<h3>
+			Excellent! You only have <strong>{{ currentMember.getConversionProgressLeft }}%</strong> left to try! <a href="/Suggestions">A few last things...</a>
+		</h3>
+	{% endifequal %}
+	{% ifequal currentMember.memberConversionLevel "complete" %}
+		<h3>
+			Wow! Your seem to have tried all of our features, <a href="/Suggestions">Thank you and...</a>
+		</h3>
+	{% endifequal %}
+</div>

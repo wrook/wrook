@@ -246,7 +246,7 @@ class Revision(db.Model):
 		if self.WordCount: return self.WordCount
 		else:
 			self.WordCount = utils.wordCount(self.Text)
-			return self.WordCount;
+			return self.WordCount
 
 	def markdownText(self):
 		return markdown2.markdown(self.Text)
@@ -861,9 +861,9 @@ class DeleteChapter(WrookRequestHandler):
 				if userIsAuthor:
 					if (self.request.get("doDelete") != "" and self.request.get("confirmDelete") == "yes"):
 						deleteChapter(chapter)
-						self.redirect("/Books/%s" % chapter.Book.key());
+						self.redirect("/Books/%s" % chapter.Book.key())
 					else:
-						self.redirect("/Chapter/Delete/%s" % chapter.key());
+						self.redirect("/Chapter/Delete/%s" % chapter.key())
 				else: return
 			else: self.error(404)
 		else: self.requestLogin()
@@ -942,9 +942,9 @@ class DeleteBook(WrookRequestHandler):
 				if userIsAuthor:
 					if (self.request.get("doDelete") != "" and self.request.get("confirmDelete") == "yes"):
 						deleteBook(book)
-						self.redirect("/");
+						self.redirect("/")
 					else:
-						self.redirect("/Books/Delete/%s" % book.key());
+						self.redirect("/Books/Delete/%s" % book.key())
 				else: return
 			else: self.error(404)
 		else: self.requestLogin()
@@ -1381,9 +1381,9 @@ class AdminCommands(WrookRequestHandler):
 	
 	def doDefaultAllBookStatus(self):
 		for book in Book.all():
-			if book.Stage == "planning": book.Stage = "writing";
+			if book.Stage == "planning": book.Stage = "writing"
 			for chapter in book.Chapters:
-				if chapter.Stage == "planning": chapter.Stage = "writing";
+				if chapter.Stage == "planning": chapter.Stage = "writing"
 				chapter.put()
 			book.put()
 		result = CommandResult(ErrorCode=0, Message=_("Empty status properties of all books and chapters have been defaulted!"))
@@ -1477,6 +1477,16 @@ class About_who(WrookRequestHandler):
 	def get(self):
 		onRequest(self)
 		self.render("views/about-who.html")
+
+
+class Suggestions(WrookRequestHandler):
+	def get(self):
+		onRequest(self)
+		if self.CurrentMember:
+			self.setVisitedMember(self.CurrentMember)
+			self.render("views/member-suggestions.html")
+		else: self.requestLogin()
+		
 
 
 #============================================================================
@@ -1632,6 +1642,7 @@ URLMappings = [
 	( '/About/OpenSourceLicense', About_OpenSoureLicense),
 	( '/About/CPAL', About_CPAL),
 	( '/About/Who', About_who),
+	( '/Suggestions', Suggestions),
 	(r'/Admin/Commands/(.*)', AdminCommands), # Refactor: move to an admin module?
 	( '/FlushCache', FlushCache) # Refactor: move to an admin module?
 ]
