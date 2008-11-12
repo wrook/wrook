@@ -94,7 +94,6 @@ class MemberConversionAct:
 		self.Done = done
 
 class Member(db.Model):
-	User = db.UserProperty()
 	Username = db.StringProperty(default="...", required=True)
 	Email = db.EmailProperty(default="...", required=True)
 	ProfilePhoto = db.BlobProperty(verbose_name="Profile photo")

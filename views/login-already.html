@@ -1,0 +1,16 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block pageId %}login{% endblock %}
+{% block pageTitle %}{% trans "Login" %}{% endblock %}
+{% block title %}
+	<h1>
+		{% trans "Login" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	{% if error %}
+		<div style="margin-bottom: 10px; padding:10px 15px; background: #BB0000; color: #FFFFFF;">
+			{{ error }}
+		</div>
+	{% endif %}
+{% endblock %}

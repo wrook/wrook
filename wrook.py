@@ -522,13 +522,19 @@ class Customize(WrookRequestHandler):
 class Login(WrookRequestHandler):
 	def get(self):
 		onRequest(self)
-		username = self.request.get("username")
-		password = self.request.get("password")
-		self.Model.update({
-			'username': username,
-			'password': password
-			})
-		self.render('views/login.html')
+		if self.CurrentMember:
+			self.Model.update({
+				'error': _("You are already logged in. In order to login again, you must first logout.")
+				})
+			self.render('views/login-already.html')
+		else:
+			username = self.request.get("username")
+			password = self.request.get("password")
+			self.Model.update({
+				'username': username,
+				'password': password
+				})
+			self.render('views/login.html')
 
 	def post(self):
 		onRequest(self)
