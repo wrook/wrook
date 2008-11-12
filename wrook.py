@@ -574,7 +574,7 @@ class Join(WrookRequestHandler):
 				})
 			self.render('views/join.html')
 
-	def post(self, key):
+	def post(self, key): #Refactor: This handler should be moved to the membership module and actuel business logic should be in separate methods
 		onRequest(self)
 		if key: invite = membership.Invite.get(key)
 		else: invite = membership.Invite()
@@ -584,15 +584,25 @@ class Join(WrookRequestHandler):
 		lastname = self.request.get("Lastname")
 		gender = self.request.get("Gender")
 		preferedLanguage = self.request.get("PreferedLanguage")
+		isValid = True
 		if (firstname == "" or lastname == "" or email == "" or username == ""):
+			isValid = False
+			error = _("Username, email, firstname and lastname are madatory!")
+		elif (membership.getMemberFromCredentials(email)): #Refactor: This constraint should be built into the Member entity
+			isValid = False
+			error = _("This email address is already used by another member")
+		elif (membership.getMemberFromCredentials(username)): #Refactor: This constraint should be built into the Member entity
+			isValid = False
+			error = _("This username address is already used by another member")
+		if (not isValid):
 			self.Model.update({
-				'Username': username,
-				'Email': email,
+				'username': username,
+				'email': email,
 				'firstname': firstname,
 				'lastname': lastname,
 				'gender': gender,
 				'preferedLanguage': preferedLanguage,
-				'error': _("Username, email, firstname and lastname are madatory!")
+				'error': error
 				})
 			self.render("views/join.html")
 		else:
