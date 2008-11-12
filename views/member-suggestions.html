@@ -1,12 +1,142 @@
-﻿{% extends "template-main-d.html" %}
+{% extends "template-main-d.html" %}
 {% load i18n %}
 {% block pageId %}member-suggestions{% endblock %}
 {% block pageTitle %}{% trans "Suggestions" %}{% endblock %}
 {% block title %}
 {% endblock %}
 {% block content %}
-	{% include "part-memberConversion.html" %}
+	{% ifequal currentMember.memberConversionLevel "none" %}
+{% blocktrans %}
+<h3>
+Welcome! As a new member here is a few thing you might find interesting.
+</h3>
+<p>
+To help our member discover our features we provide suggestions accompanied
+by a progress indicator. So here is a few of those suggestions to get you started:
+</p>
+{% endblocktrans %}
+		<ul>
+			{% for act in currentMember.getConversionActs %}
+				{% if not act.Done %}
+					<li>{{act.BeforeLabel}}</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	{% endifequal %}
+	{% ifequal currentMember.memberConversionLevel "low" %}
+{% blocktrans with currentMember.getConversionProgress as progress %}
+<h3>
+Up to now you have tried only <strong>{{ progress }}&#37;</strong> of the suggested features!
+</h3>
+<p>
+Here is a few more suggestions of what you could try:
+</p>
+{% endblocktrans %}
+		<ul>
+			{% for act in currentMember.getConversionActs %}
+				{% if not act.Done %}
+					<li>{{act.BeforeLabel}}</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+		<h3>{% trans "Features you have already tried:" %}</h3>
+		<ul>
+			{% for act in currentMember.getConversionActs %}
+				{% if act.Done %}
+					<li>{{act.AfterLabel}}</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	{% endifequal %}
+	{% ifequal currentMember.memberConversionLevel "medium" %}
+{% blocktrans with currentMember.getConversionProgress as progress %}
+<h3>
+Your making progress! Your have already tried <strong>{{ progress }}&#37;</strong> of Wrook!
+</h3>
+<p>
+Here's a few more things, you could try:
+</p>
+{% endblocktrans %}
+		<ul>
+			{% for act in currentMember.getConversionActs %}
+				{% if not act.Done %}
+					<li>{{act.BeforeLabel}}</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+		<h3>{% trans "Features you have already tried:" %}</h3>
+		<ul>
+			{% for act in currentMember.getConversionActs %}
+				{% if act.Done %}
+					<li>{{act.AfterLabel}}</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	{% endifequal %}
+	{% ifequal currentMember.memberConversionLevel "high" %}
+{% blocktrans with currentMember.getConversionProgressLeft as progressLeft %}
+<h3>
+	Excellent! You only have <strong>{{ progressLeft }}&#37;</strong> of suggestions left to try!
+</h3>
+<p>
+	Here is a few last things for you to try:
+</p>
+{% endblocktrans %}
+		<ul>
+			{% for act in currentMember.getConversionActs %}
+				{% if not act.Done %}
+					<li>{{act.BeforeLabel}}</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+		<h3>{% trans "Features you have already tried:" %}</h3>
+		<ul>
+			{% for act in currentMember.getConversionActs %}
+				{% if act.Done %}
+					<li>{{act.AfterLabel}}</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	{% endifequal %}
+	{% ifequal currentMember.memberConversionLevel "complete" %}
+{% blocktrans with currentMember.Firstname as firstname %}
+<h3>
+	Wow! Thank you {{ firstname }}, your seem to have tried all of our features!
+</h3>
+<p>
+	We appreciate very much your involvement in Wrook. We need more members like you!
+</p>
+<p>
+	Currently we dont have anything new for you to try! But dont worry, as we build new features, we'll
+	be sure to post them here for you to discover and try.
+</p>
+<p>
+	Until then, you can always go to the Labs and make your own suggestions about which new features we should add next.
+</p>
+<p>
+	[.... insert link to labs and contact form, and maybe a few permanent suggestions... ]
+</p>
+<p>
+	Thanks again!
+</p>
+{% endblocktrans %}
+		<h3>{% trans "Here is all those features you have tried:" %}</h3>
+		<ul>
+			{% for act in currentMember.getConversionActs %}
+				{% if act.Done %}
+					<li>{{act.AfterLabel}}</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	{% endifequal %}
+
 {% endblock %}
 
 {% block sidebar %}
+	<div class="sidebarPanel">
+		<h3>{% trans "Progress:" %} {{currentMember.getConversionProgress}}%</h3>
+		<div class="progressBar">
+			<div class="completed" style="width:{{currentMember.getConversionProgress}}%"></div>
+		</div>
+	</div>
 {% endblock %}

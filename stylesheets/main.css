@@ -718,3 +718,14 @@ table tr td ul li {
 .legal {
 	line-height: 1.3em;
 }
+
+.progressBar {
+	width: 161px;
+	height: 14px;
+	background: url(/images/smallProgressBar.png) 0px 0px no-repeat;
+}
+.progressBar .completed {
+	width: 100%;
+	height: 14px;
+	background: url(/images/smallProgressBar.png) 0px -14px no-repeat;
+}

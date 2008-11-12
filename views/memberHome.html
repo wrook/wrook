@@ -5,8 +5,8 @@
 {% block title %}
 {% endblock %}
 {% block content %}
-	{% include "template-part-newMemberWelcome.html" %}
 	{% include "part-memberConversion-short.html" %}
+	{% include "template-part-newMemberWelcome.html" %}
 	<h2>
 		{% trans "What's new" %}
 	</h2>
@@ -26,4 +26,5 @@
 			</ul>
 		</div>
 	</div>
+	{% include "panels-memberConversion.html" %}
 {% endblock %}

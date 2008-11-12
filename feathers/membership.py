@@ -1,4 +1,6 @@
-﻿import os
+﻿#!python
+# coding: utf-8 
+import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 import cgi, datetime, logging, hashlib
 from string import Template
@@ -110,6 +112,9 @@ class Member(db.Model):
 	Created = db.DateTimeProperty(auto_now_add=True)
 	isAdmin = db.BooleanProperty(default=False)
 
+	def firstname(self):
+		return str(self.Firstname)
+
 	def memberConversionLevel(self):
 		progress = self.getConversionProgress()
 		if progress == 100: return "complete"
@@ -126,27 +131,27 @@ class Member(db.Model):
 			acts = []
 			acts.append(MemberConversionAct(
 				"uploadedProfilePhoto",
-				"Upload a profile photo",
-				"You uploaded a profile photo",
-				10,
+				_("Upload a profile photo"),
+				_("You uploaded a profile photo"),
+				1,
 				(self.ProfilePhoto != None)))
 			acts.append(MemberConversionAct(
 				"startedReadingABook",
-				"Start reading a book",
-				"You started reading a book",
-				7,
+				_("Start reading a book"),
+				_("You started reading a book"),
+				1,
 				(len(self.Bookmarks.fetch(1))>0)))
 			acts.append(MemberConversionAct(
 				"wroteAboutHimself",
-				"Say a few words about yourself in your profile",
-				"You said a few things about yourself",
-				4,
+				_("Say a few words about yourself in your profile"),
+				_("You said a few things about yourself"),
+				1,
 				(self.About != None)))
 			acts.append(MemberConversionAct(
 				"inviteSomeone",
-				"Invite a friend to join Wrook",
-				"You invited a friend to join Wrook",
-				4,
+				_("Invite a friend to join Wrook"),
+				_("You invited a friend to join Wrook"),
+				1,
 				(len(self.SentInvites.fetch(1))>0)))
 			memcache.add(cacheKey, acts)
 		return acts
@@ -158,7 +163,6 @@ class Member(db.Model):
 		cacheKey = "wrookMemberConversionProgress-%s" % self.key()
 		progress = memcache.get(cacheKey)
 		if progress == None:
-			progress = 99
 			totalProgress = 0
 			maxProgress = 0
 			acts = self.getConversionActs()

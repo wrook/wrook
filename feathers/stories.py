@@ -1,4 +1,4 @@
-import os
+﻿import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from django.utils import simplejson
 from google.appengine.ext import db

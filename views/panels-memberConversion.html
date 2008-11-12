@@ -1,0 +1,37 @@
+{% load i18n %}
+{% ifnotequal currentMember.memberConversionLevel "none" %}
+	<div class="sidebarPanel">
+		<h3>{% trans "A few suggestions" %}</h3>
+		<div class="progressBar">
+			<div class="completed" style="width:{{currentMember.getConversionProgress}}%"></div>
+		</div>
+{% ifequal currentMember.memberConversionLevel "low" %}
+{% blocktrans with currentMember.getConversionProgress as progress %}
+<p>
+Up to now you have tried <strong>{{ progress }}&#37;</strong> of our features! <strong><a href="/Suggestions">Try more...</a></strong>
+</p>
+{% endblocktrans %}
+{% endifequal %}
+{% ifequal currentMember.memberConversionLevel "medium" %}
+{% blocktrans with currentMember.getConversionProgress as progress %}
+<p>
+Your making progress! Your have already used <strong>{{ progress }}&#37;</strong> of wrook! <strong><a href="/Suggestions">Try a few more...</a></strong>
+</p>
+{% endblocktrans %}
+{% endifequal %}
+{% ifequal currentMember.memberConversionLevel "high" %}
+{% blocktrans with currentMember.getConversionProgressLeft as progressLeft %}
+<p>
+Excellent! You only have <strong>{{ progressLeft }}&#37;</strong> left to try! <strong><a href="/Suggestions">A few last things...</a></strong>
+</p>
+{% endblocktrans %}
+{% endifequal %}
+{% ifequal currentMember.memberConversionLevel "complete" %}
+{% blocktrans %}
+<p>
+Wow! Your seem to have tried all of our features, <strong><a href="/Suggestions">Thank you and...</a></strong>
+</p>
+{% endblocktrans %}
+{% endifequal %}
+	</div>
+{% endifnotequal %}
