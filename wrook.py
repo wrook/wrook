@@ -1,5 +1,7 @@
-﻿#!python
-# coding: utf-8 
+#!python
+# coding: utf-8
+'''
+'''
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 import sys, cgi, datetime, logging, urllib, hashlib, types
@@ -621,7 +623,7 @@ class Join(WrookRequestHandler):
 				PreferedLanguage = preferedLanguage,
 				)
 			member.put()
-			member.resetPassword()
+			member.resetPassword(self.AppConfig.EncryptionKey)
 			member.sendPassword()
 			if invite:
 				invite.AcceptedMember = member
@@ -741,11 +743,17 @@ class AccountChangePassword(WrookRequestHandler):
 			self.setVisitedMember(self.CurrentMember)
 			oldPassword = self.request.get("oldPassword")
 			newPassword = self.request.get("newPassword")
-			if oldPassword == self.CurrentMember.Password and newPassword:
-				self.CurrentMember.Password = newPassword
-				self.CurrentMember.put()
-				self.CurrentMember.flushCache()
-				self.redirect("/Account/View")
+			oldEncryptedPassword = self.CurrentMember.getEncryptedPassword(oldPassword, self.AppConfig.EncryptionKey)
+			if oldEncryptedPassword == self.CurrentMember.Password and newPassword:
+				passwordChanged = self.CurrentMember.setPassword(newPassword, self.AppConfig.EncryptionKey)
+				if passwordChanged:
+					self.CurrentMember.flushCache()
+					self.redirect("/Account/View")
+				else:
+					self.Model.update({
+						'error': _("Un unforseen error occured! Your password could not be changed. You should contact the site administrator about this problem.")
+						})
+					self.render('views/account-changePassword.html')
 			else:
 				self.Model.update({
 					'error': _("Changing password failed! You have either not entered a new password or the old one does not match.")
@@ -901,7 +909,7 @@ class ResetPassword(WrookRequestHandler):
 		if key:
 			member = membership.Member.get(key)
 			if member:
-				member.resetPassword()
+				member.resetPassword(self.AppConfig.EncryptionKey)
 				member.sendPassword()
 				self.Model.update({"member": member})
 				self.redirect('/PasswordSent/%s' % member.key())
@@ -915,7 +923,7 @@ class ResetPassword(WrookRequestHandler):
 			if usernameOrEmail:
 				member = membership.getMemberFromCredentials(usernameOrEmail)
 				if member:
-					member.resetPassword()
+					member.resetPassword(self.AppConfig.EncryptionKey)
 					member.sendPassword()
 					self.Model.update({"member": member})
 					self.redirect('/PasswordSent/%s' % member.key())
@@ -1696,6 +1704,7 @@ picnikKey = "eb44efec693047ac4f4b2a429bc0be5a" # Developper Key for the Picnik A
 
 class WrookAppConfig(db.Expando):
 	DefaultCover = db.ReferenceProperty(Cover, verbose_name=_("Default cover"))
+	EncryptionKey = db.StringProperty(verbose_name=_("Encryption key")) # Used when a scecret key is needed for encrypting passwords and other data
 
 def getWrookAppConfig():
 	wrookAppConfig = memcache.get("wrookAppConfig")

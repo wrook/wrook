@@ -1,5 +1,9 @@
 ﻿#!python
 # coding: utf-8 
+"""
+MEMBERSHIP MODULE (FEATHERS FRAMEWORK)
+The membership module contains
+"""
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 import cgi, datetime, logging, hashlib
@@ -41,19 +45,20 @@ def getMemberFromCredentials(username): # Username or Email
 	memcache.add(cacheKey, member)
 	return member
 
-
+"""
+Get the currently authentified member from the encrypted credentials in the cookies.
+"""
+#Refactor: This should take the username and creds in param.... not the request handler
 def loginFromCookies(requestHandler):
+	# Get the member either from his username or email address
 	member = getMemberFromCredentials(requestHandler.request.cookies.get('username', ''))
-	if not member:
-		return None
-	else:
-		credentialsHash = requestHandler.request.cookies.get('credentialsHash', '')
-		newCredentialsHash = hashlib.md5("%s"+member.Password % member.key()).hexdigest()
-		if credentialsHash != newCredentialsHash:
-			member.cancelLogin(requestHandler)
-			return None
-		else:
+	if member:
+		# If the encrypted password match with the cookie, the login is considered successfull
+		if requestHandler.request.cookies.get('credentialsHash', '') == member.Password:
 			return member
+	# If not succeeded, clear the invalid cookie
+	logout(requestHandler)
+	return None
 
 class LoginResult():
 	def __init__(self, ErrorCode, ErrorMessage, Member):
@@ -69,7 +74,7 @@ def memberLogin(requestHandler, username, password):
 		if not member.Password:
 			return LoginResult(2, _('Your account does not have a password. Use the "Reset password" option to create a new one.'), None)
 		else:
-			if member.Password != password:
+			if member.Password != member.getEncryptedPassword(password, requestHandler.AppConfig.EncryptionKey):
 				return LoginResult(1, _("Wrong username or bad password."), None)
 	member.login(requestHandler)
 	return LoginResult(0, "", Member)
@@ -92,7 +97,12 @@ class MemberConversionAct:
 		self.AfterLabel = afterLabel
 		self.Points = points
 		self.Done = done
-
+"""
+Among other things, the member entity contains:
+- Personnaly identifiable informations (firstname, lastname)
+- Some basic profile details (email, language, gender)
+- and the credentials (Username, Password
+"""
 class Member(db.Model):
 	Username = db.StringProperty(default="...", required=True)
 	Email = db.EmailProperty(default="...", required=True)
@@ -110,6 +120,25 @@ class Member(db.Model):
 	isAuthor = db.BooleanProperty(default=False)
 	Created = db.DateTimeProperty(auto_now_add=True)
 	isAdmin = db.BooleanProperty(default=False)
+
+	"""Encrypt and set a new password on the user."""
+	# Refactor: This method should be implemented as a setter on the password property
+	def setPassword(self, password, secretEncryptionKey):
+		# Store the encrypted password if one is successfully obtained
+		encryptedPassword = self.getEncryptedPassword(password, secretEncryptionKey)
+		if encryptedPassword:
+			self.Password = encryptedPassword
+			self.put()
+			return True
+		else: return False;
+
+	"""Return an MD5 encrypted password built with the password, the member key and the secret site key."""
+	def getEncryptedPassword(self, password, secretEncryptionKey):
+		# If a password is not provided, None is returned
+		if len(password)>0 and len(secretEncryptionKey)>0:
+			# Encrypts the password with the unique member key and a secreat site key.
+			return hashlib.md5("%s-%s-%s" % (secretEncryptionKey, self.key(), password)).hexdigest()
+		else: return None
 
 	def firstname(self):
 		return str(self.Firstname)
@@ -173,10 +202,11 @@ class Member(db.Model):
 			progress = progress
 			memcache.add(cacheKey, progress)
 		return progress
-		
 
+	"""Flush the caching entries relating to the member."""
 	def flushCache(self):
 		memcache.delete("wrookMember-%s" % self.Username)
+		#Refactor: These thumbnail keys should not be needed if the image server is well built
 		memcache.delete("profilePhotoThumb30-%s" % self.key())
 		memcache.delete("profilePhotoThumb50-%s" % self.key())
 		memcache.delete("profilePhotoThumb80-%s" % self.key())
@@ -203,22 +233,27 @@ class Member(db.Model):
 		if self.Gender == "female": return _("Female")
 		else: return ""
 
+	#Refactor: This practice is unsecure and should be redone
 	def login(self, requestHandler):
-		credentialsHash = hashlib.md5("%s"+self.Password % self.key()).hexdigest()
-		requestHandler.response.headers.add_header('Set-Cookie', 'credentialsHash=%s; expires=Fri, 31-Dec-2020 23:59:59 GMT' % credentialsHash)
+		requestHandler.response.headers.add_header('Set-Cookie', 'credentialsHash=%s; expires=Fri, 31-Dec-2020 23:59:59 GMT' % self.Password)
 		requestHandler.response.headers.add_header('Set-Cookie', 'username=%s; expires=Fri, 31-Dec-2020 23:59:59 GMT' % self.Username)
 
-	def resetPassword(self):
-		self.Password = utils.nicepass()
+		"""Set a new automatically generated password, and send this new password by email"""
+	def resetPassword(self, secretEncryptionKey):
+		password = utils.nicepass()
+		self.setPassword(password, secretEncryptionKey)
+		self.sendPassword(password)
 		self.put()
 
-	def sendPassword(self):
+	"""Sends a newly generated password to the user via email address"""
+	#Refactor: This is an potentially unsecure feautre, this should be changed!
+	def sendPassword(self, password):
 		data = {
 			"firstname": self.Firstname,
 			"lastname": self.Lastname,
-			"password": self.Password
+			"password": password
 			}
-		messageTemplate = Template(_("""
+		messageTemplate = Template(_('''
 Hello $firstname $lastname,
 
 Here is your Wrook password: $password
@@ -231,7 +266,7 @@ Have a good day!
 The Wrook Team
 http://www.wrook.org
 
-"""))
+'''))
 		message = mail.EmailMessage(
 			sender = "admin@wrook.org",
 			subject = _("About your Wrook.org account!"),
@@ -240,11 +275,6 @@ http://www.wrook.org
 			body = messageTemplate.safe_substitute(data)
 			)
 		message.send()
-
-	def cancelLogin(self, requestHandler):
-		credentialsHash = hashlib.md5("%s"+self.Password % self.key()).hexdigest()
-		requestHandler.response.headers.add_header('Set-Cookie', 'credentialsHash=;')
-		requestHandler.response.headers.add_header('Set-Cookie', 'username=;')
 
 	def isNew(self):
 		booksCount = self.Books.all().count()
@@ -321,7 +351,7 @@ class Invite(db.Expando):
 		else:
 			return self.inviteTemplate.safe_substitute(inviteData)
 
-	inviteTemplateWithMessage = Template(_("""
+	inviteTemplateWithMessage = Template(_('''
 Hello $firstname $lastname,
 
 $senderName is inviting you to join the Wrook community.
@@ -337,9 +367,9 @@ http://www.wrook.org/Join/$inviteKey
 
 Thank you,
 The Wrook Team
-"""))
+'''))
 
-	inviteTemplate = Template(_("""
+	inviteTemplate = Template(_('''
 Hello $firstname $lastname,
 
 $senderName is inviting you to join the Wrook community.
@@ -352,7 +382,7 @@ http://www.wrook.org/Join/$inviteKey
 
 Thank you,
 The Wrook Team
-"""))
+'''))
 
 
 class Invites(webapp.RequestHandler):
@@ -409,11 +439,11 @@ class InviteEdit(webapp.RequestHandler):
 				if self.request.get("doDiscard"):
 					invite.Status = "discarded"
 					invite.put()
-					self.redirect('/Invites')
+					self.redirect("/Invites")
 					return
 				if self.request.get("doDelete"):
 					invite.delete()
-					self.redirect('/Invites')
+					self.redirect("/Invites")
 					return
 				form = InviteForm(data=self.request.POST, instance=invite)
 				if form.is_valid() and self.request.get("doSend"):
