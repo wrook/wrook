@@ -10,9 +10,15 @@
 	<h2>
 		{% trans "What's new" %}
 	</h2>
-	<div class="storyPosts">
-		{% for post in posts %}{% include "part-stories.html" %}{% endfor %}
-	</div>
+	{% if posts %}
+		<div class="storyPosts">
+			{% for post in posts %}{% include "part-stories.html" %}{% endfor %}
+		</div>
+	{% else %}
+		<div>
+		{% trans "There is no activity to show!" %}
+		</div>
+	{% endif %}
 {% endblock %}
 
 {% block sidebar %}
@@ -21,8 +27,8 @@
 		<div class="sidebarMenu">
 			<ul>
 				<li><a href="/Books/Edit/">{% trans "Start a new book" %}</a></li>
-				<li><a href="/Members/{{ currentMember.key }}">{% trans "Your public profile" %}</a></li>
-				<li><a href="/Account/View">{% trans "Your account settings" %}</a></li>
+				<li><a href="/Members/{{ currentMember.key }}">{% trans "Public profile" %}</a></li>
+				<li><a href="/Account/View">{% trans "Account settings" %}</a></li>
 			</ul>
 		</div>
 	</div>
