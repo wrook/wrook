@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>feathers.feed</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.wrook.org/">Wrook API documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;feathers ::
+        Module&nbsp;feed
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="feathers.feed-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="feathers.feed-module.html">Module feathers.feed</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">google</tt><tt class="py-op">.</tt><tt class="py-name">appengine</tt><tt class="py-op">.</tt><tt class="py-name">ext</tt> <tt class="py-keyword">import</tt> <tt class="py-name">db</tt><tt class="py-op">,</tt> <tt id="link-0" class="py-name" targets="Module feathers.webapp=feathers.webapp-module.html"><a title="feathers.webapp" class="py-name" href="#" onclick="return doclink('link-0', 'webapp', 'link-0');">webapp</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">feathers</tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module feathers.membership=feathers.membership-module.html"><a title="feathers.membership" class="py-name" href="#" onclick="return doclink('link-1', 'membership', 'link-1');">membership</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"># FEED Module for Google App Engine</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment"># Story types and descriptions:</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - An author has revised a chapter you had already read</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - An author has published a new chapter and you can continue your reading</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - An author has changed the overall editing stage of his book</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - A reader has left feedback on your book/chapter</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - You have gained a new reader</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - You have gained a new reader for book XXX</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - Reader has finished reading your book</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - A friend has accepted your invitation</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - A member you had invited has joined Wrook</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - An author you have read has started a new books</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - A book you where reading has been deleted</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - The wrook team has released a new feature</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - Special announcement from the Wrook Team</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-comment"># Typical Expando properties shared by StoryInstance and StoryFeedPost</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - RefWhen</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - RefMember</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - RefReader</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - RefAuthor</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - RefBook</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - RefChapter</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - RefRevision</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - RefBookmark</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - RefMessage</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - RefInvite</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - RefFeature</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - RefVote</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># - RefTheme</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="createStoryOccurence"></a><div id="createStoryOccurence-def"><a name="L36"></a><tt class="py-lineno">36</tt> <a class="py-toggle" href="#" id="createStoryOccurence-toggle" onclick="return toggle('createStoryOccurence');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="feathers.feed-module.html#createStoryOccurence">createStoryOccurence</a><tt class="py-op">(</tt><tt class="py-param">StoryClass</tt><tt class="py-op">,</tt> <tt class="py-param">referenceValues</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-comment">#factory pattern to instanciate a StoryOccurence</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-name">storyOccurence</tt> <tt class="py-op">=</tt> <tt id="link-2" class="py-name" targets="Class feathers.feed.StoryOccurence=feathers.feed.StoryOccurence-class.html,Variable feathers.feed.StoryPost.StoryOccurence=feathers.feed.StoryPost-class.html#StoryOccurence,Class feathers.stories.StoryOccurence=feathers.stories.StoryOccurence-class.html,Variable feathers.stories.StoryPost.StoryOccurence=feathers.stories.StoryPost-class.html#StoryOccurence"><a title="feathers.feed.StoryOccurence
+feathers.feed.StoryPost.StoryOccurence
+feathers.stories.StoryOccurence
+feathers.stories.StoryPost.StoryOccurence" class="py-name" href="#" onclick="return doclink('link-2', 'StoryOccurence', 'link-2');">StoryOccurence</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-name">storyOccurence</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Class feathers.feed.Story=feathers.feed.Story-class.html,Variable feathers.feed.StoryOccurence.Story=feathers.feed.StoryOccurence-class.html#Story,Variable feathers.feed.StoryPost.Story=feathers.feed.StoryPost-class.html#Story,Class feathers.stories.Story=feathers.stories.Story-class.html,Variable feathers.stories.StoryOccurence.Story=feathers.stories.StoryOccurence-class.html#Story,Variable feathers.stories.StoryPost.Story=feathers.stories.StoryPost-class.html#Story"><a title="feathers.feed.Story
+feathers.feed.StoryOccurence.Story
+feathers.feed.StoryPost.Story
+feathers.stories.Story
+feathers.stories.StoryOccurence.Story
+feathers.stories.StoryPost.Story" class="py-name" href="#" onclick="return doclink('link-3', 'Story', 'link-3');">Story</a></tt> <tt class="py-op">=</tt> <tt class="py-name">StoryClass</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">storyOccurence</tt> </tt>
+</div><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="Story"></a><div id="Story-def"><a name="L41"></a><tt class="py-lineno">41</tt> <a class="py-toggle" href="#" id="Story-toggle" onclick="return toggle('Story');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="feathers.feed.Story-class.html">Story</a><tt class="py-op">:</tt> </tt>
+</div><div id="Story-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Story-expanded"><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt id="link-4" class="py-name" targets="Variable feathers.feed.Story.ID=feathers.feed.Story-class.html#ID,Variable feathers.stories.Story.ID=feathers.stories.Story-class.html#ID,Variable wrook.StoryMemberPostMessageToABook.ID=wrook.StoryMemberPostMessageToABook-class.html#ID,Variable wrook.StoryMemberStartReadingBook.ID=wrook.StoryMemberStartReadingBook-class.html#ID,Variable wrook.StorySiteCacheIsFlushed.ID=wrook.StorySiteCacheIsFlushed-class.html#ID"><a title="feathers.feed.Story.ID
+feathers.stories.Story.ID
+wrook.StoryMemberPostMessageToABook.ID
+wrook.StoryMemberStartReadingBook.ID
+wrook.StorySiteCacheIsFlushed.ID" class="py-name" href="#" onclick="return doclink('link-4', 'ID', 'link-4');">ID</a></tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt id="link-5" class="py-name" targets="Variable feathers.feed.Story.TitleTemplate=feathers.feed.Story-class.html#TitleTemplate,Variable feathers.stories.Story.TitleTemplate=feathers.stories.Story-class.html#TitleTemplate,Variable wrook.StoryMemberPostMessageToABook.TitleTemplate=wrook.StoryMemberPostMessageToABook-class.html#TitleTemplate,Variable wrook.StoryMemberStartReadingBook.TitleTemplate=wrook.StoryMemberStartReadingBook-class.html#TitleTemplate,Variable wrook.StorySiteCacheIsFlushed.TitleTemplate=wrook.StorySiteCacheIsFlushed-class.html#TitleTemplate"><a title="feathers.feed.Story.TitleTemplate
+feathers.stories.Story.TitleTemplate
+wrook.StoryMemberPostMessageToABook.TitleTemplate
+wrook.StoryMemberStartReadingBook.TitleTemplate
+wrook.StorySiteCacheIsFlushed.TitleTemplate" class="py-name" href="#" onclick="return doclink('link-5', 'TitleTemplate', 'link-5');">TitleTemplate</a></tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt id="link-6" class="py-name" targets="Variable feathers.feed.Story.BodyTemplate=feathers.feed.Story-class.html#BodyTemplate,Variable feathers.stories.Story.BodyTemplate=feathers.stories.Story-class.html#BodyTemplate,Variable wrook.StoryMemberPostMessageToABook.BodyTemplate=wrook.StoryMemberPostMessageToABook-class.html#BodyTemplate,Variable wrook.StoryMemberStartReadingBook.BodyTemplate=wrook.StoryMemberStartReadingBook-class.html#BodyTemplate,Variable wrook.StorySiteCacheIsFlushed.BodyTemplate=wrook.StorySiteCacheIsFlushed-class.html#BodyTemplate"><a title="feathers.feed.Story.BodyTemplate
+feathers.stories.Story.BodyTemplate
+wrook.StoryMemberPostMessageToABook.BodyTemplate
+wrook.StoryMemberStartReadingBook.BodyTemplate
+wrook.StorySiteCacheIsFlushed.BodyTemplate" class="py-name" href="#" onclick="return doclink('link-6', 'BodyTemplate', 'link-6');">BodyTemplate</a></tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt id="link-7" class="py-name" targets="Variable feathers.feed.Story.Icon=feathers.feed.Story-class.html#Icon,Variable feathers.feed.StoryOccurence.Icon=feathers.feed.StoryOccurence-class.html#Icon,Variable feathers.feed.StoryPost.Icon=feathers.feed.StoryPost-class.html#Icon,Variable feathers.stories.Story.Icon=feathers.stories.Story-class.html#Icon,Variable feathers.stories.StoryOccurence.Icon=feathers.stories.StoryOccurence-class.html#Icon,Variable feathers.stories.StoryPost.Icon=feathers.stories.StoryPost-class.html#Icon,Variable wrook.StoryMemberPostMessageToABook.Icon=wrook.StoryMemberPostMessageToABook-class.html#Icon,Variable wrook.StoryMemberStartReadingBook.Icon=wrook.StoryMemberStartReadingBook-class.html#Icon,Variable wrook.StorySiteCacheIsFlushed.Icon=wrook.StorySiteCacheIsFlushed-class.html#Icon"><a title="feathers.feed.Story.Icon
+feathers.feed.StoryOccurence.Icon
+feathers.feed.StoryPost.Icon
+feathers.stories.Story.Icon
+feathers.stories.StoryOccurence.Icon
+feathers.stories.StoryPost.Icon
+wrook.StoryMemberPostMessageToABook.Icon
+wrook.StoryMemberStartReadingBook.Icon
+wrook.StorySiteCacheIsFlushed.Icon" class="py-name" href="#" onclick="return doclink('link-7', 'Icon', 'link-7');">Icon</a></tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt>  </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"> </tt>
+<a name="Story.getTitle"></a><div id="Story.getTitle-def"><a name="L47"></a><tt class="py-lineno">47</tt> <a class="py-toggle" href="#" id="Story.getTitle-toggle" onclick="return toggle('Story.getTitle');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="feathers.feed.Story-class.html#getTitle">getTitle</a><tt class="py-op">(</tt><tt class="py-param">StoryOccurence</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Story.getTitle-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Story.getTitle-expanded"><a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">                <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">                 </tt>
+<a name="Story.getBody"></a><div id="Story.getBody-def"><a name="L50"></a><tt class="py-lineno">50</tt> <a class="py-toggle" href="#" id="Story.getBody-toggle" onclick="return toggle('Story.getBody');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="feathers.feed.Story-class.html#getBody">getBody</a><tt class="py-op">(</tt><tt class="py-param">StoryOccurence</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Story.getBody-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Story.getBody-expanded"><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">                <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">                 </tt>
+<a name="Story.publish"></a><div id="Story.publish-def"><a name="L53"></a><tt class="py-lineno">53</tt> <a class="py-toggle" href="#" id="Story.publish-toggle" onclick="return toggle('Story.publish');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="feathers.feed.Story-class.html#publish">publish</a><tt class="py-op">(</tt><tt class="py-param">StoryOccurence</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-comment">#Start or continue the publishing of StoryFeedPosts</tt> </tt>
+</div><a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">                <tt class="py-keyword">pass</tt> </tt>
+</div></div><a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"> </tt>
+<a name="StoryOccurence"></a><div id="StoryOccurence-def"><a name="L56"></a><tt class="py-lineno">56</tt> <a class="py-toggle" href="#" id="StoryOccurence-toggle" onclick="return toggle('StoryOccurence');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="feathers.feed.StoryOccurence-class.html">StoryOccurence</a><tt class="py-op">(</tt><tt class="py-base-class">db</tt><tt class="py-op">.</tt><tt class="py-base-class">Expando</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StoryOccurence-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="StoryOccurence-expanded"><a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">        <tt id="link-8" class="py-name"><a title="feathers.feed.Story
+feathers.feed.StoryOccurence.Story
+feathers.feed.StoryPost.Story
+feathers.stories.Story
+feathers.stories.StoryOccurence.Story
+feathers.stories.StoryPost.Story" class="py-name" href="#" onclick="return doclink('link-8', 'Story', 'link-3');">Story</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> <tt class="py-comment">#The reference story of this occurence</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt id="link-9" class="py-name" targets="Variable feathers.feed.StoryOccurence.StoryID=feathers.feed.StoryOccurence-class.html#StoryID,Variable feathers.feed.StoryPost.StoryID=feathers.feed.StoryPost-class.html#StoryID,Variable feathers.stories.StoryOccurence.StoryID=feathers.stories.StoryOccurence-class.html#StoryID,Variable feathers.stories.StoryPost.StoryID=feathers.stories.StoryPost-class.html#StoryID"><a title="feathers.feed.StoryOccurence.StoryID
+feathers.feed.StoryPost.StoryID
+feathers.stories.StoryOccurence.StoryID
+feathers.stories.StoryPost.StoryID" class="py-name" href="#" onclick="return doclink('link-9', 'StoryID', 'link-9');">StoryID</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">StringProperty</tt><tt class="py-op">(</tt><tt class="py-name">required</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">        <tt id="link-10" class="py-name" targets="Variable feathers.customize.Theme.Title=feathers.customize.Theme-class.html#Title,Variable feathers.feed.StoryOccurence.Title=feathers.feed.StoryOccurence-class.html#Title,Variable feathers.feed.StoryPost.Title=feathers.feed.StoryPost-class.html#Title,Variable feathers.labs.Feature.Title=feathers.labs.Feature-class.html#Title,Variable feathers.stories.StoryOccurence.Title=feathers.stories.StoryOccurence-class.html#Title,Variable feathers.stories.StoryPost.Title=feathers.stories.StoryPost-class.html#Title,Variable feathers.talk.Topic.Title=feathers.talk.Topic-class.html#Title,Variable licensing.LicenseType.Title=licensing.LicenseType-class.html#Title,Variable wrook.Book.Title=wrook.Book-class.html#Title,Variable wrook.Chapter.Title=wrook.Chapter-class.html#Title,Variable wrook.Command.Title=wrook.Command-class.html#Title,Variable wrook.Moment.Title=wrook.Moment-class.html#Title"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-10', 'Title', 'link-10');">Title</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">StringProperty</tt><tt class="py-op">(</tt><tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">        <tt id="link-11" class="py-name" targets="Variable feathers.feed.StoryOccurence.Body=feathers.feed.StoryOccurence-class.html#Body,Variable feathers.feed.StoryPost.Body=feathers.feed.StoryPost-class.html#Body,Variable feathers.stories.StoryOccurence.Body=feathers.stories.StoryOccurence-class.html#Body,Variable feathers.stories.StoryPost.Body=feathers.stories.StoryPost-class.html#Body,Variable feathers.talk.Post.Body=feathers.talk.Post-class.html#Body"><a title="feathers.feed.StoryOccurence.Body
+feathers.feed.StoryPost.Body
+feathers.stories.StoryOccurence.Body
+feathers.stories.StoryPost.Body
+feathers.talk.Post.Body" class="py-name" href="#" onclick="return doclink('link-11', 'Body', 'link-11');">Body</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">TextProperty</tt><tt class="py-op">(</tt><tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">        <tt id="link-12" class="py-name"><a title="feathers.feed.Story.Icon
+feathers.feed.StoryOccurence.Icon
+feathers.feed.StoryPost.Icon
+feathers.stories.Story.Icon
+feathers.stories.StoryOccurence.Icon
+feathers.stories.StoryPost.Icon
+wrook.StoryMemberPostMessageToABook.Icon
+wrook.StoryMemberStartReadingBook.Icon
+wrook.StorySiteCacheIsFlushed.Icon" class="py-name" href="#" onclick="return doclink('link-12', 'Icon', 'link-7');">Icon</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">StringProperty</tt><tt class="py-op">(</tt><tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">        <tt id="link-13" class="py-name" targets="Variable feathers.feed.StoryOccurence.WhenOccured=feathers.feed.StoryOccurence-class.html#WhenOccured,Variable feathers.feed.StoryPost.WhenOccured=feathers.feed.StoryPost-class.html#WhenOccured,Variable feathers.stories.StoryOccurence.WhenOccured=feathers.stories.StoryOccurence-class.html#WhenOccured,Variable feathers.stories.StoryPost.WhenOccured=feathers.stories.StoryPost-class.html#WhenOccured"><a title="feathers.feed.StoryOccurence.WhenOccured
+feathers.feed.StoryPost.WhenOccured
+feathers.stories.StoryOccurence.WhenOccured
+feathers.stories.StoryPost.WhenOccured" class="py-name" href="#" onclick="return doclink('link-13', 'WhenOccured', 'link-13');">WhenOccured</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">DateTimeProperty</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">        <tt id="link-14" class="py-name" targets="Variable feathers.feed.StoryOccurence.WhenCreated=feathers.feed.StoryOccurence-class.html#WhenCreated,Variable feathers.stories.StoryOccurence.WhenCreated=feathers.stories.StoryOccurence-class.html#WhenCreated"><a title="feathers.feed.StoryOccurence.WhenCreated
+feathers.stories.StoryOccurence.WhenCreated" class="py-name" href="#" onclick="return doclink('link-14', 'WhenCreated', 'link-14');">WhenCreated</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">DateTimeProperty</tt><tt class="py-op">(</tt><tt class="py-name">auto_now_add</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">        <tt id="link-15" class="py-name" targets="Variable feathers.feed.StoryOccurence.lastPublishedMemberTimestamp=feathers.feed.StoryOccurence-class.html#lastPublishedMemberTimestamp,Variable feathers.stories.StoryOccurence.lastPublishedMemberTimestamp=feathers.stories.StoryOccurence-class.html#lastPublishedMemberTimestamp"><a title="feathers.feed.StoryOccurence.lastPublishedMemberTimestamp
+feathers.stories.StoryOccurence.lastPublishedMemberTimestamp" class="py-name" href="#" onclick="return doclink('link-15', 'lastPublishedMemberTimestamp', 'link-15');">lastPublishedMemberTimestamp</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">DateTimeProperty</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">        <tt id="link-16" class="py-name" targets="Variable feathers.feed.StoryOccurence.isDonePublishing=feathers.feed.StoryOccurence-class.html#isDonePublishing,Variable feathers.stories.StoryOccurence.isDonePublishing=feathers.stories.StoryOccurence-class.html#isDonePublishing"><a title="feathers.feed.StoryOccurence.isDonePublishing
+feathers.stories.StoryOccurence.isDonePublishing" class="py-name" href="#" onclick="return doclink('link-16', 'isDonePublishing', 'link-16');">isDonePublishing</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">BooleanProperty</tt><tt class="py-op">(</tt><tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"> </tt>
+<a name="StoryOccurence.update"></a><div id="StoryOccurence.update-def"><a name="L67"></a><tt class="py-lineno">67</tt> <a class="py-toggle" href="#" id="StoryOccurence.update-toggle" onclick="return toggle('StoryOccurence.update');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="feathers.feed.StoryOccurence-class.html#update">update</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-comment"># updates the TitleTemplate and BodyTemplate according to the new reference values</tt> </tt>
+</div><a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">                <tt class="py-keyword">pass</tt> </tt>
+</div><a name="StoryOccurence.publish"></a><div id="StoryOccurence.publish-def"><a name="L69"></a><tt class="py-lineno">69</tt> <a class="py-toggle" href="#" id="StoryOccurence.publish-toggle" onclick="return toggle('StoryOccurence.publish');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="feathers.feed.StoryOccurence-class.html#publish">publish</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StoryOccurence.publish-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="StoryOccurence.publish-expanded"><a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">                <tt class="py-keyword">pass</tt> </tt>
+</div></div><a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line"> </tt>
+<a name="StoryPost"></a><div id="StoryPost-def"><a name="L72"></a><tt class="py-lineno">72</tt> <a class="py-toggle" href="#" id="StoryPost-toggle" onclick="return toggle('StoryPost');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="feathers.feed.StoryPost-class.html">StoryPost</a><tt class="py-op">(</tt><tt class="py-base-class">db</tt><tt class="py-op">.</tt><tt class="py-base-class">Expando</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StoryPost-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="StoryPost-expanded"><a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">        <tt id="link-17" class="py-name"><a title="feathers.feed.Story
+feathers.feed.StoryOccurence.Story
+feathers.feed.StoryPost.Story
+feathers.stories.Story
+feathers.stories.StoryOccurence.Story
+feathers.stories.StoryPost.Story" class="py-name" href="#" onclick="return doclink('link-17', 'Story', 'link-3');">Story</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> <tt class="py-comment">#The reference story of this occurence</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">        <tt id="link-18" class="py-name"><a title="feathers.feed.StoryOccurence
+feathers.feed.StoryPost.StoryOccurence
+feathers.stories.StoryOccurence
+feathers.stories.StoryPost.StoryOccurence" class="py-name" href="#" onclick="return doclink('link-18', 'StoryOccurence', 'link-2');">StoryOccurence</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">ReferenceProperty</tt><tt class="py-op">(</tt><tt id="link-19" class="py-name"><a title="feathers.feed.StoryOccurence
+feathers.feed.StoryPost.StoryOccurence
+feathers.stories.StoryOccurence
+feathers.stories.StoryPost.StoryOccurence" class="py-name" href="#" onclick="return doclink('link-19', 'StoryOccurence', 'link-2');">StoryOccurence</a></tt><tt class="py-op">,</tt> <tt class="py-name">collection_name</tt><tt class="py-op">=</tt><tt class="py-string">"FeedPosts"</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">        <tt id="link-20" class="py-name"><a title="feathers.feed.StoryOccurence.StoryID
+feathers.feed.StoryPost.StoryID
+feathers.stories.StoryOccurence.StoryID
+feathers.stories.StoryPost.StoryID" class="py-name" href="#" onclick="return doclink('link-20', 'StoryID', 'link-9');">StoryID</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">StringProperty</tt><tt class="py-op">(</tt><tt class="py-name">required</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">        <tt id="link-21" class="py-name" targets="Variable feathers.customize.ThemeMemberSelection.Member=feathers.customize.ThemeMemberSelection-class.html#Member,Variable feathers.feed.StoryPost.Member=feathers.feed.StoryPost-class.html#Member,Variable feathers.labs.Vote.Member=feathers.labs.Vote-class.html#Member,Class feathers.membership.Member=feathers.membership.Member-class.html,Variable feathers.stories.StoryPost.Member=feathers.stories.StoryPost-class.html#Member"><a title="feathers.customize.ThemeMemberSelection.Member
+feathers.feed.StoryPost.Member
+feathers.labs.Vote.Member
+feathers.membership.Member
+feathers.stories.StoryPost.Member" class="py-name" href="#" onclick="return doclink('link-21', 'Member', 'link-21');">Member</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">ReferenceProperty</tt><tt class="py-op">(</tt><tt id="link-22" class="py-name"><a title="feathers.membership" class="py-name" href="#" onclick="return doclink('link-22', 'membership', 'link-1');">membership</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="feathers.customize.ThemeMemberSelection.Member
+feathers.feed.StoryPost.Member
+feathers.labs.Vote.Member
+feathers.membership.Member
+feathers.stories.StoryPost.Member" class="py-name" href="#" onclick="return doclink('link-23', 'Member', 'link-21');">Member</a></tt><tt class="py-op">,</tt> <tt class="py-name">collection_name</tt><tt class="py-op">=</tt><tt class="py-string">"FeedPosts"</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">        <tt id="link-24" class="py-name"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-24', 'Title', 'link-10');">Title</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">StringProperty</tt><tt class="py-op">(</tt><tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">        <tt id="link-25" class="py-name"><a title="feathers.feed.StoryOccurence.Body
+feathers.feed.StoryPost.Body
+feathers.stories.StoryOccurence.Body
+feathers.stories.StoryPost.Body
+feathers.talk.Post.Body" class="py-name" href="#" onclick="return doclink('link-25', 'Body', 'link-11');">Body</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">TextProperty</tt><tt class="py-op">(</tt><tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">        <tt id="link-26" class="py-name"><a title="feathers.feed.Story.Icon
+feathers.feed.StoryOccurence.Icon
+feathers.feed.StoryPost.Icon
+feathers.stories.Story.Icon
+feathers.stories.StoryOccurence.Icon
+feathers.stories.StoryPost.Icon
+wrook.StoryMemberPostMessageToABook.Icon
+wrook.StoryMemberStartReadingBook.Icon
+wrook.StorySiteCacheIsFlushed.Icon" class="py-name" href="#" onclick="return doclink('link-26', 'Icon', 'link-7');">Icon</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">StringProperty</tt><tt class="py-op">(</tt><tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">        <tt id="link-27" class="py-name"><a title="feathers.feed.StoryOccurence.WhenOccured
+feathers.feed.StoryPost.WhenOccured
+feathers.stories.StoryOccurence.WhenOccured
+feathers.stories.StoryPost.WhenOccured" class="py-name" href="#" onclick="return doclink('link-27', 'WhenOccured', 'link-13');">WhenOccured</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">DateTimeProperty</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">        <tt id="link-28" class="py-name" targets="Variable feathers.feed.StoryPost.WhenPublished=feathers.feed.StoryPost-class.html#WhenPublished,Variable feathers.stories.StoryPost.WhenPublished=feathers.stories.StoryPost-class.html#WhenPublished"><a title="feathers.feed.StoryPost.WhenPublished
+feathers.stories.StoryPost.WhenPublished" class="py-name" href="#" onclick="return doclink('link-28', 'WhenPublished', 'link-28');">WhenPublished</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">DateTimeProperty</tt><tt class="py-op">(</tt><tt class="py-name">auto_now_add</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">        <tt id="link-29" class="py-name" targets="Variable feathers.feed.StoryPost.Importance=feathers.feed.StoryPost-class.html#Importance,Variable feathers.stories.StoryPost.Importance=feathers.stories.StoryPost-class.html#Importance"><a title="feathers.feed.StoryPost.Importance
+feathers.stories.StoryPost.Importance" class="py-name" href="#" onclick="return doclink('link-29', 'Importance', 'link-29');">Importance</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">IntegerProperty</tt><tt class="py-op">(</tt><tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> <tt class="py-comment">#specific to the each users</tt> </tt>
+</div><a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.wrook.org/">Wrook API documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Nov 15 15:43:10 2008
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+application: wrook
+version: 4
+runtime: python
+api_version: 1
+
+default_expiration: "21d"
+
+handlers:
+- url: /stylesheets
+  static_dir: stylesheets
+  expiration: "21d"
+
+- url: /scripts
+  static_dir: scripts
+  expiration: "21d"
+
+- url: /images
+  static_dir: images
+  expiration: "21d"
+
+- url: /apidoc
+  static_dir: apidoc
+  expiration: "21d"
+
+- url: /
+  script: wrook.py
+
+- url: .*
+  script: wrook.py
+ 
+ 

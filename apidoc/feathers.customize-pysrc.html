@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>feathers.customize</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.wrook.org/">Wrook API documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;feathers ::
+        Module&nbsp;customize
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="feathers.customize-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="feathers.customize-module.html">Module feathers.customize</a></h1>
+<pre class="py-src">
+&#239;&#187;&#191;import os, cgi, datetime, logging
+from google.appengine.api import images, memcache
+from google.appengine.ext import db
+from google.appengine.ext.db import djangoforms
+from django.utils.translation import gettext as _
+from feathers import membership, utils, webapp
+
+
+def URLMappings():
+        return [
+                ('/Themes', ViewThemes),
+                ('/Themes/Select', ThemeSelect),
+                (r'/Themes/Theme/Edit/(.*)', ThemeEditWithImageUpload),
+                (r'/Themes/Theme/BackgroundImage/(.*)', ThemeBackgroundImage),
+                (r'/Themes/Theme/Stylesheet/(.*)', ThemeStylesheet),
+                (r'/Themes/(.*)/MemberSelect', ThemeMemberSelect),
+                (r'/Themes/(.*)', ThemeView)
+        ]
+
+        def __unicode__(self):
+                return self.Title
+
+        def GetStyle(self):
+                return None;
+
+
+class Theme(db.Model):
+        Title = db.StringProperty(verbose_name="Title", default=_("New theme"))
+        Description = db.TextProperty(verbose_name=_("Description"))
+        Created = db.DateTimeProperty(auto_now_add=True, verbose_name=_("Created"))
+        isDefault = db.BooleanProperty(default=False, verbose_name=_("Default theme"))
+        SubmitedBy = db.ReferenceProperty(membership.Member, collection_name="SubmitedThemes", verbose_name=_("Submitd by"))
+        BackgroundImage = db.BlobProperty(verbose_name=("Background image"))
+        BackgroundColor = db.StringProperty(default="#000000", verbose_name=_("Background color"))
+        StyleSource = db.TextProperty(verbose_name=_("Style source code"), default="")
+        isSharedWithEveryone = db.BooleanProperty(default=True, verbose_name=_("Share with everyone"))
+        #Refactor: Still needed ?
+        # StyleSource = db.TextProperty(verbose_name="Style source code", default=
+# """
+# headerBannerImageURL: ;
+# headerBannerRepeatImageURL: ;
+# WallpaperImageURL: ;
+# """)
+
+        def selectForMember(self, member):
+                if member:
+                        selection = ThemeMemberSelection(Member=member, Theme=self)
+                        selection.put()
+                        return selection
+                else: return None
+
+        def __unicode__(self):
+                return self.Title
+
+        def GetStyle(self):
+                return None;
+
+def onRequest(request): # Event triggering to let the host application intervene
+        pass
+
+class ThemeMemberSelection(db.Model):
+        WhenSelected = db.DateTimeProperty(auto_now_add=True, verbose_name=_("When selected"))
+        Member = db.ReferenceProperty(membership.Member, collection_name="ThemeSelections", verbose_name=_("Member"))
+        Theme = db.ReferenceProperty(Theme, collection_name="MemberSelections", verbose_name=_("Theme"))
+
+class ThemeSimpleForm(djangoforms.ModelForm):
+        class Meta:
+                model = Theme
+                fields = ('Title', 'Description', "isSharedWithEveryone", "BackgroundColor")
+
+class ThemeMemberSelect(webapp.RequestHandler):
+        def get(self, key):
+                onRequest(self)
+                if self.CurrentMember:
+                        if key:
+                                theme = Theme.get(key)
+                                if theme:
+                                        currentThemeSelection = self.CurrentMember.currentThemeSelection()
+                                        if currentThemeSelection:
+                                                if (theme.key() != currentThemeSelection.key()):
+                                                        theme.selectForMember(self.CurrentMember)
+                                        else:
+                                                theme.selectForMember(self.CurrentMember)
+                                        self.redirect("/")
+                                else: self.error(500)
+                        else: self.error(404)
+                else: self.requestLogin()
+
+
+class ThemeView(webapp.RequestHandler):
+        def get(self, key):
+                onRequest(self)
+                if self.CurrentMember:
+                        if key:
+                                theme = Theme.get(key)
+                                if theme:
+                                        self.setCurrentTheme(theme)
+                                        canEditTheme = self.CurrentMember.isAdmin or (self.CurrentMember.key() == theme.SubmitedBy.key())
+                                        self.Model.update({
+                                                'canEditTheme': canEditTheme,
+                                                'theme': theme
+                                                })
+                                        self.TemplateBase = os.path.dirname(__file__)
+                                        self.render('views/customize-viewTheme.html')
+                                else: self.error(500)
+                        else: self.error(404)
+                else: self.requestLogin()
+
+class ThemeEdit(webapp.RequestHandler):
+        def get(self, key):
+                onRequest(self)
+                if self.CurrentMember:
+                        if key == "": theme = Theme(SubmitedBy = self.CurrentMember)
+                        else: theme = Theme.get(key) 
+                        form = ThemeForm(instance=theme)
+                        self.Model.update({
+                                'form': form,
+                                'theme': theme
+                                })
+                        self.TemplateBase = os.path.dirname(__file__)
+                        self.render('views/customize-themeEdit.html')
+
+        def post(self, key):
+                onRequest(self)
+                if self.CurrentMember:
+                        if key == "": theme = Theme(SubmitedBy = self.CurrentMember)
+                        else: theme = Theme.get(key) 
+                        if self.request.get("doDelete"):
+                                theme.delete()
+                                self.redirect('/Themes')
+                                return
+                        form = ThemeForm(data=self.request.POST, instance=theme)
+                        if form.is_valid():
+                                # Save the form, and redirect to the view page
+                                entity = form.save(commit=False)
+                                entity.put()
+                                self.redirect('/Themes')
+                        else:
+                                self.Model.update({
+                                        'theme': theme,
+                                        'form': form
+                                        })
+                                self.TemplateBase = os.path.dirname(__file__)
+                                self.render("views/customize-themeEdit.html")
+
+class ThemeEditWithImageUpload(webapp.RequestHandler):
+        def get(self, key):
+                onRequest(self)
+                if self.CurrentMember:
+                        if key == "": theme = Theme(SubmitedBy = self.CurrentMember)
+                        else: theme = Theme.get(key) 
+                        form = ThemeSimpleForm(instance=theme)
+                        self.Model.update({
+                                'form': form,
+                                'theme': theme
+                                })
+                        self.TemplateBase = os.path.dirname(__file__)
+                        self.render('views/customize-themeEdit.html')
+
+        def post(self, key):
+                onRequest(self)
+                if self.CurrentMember:
+                        if key == "": theme = Theme(SubmitedBy = self.CurrentMember)
+                        else: theme = Theme.get(key) 
+                        if self.request.get("doDelete"):
+                                theme.delete()
+                                self.redirect('/Themes')
+                                return
+                        form = ThemeSimpleForm(data=self.request.POST, instance=theme)
+                        if form.is_valid():
+                                imageData = self.request.get('backgroundImageProxy')
+                                # Save the form, and redirect to the view page
+                                entity = form.save(commit=False)
+                                if imageData:
+                                        entity.BackgroundImage = db.Blob(imageData)
+                                entity.put()
+                                self.redirect('/Themes')
+                        else:
+                                self.Model.update({
+                                        'theme': theme,
+                                        'form': form
+                                        })
+                                self.TemplateBase = os.path.dirname(__file__)
+                                self.render("views/customize-themeEdit.html")
+
+class ThemeBackgroundImage(webapp.RequestHandler):
+        def get(self, key):
+                theme = db.get(key)
+                if theme:
+                        paramWidth = self.request.get("width")
+                        if paramWidth == "120":
+                                width = 120
+                                height = 90
+                        elif paramWidth == "240":
+                                width = 240
+                                height = 180
+                        elif paramWidth == "1024":
+                                width = 1024
+                                height = 768
+                        else:
+                                width = 160
+                                height = 120
+                        imageKey = "themeThumb" + str(width) + "-%s" % theme.key()
+                        thumbnailData = memcache.get(imageKey)
+                        thumbnailData = None
+                        if thumbnailData is None:
+                                image = images.Image(theme.BackgroundImage)
+                                image.resize(width, 0)
+                                thumbnailData = image.execute_transforms(output_encoding=images.JPEG)
+                                memcache.add(imageKey, thumbnailData)
+
+                        self.response.headers['content-type'] = "image/png"
+                        self.response.headers['cache-control'] = "public, max-age=1814400" # 21 day cache
+                        self.response.headers["Expires"] = "Thu, 01 Dec 2014 16"
+                        self.response.out.write(thumbnailData)
+                else:
+                        self.error(404)
+
+class ViewThemes(webapp.RequestHandler):
+        def get(self):
+                onRequest(self)
+                if self.CurrentMember:
+                        self.Model.update({
+                                "themes": Theme.all()
+                                })
+                        self.TemplateBase = os.path.dirname(__file__)
+                        self.render("views/customize-viewThemes.html")
+
+class ThemeSelect(webapp.RequestHandler):
+        def get(self):
+                onRequest(self)
+                if self.CurrentMember:
+                        self.Model.update({
+                                "themes": Theme.all(),
+                                "themeUsage": self.request.get("themeUsage"),
+                                "redirect": self.request.get("redirect")
+                                })
+                        self.TemplateBase = os.path.dirname(__file__)
+                        self.render("views/customize-selectTheme.html")
+
+class ThemeStylesheet(webapp.RequestHandler):
+        def get(self, key):
+                onRequest(self)
+                theme = Theme.get(key)
+                self.Model.update(utils.styleSourceToDict(theme.StyleSource))
+                self.response.headers["Content-Type"] = "text/css"
+                self.response.headers['cache-control'] = "public, max-age=75600" #21 day cache
+                self.response.headers["Expires"] = "Thu, 01 Dec 2014 16"
+                self.TemplateBase = os.path.dirname(__file__)
+                self.render('views/customize-theme-stylesheet.css')
+<script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.wrook.org/">Wrook API documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Nov 15 15:43:10 2008
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

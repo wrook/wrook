@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>licensing</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.wrook.org/">Wrook API documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;licensing
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="licensing-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="licensing-module.html">Module licensing</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">WROOK LICENSING MODULE</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring"> </tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">This module controls the licensing aspects of books. It offers the necessary</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">models, methods and license data needed to offer licensing options for books.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">Covered user stories:</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">        - The user selects the type of license for this books</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">        - The user specify that the book is from another author</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">        - When reading a book, the user views the licensing information</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">        - When reading a book, the user follow's a link to find more information about the license</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">google</tt><tt class="py-op">.</tt><tt class="py-name">appengine</tt><tt class="py-op">.</tt><tt class="py-name">ext</tt> <tt class="py-keyword">import</tt> <tt class="py-name">db</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="LicenseType"></a><div id="LicenseType-def"><a name="L16"></a><tt class="py-lineno">16</tt> <a class="py-toggle" href="#" id="LicenseType-toggle" onclick="return toggle('LicenseType');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="licensing.LicenseType-class.html">LicenseType</a><tt class="py-op">(</tt><tt class="py-base-class">db</tt><tt class="py-op">.</tt><tt class="py-base-class">Model</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LicenseType-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="LicenseType-expanded"><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt id="link-0" class="py-name" targets="Variable feathers.membership.MemberConversionAct.Id=feathers.membership.MemberConversionAct-class.html#Id,Variable licensing.LicenseType.Id=licensing.LicenseType-class.html#Id"><a title="feathers.membership.MemberConversionAct.Id
+licensing.LicenseType.Id" class="py-name" href="#" onclick="return doclink('link-0', 'Id', 'link-0');">Id</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">StringProperty</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt id="link-1" class="py-name" targets="Variable feathers.customize.Theme.Title=feathers.customize.Theme-class.html#Title,Variable feathers.feed.StoryOccurence.Title=feathers.feed.StoryOccurence-class.html#Title,Variable feathers.feed.StoryPost.Title=feathers.feed.StoryPost-class.html#Title,Variable feathers.labs.Feature.Title=feathers.labs.Feature-class.html#Title,Variable feathers.stories.StoryOccurence.Title=feathers.stories.StoryOccurence-class.html#Title,Variable feathers.stories.StoryPost.Title=feathers.stories.StoryPost-class.html#Title,Variable feathers.talk.Topic.Title=feathers.talk.Topic-class.html#Title,Variable licensing.LicenseType.Title=licensing.LicenseType-class.html#Title,Variable wrook.Book.Title=wrook.Book-class.html#Title,Variable wrook.Chapter.Title=wrook.Chapter-class.html#Title,Variable wrook.Command.Title=wrook.Command-class.html#Title,Variable wrook.Moment.Title=wrook.Moment-class.html#Title"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-1', 'Title', 'link-1');">Title</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">StringProperty</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt id="link-2" class="py-name" targets="Variable licensing.LicenseType.ShortDescription=licensing.LicenseType-class.html#ShortDescription"><a title="licensing.LicenseType.ShortDescription" class="py-name" href="#" onclick="return doclink('link-2', 'ShortDescription', 'link-2');">ShortDescription</a></tt> <tt class="py-op">=</tt>  <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">TextProperty</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt id="link-3" class="py-name" targets="Variable licensing.LicenseType.URL=licensing.LicenseType-class.html#URL"><a title="licensing.LicenseType.URL" class="py-name" href="#" onclick="return doclink('link-3', 'URL', 'link-3');">URL</a></tt> <tt class="py-op">=</tt> <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">StringProperty</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="LicenseType.__unicode__"></a><div id="LicenseType.__unicode__-def"><a name="L22"></a><tt class="py-lineno">22</tt> <a class="py-toggle" href="#" id="LicenseType.__unicode__-toggle" onclick="return toggle('LicenseType.__unicode__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="licensing.LicenseType-class.html#__unicode__">__unicode__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LicenseType.__unicode__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="LicenseType.__unicode__-expanded"><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-4', 'Title', 'link-1');">Title</a></tt> </tt>
+</div></div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="LoadLicenseTypes"></a><div id="LoadLicenseTypes-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="LoadLicenseTypes-toggle" onclick="return toggle('LoadLicenseTypes');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="licensing-module.html#LoadLicenseTypes">LoadLicenseTypes</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoadLicenseTypes-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="LoadLicenseTypes-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">delete</tt><tt class="py-op">(</tt><tt id="link-5" class="py-name" targets="Class licensing.LicenseType=licensing.LicenseType-class.html"><a title="licensing.LicenseType" class="py-name" href="#" onclick="return doclink('link-5', 'LicenseType', 'link-5');">LicenseType</a></tt><tt class="py-op">.</tt><tt class="py-name">all</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">licenseID</tt> <tt class="py-keyword">in</tt> <tt id="link-6" class="py-name" targets="Variable licensing.LicenseTypes=licensing-module.html#LicenseTypes"><a title="licensing.LicenseTypes" class="py-name" href="#" onclick="return doclink('link-6', 'LicenseTypes', 'link-6');">LicenseTypes</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                <tt id="link-7" class="py-name"><a title="licensing.LicenseTypes" class="py-name" href="#" onclick="return doclink('link-7', 'LicenseTypes', 'link-6');">LicenseTypes</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method feathers.customize.ThemeBackgroundImage.get()=feathers.customize.ThemeBackgroundImage-class.html#get,Method feathers.customize.ThemeEdit.get()=feathers.customize.ThemeEdit-class.html#get,Method feathers.customize.ThemeEditWithImageUpload.get()=feathers.customize.ThemeEditWithImageUpload-class.html#get,Method feathers.customize.ThemeMemberSelect.get()=feathers.customize.ThemeMemberSelect-class.html#get,Method feathers.customize.ThemeSelect.get()=feathers.customize.ThemeSelect-class.html#get,Method feathers.customize.ThemeStylesheet.get()=feathers.customize.ThemeStylesheet-class.html#get,Method feathers.customize.ThemeView.get()=feathers.customize.ThemeView-class.html#get,Method feathers.customize.ViewThemes.get()=feathers.customize.ViewThemes-class.html#get,Method feathers.labs.CastVote.get()=feathers.labs.CastVote-class.html#get,Method feathers.labs.DeleteFeature.get()=feathers.labs.DeleteFeature-class.html#get,Method feathers.labs.Labs.get()=feathers.labs.Labs-class.html#get,Method feathers.labs.MarkFeatureAsDone.get()=feathers.labs.MarkFeatureAsDone-class.html#get,Method feathers.labs.RetractVote.get()=feathers.labs.RetractVote-class.html#get,Method feathers.labs.ViewFeature.get()=feathers.labs.ViewFeature-class.html#get,Method feathers.membership.InviteEdit.get()=feathers.membership.InviteEdit-class.html#get,Method feathers.membership.Invites.get()=feathers.membership.Invites-class.html#get,Method feathers.membership.ProfilePhotoImage.get()=feathers.membership.ProfilePhotoImage-class.html#get,Method feathers.proforma.Confirm.get()=feathers.proforma.Confirm-class.html#get,Method feathers.proforma.Failed.get()=feathers.proforma.Failed-class.html#get,Method feathers.proforma.Success.get()=feathers.proforma.Success-class.html#get,Method feathers.proforma.Warning.get()=feathers.proforma.Warning-class.html#get,Method feathers.stories.StoryPostDeleteJSON.get()=feathers.stories.StoryPostDeleteJSON-class.html#get,Method feathers.talk.ReplyMiniFormJSON.get()=feathers.talk.ReplyMiniFormJSON-class.html#get,Method wrook.About_CPAL.get()=wrook.About_CPAL-class.html#get,Method wrook.About_OpenSoureAttribution.get()=wrook.About_OpenSoureAttribution-class.html#get,Method wrook.About_OpenSoureLicense.get()=wrook.About_OpenSoureLicense-class.html#get,Method wrook.About_who.get()=wrook.About_who-class.html#get,Method wrook.AccountChangePassword.get()=wrook.AccountChangePassword-class.html#get,Method wrook.AccountChangeProfilePhoto.get()=wrook.AccountChangeProfilePhoto-class.html#get,Method wrook.AccountView.get()=wrook.AccountView-class.html#get,Method wrook.AdminCommands.get()=wrook.AdminCommands-class.html#get,Method wrook.BookReaders.get()=wrook.BookReaders-class.html#get,Method wrook.BookSetCover.get()=wrook.BookSetCover-class.html#get,Method wrook.Book_ReorderChapters.get()=wrook.Book_ReorderChapters-class.html#get,Method wrook.Books.get()=wrook.Books-class.html#get,Method wrook.Books_Edit.get()=wrook.Books_Edit-class.html#get,Method wrook.Books_Edit_License.get()=wrook.Books_Edit_License-class.html#get,Method wrook.CoverEdit.get()=wrook.CoverEdit-class.html#get,Method wrook.CoverImage.get()=wrook.CoverImage-class.html#get,Method wrook.CoverList.get()=wrook.CoverList-class.html#get,Method wrook.CoverSelect.get()=wrook.CoverSelect-class.html#get,Method wrook.CoverSetDefault.get()=wrook.CoverSetDefault-class.html#get,Method wrook.CoverShare.get()=wrook.CoverShare-class.html#get,Method wrook.CoverThumbnail.get()=wrook.CoverThumbnail-class.html#get,Method wrook.CoverUnshare.get()=wrook.CoverUnshare-class.html#get,Method wrook.CoverView.get()=wrook.CoverView-class.html#get,Method wrook.Customize.get()=wrook.Customize-class.html#get,Method wrook.DeleteBook.get()=wrook.DeleteBook-class.html#get,Method wrook.DeleteChapter.get()=wrook.DeleteChapter-class.html#get,Method wrook.DeleteMessage.get()=wrook.DeleteMessage-class.html#get,Method wrook.EditAccount.get()=wrook.EditAccount-class.html#get,Method wrook.EditChapterOptions.get()=wrook.EditChapterOptions-class.html#get,Method wrook.FeedbackBook.get()=wrook.FeedbackBook-class.html#get,Method wrook.FlushCache.get()=wrook.FlushCache-class.html#get,Method wrook.Home.get()=wrook.Home-class.html#get,Method wrook.Join.get()=wrook.Join-class.html#get,Method wrook.Login.get()=wrook.Login-class.html#get,Method wrook.Logout.get()=wrook.Logout-class.html#get,Method wrook.Members.get()=wrook.Members-class.html#get,Method wrook.MembersBooksList.get()=wrook.MembersBooksList-class.html#get,Method wrook.MembersCoversList.get()=wrook.MembersCoversList-class.html#get,Method wrook.MembersFeed.get()=wrook.MembersFeed-class.html#get,Method wrook.MembersProfile.get()=wrook.MembersProfile-class.html#get,Method wrook.MembersReadingsList.get()=wrook.MembersReadingsList-class.html#get,Method wrook.NewChapter.get()=wrook.NewChapter-class.html#get,Method wrook.PasswordSent.get()=wrook.PasswordSent-class.html#get,Method wrook.ResetPassword.get()=wrook.ResetPassword-class.html#get,Method wrook.Revisions_List.get()=wrook.Revisions_List-class.html#get,Method wrook.Revisions_View.get()=wrook.Revisions_View-class.html#get,Method wrook.SendPassword.get()=wrook.SendPassword-class.html#get,Method wrook.SetDefaultTheme.get()=wrook.SetDefaultTheme-class.html#get,Method wrook.Suggestions.get()=wrook.Suggestions-class.html#get,Method wrook.Test.get()=wrook.Test-class.html#get,Method wrook.Typewriter.get()=wrook.Typewriter-class.html#get,Method wrook.ViewBook.get()=wrook.ViewBook-class.html#get,Method wrook.ViewChapter.get()=wrook.ViewChapter-class.html#get"><a title="feathers.customize.ThemeBackgroundImage.get
+feathers.customize.ThemeEdit.get
+feathers.customize.ThemeEditWithImageUpload.get
+feathers.customize.ThemeMemberSelect.get
+feathers.customize.ThemeSelect.get
+feathers.customize.ThemeStylesheet.get
+feathers.customize.ThemeView.get
+feathers.customize.ViewThemes.get
+feathers.labs.CastVote.get
+feathers.labs.DeleteFeature.get
+feathers.labs.Labs.get
+feathers.labs.MarkFeatureAsDone.get
+feathers.labs.RetractVote.get
+feathers.labs.ViewFeature.get
+feathers.membership.InviteEdit.get
+feathers.membership.Invites.get
+feathers.membership.ProfilePhotoImage.get
+feathers.proforma.Confirm.get
+feathers.proforma.Failed.get
+feathers.proforma.Success.get
+feathers.proforma.Warning.get
+feathers.stories.StoryPostDeleteJSON.get
+feathers.talk.ReplyMiniFormJSON.get
+wrook.About_CPAL.get
+wrook.About_OpenSoureAttribution.get
+wrook.About_OpenSoureLicense.get
+wrook.About_who.get
+wrook.AccountChangePassword.get
+wrook.AccountChangeProfilePhoto.get
+wrook.AccountView.get
+wrook.AdminCommands.get
+wrook.BookReaders.get
+wrook.BookSetCover.get
+wrook.Book_ReorderChapters.get
+wrook.Books.get
+wrook.Books_Edit.get
+wrook.Books_Edit_License.get
+wrook.CoverEdit.get
+wrook.CoverImage.get
+wrook.CoverList.get
+wrook.CoverSelect.get
+wrook.CoverSetDefault.get
+wrook.CoverShare.get
+wrook.CoverThumbnail.get
+wrook.CoverUnshare.get
+wrook.CoverView.get
+wrook.Customize.get
+wrook.DeleteBook.get
+wrook.DeleteChapter.get
+wrook.DeleteMessage.get
+wrook.EditAccount.get
+wrook.EditChapterOptions.get
+wrook.FeedbackBook.get
+wrook.FlushCache.get
+wrook.Home.get
+wrook.Join.get
+wrook.Login.get
+wrook.Logout.get
+wrook.Members.get
+wrook.MembersBooksList.get
+wrook.MembersCoversList.get
+wrook.MembersFeed.get
+wrook.MembersProfile.get
+wrook.MembersReadingsList.get
+wrook.NewChapter.get
+wrook.PasswordSent.get
+wrook.ResetPassword.get
+wrook.Revisions_List.get
+wrook.Revisions_View.get
+wrook.SendPassword.get
+wrook.SetDefaultTheme.get
+wrook.Suggestions.get
+wrook.Test.get
+wrook.Typewriter.get
+wrook.ViewBook.get
+wrook.ViewChapter.get" class="py-name" href="#" onclick="return doclink('link-8', 'get', 'link-8');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">licenseID</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">put</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt id="link-9" class="py-name"><a title="licensing.LicenseTypes" class="py-name" href="#" onclick="return doclink('link-9', 'LicenseTypes', 'link-6');">LicenseTypes</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt id="link-10" class="py-name"><a title="licensing.LicenseTypes" class="py-name" href="#" onclick="return doclink('link-10', 'LicenseTypes', 'link-6');">LicenseTypes</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method feathers.feed.StoryOccurence.update()=feathers.feed.StoryOccurence-class.html#update"><a title="feathers.feed.StoryOccurence.update" class="py-name" href="#" onclick="return doclink('link-11', 'update', 'link-11');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">"deriv-fair-use"</tt><tt class="py-op">:</tt> <tt id="link-12" class="py-name"><a title="licensing.LicenseType" class="py-name" href="#" onclick="return doclink('link-12', 'LicenseType', 'link-5');">LicenseType</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt id="link-13" class="py-name"><a title="feathers.membership.MemberConversionAct.Id
+licensing.LicenseType.Id" class="py-name" href="#" onclick="return doclink('link-13', 'Id', 'link-0');">Id</a></tt><tt class="py-op">=</tt><tt class="py-string">"deriv-fair-use"</tt><tt class="py-op">,</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt id="link-14" class="py-name"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-14', 'Title', 'link-1');">Title</a></tt><tt class="py-op">=</tt><tt class="py-string">"Derivative Work Under Fair Use"</tt><tt class="py-op">,</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt id="link-15" class="py-name"><a title="licensing.LicenseType.URL" class="py-name" href="#" onclick="return doclink('link-15', 'URL', 'link-3');">URL</a></tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">,</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt id="link-16" class="py-name"><a title="licensing.LicenseType.ShortDescription" class="py-name" href="#" onclick="return doclink('link-16', 'ShortDescription', 'link-2');">ShortDescription</a></tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt id="link-17" class="py-name"><a title="licensing.LicenseTypes" class="py-name" href="#" onclick="return doclink('link-17', 'LicenseTypes', 'link-6');">LicenseTypes</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="feathers.feed.StoryOccurence.update" class="py-name" href="#" onclick="return doclink('link-18', 'update', 'link-11');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">"copyright"</tt><tt class="py-op">:</tt> <tt id="link-19" class="py-name"><a title="licensing.LicenseType" class="py-name" href="#" onclick="return doclink('link-19', 'LicenseType', 'link-5');">LicenseType</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt id="link-20" class="py-name"><a title="feathers.membership.MemberConversionAct.Id
+licensing.LicenseType.Id" class="py-name" href="#" onclick="return doclink('link-20', 'Id', 'link-0');">Id</a></tt><tt class="py-op">=</tt><tt class="py-string">"copyright"</tt><tt class="py-op">,</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt id="link-21" class="py-name"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-21', 'Title', 'link-1');">Title</a></tt><tt class="py-op">=</tt><tt class="py-string">"Copyright All rights reserved"</tt><tt class="py-op">,</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt id="link-22" class="py-name"><a title="licensing.LicenseType.URL" class="py-name" href="#" onclick="return doclink('link-22', 'URL', 'link-3');">URL</a></tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">,</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt id="link-23" class="py-name"><a title="licensing.LicenseType.ShortDescription" class="py-name" href="#" onclick="return doclink('link-23', 'ShortDescription', 'link-2');">ShortDescription</a></tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt id="link-24" class="py-name"><a title="licensing.LicenseTypes" class="py-name" href="#" onclick="return doclink('link-24', 'LicenseTypes', 'link-6');">LicenseTypes</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="feathers.feed.StoryOccurence.update" class="py-name" href="#" onclick="return doclink('link-25', 'update', 'link-11');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">"public-domain"</tt><tt class="py-op">:</tt> <tt id="link-26" class="py-name"><a title="licensing.LicenseType" class="py-name" href="#" onclick="return doclink('link-26', 'LicenseType', 'link-5');">LicenseType</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt id="link-27" class="py-name"><a title="feathers.membership.MemberConversionAct.Id
+licensing.LicenseType.Id" class="py-name" href="#" onclick="return doclink('link-27', 'Id', 'link-0');">Id</a></tt><tt class="py-op">=</tt><tt class="py-string">"public-domain"</tt><tt class="py-op">,</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt id="link-28" class="py-name"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-28', 'Title', 'link-1');">Title</a></tt><tt class="py-op">=</tt><tt class="py-string">"Public Domain Dedication"</tt><tt class="py-op">,</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt id="link-29" class="py-name"><a title="licensing.LicenseType.URL" class="py-name" href="#" onclick="return doclink('link-29', 'URL', 'link-3');">URL</a></tt><tt class="py-op">=</tt><tt class="py-string">"http://creativecommons.org/licenses/publicdomain/"</tt><tt class="py-op">,</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt id="link-30" class="py-name"><a title="licensing.LicenseType.ShortDescription" class="py-name" href="#" onclick="return doclink('link-30', 'ShortDescription', 'link-2');">ShortDescription</a></tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt id="link-31" class="py-name"><a title="licensing.LicenseTypes" class="py-name" href="#" onclick="return doclink('link-31', 'LicenseTypes', 'link-6');">LicenseTypes</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="feathers.feed.StoryOccurence.update" class="py-name" href="#" onclick="return doclink('link-32', 'update', 'link-11');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">"cc-by"</tt><tt class="py-op">:</tt> <tt id="link-33" class="py-name"><a title="licensing.LicenseType" class="py-name" href="#" onclick="return doclink('link-33', 'LicenseType', 'link-5');">LicenseType</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt id="link-34" class="py-name"><a title="feathers.membership.MemberConversionAct.Id
+licensing.LicenseType.Id" class="py-name" href="#" onclick="return doclink('link-34', 'Id', 'link-0');">Id</a></tt><tt class="py-op">=</tt><tt class="py-string">"cc-by"</tt><tt class="py-op">,</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt id="link-35" class="py-name"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-35', 'Title', 'link-1');">Title</a></tt><tt class="py-op">=</tt><tt class="py-string">"CC Attribution Alone (by)"</tt><tt class="py-op">,</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">        <tt id="link-36" class="py-name"><a title="licensing.LicenseType.URL" class="py-name" href="#" onclick="return doclink('link-36', 'URL', 'link-3');">URL</a></tt><tt class="py-op">=</tt><tt class="py-string">"http://creativecommons.org/licenses/by/3.0/"</tt><tt class="py-op">,</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">        <tt id="link-37" class="py-name"><a title="licensing.LicenseType.ShortDescription" class="py-name" href="#" onclick="return doclink('link-37', 'ShortDescription', 'link-2');">ShortDescription</a></tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"><tt id="link-38" class="py-name"><a title="licensing.LicenseTypes" class="py-name" href="#" onclick="return doclink('link-38', 'LicenseTypes', 'link-6');">LicenseTypes</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="feathers.feed.StoryOccurence.update" class="py-name" href="#" onclick="return doclink('link-39', 'update', 'link-11');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">"cc-by-nc"</tt><tt class="py-op">:</tt> <tt id="link-40" class="py-name"><a title="licensing.LicenseType" class="py-name" href="#" onclick="return doclink('link-40', 'LicenseType', 'link-5');">LicenseType</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt id="link-41" class="py-name"><a title="feathers.membership.MemberConversionAct.Id
+licensing.LicenseType.Id" class="py-name" href="#" onclick="return doclink('link-41', 'Id', 'link-0');">Id</a></tt><tt class="py-op">=</tt><tt class="py-string">"cc-by-nc"</tt><tt class="py-op">,</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">        <tt id="link-42" class="py-name"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-42', 'Title', 'link-1');">Title</a></tt><tt class="py-op">=</tt><tt class="py-string">"CC Attribution, Noncommercial (by-nc)"</tt><tt class="py-op">,</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">        <tt id="link-43" class="py-name"><a title="licensing.LicenseType.URL" class="py-name" href="#" onclick="return doclink('link-43', 'URL', 'link-3');">URL</a></tt><tt class="py-op">=</tt><tt class="py-string">"http://creativecommons.org/licenses/by-nc/3.0/"</tt><tt class="py-op">,</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">        <tt id="link-44" class="py-name"><a title="licensing.LicenseType.ShortDescription" class="py-name" href="#" onclick="return doclink('link-44', 'ShortDescription', 'link-2');">ShortDescription</a></tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"><tt id="link-45" class="py-name"><a title="licensing.LicenseTypes" class="py-name" href="#" onclick="return doclink('link-45', 'LicenseTypes', 'link-6');">LicenseTypes</a></tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="feathers.feed.StoryOccurence.update" class="py-name" href="#" onclick="return doclink('link-46', 'update', 'link-11');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">"cc-by-nd"</tt><tt class="py-op">:</tt> <tt id="link-47" class="py-name"><a title="licensing.LicenseType" class="py-name" href="#" onclick="return doclink('link-47', 'LicenseType', 'link-5');">LicenseType</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt id="link-48" class="py-name"><a title="feathers.membership.MemberConversionAct.Id
+licensing.LicenseType.Id" class="py-name" href="#" onclick="return doclink('link-48', 'Id', 'link-0');">Id</a></tt><tt class="py-op">=</tt><tt class="py-string">"cc-by-nd"</tt><tt class="py-op">,</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">        <tt id="link-49" class="py-name"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-49', 'Title', 'link-1');">Title</a></tt><tt class="py-op">=</tt><tt class="py-string">"CC Attribution, No Derivatives (by-nd)"</tt><tt class="py-op">,</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">        <tt id="link-50" class="py-name"><a title="licensing.LicenseType.URL" class="py-name" href="#" onclick="return doclink('link-50', 'URL', 'link-3');">URL</a></tt><tt class="py-op">=</tt><tt class="py-string">"http://creativecommons.org/licenses/by-nd/3.0/"</tt><tt class="py-op">,</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">        <tt id="link-51" class="py-name"><a title="licensing.LicenseType.ShortDescription" class="py-name" href="#" onclick="return doclink('link-51', 'ShortDescription', 'link-2');">ShortDescription</a></tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"><tt id="link-52" class="py-name"><a title="licensing.LicenseTypes" class="py-name" href="#" onclick="return doclink('link-52', 'LicenseTypes', 'link-6');">LicenseTypes</a></tt><tt class="py-op">.</tt><tt id="link-53" class="py-name"><a title="feathers.feed.StoryOccurence.update" class="py-name" href="#" onclick="return doclink('link-53', 'update', 'link-11');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">"cc-by-sa"</tt><tt class="py-op">:</tt> <tt id="link-54" class="py-name"><a title="licensing.LicenseType" class="py-name" href="#" onclick="return doclink('link-54', 'LicenseType', 'link-5');">LicenseType</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">        <tt id="link-55" class="py-name"><a title="feathers.membership.MemberConversionAct.Id
+licensing.LicenseType.Id" class="py-name" href="#" onclick="return doclink('link-55', 'Id', 'link-0');">Id</a></tt><tt class="py-op">=</tt><tt class="py-string">"cc-by-sa"</tt><tt class="py-op">,</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">        <tt id="link-56" class="py-name"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-56', 'Title', 'link-1');">Title</a></tt><tt class="py-op">=</tt><tt class="py-string">"CC Attribution-Share Alike (by-sa)"</tt><tt class="py-op">,</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">        <tt id="link-57" class="py-name"><a title="licensing.LicenseType.URL" class="py-name" href="#" onclick="return doclink('link-57', 'URL', 'link-3');">URL</a></tt><tt class="py-op">=</tt><tt class="py-string">"http://creativecommons.org/licenses/by-sa/3.0/"</tt><tt class="py-op">,</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">        <tt id="link-58" class="py-name"><a title="licensing.LicenseType.ShortDescription" class="py-name" href="#" onclick="return doclink('link-58', 'ShortDescription', 'link-2');">ShortDescription</a></tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"><tt id="link-59" class="py-name"><a title="licensing.LicenseTypes" class="py-name" href="#" onclick="return doclink('link-59', 'LicenseTypes', 'link-6');">LicenseTypes</a></tt><tt class="py-op">.</tt><tt id="link-60" class="py-name"><a title="feathers.feed.StoryOccurence.update" class="py-name" href="#" onclick="return doclink('link-60', 'update', 'link-11');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">"cc-by-nc-nd"</tt><tt class="py-op">:</tt> <tt id="link-61" class="py-name"><a title="licensing.LicenseType" class="py-name" href="#" onclick="return doclink('link-61', 'LicenseType', 'link-5');">LicenseType</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">        <tt id="link-62" class="py-name"><a title="feathers.membership.MemberConversionAct.Id
+licensing.LicenseType.Id" class="py-name" href="#" onclick="return doclink('link-62', 'Id', 'link-0');">Id</a></tt><tt class="py-op">=</tt><tt class="py-string">"cc-by-nc-nd"</tt><tt class="py-op">,</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">        <tt id="link-63" class="py-name"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-63', 'Title', 'link-1');">Title</a></tt><tt class="py-op">=</tt><tt class="py-string">"CC Attribution-Noncommercial-No Derivatives (by-nc-nd)"</tt><tt class="py-op">,</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">        <tt id="link-64" class="py-name"><a title="licensing.LicenseType.URL" class="py-name" href="#" onclick="return doclink('link-64', 'URL', 'link-3');">URL</a></tt><tt class="py-op">=</tt><tt class="py-string">"http://creativecommons.org/licenses/by-nc-nd/3.0/"</tt><tt class="py-op">,</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">        <tt id="link-65" class="py-name"><a title="licensing.LicenseType.ShortDescription" class="py-name" href="#" onclick="return doclink('link-65', 'ShortDescription', 'link-2');">ShortDescription</a></tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line"><tt id="link-66" class="py-name"><a title="licensing.LicenseTypes" class="py-name" href="#" onclick="return doclink('link-66', 'LicenseTypes', 'link-6');">LicenseTypes</a></tt><tt class="py-op">.</tt><tt id="link-67" class="py-name"><a title="feathers.feed.StoryOccurence.update" class="py-name" href="#" onclick="return doclink('link-67', 'update', 'link-11');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">"cc-by-nc-sa"</tt><tt class="py-op">:</tt> <tt id="link-68" class="py-name"><a title="licensing.LicenseType" class="py-name" href="#" onclick="return doclink('link-68', 'LicenseType', 'link-5');">LicenseType</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">        <tt id="link-69" class="py-name"><a title="feathers.membership.MemberConversionAct.Id
+licensing.LicenseType.Id" class="py-name" href="#" onclick="return doclink('link-69', 'Id', 'link-0');">Id</a></tt><tt class="py-op">=</tt><tt class="py-string">"cc-by-nc-sa"</tt><tt class="py-op">,</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">        <tt id="link-70" class="py-name"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-70', 'Title', 'link-1');">Title</a></tt><tt class="py-op">=</tt><tt class="py-string">"CC Attribution-Noncommercial-Share Alike (by-nc-sa)"</tt><tt class="py-op">,</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">        <tt id="link-71" class="py-name"><a title="licensing.LicenseType.URL" class="py-name" href="#" onclick="return doclink('link-71', 'URL', 'link-3');">URL</a></tt><tt class="py-op">=</tt><tt class="py-string">"http://creativecommons.org/licenses/by-nc-sa/3.0/"</tt><tt class="py-op">,</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">        <tt id="link-72" class="py-name"><a title="licensing.LicenseType.ShortDescription" class="py-name" href="#" onclick="return doclink('link-72', 'ShortDescription', 'link-2');">ShortDescription</a></tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line"><tt id="link-73" class="py-name"><a title="licensing.LicenseTypes" class="py-name" href="#" onclick="return doclink('link-73', 'LicenseTypes', 'link-6');">LicenseTypes</a></tt><tt class="py-op">.</tt><tt id="link-74" class="py-name"><a title="feathers.feed.StoryOccurence.update" class="py-name" href="#" onclick="return doclink('link-74', 'update', 'link-11');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">"free-art-license"</tt><tt class="py-op">:</tt> <tt id="link-75" class="py-name"><a title="licensing.LicenseType" class="py-name" href="#" onclick="return doclink('link-75', 'LicenseType', 'link-5');">LicenseType</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">        <tt id="link-76" class="py-name"><a title="feathers.membership.MemberConversionAct.Id
+licensing.LicenseType.Id" class="py-name" href="#" onclick="return doclink('link-76', 'Id', 'link-0');">Id</a></tt><tt class="py-op">=</tt><tt class="py-string">"free-art-license"</tt><tt class="py-op">,</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">        <tt id="link-77" class="py-name"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-77', 'Title', 'link-1');">Title</a></tt><tt class="py-op">=</tt><tt class="py-string">"Free Art License 1.3"</tt><tt class="py-op">,</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">        <tt id="link-78" class="py-name"><a title="licensing.LicenseType.URL" class="py-name" href="#" onclick="return doclink('link-78', 'URL', 'link-3');">URL</a></tt><tt class="py-op">=</tt><tt class="py-string">"http://artlibre.org/licence/lal/en/"</tt><tt class="py-op">,</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">        <tt id="link-79" class="py-name"><a title="licensing.LicenseType.ShortDescription" class="py-name" href="#" onclick="return doclink('link-79', 'ShortDescription', 'link-2');">ShortDescription</a></tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line"> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line"><tt id="link-80" class="py-name"><a title="licensing.LicenseTypes" class="py-name" href="#" onclick="return doclink('link-80', 'LicenseTypes', 'link-6');">LicenseTypes</a></tt><tt class="py-op">.</tt><tt id="link-81" class="py-name"><a title="feathers.feed.StoryOccurence.update" class="py-name" href="#" onclick="return doclink('link-81', 'update', 'link-11');">update</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">"other"</tt><tt class="py-op">:</tt> <tt id="link-82" class="py-name"><a title="licensing.LicenseType" class="py-name" href="#" onclick="return doclink('link-82', 'LicenseType', 'link-5');">LicenseType</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">        <tt id="link-83" class="py-name"><a title="feathers.membership.MemberConversionAct.Id
+licensing.LicenseType.Id" class="py-name" href="#" onclick="return doclink('link-83', 'Id', 'link-0');">Id</a></tt><tt class="py-op">=</tt><tt class="py-string">"other"</tt><tt class="py-op">,</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line">        <tt id="link-84" class="py-name"><a title="feathers.customize.Theme.Title
+feathers.feed.StoryOccurence.Title
+feathers.feed.StoryPost.Title
+feathers.labs.Feature.Title
+feathers.stories.StoryOccurence.Title
+feathers.stories.StoryPost.Title
+feathers.talk.Topic.Title
+licensing.LicenseType.Title
+wrook.Book.Title
+wrook.Chapter.Title
+wrook.Command.Title
+wrook.Moment.Title" class="py-name" href="#" onclick="return doclink('link-84', 'Title', 'link-1');">Title</a></tt><tt class="py-op">=</tt><tt class="py-string">"Other..."</tt><tt class="py-op">,</tt> </tt>
+<a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line">        <tt id="link-85" class="py-name"><a title="licensing.LicenseType.URL" class="py-name" href="#" onclick="return doclink('link-85', 'URL', 'link-3');">URL</a></tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">,</tt> </tt>
+<a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line">        <tt id="link-86" class="py-name"><a title="licensing.LicenseType.ShortDescription" class="py-name" href="#" onclick="return doclink('link-86', 'ShortDescription', 'link-2');">ShortDescription</a></tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.wrook.org/">Wrook API documentation</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Nov 15 15:43:13 2008
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
