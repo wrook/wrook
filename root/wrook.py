@@ -275,7 +275,7 @@ class Bookmark(db.Model):
 	Reader = db.ReferenceProperty(membership.Member, collection_name="Bookmarks")
 	When = db.DateTimeProperty(auto_now_add=True)
 
-#Refactor: Replace with the Talk module
+#TODO: Refactor -  Replace with the Talk module
 class Message(db.Model):
 	Chapter = db.ReferenceProperty(Chapter, collection_name="Feedback")
 	Book = db.ReferenceProperty(Book, collection_name="Feedback")
@@ -298,7 +298,7 @@ class CoverForm(djangoforms.ModelForm):
 		model = Cover
 		fields = ("SampleTitle", "TitleColor", "isReusable")
 
-#Refactor: should be secure for admins???
+#TODO: Refactor -  should be secure for admins???
 class CoverSetDefault(WrookRequestHandler):
 	def get(self):
 		onRequest(self)
@@ -361,7 +361,7 @@ class CoverEdit(WrookRequestHandler):
 			else: cover = Cover(CreatedBy=self.CurrentMember)
 			if self.request.get("doDelete"):
 				if cover.Books:
-					#Refactor: Replace this with the proforma module
+					#TODO: Refactor -  Replace this with the proforma module
 					self.response.out.write(_("This cover is already in use by other book. It was not deleted"))
 				else:
 					db.delete(cover)
@@ -581,7 +581,7 @@ class Join(WrookRequestHandler):
 				})
 			self.render('views/join.html')
 
-	def post(self, key): #Refactor: This handler should be moved to the membership module and actuel business logic should be in separate methods
+	def post(self, key): #TODO: Refactor -  This handler should be moved to the membership module and actuel business logic should be in separate methods
 		onRequest(self)
 		if key: invite = membership.Invite.get(key)
 		else: invite = membership.Invite()
@@ -595,10 +595,10 @@ class Join(WrookRequestHandler):
 		if (firstname == "" or lastname == "" or email == "" or username == ""):
 			isValid = False
 			error = _("Username, email, firstname and lastname are madatory!")
-		elif (membership.getMemberFromCredentials(email)): #Refactor: This constraint should be built into the Member entity
+		elif (membership.getMemberFromCredentials(email)): #TODO: Refactor -  This constraint should be built into the Member entity
 			isValid = False
 			error = _("This email address is already used by another member")
-		elif (membership.getMemberFromCredentials(username)): #Refactor: This constraint should be built into the Member entity
+		elif (membership.getMemberFromCredentials(username)): #TODO: Refactor -  This constraint should be built into the Member entity
 			isValid = False
 			error = _("This username address is already used by another member")
 		if (not isValid):
@@ -848,14 +848,14 @@ class MembersProfile(WrookRequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-#Refactor: Put back in the chapter object
+#TODO: Refactor -  Put back in the chapter object
 def deleteChapter(chapter):
 	db.delete(chapter.Feedback)
 	db.delete(chapter.Revisions)
 	db.delete(chapter.Bookmarks)
 	db.delete(chapter)
 
-#Refactor: Put back in the book object
+#TODO: Refactor -  Put back in the book object
 def deleteBook(book):
 	for chapter in book.Chapters:
 		deleteChapter(chapter)
@@ -1440,7 +1440,7 @@ class FlushCache(WrookRequestHandler):
 		onRequest(self)
 		if self.CurrentMember:
 			memcache.flush_all()
-			#Refactor:Use the proforma module for a confirmation
+			#TODO: Refactor - Use the proforma module for a confirmation
 			self.response.out.write(_("Congratulations... you flushed the cache!"))
 			#Post this as a story for admins
 			story = StorySiteCacheIsFlushed()
@@ -1453,7 +1453,7 @@ class Test(WrookRequestHandler):
 		import _runtest
 		self.response.out.write(_runtest.getTestResults())
 
-def getDefaultTheme(): #Refactor: Move back to the Customize module??
+def getDefaultTheme(): #TODO: Refactor -  Move back to the Customize module??
 	defaultTheme = memcache.get("wrookDefaultTheme")
 	if not defaultTheme:
 		defaultMoments = Moment.all().filter("isDefault =", True).order("-Priority").fetch(limit=1)
@@ -1464,7 +1464,7 @@ def getDefaultTheme(): #Refactor: Move back to the Customize module??
 			memcache.add("wrookDefaultTheme", defaultTheme)
 	return defaultTheme
 
-class SetDefaultTheme(WrookRequestHandler): #Refactor: Move back to the Customize module
+class SetDefaultTheme(WrookRequestHandler): #TODO: Refactor -  Move back to the Customize module
 	def get(self):
 		onRequest(self)
 		if self.CurrentMember:
@@ -1629,8 +1629,8 @@ URLMappings = [
 	(r'/Feedback/Book/(.*)', FeedbackBook),
 	(r'/Feedback/Delete/(.*)', DeleteMessage),
 	( '/PostMessage', PostMessage),
-	(r'/Join/(.*)', Join), #Refactor: Should this be moved in the membership module?
-	( '/EditAccount', EditAccount), #Refactor: Should this be moved in part in the membership module?
+	(r'/Join/(.*)', Join), #TODO: Refactor -  Should this be moved in the membership module?
+	( '/EditAccount', EditAccount), #TODO: Refactor -  Should this be moved in part in the membership module?
 	( '/Account/View', AccountView),
 	( '/Account/ChangeProfilePhoto', AccountChangeProfilePhoto),
 	( '/Account/ChangePassword', AccountChangePassword),
