@@ -58,6 +58,7 @@ table tr td {
 	width: 1024px;
 	margin: 0px auto 0px auto;
 	min-height: 1024px;
+	position: relative;
 }
 
 #pageInner {

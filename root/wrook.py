@@ -1488,6 +1488,11 @@ class WrookApplication(webapp.Application): # decouppling for future use
 #============================================================================
 # ABOUT
 
+class About_HalfBakedEdition(WrookRequestHandler):
+	def get(self):
+		onRequest(self)
+		self.render("views/about-halfBakedEdition.html")
+
 class About_OpenSoureLicense(WrookRequestHandler):
 	def get(self):
 		onRequest(self)
@@ -1672,6 +1677,7 @@ URLMappings = [
 	( '/About/OpenSourceLicense', About_OpenSoureLicense),
 	( '/About/CPAL', About_CPAL),
 	( '/About/Who', About_who),
+	( '/About/Half-Baked-Edition', About_HalfBakedEdition),
 	( '/Suggestions', Suggestions),
 	(r'/Admin/Commands/(.*)', AdminCommands), # Refactor: move to an admin module?
 	( '/FlushCache', FlushCache), # Refactor: move to an admin module?

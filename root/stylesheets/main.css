@@ -736,10 +736,31 @@ table tr td ul li {
 }
 .tumblr-blog ol {
 	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.tumblr_post {
+	margin: 0px 0px 20px 0px;
 }
 
 .tumblr-blog .tumblr_title {
 	font-size: 1.2em;
 	font-weight: bold;
+	margin: 0px 0px 5px 0px;
+	padding: 0px;
 }
 
+#halfBakedLogo {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1000;
+}
+
+#halfBakedLogo a {
+	display: block;
+	width: 82px;
+	height: 83px;
+	background: url(/images/half-baked-small.png) no-repeat;
+}

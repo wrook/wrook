@@ -1,0 +1,41 @@
+﻿{% extends "template-main-d.html" %}
+{% load i18n %}
+{% block pageId %}about-OpenSourceLicense{% endblock %}
+{% block pageTitle %}{% trans "Half Baked Edition" %}{% endblock %}
+{% block title %}
+	<h1>
+		{% trans "Wrook, the Half Baked Edition!" %}
+	</h1>
+{% endblock %}
+
+{% block content %}
+<img src="/images/half-baked-big.png" style="float:right; margin: 0px 0px 20px 20px;" alt="Half Baked Edition" />
+{% blocktrans %}
+<h3>Q: What does "Half Baked" mean ?</h3>
+<p>
+It simply means that:
+</p>
+<ul>
+<li>It still has plenty of bugs</li>
+<li>Some feature are incomplete</li>
+<li>Not all features are available yet</li>
+<li>Its not quite secure or stable yet</li>
+</ul>
+<p>In other words, <strong>You can eat some, but it might taste funny</strong>!</li>
+
+<h3>Q: If I start adding my stuff, am I at risk of loosing it?</h3>
+<p>
+Short answer: Yes. Long answer: I suggest you keep copies of whatever you write
+on your computer. I try to make sure nothing is lost when features are updated, but
+the fact is that not enough testing has been done and backups are not being done yet.
+So, just be carefull.
+</p>
+
+<h3>Q: When will it be "Fully Cooked"?</h3>
+<p>
+Development is moving along great and new features come in daily. I dont know
+exactly how much needs to be done so that early members are satisfied with it, but
+I personnaly would like to start advertising around January.
+</p>
+{% endblocktrans %}
+{% endblock %}
