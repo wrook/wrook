@@ -917,13 +917,13 @@ class ResetPassword(WrookRequestHandler):
 			self.render("views/resetPassword.html")
 
 	def post(self, key):
+		onRequest(self)
 		if not key:
 			usernameOrEmail = self.request.get("usernameOrEmail")
 			if usernameOrEmail:
 				member = membership.getMemberFromCredentials(usernameOrEmail)
 				if member:
 					member.resetPassword(self.AppConfig.EncryptionKey)
-					member.sendPassword()
 					self.Model.update({"member": member})
 					self.redirect('/PasswordSent/%s' % member.key())
 				else:
@@ -1385,24 +1385,26 @@ class Typewriter(WrookRequestHandler):
 class AdminCommands(WrookRequestHandler):
 	def get(self):
 		onRequest(self)
-		if self.CurrentMember:
-			self.render('views/admin-commands.html')
-		else: self.requestLogin()
+#		if self.CurrentMember:
+		self.render('views/admin-commands.html')
+#		else: self.requestLogin()
 
 	def post(self, key):
 		onRequest(self)
-		if self.CurrentMember:
-			if (key == "doDefaultAllBookStatus"):
-				operationResults = self.doDefaultAllBookStatus()
-			if (key == "doDefaultAllChapterNumberTo0"):
-				operationResults = self.doDefaultAllChapterNumberTo0()
-			if (key == "doLoadLicenseTypes"):
-				operationResults = self.doLoadLicenseTypes()
-			else:
-				operationResults = CommandResult(ErrorCode=1, Message=_("No commands have been processed. Missing parameters!"))
-			self.Model.update({"operationResults": operationResults})
-			self.render('views/admin-commands.html')
-		else: self.requestLogin()
+#		if self.CurrentMember:
+		if (key == "doDefaultAllBookStatus"):
+			operationResults = self.doDefaultAllBookStatus()
+		if (key == "doDefaultAllChapterNumberTo0"):
+			operationResults = self.doDefaultAllChapterNumberTo0()
+		if (key == "doLoadLicenseTypes"):
+			operationResults = self.doLoadLicenseTypes()
+		if (key == "doSetEncryptionKey"):
+			operationResults = self.doSetEncryptionKey()
+		else:
+			operationResults = CommandResult(ErrorCode=1, Message=_("No commands have been processed. Missing parameters!"))
+		self.Model.update({"operationResults": operationResults})
+		self.render('views/admin-commands.html')
+#		else: self.requestLogin()
 	
 	def doDefaultAllBookStatus(self):
 		for book in Book.all():
@@ -1412,6 +1414,13 @@ class AdminCommands(WrookRequestHandler):
 				chapter.put()
 			book.put()
 		result = CommandResult(ErrorCode=0, Message=_("Empty status properties of all books and chapters have been defaulted!"))
+		return result
+
+	def doSetEncryptionKey(self):
+		appConfig = getWrookAppConfig()
+		appConfig.EncryptionKey = self.request.get("encryptionKey")
+		appConfig.put()
+		result = CommandResult(ErrorCode=0, Message=_("The new encryption key has been set!"))
 		return result
 
 	def doLoadLicenseTypes(self):
@@ -1438,15 +1447,15 @@ class Command(db.Model):
 class FlushCache(WrookRequestHandler):
 	def get(self):
 		onRequest(self)
-		if self.CurrentMember:
-			memcache.flush_all()
-			#TODO: Refactor - Use the proforma module for a confirmation
-			self.response.out.write(_("Congratulations... you flushed the cache!"))
-			#Post this as a story for admins
-			story = StorySiteCacheIsFlushed()
-			occurence = story.createOccurence({"member": self.CurrentMember })
-			occurence.publish()
-		else: self.requestLogin()
+#		if self.CurrentMember:
+		memcache.flush_all()
+		#TODO: Refactor - Use the proforma module for a confirmation
+		self.response.out.write(_("Congratulations... you flushed the cache!"))
+		#Post this as a story for admins
+		story = StorySiteCacheIsFlushed()
+		occurence = story.createOccurence({"member": self.CurrentMember })
+		occurence.publish()
+#		else: self.requestLogin()
 
 class Test(WrookRequestHandler):
 	def get(self):
@@ -1711,9 +1720,10 @@ talk.onRequest = onRequest
 application = WrookApplication(URLMappings, debug=True) # Instantiate the main application
 
 # Application constants
+#TODO: This is not secure, put in the app config
 picnikKey = "eb44efec693047ac4f4b2a429bc0be5a" # Developper Key for the Picnik API
 
-class WrookAppConfig(db.Expando):
+class WrookAppConfig(db.Model):
 	DefaultCover = db.ReferenceProperty(Cover, verbose_name=_("Default cover"))
 	EncryptionKey = db.StringProperty(verbose_name=_("Encryption key")) # Used when a scecret key is needed for encrypting passwords and other data
 
@@ -1721,8 +1731,9 @@ def getWrookAppConfig():
 	wrookAppConfig = memcache.get("wrookAppConfig")
 	if not wrookAppConfig:
 		cfg = WrookAppConfig.all().fetch(limit=1)
-		if len(cfg) == 1: wrookAppConfig = cfg[0]
-		memcache.add("wrookAppConfig", wrookAppConfig)
+		if len(cfg) == 1:
+			wrookAppConfig = cfg[0]
+			memcache.add("wrookAppConfig", wrookAppConfig)
 	return wrookAppConfig
 
 def real_main():

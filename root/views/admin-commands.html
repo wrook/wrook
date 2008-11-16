@@ -25,7 +25,6 @@
 			<br/>
 		{% endifequal %}
 	{% endif %}
-	{% if currentMember.isAdmin %}
 		<form action="/Admin/Commands/doDefaultAllBookStatus" method="post">
 			<input type="submit" value="Default All Book Status" />
 		</form>
@@ -34,7 +33,13 @@
 		</form>							
 		<form action="/Admin/Commands/doLoadLicenseTypes" method="post">
 			<input type="submit" value="Load License Types" />
-		</form>							
+		</form>			
+		<div>
+			<form action="/Admin/Commands/doSetEncryptionKey" method="post">
+				New encryption key: <input type="text" name="encryptionKey" value="" /><input type="submit" value="Submit new key" />
+			</form>
+		</div>							
+	{% if currentMember.isAdmin %}
 	{% else %}
 		<p>
 			{% trans "This page is restricted to the site administrators" %}
