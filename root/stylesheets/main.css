@@ -729,3 +729,17 @@ table tr td ul li {
 	height: 14px;
 	background: url(/images/smallProgressBar.png) 0px -14px no-repeat;
 }
+
+
+.tumblr-blog {
+	font-size: 1.1em;
+}
+.tumblr-blog ol {
+	list-style: none;
+}
+
+.tumblr-blog .tumblr_title {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
