@@ -30,7 +30,7 @@
 			</thead>
 			<tbody>
 				{% for invite in invites %}
-					{% ifnotequal invite.Status "discarded" %}
+					{% ifequal invite.Status "sent" %}
 						<tr>
 							<td>
 								<h4>
@@ -44,7 +44,7 @@
 								{{ invite.Status }}
 							</td>
 						</tr>
-					{% endifnotequal %}
+					{% endifequal %}
 				{% endfor %}
 			</tbody>
 		</table>
@@ -57,7 +57,7 @@
 
 	{% ifnotequal allInvites.count 0 %}
 		<h2 style="text-align: left;">
-			{% trans "All invites" %}
+			{% trans "Accepted invites" %}
 		</h2>
 		<table width="50%">
 			<thead>
@@ -77,24 +77,26 @@
 			</thead>
 			<tbody>
 				{% for invite in allInvites %}
-					<tr>
-						<td>
-							<h4>
-								<a href="/Member/{{ invite.FromMember.key }}">{{ invite.FromMember.fullname }}</a>
-							</h4>
-						</td>
-						<td>
-							<h4>
-								<a href="/Invites/{{ invite.key }}">{{ invite.Firstname }} {{ invite.Lastname }}</a>
-							</h4>
-						</td>
-						<td>
-							{{ invite.Email }}
-						</td>
-						<td>
-							{{ invite.Status }}
-						</td>
-					</tr>
+					{% ifequal invite.Status "accepted" %}
+						<tr>
+							<td>
+								<h4>
+									<a href="/Member/{{ invite.FromMember.key }}">{{ invite.FromMember.fullname }}</a>
+								</h4>
+							</td>
+							<td>
+								<h4>
+									<a href="/Invites/{{ invite.key }}">{{ invite.Firstname }} {{ invite.Lastname }}</a>
+								</h4>
+							</td>
+							<td>
+								{{ invite.Email }}
+							</td>
+							<td>
+								<a href="/Invites/{{ invite.key }}">{{ invite.Status }}</a>
+							</td>
+						</tr>
+					{% endifequal %}
 				{% endfor %}
 			</tbody>
 		</table>

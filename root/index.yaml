@@ -135,7 +135,7 @@ indexes:
   - name: WhenOccured
     direction: desc
 
-# Used 395 times in query history.
+# Used 396 times in query history.
 - kind: StoryPost
   properties:
   - name: Member
@@ -150,7 +150,7 @@ indexes:
   - name: WhenOccured
     direction: desc
 
-# Used 643 times in query history.
+# Used 644 times in query history.
 - kind: ThemeMemberSelection
   properties:
   - name: Member
