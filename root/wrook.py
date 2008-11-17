@@ -575,7 +575,7 @@ class Join(WrookRequestHandler):
 			else: invite = membership.Invite()
 			self.Model.update({
 				"invite": invite,
-				"email": invite.Email.strip(),
+				"email": invite.Email.strip().lower(),
 				"firstname": invite.Firstname.strip(),
 				"lastname": invite.Lastname.strip()
 				})
@@ -585,16 +585,19 @@ class Join(WrookRequestHandler):
 		onRequest(self)
 		if key: invite = membership.Invite.get(key)
 		else: invite = membership.Invite()
-		username = self.request.get("Username")
-		email = self.request.get("Email")
-		firstname = self.request.get("Firstname")
-		lastname = self.request.get("Lastname")
+		username = self.request.get("Username").strip().lower() #TODO: Stripping and lowercasing should also be in the class logic
+		email = self.request.get("Email").strip().lower() #TODO: Stripping and lowercasing should also be in the class logic
+		firstname = self.request.get("Firstname").strip()
+		lastname = self.request.get("Lastname").strip()
 		gender = self.request.get("Gender")
 		preferedLanguage = self.request.get("PreferedLanguage")
 		isValid = True
 		if (firstname == "" or lastname == "" or email == "" or username == ""):
 			isValid = False
 			error = _("Username, email, firstname and lastname are madatory!")
+		elif (not username.isalnum()):
+			isValid = False
+			error = _("Sorry, the username can only contain letters and numbers.")
 		elif (membership.getMemberFromCredentials(email)): #TODO: Refactor -  This constraint should be built into the Member entity
 			isValid = False
 			error = _("This email address is already used by another member")
@@ -623,7 +626,6 @@ class Join(WrookRequestHandler):
 				)
 			member.put()
 			member.resetPassword(self.AppConfig.EncryptionKey)
-			member.sendPassword()
 			if invite:
 				invite.AcceptedMember = member
 				invite.Status = "accepted"
@@ -909,7 +911,6 @@ class ResetPassword(WrookRequestHandler):
 			member = membership.Member.get(key)
 			if member:
 				member.resetPassword(self.AppConfig.EncryptionKey)
-				member.sendPassword()
 				self.Model.update({"member": member})
 				self.redirect('/PasswordSent/%s' % member.key())
 			else: self.error(404)
@@ -932,16 +933,6 @@ class ResetPassword(WrookRequestHandler):
 			else:
 				self.Model.update({"error": _("No member found with this username or email address!")})
 				self.render("views/resetPassword.html")
-		else: self.error(404)
-
-class SendPassword(WrookRequestHandler):
-	def get(self, key):
-		onRequest(self)
-		member = membership.Member.get(key)
-		if member:
-			member.sendPassword()
-			self.Model.update({"member": member})
-			self.redirect('/PasswordSent/%s' % member.key())
 		else: self.error(404)
 
 class DeleteBook(WrookRequestHandler):
@@ -1681,7 +1672,6 @@ URLMappings = [
 	( '/Customize', Customize),
 	(r'/PasswordSent/(.*)', PasswordSent),
 	(r'/ResetPassword/(.*)', ResetPassword),
-	(r'/SendPassword/(.*)', SendPassword),
 	( '/About/OpenSourceAttribution', About_OpenSoureAttribution),
 	( '/About/OpenSourceLicense', About_OpenSoureLicense),
 	( '/About/CPAL', About_CPAL),
