@@ -1,8 +1,12 @@
 ﻿#!python
 # coding: utf-8 
 """
-MEMBERSHIP MODULE (FEATHERS FRAMEWORK)
-The membership module contains
+Membership module of Feathers
+
+The membership module contains the necessary classes and methods to do features
+like sign-up, login, logout, invite, account settings, change password and etc.
+
+A part of the Feathers Modules.
 """
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
@@ -45,11 +49,11 @@ def getMemberFromCredentials(username): # Username or Email
 	memcache.add(cacheKey, member)
 	return member
 
-"""
-Get the currently authentified member from the encrypted credentials in the cookies.
-"""
 #Refactor: This should take the username and creds in param.... not the request handler
 def loginFromCookies(requestHandler):
+	"""
+	Get the currently authentified member from the encrypted credentials in the cookies.
+	"""
 	# Get the member either from his username or email address
 	member = getMemberFromCredentials(requestHandler.request.cookies.get('username', ''))
 	if member:
@@ -97,13 +101,14 @@ class MemberConversionAct:
 		self.AfterLabel = afterLabel
 		self.Points = points
 		self.Done = done
-"""
-Among other things, the member entity contains:
-- Personnaly identifiable informations (firstname, lastname)
-- Some basic profile details (email, language, gender)
-- and the credentials (Username, Password
-"""
 class Member(db.Model):
+	"""
+	Member.
+	Among other things, the member entity contains:
+	- Personnaly identifiable informations (firstname, lastname)
+	- Some basic profile details (email, language, gender)
+	- and the credentials (Username, Password
+	"""
 	Username = db.StringProperty(default="...", required=True)
 	Email = db.EmailProperty(default="...", required=True)
 	ProfilePhoto = db.BlobProperty(verbose_name="Profile photo")
@@ -121,9 +126,9 @@ class Member(db.Model):
 	Created = db.DateTimeProperty(auto_now_add=True)
 	isAdmin = db.BooleanProperty(default=False)
 
-	"""Encrypt and set a new password on the user."""
 	# Refactor: This method should be implemented as a setter on the password property
 	def setPassword(self, password, secretEncryptionKey):
+		"""Encrypt and set a new password on the user."""
 		# Store the encrypted password if one is successfully obtained
 		encryptedPassword = self.getEncryptedPassword(password, secretEncryptionKey)
 		if encryptedPassword:
@@ -132,8 +137,8 @@ class Member(db.Model):
 			return True
 		else: return False;
 
-	"""Return an MD5 encrypted password built with the password, the member key and the secret site key."""
 	def getEncryptedPassword(self, password, secretEncryptionKey):
+		"""Return an MD5 encrypted password built with the password, the member key and the secret site key."""
 		# If a password is not provided, None is returned
 		if len(password)>0 and len(secretEncryptionKey)>0:
 			# Encrypts the password with the unique member key and a secreat site key.
@@ -203,8 +208,8 @@ class Member(db.Model):
 			memcache.add(cacheKey, progress)
 		return progress
 
-	"""Flush the caching entries relating to the member."""
 	def flushCache(self):
+		"""Flush the caching entries relating to the member."""
 		memcache.delete("wrookMember-%s" % self.Username)
 		#Refactor: These thumbnail keys should not be needed if the image server is well built
 		memcache.delete("profilePhotoThumb30-%s" % self.key())
@@ -238,16 +243,16 @@ class Member(db.Model):
 		requestHandler.response.headers.add_header('Set-Cookie', 'credentialsHash=%s; expires=Fri, 31-Dec-2020 23:59:59 GMT' % self.Password)
 		requestHandler.response.headers.add_header('Set-Cookie', 'username=%s; expires=Fri, 31-Dec-2020 23:59:59 GMT' % self.Username)
 
-		"""Set a new automatically generated password, and send this new password by email"""
 	def resetPassword(self, secretEncryptionKey):
+		"""Set a new automatically generated password, and send this new password by email"""
 		password = utils.nicepass()
 		self.setPassword(password, secretEncryptionKey)
 		self.sendPassword(password)
 		self.put()
 
-	"""Sends a newly generated password to the user via email address"""
 	#Refactor: This is an potentially unsecure feautre, this should be changed!
 	def sendPassword(self, password):
+		"""Sends a newly generated password to the user via email address"""
 		data = {
 			"firstname": self.Firstname,
 			"lastname": self.Lastname,

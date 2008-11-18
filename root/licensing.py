@@ -1,14 +1,8 @@
 """
-WROOK LICENSING MODULE
+Wrook's Licensing Module.
  
 This module controls the licensing aspects of books. It offers the necessary
 models, methods and license data needed to offer licensing options for books.
-
-Covered user stories:
-	- The user selects the type of license for this books
-	- The user specify that the book is from another author
-	- When reading a book, the user views the licensing information
-	- When reading a book, the user follow's a link to find more information about the license
 
 """
 from google.appengine.ext import db

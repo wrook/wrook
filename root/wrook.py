@@ -1,15 +1,31 @@
+'''
+Wrook's main module
+'''
 #!python
 # coding: utf-8
+
+#Non GAE imports
+import diff
+import markdown2
+
+#GAE imports
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
-import sys, cgi, datetime, logging, urllib, hashlib, types
-
-import diff, markdown2
+import sys
+import cgi
+import datetime
+import logging
+import urllib
+import hashlib
+import types
 from string import Template
+
+#GAE API imports
 from google.appengine.api import urlfetch, users, mail, images, memcache
 from google.appengine.ext import db
 from google.appengine.ext.db import djangoforms
 
+#Django imports
 from django.utils import translation
 from django.utils.translation import gettext as _
 from django.conf import settings
@@ -17,19 +33,26 @@ from django.db import models
 #from django import newforms as forms 
 from django import forms 
 
+#Feathers imports
 from feathers import webapp, stories, utils, customize, membership, labs, proforma, talk
 
+#Wrook imports
 import licensing
 
 #-------------------- i18n FIX start --------------------
 settings._target = None
 #-------------------- i18n FIX end --------------------
 
-
 class WrookRequestHandler(webapp.RequestHandler):
+	'''
+	Basic request handling based on the feathers.webapp class used for leverage.
+	'''
 	pass
 
 def onRequest(self):
+	'''
+	Initialization method triggered before a request is processed.
+	'''
 	self.Model = {}
 	self.MasterTemplate = os.path.join(os.path.dirname(__file__), "views/template-main-d.html") # Sets the default template to be used by hosted modules
 	self.CurrentMember = membership.loginFromCookies(self) # Load the current member from the google authentication and add it to the requesthandler
@@ -44,9 +67,13 @@ def onRequest(self):
 		'appConfig': self.AppConfig # Add the app config to the model
 		})
 
-# Moments define periodes of the year where specific customization of the site occurs
-# These moments can change de default, the palette, special mssages to the user
 class Moment(db.Model):
+	'''
+	A moment according to the system.
+	
+	Moments define periodes of the year where specific customization of the site occurs
+	These moments can change de default, the palette, special messages to the user
+	'''
 	Title = db.StringProperty()
 	Begins = db.DateTimeProperty()
 	Ends = db.DateTimeProperty()
@@ -56,6 +83,9 @@ class Moment(db.Model):
 	Priority = db.IntegerProperty(required=True, default=0)
 
 class Cover(db.Model):
+	'''
+	Cover image of a book.
+	'''
 	SampleTitle = db.StringProperty()
 	TitleColor = db.StringProperty()
 	ThumbnailImage = db.BlobProperty(verbose_name=_("Image"))
@@ -77,6 +107,9 @@ class Cover(db.Model):
 			return "http://www.wrook.org/Covers/Image/%s" % self.key()
 
 class Book(db.Model):
+	'''
+	A book contributed by a member
+	'''
 	Title = db.StringProperty(default=_("New book..."), required=True, verbose_name=_("Title"))
 	Author = db.ReferenceProperty(membership.Member, collection_name="Books", verbose_name=_("Author"))
 	Slug = db.StringProperty(verbose_name=_("Slug"))
@@ -134,20 +167,33 @@ class Book(db.Model):
 		return markdown2.markdown(self.AttribDetailed)
 
 class BookForm(djangoforms.ModelForm):
+	'''
+	Form used to create a book or edit a books properties.
+	'''
 	class Meta:
 		model = Book
 		fields = ('Title', 'Stage', "Slug", 'Synopsis', 'NoteFromAuthor')
 
 class BookLicenseForm(djangoforms.ModelForm):
+	'''
+	Form used to edit specifically the licensing properties of a book.
+	'''
 	class Meta:
 		model = Book
 		fields = ('License', 'AttribDetailed', 'AttribAuthorIsAuthor', 'AttribAuthorName')
 
 class Chapter(db.Model):
+	'''
+	Chapter of a book.
+	'''
 	Book = db.ReferenceProperty(Book, collection_name="Chapters")
+	'''The parent Book of the chapter'''
 	Number = db.IntegerProperty(default=0)
+	'''Numeric index of the chapter compared to other chapters in the book'''
 	Name = db.StringProperty(default=_("Chapter X"), required=True)
+	'''Name of the chapter. Ex.: Chapter 2 (not to confuse with Title)'''
 	Title = db.StringProperty(default="")
+	'''Title of the chapter. Ex.: A dark and stormy night (not to be confused with Name)'''
 	Stage = db.StringProperty(required=True, default="planning", choices=set(["planning", "drafting", "writing", "proofing", "final"]))
 	Synopsis = db.TextProperty()
 	Created = db.DateTimeProperty(auto_now_add=True)
@@ -224,8 +270,10 @@ class Chapter(db.Model):
 				if i > 0:
 					return chapters[i-1]
 			i=i+1
-
 class ChapterForm(djangoforms.ModelForm):
+	'''
+	Form used to create a chapter or edit its properties
+	'''
 	class Meta:
 		model = Chapter
 		fields = ("Name", "Title", "Stage", "Synopsis")
@@ -1714,10 +1762,16 @@ application = WrookApplication(URLMappings, debug=True) # Instantiate the main a
 picnikKey = "eb44efec693047ac4f4b2a429bc0be5a" # Developper Key for the Picnik API
 
 class WrookAppConfig(db.Model):
+	'''
+	Configuration object for the Wrook application.
+	'''
 	DefaultCover = db.ReferenceProperty(Cover, verbose_name=_("Default cover"))
 	EncryptionKey = db.StringProperty(verbose_name=_("Encryption key")) # Used when a scecret key is needed for encrypting passwords and other data
 
 def getWrookAppConfig():
+	'''
+	Obtain the application configuration currently in effect.
+	'''
 	wrookAppConfig = memcache.get("wrookAppConfig")
 	if not wrookAppConfig:
 		cfg = WrookAppConfig.all().fetch(limit=1)
@@ -1727,14 +1781,20 @@ def getWrookAppConfig():
 	return wrookAppConfig
 
 def real_main():
+	'''
+	The basic main function to start the application on the production servers
+	'''
 	sys.path.append(os.path.dirname(__file__))
 	sys.path.append(os.path.join(os.path.dirname(__file__), 'feathers'))
+	#TODO: Find out if there is a way for module folders to be loaded automatically
 	logging.getLogger().setLevel(logging.DEBUG)
+	#TODO: Find out if loggin.DEBUG should be disable on the production servers
 	webapp.run(application)
 
 def profile_log_main():
-	# This is the main function for profiling 
-	# We've renamed our original main() above to real_main()
+	'''
+	Main function used for profiling to the log files.
+	'''
 	import cProfile, pstats, StringIO
 	prof = cProfile.Profile()
 	prof = prof.runctx("real_main()", globals(), locals())
@@ -1748,9 +1808,11 @@ def profile_log_main():
 	logging.info("Profile data:\n%s", stream.getvalue())
 
 def profile_html_main():
-	# This is the main function for profiling 
-	# We've renamed our original main() above to real_main()
-	import cProfile, pstats
+	'''
+	This is the main function for profiling to the html output
+	'''
+	import cProfile
+	import pstats
 	prof = cProfile.Profile()
 	prof = prof.runctx("real_main()", globals(), locals())
 	print "<div style='text-align:left;font-size:1.1em; color: #000; background: #fff; padding: 20px;'><pre>"

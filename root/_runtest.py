@@ -1,3 +1,9 @@
+'''
+Wrook's Test Runner Module.
+
+This module is used to load and patch the necessary modules for
+running all the Doctests routines.
+'''
 import sys, os, StringIO
 sys.path = sys.path + [
 	'/Python25/Lib/site-packages',
