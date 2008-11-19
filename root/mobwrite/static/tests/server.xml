@@ -1,0 +1,401 @@
+<XML>
+
+  <TEST NAME="Empty">
+    <QUESTION>
+    </QUESTION>
+    <ANSWER>
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Null">
+    <QUESTION>
+u:1234567890
+f:unittests
+x:foo
+UNKNOWN COMMAND
+
+    </QUESTION>
+    <ANSWER>
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Good raw text">
+    <QUESTION>
+U:1234567890
+f:123
+R:Hello world
+r:Hello world
+
+    </QUESTION>
+    <ANSWER>
+u:1234567890
+D:=11
+d:=11
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Bad raw text">
+    <QUESTION>
+u:1234567890
+F:unittests
+R:Hello world
+r:x
+
+    </QUESTION>
+    <ANSWER>
+f:unittests
+D:=11
+d:-1	+Hello world
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Good delta on empty file">
+    <QUESTION>
+U:1234567890
+F:unittests
+R:
+d:+Hello world
+
+    </QUESTION>
+    <ANSWER>
+u:1234567890
+f:unittests
+D:=0
+d:=11
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Bad delta on empty file">
+    <QUESTION>
+u:1234567890
+f:unittests
+R:
+d:-1
+
+    </QUESTION>
+    <ANSWER>
+D:=0
+R:
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Good delta">
+    <QUESTION>
+u:1234567890
+f:unittests
+R:Hello world
+d:-5	+Goodbye	=6
+
+    </QUESTION>
+    <ANSWER>
+D:=11
+d:=13
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Bad delta">
+    <QUESTION>
+u:1234567890
+f:unittests
+R:Hello world
+d:-5	+Goodbye	=5
+
+    </QUESTION>
+    <ANSWER>
+D:=11
+R:Hello world
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Raw text with all normal chars">
+    <!-- Note, '&amp;' is encoded here for the XML. -->
+    <QUESTION>
+u:1234567890
+f:unittests
+R:A-Z a-z 0-9 - _ . ! ~ * ' ( ) ; / ? : @ &amp; = + $ , #
+d:-1
+
+    </QUESTION>
+    <ANSWER>
+D:=51
+R:A-Z a-z 0-9 - _ . ! ~ * ' ( ) ; / ? : @ &amp; = + $ , #
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Delta with all normal chars">
+    <!-- Note, '&amp;' is encoded here for the XML. -->
+    <QUESTION>
+u:1234567890
+f:unittests
+R:
+d:+A-Z a-z 0-9 - _ . ! ~ * ' ( ) ; / ? : @ &amp; = + $ , #
+r:x
+
+    </QUESTION>
+    <ANSWER>
+D:=0
+d:=51
+d:-1	+A-Z a-z 0-9 - _ . ! ~ * ' ( ) ; / ? : @ &amp; = + $ , #
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Raw text with special chars">
+    <QUESTION>
+u:1234567890
+f:unittests
+R:a%00b%25c%0D%0Ad
+d:-1
+
+    </QUESTION>
+    <ANSWER>
+D:=8
+R:a%00b%25c%0D%0Ad
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Delta with special chars">
+    <QUESTION>
+u:1234567890
+f:unittests
+R:
+d:+a%00b%25c%0D%0Ad
+r:x
+
+    </QUESTION>
+    <ANSWER>
+D:=0
+d:=8
+d:-1	+a%00b%25c%0D%0Ad
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Raw text with Unicode">
+    <QUESTION>
+u:1234567890
+f:unittests
+R:a%E3%81%86b
+d:-1
+
+    </QUESTION>
+    <ANSWER>
+D:=3
+R:a%E3%81%86b
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Delta with Unicode">
+    <QUESTION>
+u:1234567890
+f:unittests
+R:
+d:+a%E3%81%86b
+r:x
+
+    </QUESTION>
+    <ANSWER>
+D:=0
+d:=3
+d:-1	+a%E3%81%86b
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Raw text with malformed linefeed">
+    <QUESTION>
+u:1234567890
+f:unittests
+R:a%0Ab
+
+    </QUESTION>
+    <ANSWER>
+D:=1	+%0D	=2
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Delta with malformed linefeed">
+    <QUESTION>
+u:1234567890
+f:unittests
+R:ab
+d:=1	+%0D	=1
+
+    </QUESTION>
+    <ANSWER>
+D:=2
+d:=2	+%0A	=1
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Simple collaboration">
+    <QUESTION>
+F:unittests
+U:1
+R:Hello world
+U:2
+R:Hello world
+d:-5	+Goodbye	=6
+U:1
+d:=11
+
+    </QUESTION>
+    <ANSWER>
+u:1
+f:unittests
+D:=11
+u:2
+D:=11
+d:=13
+u:1
+d:-5	+Goodbye	=6
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Simple merge">
+    <QUESTION>
+f:unittests
+u:1
+R:Hello world
+U:2
+R:Hello world
+d:-5	+Goodbye	=6
+U:1
+d:=9	-2	+m
+
+    </QUESTION>
+    <ANSWER>
+D:=11
+u:2
+D:=11
+d:=13
+u:1
+d:-5	+Goodbye	=5
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Conflicting merge">
+    <QUESTION>
+f:unittests
+U:1
+R:Hello world
+U:2
+R:Hello world
+d:-5	+Goodbye	=6
+U:1
+d:-5	+My	=6
+
+    </QUESTION>
+    <ANSWER>
+u:1
+D:=11
+u:2
+D:=11
+d:=13
+u:1
+d:-2	+Goodbye	=6
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Text merge">
+    <QUESTION>
+f:unittests
+U:1
+R:bc
+U:2
+R:bc
+d:+a	=2
+U:1
+d:=2	+d
+
+    </QUESTION>
+    <ANSWER>
+u:1
+D:=2
+u:2
+D:=2
+d:=3
+u:1
+d:+a	=3
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Numeric merge">
+    <QUESTION>
+f:unittests
+U:1
+R:23
+U:2
+R:23
+D:+1	=2
+U:1
+D:=2	+4
+
+    </QUESTION>
+    <ANSWER>
+u:1
+D:=2
+u:2
+D:=2
+D:=3
+u:1
+D:=3
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Complete Buffer">
+    <QUESTION>
+b:testbuffer1 3 2 f%3Aunittests%0A
+b:testbuffer1 3 3 R%3AHello world%0A
+b:testbuffer1 3 1 U%3A1234567890%0A
+
+    </QUESTION>
+    <ANSWER>
+u:1234567890
+D:=11
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Incomplete Buffer">
+    <QUESTION>
+b:testbuffer2 3 2 f%3Aunittests%0A
+b:testbuffer2 3 3 R%3AHello world%0A
+
+    </QUESTION>
+    <ANSWER>
+
+    </ANSWER>
+  </TEST>
+
+  <TEST NAME="Nested Buffer">
+    <QUESTION>
+b:testbuffer3 3 2 b%3Atestbuffer4 3 2 f%253Aunittests%250A%0A
+b:testbuffer3 3 1 b%3Atestbuffer4 3 3 R%253AHello world%250A%0A
+b:testbuffer3 3 3 b%3Atestbuffer4 3 1 U%253A1234567890%250A%0A
+
+    </QUESTION>
+    <ANSWER>
+u:1234567890
+D:=11
+
+    </ANSWER>
+  </TEST>
+
+</XML>

@@ -6,6 +6,7 @@ Wrook's main module
 
 #Non GAE imports
 import diff
+import wrookdiff
 import markdown2
 
 #GAE imports
@@ -1667,7 +1668,6 @@ class StorySiteCacheIsFlushed(stories.Story):
 	def getTargets(self, params): #Get the list of member who will receive the story posts
 		return membership.Member.all().filter("isAdmin =", True).fetch(limit=999)
 		
-
 
 
 #============================================================================
