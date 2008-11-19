@@ -5,9 +5,7 @@ Wrook's main module
 # coding: utf-8
 
 #Non GAE imports
-import diff
-import wrookdiff
-import markdown2
+#None for now
 
 #GAE imports
 import os
@@ -165,6 +163,7 @@ class Book(db.Model):
 		return len(Bookmark().all().filter("Book =", self).fetch(limit=999))
 
 	def markdownAttribDetailed(self):
+		import markdown2
 		return markdown2.markdown(self.AttribDetailed)
 
 class BookForm(djangoforms.ModelForm):
@@ -301,6 +300,7 @@ class Revision(db.Model):
 			return self.WordCount
 
 	def markdownText(self):
+		import markdown2
 		return markdown2.markdown(self.Text)
 
 	def diffFromLatest(self):
