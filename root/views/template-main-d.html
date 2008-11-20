@@ -26,6 +26,10 @@ body {
 	<body id="page-{% block pageId %}none{% endblock %}">
 		<div id="spritesPreload"></div>
 		<div id="page">
+			<div class="bgFade">
+				{% for op in array100 %}<div class="o{{op}}"></div>{% endfor %}
+				<div class="o100 last"></div>
+			</div>
 			<div id="halfBakedLogo"><a href="/About/Half-Baked-Edition"></a></div>
 			<div id="header">
 				<div id="siteBar">

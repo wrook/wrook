@@ -764,3 +764,112 @@ table tr td ul li {
 	height: 83px;
 	background: url(/images/half-baked-small.png) no-repeat;
 }
+
+
+
+.bgFade {
+	position: absolute;
+	top: 560px;
+	left: 0px;
+	width: 100%
+}
+.bgFade div {
+	height: 2px;
+	background: #000000;
+}
+.bgFade div.last {
+	height: 300px;
+	background: #000000;
+}
+
+.o10 {opacity: 0.10}
+.o11 {opacity: 0.11}
+.o12 {opacity: 0.12}
+.o13 {opacity: 0.13}
+.o14 {opacity: 0.14}
+.o15 {opacity: 0.15}
+.o16 {opacity: 0.16}
+.o17 {opacity: 0.17}
+.o18 {opacity: 0.18}
+.o19 {opacity: 0.19}
+.o20 {opacity: 0.20}
+.o21 {opacity: 0.21}
+.o22 {opacity: 0.22}
+.o23 {opacity: 0.23}
+.o24 {opacity: 0.24}
+.o25 {opacity: 0.25}
+.o26 {opacity: 0.26}
+.o27 {opacity: 0.27}
+.o28 {opacity: 0.28}
+.o29 {opacity: 0.29}
+.o30 {opacity: 0.30}
+.o31 {opacity: 0.31}
+.o32 {opacity: 0.32}
+.o33 {opacity: 0.33}
+.o34 {opacity: 0.34}
+.o35 {opacity: 0.35}
+.o36 {opacity: 0.36}
+.o37 {opacity: 0.37}
+.o38 {opacity: 0.38}
+.o39 {opacity: 0.39}
+.o40 {opacity: 0.40}
+.o41 {opacity: 0.41}
+.o42 {opacity: 0.42}
+.o43 {opacity: 0.43}
+.o44 {opacity: 0.44}
+.o45 {opacity: 0.45}
+.o46 {opacity: 0.46}
+.o47 {opacity: 0.47}
+.o48 {opacity: 0.48}
+.o49 {opacity: 0.49}
+.o50 {opacity: 0.50}
+.o51 {opacity: 0.51}
+.o52 {opacity: 0.52}
+.o53 {opacity: 0.53}
+.o54 {opacity: 0.54}
+.o55 {opacity: 0.55}
+.o56 {opacity: 0.56}
+.o57 {opacity: 0.57}
+.o58 {opacity: 0.58}
+.o59 {opacity: 0.59}
+.o60 {opacity: 0.60}
+.o61 {opacity: 0.61}
+.o62 {opacity: 0.62}
+.o63 {opacity: 0.63}
+.o64 {opacity: 0.64}
+.o65 {opacity: 0.65}
+.o66 {opacity: 0.66}
+.o67 {opacity: 0.67}
+.o68 {opacity: 0.68}
+.o69 {opacity: 0.69}
+.o70 {opacity: 0.70}
+.o71 {opacity: 0.71}
+.o72 {opacity: 0.72}
+.o73 {opacity: 0.73}
+.o74 {opacity: 0.74}
+.o75 {opacity: 0.75}
+.o76 {opacity: 0.76}
+.o77 {opacity: 0.77}
+.o78 {opacity: 0.78}
+.o79 {opacity: 0.79}
+.o80 {opacity: 0.80}
+.o81 {opacity: 0.81}
+.o82 {opacity: 0.82}
+.o83 {opacity: 0.83}
+.o84 {opacity: 0.84}
+.o85 {opacity: 0.85}
+.o86 {opacity: 0.86}
+.o87 {opacity: 0.87}
+.o88 {opacity: 0.88}
+.o89 {opacity: 0.89}
+.o90 {opacity: 0.90}
+.o91 {opacity: 0.91}
+.o92 {opacity: 0.92}
+.o93 {opacity: 0.93}
+.o94 {opacity: 0.94}
+.o95 {opacity: 0.95}
+.o96 {opacity: 0.96}
+.o97 {opacity: 0.97}
+.o98 {opacity: 0.98}
+.o99 {opacity: 0.99}
+.o100 {opacity: 1}

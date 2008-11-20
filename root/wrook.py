@@ -59,11 +59,14 @@ def onRequest(self):
 	self.AppConfig = getWrookAppConfig() # Load the application config from the database
 	if self.CurrentMember: translation.activate(self.CurrentMember.PreferedLanguage) # If the is a current member, his prefered language is activated
 	else: translation.activate("en") # If not, the default language is set to english
+	array100 = []
+	for op in range(10,100): array100.append(op)
 	self.Model.update({
 		'now': datetime.datetime.now(), # Add the current time tot the model
 		'currentMember': self.CurrentMember, # Add the current user to the model
 		'currentTheme': self.CurrentTheme, # Add the default theme to the model
-		'appConfig': self.AppConfig # Add the app config to the model
+		'appConfig': self.AppConfig, # Add the app config to the model
+		'array100': array100
 		})
 
 class Moment(db.Model):
