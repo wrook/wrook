@@ -127,7 +127,7 @@ indexes:
   - name: Version
     direction: desc
 
-# Used 76 times in query history.
+# Used 77 times in query history.
 - kind: StoryPost
   properties:
   - name: Member

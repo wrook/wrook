@@ -1495,9 +1495,9 @@ class FlushCache(WrookRequestHandler):
 		#TODO: Refactor - Use the proforma module for a confirmation
 		self.response.out.write(_("Congratulations... you flushed the cache!"))
 		#Post this as a story for admins
-		story = StorySiteCacheIsFlushed()
-		occurence = story.createOccurence({"member": self.CurrentMember })
-		occurence.publish()
+#		story = StorySiteCacheIsFlushed()
+#		occurence = story.createOccurence({"member": self.CurrentMember })
+#		occurence.publish()
 #		else: self.requestLogin()
 
 class Test(WrookRequestHandler):

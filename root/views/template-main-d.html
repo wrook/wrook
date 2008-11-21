@@ -3,8 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>Wrook: {% block pageTitle %}Readers, Writers, Words{% endblock %}</title>
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"></meta>
 		<meta http-equiv="pragma" content="no-cache"></meta>
+		{% if currentMember %}
+			<meta name="wrook.username" content="{{ currentMember.Username }}">
+		{% endif %}
 		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"></link>
 		<link rel="stylesheet" type="text/css" href="/stylesheets/template-d.css"></link>
 		{% if currentTheme %}

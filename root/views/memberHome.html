@@ -26,9 +26,9 @@
 		<h3>{% trans "Your options" %}</h3>
 		<div class="sidebarMenu">
 			<ul>
-				<li><a href="/Books/Edit/">{% trans "Start a new book" %}</a></li>
-				<li><a href="/Members/{{ currentMember.key }}">{% trans "Public profile" %}</a></li>
-				<li><a href="/Account/View">{% trans "Account settings" %}</a></li>
+				<li><a id="sidebarMenu-startNewBook" href="/Books/Edit/">{% trans "Start a new book" %}</a></li>
+				<li><a id="sidebarMenu-publicProfile" href="/Members/{{ currentMember.key }}">{% trans "Public profile" %}</a></li>
+				<li><a id="sidebarMenu-accountSettings" href="/Account/View">{% trans "Account settings" %}</a></li>
 			</ul>
 		</div>
 	</div>
