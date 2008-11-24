@@ -17,6 +17,7 @@ from google.appengine.ext import db
 from google.appengine.ext.db import djangoforms
 from django.utils.translation import gettext as _
 from feathers import utils, webapp
+import cookies
 
 # Not used anymore, but kept here as a reminder of how to get the hostname... remove later
 #hostname = os.environ['HTTP_HOST'] 
@@ -84,9 +85,10 @@ def memberLogin(requestHandler, username, password):
 	return LoginResult(0, "", Member)
 
 def logout(requestHandler):
-	# Clears the login cookies
-	requestHandler.response.headers.add_header('Set-Cookie', 'credentialsHash=%s; expires=Fri, 31-Dec-2020 23:59:59 GMT' % "")
-	requestHandler.response.headers.add_header('Set-Cookie', 'username=%s; expires=Fri, 31-Dec-2020 23:59:59 GMT' % "")
+	_cookies = cookies.Cookies(requestHandler, max_age=180)
+	del _cookies['credentialsHash']
+	del _cookies['username']
+
 
 class MemberConversionAct:
 	Id = ""
@@ -134,6 +136,7 @@ class Member(db.Model):
 		if encryptedPassword:
 			self.Password = encryptedPassword
 			self.put()
+			self.flushCache()
 			return True
 		else: return False;
 
@@ -240,8 +243,9 @@ class Member(db.Model):
 
 	#Refactor: This practice is unsecure and should be redone
 	def login(self, requestHandler):
-		requestHandler.response.headers.add_header('Set-Cookie', 'credentialsHash=%s; expires=Fri, 31-Dec-2020 23:59:59 GMT' % self.Password)
-		requestHandler.response.headers.add_header('Set-Cookie', 'username=%s; expires=Fri, 31-Dec-2020 23:59:59 GMT' % self.Username)
+		_cookies = cookies.Cookies(requestHandler, max_age=180)
+		_cookies['credentialsHash'] = self.Password
+		_cookies['username'] = self.Username
 
 	def resetPassword(self, secretEncryptionKey):
 		"""Set a new automatically generated password, and send this new password by email"""
@@ -249,6 +253,7 @@ class Member(db.Model):
 		self.setPassword(password, secretEncryptionKey)
 		self.sendPassword(password)
 		self.put()
+		self.flushCache()
 
 	#Refactor: This is an potentially unsecure feautre, this should be changed!
 	def sendPassword(self, password):

@@ -719,6 +719,7 @@ class EditAccount(WrookRequestHandler):
 	def post(self):
 		onRequest(self)
 		if self.CurrentMember:
+			self.CurrentMember.flushCache()
 			self.setVisitedMember(self.CurrentMember)
 			firstname = self.request.get("Firstname")
 			lastname = self.request.get("Lastname")
@@ -747,6 +748,7 @@ class EditAccount(WrookRequestHandler):
 				member.About = about
 				if profilePhoto: member.ProfilePhoto = profilePhoto
 				member.put()
+				member.flushCache()
 				self.redirect("/Account/View")
 		else: self.requestLogin()
 
@@ -799,6 +801,7 @@ class AccountChangePassword(WrookRequestHandler):
 			oldEncryptedPassword = self.CurrentMember.getEncryptedPassword(oldPassword, self.AppConfig.EncryptionKey)
 			if oldEncryptedPassword == self.CurrentMember.Password and newPassword:
 				passwordChanged = self.CurrentMember.setPassword(newPassword, self.AppConfig.EncryptionKey)
+				self.CurrentMember.login(self) #The user is login's immediatly to prevent a logout after the postback
 				if passwordChanged:
 					self.CurrentMember.flushCache()
 					self.redirect("/Account/View")

@@ -5,14 +5,15 @@
 
 import sys, os
 sys.path = sys.path + [
-	'/Python25/Lib/site-packages/',
+	'/Python25/Lib/site-packages',
 	'/Python25/Lib/site-packages/epydoc',
 	'/Program Files/Google/google_appengine',
 	'/Program Files/Google/google_appengine/lib/django',
 	'/Program Files/Google/google_appengine/lib/webob',
 	'/Program Files/Google/google_appengine/lib/yaml/lib',
 	'/Program Files/Google/google_appengine/google/appengine',
-	'/wrook/root/latest/']
+	'/wrook/root/latest/',
+	'/wrook/root/latest/root']
 
 from google.appengine.api import apiproxy_stub_map
 from google.appengine.api import datastore_file_stub

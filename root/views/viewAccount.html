@@ -12,27 +12,27 @@
 		<tbody>
 			<tr>
 				<th>Name</th>
-				<td>{{ member.Firstname }} {{ member.Lastname }}</td>
+				<td id="valFirstname">{{ member.Firstname }} {{ member.Lastname }}</td>
 			</tr>
 			<tr>
 				<th>Username</th>
-				<td>{{ member.Username }}</td>
+				<td id="valUsername">{{ member.Username }}</td>
 			</tr>
 			<tr>
 				<th>Email</th>
-				<td>{{ member.Email }}</td>
+				<td id="valEmail">{{ member.Email }}</td>
 			</tr>
 			<tr>
 				<th>Prefered language</th>
-				<td>{{ member.preferedLanguageName }}</td>
+				<td id="valPreferedLanguage">{{ member.preferedLanguageName }}</td>
 			</tr>
 			<tr>
 				<th>Gender</th>
-				<td>{{ member.genderName }}</td>
+				<td id="Gender">{{ member.genderName }}</td>
 			</tr>
 			<tr>
 				<th>About you</th>
-				<td>
+				<td id="valAbout">
 					{% if member.About %}
 						{{ member.About }}
 					{% endif %}
@@ -43,7 +43,9 @@
 				<td>
 					<div class="buttonBar">
 						<ul>
-							<li><a href="/EditAccount"><span>Edit account</span></a></li>
+							<li><a id="btnEditAccount" href="/EditAccount"><span>
+								{% trans "Edit account" %}
+							</span></a></li>
 						</ul>
 					</div>
 				</td>
@@ -57,8 +59,8 @@
 		<h3>{% trans "Options" %}</h3>
 		<div class="sidebarMenu">
 			<ul>
-				<li><a href="/Account/ChangePassword">{% trans "Change password" %}</a></li>
-				<li><a href="/Account/ChangeProfilePhoto">{% trans "Change profile photo" %}</a></li>
+				<li><a id="sidebarMenu-changePassword" href="/Account/ChangePassword">{% trans "Change password" %}</a></li>
+				<li><a id="sidebarMenu-changeProfilePhoto" href="/Account/ChangeProfilePhoto">{% trans "Change profile photo" %}</a></li>
 			</ul>
 		</div>
 	</div>
