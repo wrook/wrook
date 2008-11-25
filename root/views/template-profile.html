@@ -1,0 +1,39 @@
+{% extends templateMain %}
+{% load i18n %}
+{% block pageContent %}
+	<div id="pageContent">
+		<div class="section">
+			<div class="sectionHeader withProfileMenu">
+				<div id="memberAvatar">
+					<a href="/Members/{{ visitedMember.key}}"><img width="50" src="{{ visitedMember.gravatar50 }}" /></a>
+				</div>
+				<h1><a href="/Members/{{ visitedMember.key}}">
+					{{ visitedMember.fullname }}
+				</a></h1>
+				<div class="sectionMenu">
+					<ul>
+						<li><a id="menu-memberFeed" href="/Members/{{ visitedMember.key }}">{% trans "Feed" %}</a></li>
+						<li><a id="menu-memberProfile" href="/Members/{{ visitedMember.key }}/Profile">{% trans "Profile" %}</a></li>
+						<li><a id="menu-memberBooks" href="/Members/{{ visitedMember.key }}/Books">{% trans "Books" %}</a></li>
+						<li><a id="menu-memberReadings" href="/Members/{{ visitedMember.key }}/Readings">{% trans "Readings" %}</a></li>
+						<li><a id="menu-memberCovers" href="/Members/{{ visitedMember.key }}/Covers">{% trans "Covers" %}</a></li>
+						{% ifequal visitedMember.key currentMember.key %}
+							<li><a id="menu-memberInvites" href="/Invites">{% trans "Invites" %}</a></li>
+						{% endifequal %}
+					</ul>
+				</div>
+			</div>
+			<div class="sectionBody">
+				<div id="notices">
+					{% block notices %}{% endblock %}
+				</div>
+				<div class="sectionBodyContent">
+					{% include "part-titleBlock.html" %}
+					{% block content %}{% endblock %}
+				</div>
+			</div>
+		</div>
+		<div class="sectionFooter"></div>
+		<div class="clearfix"></div>
+	</div>
+{% endblock %}

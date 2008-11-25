@@ -100,7 +100,7 @@ class ThemeView(webapp.RequestHandler):
 						'canEditTheme': canEditTheme,
 						'theme': theme
 						})
-					self.TemplateBase = os.path.dirname(__file__)
+					self.TemplateBaseFolder = os.path.dirname(__file__)
 					self.render('views/customize-viewTheme.html')
 				else: self.error(500)
 			else: self.error(404)
@@ -117,7 +117,7 @@ class ThemeEdit(webapp.RequestHandler):
 				'form': form,
 				'theme': theme
 				})
-			self.TemplateBase = os.path.dirname(__file__)
+			self.TemplateBaseFolder = os.path.dirname(__file__)
 			self.render('views/customize-themeEdit.html')
 
 	def post(self, key):
@@ -140,7 +140,7 @@ class ThemeEdit(webapp.RequestHandler):
 					'theme': theme,
 					'form': form
 					})
-				self.TemplateBase = os.path.dirname(__file__)
+				self.TemplateBaseFolder = os.path.dirname(__file__)
 				self.render("views/customize-themeEdit.html")
 
 class ThemeEditWithImageUpload(webapp.RequestHandler):
@@ -154,7 +154,7 @@ class ThemeEditWithImageUpload(webapp.RequestHandler):
 				'form': form,
 				'theme': theme
 				})
-			self.TemplateBase = os.path.dirname(__file__)
+			self.TemplateBaseFolder = os.path.dirname(__file__)
 			self.render('views/customize-themeEdit.html')
 
 	def post(self, key):
@@ -180,7 +180,7 @@ class ThemeEditWithImageUpload(webapp.RequestHandler):
 					'theme': theme,
 					'form': form
 					})
-				self.TemplateBase = os.path.dirname(__file__)
+				self.TemplateBaseFolder = os.path.dirname(__file__)
 				self.render("views/customize-themeEdit.html")
 
 class ThemeBackgroundImage(webapp.RequestHandler):
@@ -223,7 +223,7 @@ class ViewThemes(webapp.RequestHandler):
 			self.Model.update({
 				"themes": Theme.all()
 				})
-			self.TemplateBase = os.path.dirname(__file__)
+			self.TemplateBaseFolder = os.path.dirname(__file__)
 			self.render("views/customize-viewThemes.html")
 
 class ThemeSelect(webapp.RequestHandler):
@@ -235,7 +235,7 @@ class ThemeSelect(webapp.RequestHandler):
 				"themeUsage": self.request.get("themeUsage"),
 				"redirect": self.request.get("redirect")
 				})
-			self.TemplateBase = os.path.dirname(__file__)
+			self.TemplateBaseFolder = os.path.dirname(__file__)
 			self.render("views/customize-selectTheme.html")
 
 class ThemeStylesheet(webapp.RequestHandler):

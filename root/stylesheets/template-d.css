@@ -3,12 +3,9 @@ html, div, p, table, tr, td, th, ul, ol, li {
 }
 
 body {
-	text-align: center;
-	background: #f2f2f2;
-	font-family: "Courier New", Courier, monospace;
-	font-family: Verdana;
-	font-family: Arial Narrow;
-	font-family: Tahoma;
+	text-align: left;
+	background: #000000;
+	font-family: Tahoma, Sans-serif;
 	margin: 0px;
 	padding: 0px;
 	font-size: 1em;
@@ -54,22 +51,18 @@ table tr td {
 }
 
 #page {
-	background: #ffffff;
-	width: 1024px;
-	margin: 0px auto 0px auto;
+	color: #ffffff;
+	width: 1204px;
 	min-height: 1024px;
 	position: relative;
+	background: #000000;
 }
+
 
 #pageInner {
 	position: relative;
-	text-align: left;
-	width: 840px;
-	margin: 0px auto 0px auto;
+	width: 1204px;
 	padding: 0px;
-}
-
-#pageTitle {
 }
 
 
@@ -90,11 +83,10 @@ table tr td {
 
 #memberAvatar {
 	position: absolute;
-	top: 9px;
-	left: 20px;
+	top: 10px;
+	left: 10px;
 	height: 50px;
 	width: 50px;
-	border: 2px solid #000;
 	background: #000;
 }
 #memberName {
@@ -131,20 +123,20 @@ table tr td {
 
 
 
-#memberMenu {
+.sectionMenu {
 	position: absolute;
-	left: 82px;
-	top: 43px;
+	left: 68px;
+	top: 40px;
 }
 
-#memberMenu ul {
+.sectionMenu ul {
 	list-style: none;
 	margin: 0px;
 	padding: 0px;
 	font-size: 1.1em;
 }
 
-#memberMenu ul li{
+.sectionMenu ul li{
 	display: inline;
 	float: left;
 	list-style: none;
@@ -154,8 +146,8 @@ table tr td {
 	font-size: 1.1em;
 }
 
-#memberMenu ul li a:visited,
-#memberMenu ul li a:link {
+.sectionMenu ul li a:visited,
+.sectionMenu ul li a:link {
 	display: block;
 	margin: 0px 5px 0px 0px;
 	padding: 2px 8px 2px 8px;
@@ -163,13 +155,12 @@ table tr td {
 	text-decoration: none;
 }
 
-#memberMenu ul li a:hover {
-	background: #fff;
-	color: #000;
+.sectionMenu ul li a:hover {
+	background: #000;
 }
 
 .notice {
-	padding: 5px 6px 5px 6px;
+	padding: 10px;
 	background: #f7f561;
 	position: relative;
 	margin-bottom: 5px;
@@ -207,11 +198,56 @@ table tr td {
 }
 
 #pageContent {
-	padding: 20px;
-	background: #fff;
-	width: 550px;
+	position: relative;
+	top: 10px;
+	margin-left: 190px;
+	padding: 10px;
+	width: 980px;
 
 }
+
+.section {
+	position: relative;
+	background: url(../images/pageSection-shadow.png) no-repeat;
+	width: 712px;
+}
+
+.sectionHeader.withProfileMenu {
+	position: relative;
+	padding-left: 65px;
+	height: 60px;
+}
+.sectionHeader h1 {
+	color: #FFFFFF;
+	font-size: 2em;
+	padding: 10px 0px 0px 10px;
+	height: 24px;
+}
+
+.sectionHeader h1 a:visited,
+.sectionHeader h1 a:link {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.sectionBody {
+	position: relative;
+	margin: 10px 10px 0px 10px;
+	background: #fff;
+	color: #000;
+}
+.sectionBodyContent {
+	position: relative;
+	padding: 10px 20px 10px 20px;
+}
+
+.sectionFooter {
+	background: url(../images/pageSection-shadow.png) bottom left no-repeat;
+	width: 712px;
+	height: 10px;
+}
+
+
 #pageContent .chapterInfo{
 	text-align: center;
 }
@@ -299,10 +335,9 @@ table tr td {
 	position: relative;
 	background: #000000;
 	color: #FFFFFF;
-	height: 52px;
-	background: url(/images/sitebar-background.png) -50px 0px no-repeat;
-	margin-bottom: 50px;
+	height: 50px;
 }
+
 #siteBarContent {
 	position: relative;
 	width: 840px;
@@ -311,16 +346,16 @@ table tr td {
 
 #currentMemberAvatar {
 	position: absolute;
-	top: 12px;
-	left: 0px;
+	top: 10px;
+	left: 10em;
 }
 
 #siteName {
 	position: absolute;
 	font-family: courier new, courier, serif;
-	font-size: 3.5em;
+	font-size: 3em;
 	font-weight: bold;
-	top: 4px;
+	top: 10px;
 	left: 0px;
 }
 #siteName a:visited,
@@ -338,15 +373,18 @@ ul#siteMenu {
 	margin: 0px;
 	padding: 0px;
 	text-align: left;
-	top: 10px;
-	left: 200px;
-	font-size: 1em;
+	top: 26px;
+	left: 8em;
+	font-size: 1.2em;
+}
+ul.withAvatar#siteMenu {
+	left: 10em;
 }
 ul#siteMenu li {
 	position: relative;
 	display: block;
 	float: left;
-	margin-right: 6px;
+	margin-right: 0px 0px 9px 0px;
 	font-size: 1em;
 }
 ul#siteMenu li a:visited,
@@ -359,10 +397,10 @@ ul#siteMenu li a:link {
 }
 
 #sidebar {
-	width: 200px;
+	width: 180px;
 	position: absolute;
 	top: 0px;
-	right: 35px;
+	left: 0px;
 }
 
 .sidebarPanel {
@@ -372,15 +410,20 @@ ul#siteMenu li a:link {
 	padding: 10px 10px 10px 10px;
 }
 .sidebarPanel h3 {
+	text-align: right;
 	margin: 0px;
-	padding: 0px 0px 10px 0px;
+	padding: 0px 30px 10px 0px;
+	font-size: 1.2em;
+	text-transform: uppercase;
 }
 .sidebarPanel a:visited,
 .sidebarPanel a:link {
+	text-align: right;
 	color: #fff;
 }
 
 .sidebarMenu ul {
+	text-align: right;
 	list-style: none;
 	margin: 0px;
 	padding: 0xp;
@@ -388,17 +431,35 @@ ul#siteMenu li a:link {
 .sidebarMenu ul li{
 	list-style: none;
 	margin: 0px;
-	padding: 0xp;
+	padding: 0px 26px 0px 0px;
 }
 
 .sidebarMenu a:visited,
 .sidebarMenu a:link {
 	display: block;
-	color: #fff;
+	color: #a6a6a6;
 	text-decoration: none;
 	padding: 4px 0px 4px 0px;
 }
 .sidebarMenu a:hover {
 	background: #000;
 }
+
+
+
+
+#halfBakedLogo {
+	position: absolute;
+	top: 20px;
+	right: -20px;
+	z-index: 1000;
+}
+
+#halfBakedLogo a {
+	display: block;
+	width: 82px;
+	height: 83px;
+	background: url(/images/half-baked-small.png) no-repeat;
+}
+
 

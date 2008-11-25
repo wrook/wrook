@@ -83,7 +83,7 @@ class Labs(webapp.RequestHandler):
 				"yourVotes": yourVotes,
 				"memberVotesLeft": memberVotesLeft
 			})
-			self.TemplateBase = os.path.dirname(__file__)
+			self.TemplateBaseFolder = os.path.dirname(__file__)
 			self.render('views/labs.html')
 
 class Submit(webapp.RequestHandler):
@@ -107,7 +107,7 @@ class Submit(webapp.RequestHandler):
 				)
 			vote.put()
 			self.Model.update({"feature": feature})
-			self.TemplateBase = os.path.dirname(__file__)
+			self.TemplateBaseFolder = os.path.dirname(__file__)
 			self.render('views/labs-submit.html')
 
 
@@ -123,7 +123,7 @@ class ViewFeature(webapp.RequestHandler):
 				"memberHasVoted": memberHasVoted,
 				"memberHasVotesLeft": memberHasVotesLeft
 				})
-			self.TemplateBase = os.path.dirname(__file__)
+			self.TemplateBaseFolder = os.path.dirname(__file__)
 			self.render('views/labs-viewFeature.html')
 
 class CastVote(webapp.RequestHandler):

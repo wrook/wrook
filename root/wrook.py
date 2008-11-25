@@ -54,19 +54,19 @@ def onRequest(self):
 	'''
 	self.Model = {}
 	self.MasterTemplate = os.path.join(os.path.dirname(__file__), "views/template-main-d.html") # Sets the default template to be used by hosted modules
+	self.TemplateBase = os.path.join(os.path.dirname(__file__), "views/template-main.html") # Sets the default template to be used by hosted modules
 	self.CurrentMember = membership.loginFromCookies(self) # Load the current member from the google authentication and add it to the requesthandler
 	self.CurrentTheme = getDefaultTheme() # Set the default theme as the current theme
 	self.AppConfig = getWrookAppConfig() # Load the application config from the database
 	if self.CurrentMember: translation.activate(self.CurrentMember.PreferedLanguage) # If the is a current member, his prefered language is activated
 	else: translation.activate("en") # If not, the default language is set to english
-	array100 = []
-	for op in range(10,100): array100.append(op)
 	self.Model.update({
+		'templateMain': self.MasterTemplate,
+		'templateBase': self.TemplateBase,
 		'now': datetime.datetime.now(), # Add the current time tot the model
 		'currentMember': self.CurrentMember, # Add the current user to the model
 		'currentTheme': self.CurrentTheme, # Add the default theme to the model
-		'appConfig': self.AppConfig, # Add the app config to the model
-		'array100': array100
+		'appConfig': self.AppConfig # Add the app config to the model
 		})
 
 class Moment(db.Model):

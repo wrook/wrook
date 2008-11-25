@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+{% load i18n %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Wrook: {% block pageTitle %}Readers, Writers, Words{% endblock %}</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"></meta>
+		<meta http-equiv="pragma" content="no-cache"></meta>
+		{% if currentMember %}
+			<meta name="wrook.username" content="{{ currentMember.Username }}">
+		{% endif %}
+		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"></link>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/template-d.css"></link>
+		{% if currentTheme %}
+			<link rel="stylesheet" type="text/css" href="/Themes/Theme/Stylesheet/{{ currentTheme.key }}"></link>
+		{% endif %}
+{% if currentTheme %}
+<style>
+#page { background: #000000 url(/Themes/Theme/BackgroundImage/{{ currentTheme.key }}?width=1024) 180px 50px no-repeat; }
+{% endif %}
+</style>
+{% block htmlHead %}{% endblock %}
+	</head>
+	<body id="page-{% block pageId %}none{% endblock %}">
+		<div id="spritesPreload"></div>
+		<div id="page">
+			<div class="bgFade"> </div>
+			<div id="halfBakedLogo"><a href="/About/Half-Baked-Edition"></a></div>
+			<div id="header">
+				<div id="siteBar">
+					<div id="siteBarContent">
+						<div id="siteName"><a href="/">Wrook</a></div>
+						{% if currentMember %}
+							<a href="/" id="currentMemberAvatar"><img width="30" src="{{ currentMember.gravatar30 }}" /></a>
+							<ul id="siteMenu" class="withAvatar">
+								<li><a id="menu-home" href="/">{% trans "Welcome" %} {{ currentMember.Firstname }}</a></li>
+								<li><a id="menu-books" href="/Books">{% trans "Books" %}</a></li>
+								<li><a id="menu-readers" href="/Members">{% trans "Members" %}</a></li>
+								<li><a id="menu-customize" href="/Customize">{% trans "Customize" %}</a></li>
+								<li><a id="menu-labs" href="/Labs">{% trans "Labs" %}</a></li>
+								<li><a id="menu-logout" href="/Logout">{% trans "Logout" %}</a></li>
+							</ul>
+						{% else %}
+							<ul id="siteMenu">
+								<li><a id="menu-home" href="/">{% trans "Home" %}</a></li>
+								<li><a id="menu-join" href="/Join/">{% trans "Join" %}</a></li>
+								<li><a id="menu-login" href="/Login">{% trans "Login" %}</a></li>
+							</ul>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			<div id="pageInner">
+				<div id="sidebar">
+					{% block sidebar %}{% endblock %}
+					<div class="sidebarPanel">
+						<h3>{% trans "About" %}</h3>
+						<div class="sidebarMenu">
+							<ul>
+								<li><a href="/About/Who">{% trans "Who is behind Wrook" %}</a></li>
+								<li><a href="/About/OpenSourceLicense">{% trans "Open source license" %}</a></li>
+								<li><a href="/About/Half-Baked-Edition">{% trans "Half Baked Edition" %}</a></li>
+							</ul>
+						</div>
+					</div>
+					{% block sidebarBottom %}{% endblock %}
+				</div>
+				{% block pageContent %}{% endblock %}
+				<div id="pageFooter">
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<div id="footerContent">
+			{% block footer %} {% endblock %}
+			</div>
+		</div>
+		<script type="text/javascript" src="/scripts/jquery/jquery.js"></script>
+		<script type="text/javascript" src="/scripts/jquery/dimensions/jquery.dimensions.pack.js"></script>
+		<script type="text/javascript" src="/scripts/main.js"></script>
+		{% include "analytics.html" %}
+	</body>
+</html>

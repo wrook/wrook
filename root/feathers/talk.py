@@ -40,7 +40,7 @@ class ReplyMiniFormJSON(webapp.RequestHandler):
 				"key": key,
 				"postURL": "/Talk/Post/%s/Reply/MiniForm" % key
 			})
-			self.TemplateBase = os.path.dirname(__file__)
+			self.TemplateBaseFolder = os.path.dirname(__file__)
 			html = self.getRender("views/talk-comment-miniForm.html")
 			data = {"errorCode":0, "html":html}
 			self.response.out.write(simplejson.dumps(data))

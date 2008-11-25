@@ -12,7 +12,7 @@ def run(application):
 class RequestHandler(webapp.RequestHandler):
 	Model = {}
 	Template = ""
-	TemplateBase = ""
+	TemplateBaseFolder = ""
 	MasterTemplate = ""
 	CurrentMember = None
 	CurrentTheme = None
@@ -33,7 +33,7 @@ class RequestHandler(webapp.RequestHandler):
 	def render(self, templateFile=""):
 		self.Model.update({"masterTemplate": self.MasterTemplate}) # Includes the path of the MasterTemplate in he model
 		if templateFile != "": self.Template = templateFile #  If a template path is specified it overrides the one set previously
-		path = os.path.join(self.TemplateBase, self.Template) # Merges the base folder and the template path
+		path = os.path.join(self.TemplateBaseFolder, self.Template) # Merges the base folder and the template path
 		templateText = template.render(path, self.Model) # Renders the template with the Model
 		self.response.out.write(templateText) # Outputs the rendered template
 	

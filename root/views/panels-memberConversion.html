@@ -1,7 +1,7 @@
 {% load i18n %}
 {% ifnotequal currentMember.memberConversionLevel "none" %}
 	<div class="sidebarPanel">
-		<h3>{% trans "A few suggestions" %}</h3>
+		<h3>{% trans "Suggestions" %}</h3>
 		<div class="progressBar">
 			<div class="completed" style="width:{{currentMember.getConversionProgress}}%"></div>
 		</div>

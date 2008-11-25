@@ -85,7 +85,7 @@ def memberLogin(requestHandler, username, password):
 	return LoginResult(0, "", Member)
 
 def logout(requestHandler):
-	_cookies = cookies.Cookies(requestHandler, max_age=180)
+	_cookies = cookies.Cookies(requestHandler, max_age=604800)
 	del _cookies['credentialsHash']
 	del _cookies['username']
 
@@ -243,7 +243,7 @@ class Member(db.Model):
 
 	#Refactor: This practice is unsecure and should be redone
 	def login(self, requestHandler):
-		_cookies = cookies.Cookies(requestHandler, max_age=180)
+		_cookies = cookies.Cookies(requestHandler, max_age=604800) #TODO: This value should be mad common
 		_cookies['credentialsHash'] = self.Password
 		_cookies['username'] = self.Username
 
@@ -404,7 +404,7 @@ class Invites(webapp.RequestHandler):
 				allInvites = Invite.all()
 				self.Model.update({"allInvites": allInvites})
 			self.Model.update({"invites": invites})
-			self.TemplateBase = os.path.dirname(__file__)
+			self.TemplateBaseFolder = os.path.dirname(__file__)
 			self.render('views/membership-invites.html')
 
 class InviteForm(djangoforms.ModelForm):
@@ -433,10 +433,10 @@ class InviteEdit(webapp.RequestHandler):
 					self.Model.update({ "inviteKey": invite.key() })
 				if invite.is_saved():
 					self.Model.update({"messagePreview": invite.getMessage()})
-					self.TemplateBase = os.path.dirname(__file__)
+					self.TemplateBaseFolder = os.path.dirname(__file__)
 					self.render('views/membership-inviteNew-preview.html')
 				else:
-					self.TemplateBase = os.path.dirname(__file__)
+					self.TemplateBaseFolder = os.path.dirname(__file__)
 					self.render('views/membership-inviteNew.html')
 			else: self.error(404)
 
@@ -471,10 +471,10 @@ class InviteEdit(webapp.RequestHandler):
 					if form.is_valid() and self.request.get("doPreview"):
 						invite = form.save(commit=False)
 						self.Model.update({"messagePreview": invite.getMessage()})
-						self.TemplateBase = os.path.dirname(__file__)
+						self.TemplateBaseFolder = os.path.dirname(__file__)
 						self.render('views/membership-inviteNew-preview.html')
 					else:
-						self.TemplateBase = os.path.dirname(__file__)
+						self.TemplateBaseFolder = os.path.dirname(__file__)
 						self.render('views/membership-inviteNew.html')
 			else: self.error(404)
 

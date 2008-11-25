@@ -36,7 +36,7 @@ class Confirm(webapp.RequestHandler):
 			'statement': self.request.get("statement"), # The statement to confirm
 			'redirect': self.request.get("redirect") # The page to where you must redirect upon confirmation
 			})
-		self.TemplateBase = os.path.dirname(__file__)
+		self.TemplateBaseFolder = os.path.dirname(__file__)
 		self.render('views/proforma-confirm.html')
 
 confirmPage = ProformaPage()
@@ -51,7 +51,7 @@ class Success(webapp.RequestHandler):
 			'continueURL': self.request.get("ContinueURL"), # The URL to where the user is invited to continue 
 			'continueLabel': self.request.get("ContinueLabel") # The Label of the "continue" button 
 			})
-		self.TemplateBase = os.path.dirname(__file__)
+		self.TemplateBaseFolder = os.path.dirname(__file__)
 		self.render('views/proforma-success.html')
 
 class SuccessPage(ProformaPage):
@@ -70,7 +70,7 @@ class Failed(webapp.RequestHandler):
 			'retryURL': self.request.get("redirect"), # The URL to where the user is invited to retry his last action 
 			'retryLabel': self.request.get("redirect") # The Label of the "retry" button 
 			})
-		self.TemplateBase = os.path.dirname(__file__)
+		self.TemplateBaseFolder = os.path.dirname(__file__)
 		self.render('views/proforma-failed.html')
 
 failedPage = ProformaPage()
@@ -87,7 +87,7 @@ class Warning(webapp.RequestHandler):
 			'backURL': self.request.get("redirect"), # The URL to where the user is invited to go back 
 			'backLabel': self.request.get("redirect") # The Label of the "go back" button 
 			})
-		self.TemplateBase = os.path.dirname(__file__)
+		self.TemplateBaseFolder = os.path.dirname(__file__)
 		self.render('views/proforma-warning.html')
 
 warningPage = ProformaPage()

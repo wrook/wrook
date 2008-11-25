@@ -1,4 +1,4 @@
-﻿{% extends "template-main-d.html" %}
+﻿{% extends "template-profile.html" %}
 {% load i18n %}
 {% block title %}
 	<h1>
@@ -13,7 +13,7 @@
 					{% for book in books %}
 						<td>
 						<div class="book">
-							<div style="display:none">{% cycle 0,0,1 as rowChange %}</div>
+							<div style="display:none">{% cycle 0,0,0,1 as rowChange %}</div>
 							<div class="cover">
 								<a href="/Books/{{ book.key }}">
 									<img src='/Covers/Thumbnail/{{ book.getCover.key }}' title="{{ book.Title }}" alt="{{ book.Title }}">
@@ -43,7 +43,7 @@
 					{% endifequal %}
 				{% endif %}
 			</tr>
-		<table>
+		</table>
 	</div>
 {% endblock %}
 
