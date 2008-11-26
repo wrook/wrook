@@ -16,19 +16,12 @@
 				<div class="clearfix"></div>
 			</div>
 		{% endif %}
-		{% if post.Topic %}
-			{% if post.Topic.isRead %}
-				<div class="replies">
-					<h4>{% blocktrans with post.Topic.Replies.count as replyCount %}{{replyCount}} replies{% endblocktrans %} - <a href="#">{% trans "Show" %}</a></h4>
-				</div>
-			{% else %}
-				<div class="replies">
-					<h4>{% blocktrans with post.Topic.Replies.count as replyCount %}{{replyCount}} replies{% endblocktrans %} - <a href="#">{% trans "Mark as read" %}</a></h4>
-					{% for reply in post.Topic.unreadReplies %}
-						{% include "part-replies.html" %}
-					{% endfor %}
-				</div>
-			{% endif %}
-		{% endif %}
+		<div class="replies">
+			<div class="replies-list">
+				{% for reply in post.getReplies %}
+					{% include "part-replies.html" %}
+				{% endfor %}
+			</div>
+		</div>
 	</div>
 </div>

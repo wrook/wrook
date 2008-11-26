@@ -129,6 +129,8 @@ class StoryPost(db.Model):
 	Importance = db.IntegerProperty(default=0) #specific to the each users
 	Topic = db.ReferenceProperty(StoryPostTopic, collection_name="StoryPost")
 
+	def getReplies(self):
+		return talk.getReplies(self)
 
 class StoryPostReply(webapp.RequestHandler):
 	def post(self, key):

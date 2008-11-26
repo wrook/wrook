@@ -705,6 +705,7 @@ table tr td ul li {
 .talk-replyMiniForm {
 	background: #fffd6c;
 	padding: 10px;
+	margin: 5px 0px;
 }
 
 .talk-replyMiniForm-body {

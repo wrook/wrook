@@ -1,14 +1,29 @@
 {% load i18n %}
 <script>
-	function talkPostComent(id, url) {
-		body = $("#" + id + " .talk-replyMiniForm-body")[0].value;
-		console.debug(id, body, url);
+	function talkPostComent(id, key, url) {
+		console.debug("waiting for answer for :", key);
+		$.get(
+			"/Talk/Post/" + key + "/Reply/MiniForm/JSON/Post",
+			{'commentBody': $("#" + id + " .talk-replyMiniForm-body")[0].value},
+			function(data){
+				data = eval(data)
+				console.debug(eval(data));
+				console.debug("#" + key + " .replies-list", $("#" + key + " .replies-list"));
+				if (data.errorCode == 0) {
+					console.debug("received :", data.html);
+					$("#" + key + " .replies-list").prepend(data.html);
+				} else if(data.errorCode > 0) {
+					alert("Oups! A problem occured: " + data.errorMessage + " (Error code:" + data.errorCode + ")");
+				}
+			},
+			"script"
+		);
 	}
 </script>
 <div id="talk-replyMiniForm-{{ key }}" class="talk-replyMiniForm">
-	<textarea class="talk-replyMiniForm-body" type="text" name="comment"></textarea>
+	<textarea class="talk-replyMiniForm-body" type="text" name="commentBody"></textarea>
 	<div class="talk-buttons">
-		<button type="button" onclick="talkPostComent('talk-replyMiniForm-{{ key }}', '{{ postURL }}')">{% trans 'Post' %}</button>
+		<button type="button" onclick="talkPostComent('talk-replyMiniForm-{{ key }}', '{{ key }}', '{{ postURL }}')">{% trans 'Post' %}</button>
 		<a onclick="$('#talk-replyMiniForm-{{ key }}').remove()">{% trans "Cancel" %}</a>
 	</div>
 </div>

@@ -7,176 +7,205 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-05 16:13-0500\n"
-"PO-Revision-Date: 2008-09-21 14:40-0500\n"
-"Last-Translator: Mathieu Sylvain <mathieu@ti-coco.com>\n"
+"POT-Creation-Date: 2008-11-25 08:28-0500\n"
+"PO-Revision-Date: 2008-11-24 15:25-0500\n"
+"Last-Translator: Véronique Durand <veronique@ti-coco.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\wrook.py:50
+#: .\wrook.py:83
 msgid "Moments"
 msgstr ""
 
-#: .\wrook.py:57
+#: .\wrook.py:93
 msgid "Image"
 msgstr ""
 
-#: .\wrook.py:59
+#: .\wrook.py:95
 msgid "Created by"
 msgstr ""
 
-#: .\wrook.py:60
+#: .\wrook.py:96
 msgid "Is this cover reusable for other books?"
 msgstr ""
 
-#: .\wrook.py:61 .\feathers\customize.py:35
+#: .\wrook.py:97 .\feathers\customize.py:36
 msgid "Share with everyone"
 msgstr ""
 
-#: .\wrook.py:76
+#: .\wrook.py:115
 msgid "New book..."
 msgstr ""
 
-#: .\wrook.py:76 .\feathers\views\labs.html.py:38 .\views\startBook.html.py:8
+#: .\wrook.py:115 .\feathers\views\labs.html.py:38 .\views\startBook.html.py:8
 msgid "Title"
 msgstr ""
 
-#: .\wrook.py:77
+#: .\wrook.py:116
 msgid "Author"
 msgstr ""
 
-#: .\wrook.py:78
+#: .\wrook.py:117
 msgid "Slug"
 msgstr ""
 
-#: .\wrook.py:79
+#: .\wrook.py:118
 msgid "Stage"
 msgstr ""
 
-#: .\wrook.py:80
+#: .\wrook.py:119
 msgid "Cover"
 msgstr ""
 
-#: .\wrook.py:81 .\views\books-view.html.py:70 .\views\startBook.html.py:12
+#: .\wrook.py:120 .\views\books-view.html.py:70 .\views\startBook.html.py:12
 msgid "Synopsis"
 msgstr ""
 
-#: .\wrook.py:82 .\views\viewChapter.html.py:144
+#: .\wrook.py:121 .\views\viewChapter.html.py:143
 msgid "Note from the author"
 msgstr ""
 
-#: .\wrook.py:83
+#: .\wrook.py:122
 msgid "License"
 msgstr ""
 
-#: .\wrook.py:84
+#: .\wrook.py:123
 msgid "Attribution"
 msgstr ""
 
-#: .\wrook.py:85
+#: .\wrook.py:124
 msgid "Are you the author"
 msgstr ""
 
-#: .\wrook.py:86
+#: .\wrook.py:125
 msgid "Author's name"
 msgstr ""
 
-#: .\wrook.py:107
+#: .\wrook.py:146
 msgid "Mr. Unknown"
 msgstr ""
 
-#: .\wrook.py:145
+#: .\wrook.py:196
 msgid "Chapter X"
 msgstr ""
 
-#: .\wrook.py:311
+#: .\wrook.py:367
 msgid "The default cover has been set!"
 msgstr ""
 
-#: .\wrook.py:313
+#: .\wrook.py:369
 msgid "Back to the covers"
 msgstr ""
 
-#: .\wrook.py:332
+#: .\wrook.py:388
 msgid "The cover has been changed!"
 msgstr ""
 
-#: .\wrook.py:334
+#: .\wrook.py:390
 msgid "Back to the book"
 msgstr ""
 
-#: .\wrook.py:361
+#: .\wrook.py:417
 msgid "This cover is already in use by other book. It was not deleted"
 msgstr ""
 
-#: .\wrook.py:540
+#: .\wrook.py:580
+msgid ""
+"You are already logged in. In order to login again, you must first logout."
+msgstr ""
+
+#: .\wrook.py:603
 msgid "<strong>Login failed:</strong> "
 msgstr ""
 
-#: .\wrook.py:542
+#: .\wrook.py:605
 msgid ""
 "<strong>Login failed:</strong> Username and password are both mandatory!"
 msgstr ""
 
-#: .\wrook.py:591
+#: .\wrook.py:649
 msgid "Username, email, firstname and lastname are madatory!"
+msgstr "Username, email, first name and last name are mandatory!"
+
+#: .\wrook.py:652
+msgid "Sorry, the username can only contain letters and numbers."
 msgstr ""
 
-#: .\wrook.py:663
+#: .\wrook.py:655
+msgid "This email address is already used by another member"
+msgstr ""
+
+#: .\wrook.py:658
+msgid "This username address is already used by another member"
+msgstr ""
+
+#: .\wrook.py:739
 msgid ""
 "Firstname and lastname are madatory! You will also have to re-upload your "
 "photo!"
 msgstr ""
+"First name and last name are mandatory! You will also have to re-upload your "
+"photo!"
 
-#: .\wrook.py:698
+#: .\wrook.py:775
 msgid "No file were uploaded!"
 msgstr ""
 
-#: .\wrook.py:729
+#: .\wrook.py:810
+msgid ""
+"Un unforseen error occured! Your password could not be changed. You should "
+"contact the site administrator about this problem."
+msgstr ""
+
+#: .\wrook.py:815
 msgid ""
 "Changing password failed! You have either not entered a new password or the "
 "old one does not match."
 msgstr ""
 
-#: .\wrook.py:901 .\wrook.py:904
+#: .\wrook.py:986 .\wrook.py:989
 msgid "No member found with this username or email address!"
 msgstr ""
 
-#: .\wrook.py:1373
+#: .\wrook.py:1450
 msgid "No commands have been processed. Missing parameters!"
 msgstr ""
 
-#: .\wrook.py:1385
+#: .\wrook.py:1462
 msgid "Empty status properties of all books and chapters have been defaulted!"
 msgstr ""
 
-#: .\wrook.py:1390
+#: .\wrook.py:1469
+msgid "The new encryption key has been set!"
+msgstr ""
+
+#: .\wrook.py:1474
 msgid "All license types have been loaded into the database!"
 msgstr ""
 
-#: .\wrook.py:1397
+#: .\wrook.py:1481
 msgid "All chapter numbers have been reseted to 0!"
-msgstr ""
+msgstr "All chapter numbers have been reset to 0!"
 
-#: .\wrook.py:1415
+#: .\wrook.py:1499
 msgid "Congratulations... you flushed the cache!"
 msgstr ""
 
-#: .\wrook.py:1458
+#: .\wrook.py:1587
 msgid ""
 "<a href=\"/Members/$MemberKey\">$MemberFullname</a> started reading <a href="
 "\"/Books/$BookKey\">$BookTitle</a>"
 msgstr ""
 
-#: .\wrook.py:1482
+#: .\wrook.py:1611
 msgid ""
 "<a href=\"/Members/$MemberKey\">$MemberFullname</a> left a comment on <a "
 "href=\"/Books/$BookKey\">$BookTitle</a>"
 msgstr ""
 
-#: .\wrook.py:1483
+#: .\wrook.py:1612
 msgid ""
 "\n"
 "<a href=\"/Feedback/Book/$BookKey\" style=\"float: right; margin-left: 15px;"
@@ -190,87 +219,123 @@ msgid ""
 "$MessageTitle </strong><br />\"&#160;$MessageBody&#160;\"\n"
 msgstr ""
 
-#: .\wrook.py:1532
+#: .\wrook.py:1661
 msgid ""
 "<a href=\"/Members/$MemberKey\">$MemberFullname</a> has flushed the site "
 "cache"
 msgstr ""
 
-#: .\wrook.py:1636
+#: .\wrook.py:1774
 msgid "Default cover"
 msgstr ""
 
-#: .\feathers\customize.py:27
+#: .\wrook.py:1775
+msgid "Encryption key"
+msgstr ""
+
+#: .\feathers\customize.py:28
 msgid "New theme"
 msgstr ""
 
-#: .\feathers\customize.py:28 .\feathers\views\labs-viewFeature.html.py:33
+#: .\feathers\customize.py:29 .\feathers\views\labs-viewFeature.html.py:33
 #: .\feathers\views\labs.html.py:46 .\feathers\views\labs.html.py:73
 #: .\feathers\views\labs.html.py:116 .\feathers\views\labs.html.py:158
 msgid "Description"
 msgstr ""
 
-#: .\feathers\customize.py:29
+#: .\feathers\customize.py:30
 msgid "Created"
 msgstr ""
 
-#: .\feathers\customize.py:30
+#: .\feathers\customize.py:31
 msgid "Default theme"
 msgstr ""
 
-#: .\feathers\customize.py:31
+#: .\feathers\customize.py:32
 msgid "Submitd by"
-msgstr ""
+msgstr "Submitted by"
 
-#: .\feathers\customize.py:33
+#: .\feathers\customize.py:34
 msgid "Background color"
 msgstr ""
 
-#: .\feathers\customize.py:34
+#: .\feathers\customize.py:35
 msgid "Style source code"
 msgstr ""
 
-#: .\feathers\customize.py:76
+#: .\feathers\customize.py:62
 msgid "When selected"
 msgstr ""
 
-#: .\feathers\customize.py:77
+#: .\feathers\customize.py:63
 msgid "Member"
 msgstr ""
 
-#: .\feathers\customize.py:78
+#: .\feathers\customize.py:64
 msgid "Theme"
 msgstr ""
 
-#: .\feathers\membership.py:65 .\feathers\membership.py:71
+#: .\feathers\membership.py:77 .\feathers\membership.py:83
 msgid "Wrong username or bad password."
-msgstr ""
+msgstr "Wrong username or password."
 
-#: .\feathers\membership.py:68
+#: .\feathers\membership.py:80
 msgid ""
 "Your account does not have a password. Use the \"Reset password\" option to "
 "create a new one."
 msgstr ""
 
-#: .\feathers\membership.py:108
+#: .\feathers\membership.py:170
+msgid "Upload a profile photo"
+msgstr ""
+
+#: .\feathers\membership.py:171
+msgid "You uploaded a profile photo"
+msgstr ""
+
+#: .\feathers\membership.py:176
+msgid "Start reading a book"
+msgstr ""
+
+#: .\feathers\membership.py:177
+msgid "You started reading a book"
+msgstr ""
+
+#: .\feathers\membership.py:182
+msgid "Say a few words about yourself in your profile"
+msgstr ""
+
+#: .\feathers\membership.py:183
+msgid "You said a few things about yourself"
+msgstr ""
+
+#: .\feathers\membership.py:188
+msgid "Invite a friend to join Wrook"
+msgstr ""
+
+#: .\feathers\membership.py:189
+msgid "You invited a friend to join Wrook"
+msgstr ""
+
+#: .\feathers\membership.py:235
 msgid "English"
 msgstr ""
 
-#: .\feathers\membership.py:109
+#: .\feathers\membership.py:236
 msgid "French"
 msgstr ""
 
-#: .\feathers\membership.py:113 .\views\editAccount.html.py:53
+#: .\feathers\membership.py:240 .\views\editAccount.html.py:53
 #: .\views\join.html.py:75
 msgid "Male"
 msgstr ""
 
-#: .\feathers\membership.py:114 .\views\editAccount.html.py:54
+#: .\feathers\membership.py:241 .\views\editAccount.html.py:54
 #: .\views\join.html.py:76
 msgid "Female"
 msgstr ""
 
-#: .\feathers\membership.py:132
+#: .\feathers\membership.py:266
 msgid ""
 "\n"
 "Hello $firstname $lastname,\n"
@@ -289,16 +354,16 @@ msgid ""
 "\n"
 msgstr ""
 
-#: .\feathers\membership.py:148
+#: .\feathers\membership.py:282
 msgid "About your Wrook.org account!"
 msgstr ""
 
-#: .\feathers\membership.py:205
+#: .\feathers\membership.py:334
 #, python-format
 msgid "%s invites you to read a book!"
 msgstr ""
 
-#: .\feathers\membership.py:235
+#: .\feathers\membership.py:364
 msgid ""
 "\n"
 "Hello $firstname $lastname,\n"
@@ -320,7 +385,7 @@ msgid ""
 "The Wrook Team\n"
 msgstr ""
 
-#: .\feathers\membership.py:253
+#: .\feathers\membership.py:382
 msgid ""
 "\n"
 "Hello $firstname $lastname,\n"
@@ -339,17 +404,17 @@ msgid ""
 "The Wrook Team\n"
 msgstr ""
 
-#: .\feathers\stories.py:176
+#: .\feathers\stories.py:177
 msgid "Sorry, you do not have the right to delete this item."
 msgstr ""
 
-#: .\feathers\stories.py:177
+#: .\feathers\stories.py:178
 msgid ""
 "The item you tried to delete could not be found. Maybe it was already "
 "deleted."
 msgstr ""
 
-#: .\feathers\stories.py:178
+#: .\feathers\stories.py:179
 msgid "You must be logged in to delete this item."
 msgstr ""
 
@@ -361,28 +426,10 @@ msgstr ""
 msgid "Select a theme"
 msgstr ""
 
-#: .\feathers\views\customize-selectTheme.html.py:26
+#: .\feathers\views\customize-selectTheme.html.py:21
 #: .\feathers\views\customize-viewThemes.html.py:34
 #: .\views\customize.html.py:36
 msgid "Sorry, no themes have been created!"
-msgstr ""
-
-#: .\feathers\views\customize-selectTheme.html.py:45
-#: .\feathers\views\customize-viewThemes.html.py:45
-#: .\views\customize.html.py:70
-msgid "Create a new theme"
-msgstr ""
-
-#: .\feathers\views\customize-selectTheme.html.py:49
-msgid "About themes"
-msgstr ""
-
-#: .\feathers\views\customize-selectTheme.html.py:51
-msgid ""
-" \n"
-"Here you can browse the various themes used throughout the site. You can "
-"select themes for your\n"
-"profile or for your books. You can also share the themes you create.\n"
 msgstr ""
 
 #: .\feathers\views\customize-themeEdit.html.py:5
@@ -406,11 +453,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: .\feathers\views\customize-themeEdit.html.py:30
-msgid " Save as default"
-msgstr ""
-
-#: .\feathers\views\customize-themeEdit.html.py:32
+#: .\feathers\views\customize-themeEdit.html.py:31
 #: .\feathers\views\membership-inviteNew-preview.html.py:33
 #: .\feathers\views\membership-inviteNew.html.py:19
 #: .\views\books-chapter-edit.html.py:18 .\views\covers-edit.html.py:37
@@ -445,6 +488,11 @@ msgstr ""
 msgid "By"
 msgstr ""
 
+#: .\feathers\views\customize-viewThemes.html.py:45
+#: .\views\customize.html.py:73
+msgid "Create a new theme"
+msgstr ""
+
 #: .\feathers\views\labs-submit.html.py:5 .\feathers\views\labs.html.py:4
 #: .\feathers\views\labs.html.py:7
 msgid "Wrook Labs"
@@ -461,7 +509,7 @@ msgstr ""
 
 #: .\feathers\views\labs-submit.html.py:21
 #: .\feathers\views\labs-viewFeature.html.py:94
-#: .\views\admin-commands.html.py:49
+#: .\views\admin-commands.html.py:54
 msgid "Back to the labs"
 msgstr ""
 
@@ -494,11 +542,11 @@ msgid "Voting members"
 msgstr ""
 
 #: .\feathers\views\labs-viewFeature.html.py:73
-#: .\feathers\views\labs.html.py:191 .\views\admin-commands.html.py:46
+#: .\feathers\views\labs.html.py:191 .\views\admin-commands.html.py:51
 #: .\views\covers-list.html.py:52 .\views\covers-select.html.py:54
 #: .\views\covers-view.html.py:15 .\views\members-books-list.html.py:52
 #: .\views\members-covers-list.html.py:47 .\views\revisions-list.html.py:33
-#: .\views\revisions-view.html.py:37 .\views\viewAccount.html.py:57
+#: .\views\revisions-view.html.py:37 .\views\viewAccount.html.py:59
 #: .\views\viewChapter.html.py:88
 msgid "Options"
 msgstr ""
@@ -636,7 +684,7 @@ msgstr ""
 
 #: .\feathers\views\membership-invites.html.py:4
 #: .\feathers\views\membership-invites.html.py:7
-#: .\views\template-main-d.html.py:70
+#: .\views\template-profile.html.py:21
 msgid "Invites"
 msgstr ""
 
@@ -665,7 +713,7 @@ msgid ""
 msgstr ""
 
 #: .\feathers\views\membership-invites.html.py:60
-msgid "All invites"
+msgid "Accepted invites"
 msgstr ""
 
 #: .\feathers\views\membership-invites.html.py:66
@@ -676,7 +724,7 @@ msgstr ""
 msgid "To"
 msgstr ""
 
-#: .\feathers\views\membership-invites.html.py:109
+#: .\feathers\views\membership-invites.html.py:111
 msgid "Invite a friend"
 msgstr ""
 
@@ -747,6 +795,126 @@ msgstr ""
 msgid "Administrator"
 msgstr ""
 
+#: .\views\about-CPAL.html.py:4
+msgid "CPAL License"
+msgstr ""
+
+#: .\views\about-CPAL.html.py:7
+msgid "Common Public Attribution License 1.0 (CPAL)"
+msgstr ""
+
+#: .\views\about-CPAL.html.py:13
+msgid ""
+"\n"
+"\t\t<p>\n"
+"\t\t\tThe source code of Wrook is distributed under the terms of the license "
+"described below.\n"
+"\t\t</p>\n"
+"\t\t<p>\n"
+"\t\t\tFor more details on this innitiative, visit the \"<a href='/About/"
+"OpenSourceLicense'>Wrook is Open Source</a>\" page.\n"
+"\t\t</p>\n"
+"\t"
+msgstr ""
+
+#: .\views\about-halfBakedEdition.html.py:4 .\views\template-main.html.py:61
+msgid "Half Baked Edition"
+msgstr ""
+
+#: .\views\about-halfBakedEdition.html.py:7
+msgid "Wrook, the Half Baked Edition!"
+msgstr ""
+
+#: .\views\about-halfBakedEdition.html.py:13
+msgid ""
+"\n"
+"<h3>Q: What does \"Half Baked\" mean ?</h3>\n"
+"<p>\n"
+"It simply means that:\n"
+"</p>\n"
+"<ul>\n"
+"<li>It still has plenty of bugs</li>\n"
+"<li>Some feature are incomplete</li>\n"
+"<li>Not all features are available yet</li>\n"
+"<li>Its not quite secure or stable yet</li>\n"
+"</ul>\n"
+"<p>In other words, <strong>You can eat some, but it might taste funny</"
+"strong>!</li>\n"
+"\n"
+"<h3>Q: If I start adding my stuff, am I at risk of loosing it?</h3>\n"
+"<p>\n"
+"Short answer: Yes. Long answer: I suggest you keep copies of whatever you "
+"write\n"
+"on your computer. I try to make sure nothing is lost when features are "
+"updated, but\n"
+"the fact is that not enough testing has been done and backups are not being "
+"done yet.\n"
+"So, just be carefull.\n"
+"</p>\n"
+"\n"
+"<h3>Q: When will it be \"Fully Cooked\"?</h3>\n"
+"<p>\n"
+"Development is moving along great and new features come in daily. I dont "
+"know\n"
+"exactly how much needs to be done so that early members are satisfied with "
+"it, but\n"
+"I personnaly would like to start advertising around January.\n"
+"</p>\n"
+msgstr ""
+
+#: .\views\about-openSourceAttribution.html.py:4
+#: .\views\about-openSourceAttribution.html.py:7
+#: .\views\panels-aboutOpenSource.html.py:7
+msgid "Attribution to Wrook"
+msgstr ""
+
+#: .\views\about-openSourceLicense.html.py:4
+msgid "Open Source License"
+msgstr ""
+
+#: .\views\about-openSourceLicense.html.py:7
+msgid "Wrook is Open Source!"
+msgstr ""
+
+#: .\views\about-who.html.py:4 .\views\about-who.html.py:7
+msgid "Who is behind Wrook?"
+msgstr ""
+
+#: .\views\about-who.html.py:13
+msgid ""
+"\n"
+"<div style=\"float:right; margin: 0px 0px 20px 20px\"><img src=\"/images/"
+"mathieu.jpg\" alt=\"Mathieu Sylvain\" /></div>\n"
+"<p>\n"
+"My name is Mathieu Sylvain, and I'm a web developper in his thirties with a "
+"marvelous girlfriend, a two year-old girl and a day job.\n"
+"</p>\n"
+"<p>\n"
+"I do not have a dozen code ninjas or web monkeys working for me and I have "
+"no venture capital investor showering me with money.\n"
+"</p>\n"
+"<p>\n"
+"I'm building Wrook mostly alone, out of my free time and with no budget.\n"
+"</p>\n"
+"<p>\n"
+"I've been coding since the age of 15 and building web sites since Internet "
+"Explorer 2.\n"
+"For me, wrook is a way to have fun while building something which I believe "
+"is for a \"greater good\".\n"
+"</p>\n"
+"<p>\n"
+"I'd welcome any help and would relish the possibility of getting sponsors, "
+"but until then I'm still having a lot of fun!\n"
+"</p>\n"
+"<p>\n"
+"<strong>Cheers!</strong>\n"
+"</p>\n"
+"<p>\n"
+"My LinkedIn profile: <a href=\"http://www.linkedin.com/in/masyl\">http://www."
+"linkedin.com/in/masyl</a>\n"
+"</p>\n"
+msgstr ""
+
 #: .\views\account-changePassword.html.py:4
 #: .\views\account-changePassword.html.py:7
 msgid "Change your password"
@@ -784,7 +952,7 @@ msgstr ""
 msgid "Labs: Admin commands"
 msgstr ""
 
-#: .\views\admin-commands.html.py:40
+#: .\views\admin-commands.html.py:45
 msgid "This page is restricted to the site administrators"
 msgstr ""
 
@@ -848,13 +1016,13 @@ msgstr ""
 msgid "Start reading"
 msgstr ""
 
-#: .\views\books-view.html.py:37 .\views\viewChapter.html.py:129
+#: .\views\books-view.html.py:37 .\views\viewChapter.html.py:128
 msgid "About this book"
 msgstr ""
 
 #: .\views\books-view.html.py:41 .\views\main.html.py:19
 #: .\views\readers.html.py:8 .\views\readers.html.py:16
-#: .\views\viewChapter.html.py:133
+#: .\views\viewChapter.html.py:132
 msgid "Readers"
 msgstr ""
 
@@ -910,7 +1078,7 @@ msgstr ""
 msgid "Resume writing"
 msgstr ""
 
-#: .\views\books-view.html.py:148 .\views\viewChapter.html.py:109
+#: .\views\books-view.html.py:148 .\views\viewChapter.html.py:108
 msgid "Start a new chapter"
 msgstr ""
 
@@ -931,8 +1099,8 @@ msgid "Delete whole book"
 msgstr ""
 
 #: .\views\books.html.py:4 .\views\books.html.py:7 .\views\main.html.py:17
-#: .\views\members-books-list.html.py:5 .\views\template-main-d.html.py:43
-#: .\views\template-main-d.html.py:66 .\views\viewMember.html.py:15
+#: .\views\members-books-list.html.py:5 .\views\template-main.html.py:36
+#: .\views\template-profile.html.py:17 .\views\viewMember.html.py:15
 msgid "Books"
 msgstr ""
 
@@ -1089,7 +1257,7 @@ msgstr ""
 msgid "Choose as the default"
 msgstr ""
 
-#: .\views\customize.html.py:5 .\views\template-main-d.html.py:45
+#: .\views\customize.html.py:5 .\views\template-main.html.py:38
 msgid "Customize"
 msgstr ""
 
@@ -1111,6 +1279,10 @@ msgid ""
 "members. Themes can be applied to you profile page or to a specific books.</"
 "p>\n"
 msgstr ""
+" \n"
+"<p>You can create your own theme and then choose to share it with other "
+"members. Themes can be applied to your profile page or to a specific book.</"
+"p>\n"
 
 #: .\views\customize.html.py:31
 msgid "Browse all themes"
@@ -1130,6 +1302,14 @@ msgstr ""
 
 #: .\views\customize.html.py:59 .\views\members-covers-list.html.py:51
 msgid "Browse all covers"
+msgstr ""
+
+#: .\views\customize.html.py:71
+msgid "Default"
+msgstr ""
+
+#: .\views\customize.html.py:71
+msgid "Select the default theme"
 msgstr ""
 
 #: .\views\deleteBook.html.py:6
@@ -1185,11 +1365,11 @@ msgstr ""
 
 #: .\views\editAccount.html.py:21
 msgid "Firstname *"
-msgstr ""
+msgstr "First name *"
 
 #: .\views\editAccount.html.py:29
 msgid "Lastname *"
-msgstr ""
+msgstr "Last name *"
 
 #: .\views\editAccount.html.py:52 .\views\join.html.py:74
 msgid "Select one..."
@@ -1209,7 +1389,7 @@ msgid ""
 "really know what we're doing!"
 msgstr ""
 
-#: .\views\join.html.py:5
+#: .\views\join.html.py:5 .\views\visitorHome.html.py:26
 msgid "Join Wrook"
 msgstr ""
 
@@ -1233,18 +1413,19 @@ msgstr ""
 
 #: .\views\join.html.py:43
 msgid "Firstname"
-msgstr ""
+msgstr "First name"
 
 #: .\views\join.html.py:51
 msgid "Lastname"
-msgstr ""
+msgstr "Last name"
 
-#: .\views\join.html.py:84 .\views\template-main-d.html.py:51
+#: .\views\join.html.py:84 .\views\template-main.html.py:45
 msgid "Join"
 msgstr ""
 
+#: .\views\login-already.html.py:4 .\views\login-already.html.py:7
 #: .\views\login.html.py:4 .\views\login.html.py:7 .\views\login.html.py:34
-#: .\views\passwordSent.html.py:14 .\views\template-main-d.html.py:53
+#: .\views\passwordSent.html.py:17 .\views\template-main.html.py:46
 msgid "Login"
 msgstr ""
 
@@ -1263,7 +1444,7 @@ msgid ""
 msgstr ""
 
 #: .\views\main.html.py:16 .\views\memberHome.html.py:4
-#: .\views\template-main-d.html.py:42 .\views\template-main-d.html.py:50
+#: .\views\template-main.html.py:44
 msgid "Home"
 msgstr ""
 
@@ -1271,12 +1452,12 @@ msgstr ""
 msgid "Authors"
 msgstr ""
 
-#: .\views\main.html.py:20 .\views\template-main-d.html.py:46
+#: .\views\main.html.py:20 .\views\template-main.html.py:39
 msgid "Labs"
 msgstr ""
 
 #: .\views\main.html.py:25 .\views\part-newMemberWelcome.html.py:6
-#: .\views\visitorHome.html.py:4
+#: .\views\template-main.html.py:35 .\views\visitorHome.html.py:4
 msgid "Welcome"
 msgstr ""
 
@@ -1284,34 +1465,138 @@ msgstr ""
 msgid "Account"
 msgstr ""
 
-#: .\views\main.html.py:27 .\views\template-main-d.html.py:48
+#: .\views\main.html.py:27 .\views\template-main.html.py:40
 msgid "Logout"
 msgstr ""
 
-#: .\views\memberHome.html.py:10 .\views\members-stories.html.py:4
+#: .\views\member-suggestions.html.py:4
+#: .\views\panels-memberConversion.html.py:4
+msgid "Suggestions"
+msgstr ""
+
+#: .\views\member-suggestions.html.py:9
+msgid ""
+"\n"
+"<h3>\n"
+"Welcome! As a new member here is a few thing you might find interesting.\n"
+"</h3>\n"
+"<p>\n"
+"To help our member discover our features we provide suggestions accompanied\n"
+"by a progress indicator. So here is a few of those suggestions to get you "
+"started:\n"
+"</p>\n"
+msgstr ""
+
+#: .\views\member-suggestions.html.py:27
+#, python-format
+msgid ""
+"\n"
+"<h3>\n"
+"Up to now you have tried only <strong>%(progress)s&#37;</strong> of the "
+"suggested features!\n"
+"</h3>\n"
+"<p>\n"
+"Here is a few more suggestions of what you could try:\n"
+"</p>\n"
+msgstr ""
+
+#: .\views\member-suggestions.html.py:42 .\views\member-suggestions.html.py:67
+#: .\views\member-suggestions.html.py:92
+msgid "Features you have already tried:"
+msgstr ""
+
+#: .\views\member-suggestions.html.py:52
+#, python-format
+msgid ""
+"\n"
+"<h3>\n"
+"Your making progress! Your have already tried <strong>%(progress)s&#37;</"
+"strong> of Wrook!\n"
+"</h3>\n"
+"<p>\n"
+"Here's a few more things, you could try:\n"
+"</p>\n"
+msgstr ""
+
+#: .\views\member-suggestions.html.py:77
+#, python-format
+msgid ""
+"\n"
+"<h3>\n"
+"\tExcellent! You only have <strong>%(progressLeft)s&#37;</strong> of "
+"suggestions left to try!\n"
+"</h3>\n"
+"<p>\n"
+"\tHere is a few last things for you to try:\n"
+"</p>\n"
+msgstr ""
+
+#: .\views\member-suggestions.html.py:102
+#, python-format
+msgid ""
+"\n"
+"<h3>\n"
+"\tWow! Thank you %(firstname)s, your seem to have tried all of our "
+"features!\n"
+"</h3>\n"
+"<p>\n"
+"\tWe appreciate very much your involvement in Wrook. We need more members "
+"like you!\n"
+"</p>\n"
+"<p>\n"
+"\tCurrently we dont have anything new for you to try! But dont worry, as we "
+"build new features, we'll\n"
+"\tbe sure to post them here for you to discover and try.\n"
+"</p>\n"
+"<p>\n"
+"\tUntil then, you can always go to the Labs and make your own suggestions "
+"about which new features we should add next.\n"
+"</p>\n"
+"<p>\n"
+"\t[.... insert link to labs and contact form, and maybe a few permanent "
+"suggestions... ]\n"
+"</p>\n"
+"<p>\n"
+"\tThanks again!\n"
+"</p>\n"
+msgstr ""
+
+#: .\views\member-suggestions.html.py:123
+msgid "Here is all those features you have tried:"
+msgstr ""
+
+#: .\views\member-suggestions.html.py:137
+msgid "Progress:"
+msgstr ""
+
+#: .\views\memberHome.html.py:11 .\views\members-stories.html.py:4
 #: .\views\members-stories.html.py:9
 msgid "What's new"
 msgstr ""
 
-#: .\views\memberHome.html.py:19 .\views\members-stories.html.py:18
+#: .\views\memberHome.html.py:19
+msgid "There is no activity to show!"
+msgstr ""
+
+#: .\views\memberHome.html.py:26 .\views\members-stories.html.py:18
 msgid "Your options"
 msgstr ""
 
-#: .\views\memberHome.html.py:22 .\views\members-books-list.html.py:56
+#: .\views\memberHome.html.py:29 .\views\members-books-list.html.py:56
 #: .\views\startBook.html.py:5
 msgid "Start a new book"
 msgstr ""
 
-#: .\views\memberHome.html.py:23
-msgid "Your public profile"
+#: .\views\memberHome.html.py:30
+msgid "Public profile"
 msgstr ""
 
-#: .\views\memberHome.html.py:24
-msgid "Your account settings"
+#: .\views\memberHome.html.py:31
+msgid "Account settings"
 msgstr ""
 
-#: .\views\members-bookmarks-list.html.py:5 .\views\template-main-d.html.py:67
-#: .\views\viewMember.html.py:44
+#: .\views\members-bookmarks-list.html.py:5
+#: .\views\template-profile.html.py:18 .\views\viewMember.html.py:44
 msgid "Readings"
 msgstr ""
 
@@ -1342,7 +1627,7 @@ msgid "Create a new cover"
 msgstr ""
 
 #: .\views\members.html.py:5 .\views\members.html.py:9
-#: .\views\template-main-d.html.py:44
+#: .\views\template-main.html.py:37
 msgid "Members"
 msgstr ""
 
@@ -1380,6 +1665,68 @@ msgstr ""
 
 #: .\views\messages.html.py:85
 msgid "No other messages have been posted yet!"
+msgstr ""
+
+#: .\views\panels-aboutOpenSource.html.py:3
+msgid "More About Licensing"
+msgstr ""
+
+#: .\views\panels-aboutOpenSource.html.py:6
+msgid "About Wrook's Licensing"
+msgstr ""
+
+#: .\views\panels-aboutOpenSource.html.py:8
+msgid "CPAL 1.0 License"
+msgstr ""
+
+#: .\views\panels-memberConversion.html.py:9
+#, python-format
+msgid ""
+"\n"
+"<p>\n"
+"Up to now you have tried <strong>%(progress)s&#37;</strong> of our features! "
+"<strong><a href=\"/Suggestions\">Try more...</a></strong>\n"
+"</p>\n"
+msgstr ""
+
+#: .\views\panels-memberConversion.html.py:16
+#, python-format
+msgid ""
+"\n"
+"<p>\n"
+"Your making progress! Your have already used <strong>%(progress)s&#37;</"
+"strong> of wrook! <strong><a href=\"/Suggestions\">Try a few more...</a></"
+"strong>\n"
+"</p>\n"
+msgstr ""
+
+#: .\views\panels-memberConversion.html.py:23
+#, python-format
+msgid ""
+"\n"
+"<p>\n"
+"Excellent! You only have <strong>%(progressLeft)s&#37;</strong> left to try! "
+"<strong><a href=\"/Suggestions\">A few last things...</a></strong>\n"
+"</p>\n"
+msgstr ""
+
+#: .\views\panels-memberConversion.html.py:30
+msgid ""
+"\n"
+"<p>\n"
+"Wow! Your seem to have tried all of our features, <strong><a href=\"/"
+"Suggestions\">Thank you and...</a></strong>\n"
+"</p>\n"
+msgstr ""
+
+#: .\views\part-memberConversion-short.html.py:14
+#, python-format
+msgid ""
+"\n"
+"<strong>Welcome %(firstname)s!</strong> Since you are a new member we have "
+"a\n"
+"few suggestions you might find interesting.\n"
+"<a href=\"/Suggestions\">Read more...</a>\n"
 msgstr ""
 
 #: .\views\part-newMemberWelcome.html.py:8
@@ -1423,8 +1770,10 @@ msgstr ""
 msgid "The password has been sent to: "
 msgstr ""
 
-#: .\views\passwordSent.html.py:15
-msgid "Send again"
+#: .\views\passwordSent.html.py:13
+msgid ""
+"If you fail to receive the password within the next few hours, we invite you "
+"to contact the site administrator: "
 msgstr ""
 
 #: .\views\readers.html.py:6 .\views\readers.html.py:14
@@ -1472,15 +1821,27 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: .\views\template-main-d.html.py:64
+#: .\views\template-main.html.py:56
+msgid "About"
+msgstr ""
+
+#: .\views\template-main.html.py:59
+msgid "Who is behind Wrook"
+msgstr ""
+
+#: .\views\template-main.html.py:60
+msgid "Open source license"
+msgstr ""
+
+#: .\views\template-profile.html.py:15
 msgid "Feed"
 msgstr ""
 
-#: .\views\template-main-d.html.py:65
+#: .\views\template-profile.html.py:16
 msgid "Profile"
 msgstr ""
 
-#: .\views\template-main-d.html.py:68
+#: .\views\template-profile.html.py:19
 msgid "Covers"
 msgstr ""
 
@@ -1508,11 +1869,15 @@ msgstr ""
 msgid "Your account"
 msgstr ""
 
-#: .\views\viewAccount.html.py:60
+#: .\views\viewAccount.html.py:47
+msgid "Edit account"
+msgstr ""
+
+#: .\views\viewAccount.html.py:62
 msgid "Change password"
 msgstr ""
 
-#: .\views\viewAccount.html.py:61
+#: .\views\viewAccount.html.py:63
 msgid "Change profile photo"
 msgstr ""
 
@@ -1552,7 +1917,7 @@ msgstr ""
 msgid "Previous chapter"
 msgstr ""
 
-#: .\views\viewChapter.html.py:68 .\views\viewChapter.html.py:98
+#: .\views\viewChapter.html.py:68 .\views\viewChapter.html.py:97
 msgid "Back to cover"
 msgstr ""
 
@@ -1560,35 +1925,31 @@ msgstr ""
 msgid "Next chapter"
 msgstr ""
 
-#: .\views\viewChapter.html.py:97
-msgid "Invite your friends!"
-msgstr ""
-
-#: .\views\viewChapter.html.py:104
+#: .\views\viewChapter.html.py:103
 msgid "Editing"
 msgstr ""
 
-#: .\views\viewChapter.html.py:108
+#: .\views\viewChapter.html.py:107
 msgid "Write chapter"
 msgstr ""
 
-#: .\views\viewChapter.html.py:110
+#: .\views\viewChapter.html.py:109
 msgid "Edit chapter options"
 msgstr ""
 
-#: .\views\viewChapter.html.py:111
+#: .\views\viewChapter.html.py:110
 msgid "Delete chapter"
 msgstr ""
 
-#: .\views\viewChapter.html.py:118
+#: .\views\viewChapter.html.py:117
 msgid "About this chapter"
 msgstr ""
 
-#: .\views\viewChapter.html.py:122
+#: .\views\viewChapter.html.py:121
 msgid "Revisions"
 msgstr ""
 
-#: .\views\viewChapter.html.py:136
+#: .\views\viewChapter.html.py:135
 msgid "Book feedback"
 msgstr ""
 
@@ -1596,15 +1957,7 @@ msgstr ""
 msgid "Read Write Share!"
 msgstr ""
 
-#: .\views\visitorHome.html.py:15
-msgid ""
-"\n"
-"<h2>Our motto</h2>\n"
-"<p>When lovers of the written words get together, wonderful things are bound "
-"to happen!</p>\n"
-msgstr ""
-
-#: .\views\visitorHome.html.py:20
+#: .\views\visitorHome.html.py:16
 msgid ""
 "\n"
 "<p>Wrook is a community for readers and writers who share a passion for "
@@ -1619,7 +1972,12 @@ msgid ""
 "</ul>\n"
 msgstr ""
 
-#: .\views\visitorHome.html.py:41
+#: .\views\visitorHome.html.py:31
+#, fuzzy
+msgid "Latest news"
+msgstr "Last name"
+
+#: .\views\visitorHome.html.py:42
 msgid ""
 "\n"
 "<p>Wrook is adding features as fast as possible to gear up for the "

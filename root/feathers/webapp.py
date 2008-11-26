@@ -40,7 +40,7 @@ class RequestHandler(webapp.RequestHandler):
 	def getRender(self, templateFile=""): #Refactor: merge with render()
 		self.Model.update({"masterTemplate": self.MasterTemplate}) # Includes the path of the MasterTemplate in he model
 		if templateFile != "": self.Template = templateFile #  If a template path is specified it overrides the one set previously
-		path = os.path.join(self.TemplateBase, self.Template) # Merges the base folder and the template path
+		path = os.path.join(self.TemplateBaseFolder, self.Template) # Merges the base folder and the template path
 		templateText = template.render(path, self.Model) # Renders the template with the Model
 		return templateText # returns the rendered template
 

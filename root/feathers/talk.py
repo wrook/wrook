@@ -8,7 +8,8 @@ from feathers import webapp, membership
 
 def URLMappings():
 	return [
-		(r'/Talk/Post/(.*)/Reply/MiniForm/JSON', ReplyMiniFormJSON)
+		(r'/Talk/Post/(.*)/Reply/MiniForm/JSON', ReplyMiniFormJSON),
+		(r'/Talk/Post/(.*)/Reply/MiniForm/JSON/Post', ReplyMiniFormJSONPost)
 	]
 
 def onRequest(request): # Event triggering to let the host application intervene
@@ -30,7 +31,15 @@ class Topic(Post):
 
 
 class Reply(Post):
-	Topic = db.ReferenceProperty(Topic, collection_name="Replies", required=True)
+	#Topic = db.ReferenceProperty(Topic, collection_name="Replies", required=True)
+	
+	def renderBasic(self, request):
+		request.Model.update({"reply": self})
+		request.TemplateBaseFolder = os.path.dirname(__file__)
+		return request.getRender("views/talk-part-replies.html")
+
+def getReplies(parent):
+	return Reply.all().ancestor(parent).order("Sent").fetch(limit=999)
 
 class ReplyMiniFormJSON(webapp.RequestHandler):
 	def get(self, key):
@@ -43,11 +52,38 @@ class ReplyMiniFormJSON(webapp.RequestHandler):
 			self.TemplateBaseFolder = os.path.dirname(__file__)
 			html = self.getRender("views/talk-comment-miniForm.html")
 			data = {"errorCode":0, "html":html}
-			self.response.out.write(simplejson.dumps(data))
-		else: self.response.out.write(simplejson.dumps({"errorCode":1004, "errorMessage": _("You must be logged in to post a comment.")}))
+			self.response.out.write("(%s)" % simplejson.dumps(data))
+		else:
+				self.response.out.write(simplejson.dumps({
+					"errorCode":1004,
+					"errorMessage": _("You must be logged in to post a comment.")
+					}))
 
-	def post(self, key):
+class ReplyMiniFormJSONPost(webapp.RequestHandler):
+	def get(self, key):
 		onRequest(self)
 		if self.CurrentMember:
-			pass
+			parentEntity = db.get(key)
+			commentBody = self.request.get("commentBody")
+			if parentEntity:
+				if commentBody:
+					reply = Reply(
+						parent = parentEntity,
+						From = self.CurrentMember,
+						Body = commentBody)
+					reply.put()
+					self.response.out.write("(%s)" % simplejson.dumps({
+						"errorCode":0,
+						"html": reply.renderBasic(self)
+						}))
+				else: #Return empty html is the reply body was empty
+					self.response.out.write(simplejson.dumps({
+						"errorCode":0
+						}))
+			else: self.error(404)
+		else:
+			self.response.out.write(simplejson.dumps({
+				"errorCode":1004,
+				"errorMessage": _("You must be logged in to post a comment.")
+				}))
 
