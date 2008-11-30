@@ -3,7 +3,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from django.utils import simplejson
 from google.appengine.ext import db
 from google.appengine.api import memcache
-from feathers import webapp, membership, talk
+from feathers import webapp, membership
 
 # FEED Module for Google App Engine
 
@@ -39,7 +39,7 @@ from feathers import webapp, membership, talk
 
 def URLMappings():
 	return [
-		(r'/Stories/Reply/(.*)', StoryPostReply),
+#		(r'/Stories/Reply/(.*)', StoryPostReply),
 		(r'/Stories/Post/(.*)/Delete/JSON', StoryPostDeleteJSON)
 	]
 
@@ -112,9 +112,6 @@ class StoryOccurence(db.Model):
 		post.put()
 		return post
 
-class StoryPostTopic(talk.Topic):
-	isRead = db.BooleanProperty(default = False) # The author has forced this message to be private
-
 class StoryPost(db.Model):
 	Story = None #The reference story of this occurence
 	StoryID = db.StringProperty(required=True)
@@ -127,11 +124,16 @@ class StoryPost(db.Model):
 	WhenOccured = db.DateTimeProperty()
 	WhenPublished = db.DateTimeProperty(auto_now_add=True)
 	Importance = db.IntegerProperty(default=0) #specific to the each users
-	Topic = db.ReferenceProperty(StoryPostTopic, collection_name="StoryPost")
 
 	def getReplies(self):
-		return talk.getReplies(self)
+		pass
+#		return talk.getReplies(self)
 
+	def delete(self):
+		for reply in self.getReplies():
+			reply.delete()
+		return super(Story, self).delete()
+"""
 class StoryPostReply(webapp.RequestHandler):
 	def post(self, key):
 		onRequest(self)
@@ -159,7 +161,7 @@ class StoryPostReply(webapp.RequestHandler):
 				else: self.redirect("/Members/%s" % storyPost.Member.key())
 			else: self.error(404)
 		else: self.requestLogin()
-
+"""
 class StoryPostDeleteJSON(webapp.RequestHandler):
 	def get(self, key):
 		onRequest(self)

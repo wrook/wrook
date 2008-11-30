@@ -216,6 +216,7 @@ class Member(db.Model):
 		memcache.delete("wrookMember-%s" % self.Username)
 		#Refactor: These thumbnail keys should not be needed if the image server is well built
 		memcache.delete("profilePhotoThumb30-%s" % self.key())
+		memcache.delete("profilePhotoThumb40-%s" % self.key())
 		memcache.delete("profilePhotoThumb50-%s" % self.key())
 		memcache.delete("profilePhotoThumb80-%s" % self.key())
 		memcache.delete("profilePhotoThumb100-%s" % self.key())
@@ -296,6 +297,10 @@ http://www.wrook.org
 		if self.ProfilePhoto: return "/Membership/ProfilePhoto/Image/%s?width=30" % self.key()
 		else: return "/images/avatar.png"
 
+	def gravatar40(self):
+		if self.ProfilePhoto: return "/Membership/ProfilePhoto/Image/%s?width=40" % self.key()
+		else: return "/images/avatar.png"
+
 	def gravatar50(self):
 		if self.ProfilePhoto: return "/Membership/ProfilePhoto/Image/%s?width=50" % self.key()
 		else: return "/images/avatar.png"
@@ -313,7 +318,7 @@ http://www.wrook.org
 		else: return "/images/avatar.png"
 
 	def fullname(self):
-		return str(self.Firstname + " " + self.Lastname)
+		return "%s %s" % (self.Firstname, self.Lastname)
 
 class Invite(db.Expando):
 	FromMember = db.ReferenceProperty(Member, collection_name="SentInvites")
@@ -489,6 +494,9 @@ class ProfilePhotoImage(webapp.RequestHandler):
 				if paramWidth == "30":
 					width = 30
 					height = 30
+				if paramWidth == "40":
+					width = 40
+					height = 40
 				elif paramWidth == "80":
 					width = 80
 					height = 80

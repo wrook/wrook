@@ -1,0 +1,44 @@
+{% load i18n %}
+<script>
+{% include "talk-script-replyForm.js" %}
+</script>
+<style>
+	form label.error {
+		display: block;
+		padding: 2px 0px 5px 0px;
+		background: none;
+		border: none;
+		margin: 0px;
+		font-weight: bold;
+		color: #BB0000;
+	}
+	input.error,
+	textarea.error {
+		border: 2px solid #FF0000 !important;
+	}
+
+</style>
+<div style="position: relative; padding: 0px 0px 0px 64px;">
+	<h2>
+		{% trans "Post a reply" %}
+	</h2>
+	<div style="position: relative">
+		<div class="memberAvatar" style="position:absolute; top:0px; right:0px;">
+			<img style="width: 40px; height: 40px;" src="{{currentMember.gravatar40}}" />
+		</div>
+		<div style="background: #f1f1f1; padding: 10px; border-bottom: 2px solid #bbbbbb; width:514px;">
+			<form action="/Talk/Reply/New/{{parentKey}}/" method="post" id="frmAddNewReply">
+				<input type="hidden" name="parentTitle" value="{{parentTitle}}" />
+				<input type="hidden" name="parentURL" value="{{parentURL}}" />
+				<input type="hidden" name="recipient" value="{{recipient}}" />
+				<div>
+					<textarea style="background: #fff; width: 500px; height: 40px;" id="frmAddNewReply-body" name="body" title="{% trans "Your message..." %}"></textarea>
+				</div>
+				<div>
+					<input class="loadingMessage" style="display: none;" type="submit" disabled="true" value="{% trans "Posting..." %}" />
+					<input class="submit" type="submit" value="{% trans "Post" %}" />
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

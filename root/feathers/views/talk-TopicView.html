@@ -1,0 +1,17 @@
+{% extends masterTemplate %}
+{% load i18n %}
+{% block title %}
+	<h1>
+		{% trans "Discussion Topic" %}
+	</h1>
+{% endblock %}
+{% block content %}
+	<div style="margin: 10px 0px;">
+		{% include "talk-part-topic.html" %}
+	</div>
+	<div class="replies">
+		{{ renderedReplies }}
+	</div>
+	{{ renderedReplyForm }}
+{% endblock %}
+

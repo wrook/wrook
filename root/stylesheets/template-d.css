@@ -245,6 +245,7 @@ table tr td {
 	background: url(../images/pageSection-shadow.png) bottom left no-repeat;
 	width: 712px;
 	height: 10px;
+	margin-bottom: 20px;
 }
 
 
@@ -463,3 +464,16 @@ ul#siteMenu li a:link {
 }
 
 
+#secondarySidebar {
+	padding: 10px;
+	position: absolute;
+	right: 10px;
+	top: 44px;
+	width: 220px;
+	background: url(/images/background50black.png);
+}
+#secondarySidebar a:visited,
+#secondarySidebar a:visited {
+	color: #fff;
+	font-weight: bold;
+}

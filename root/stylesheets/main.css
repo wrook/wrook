@@ -32,14 +32,33 @@ a img {
 	border: none;
 }
 
+.inputExample {
+	color: #999999;
+	font-weight: normal;
+}
+
+form {
+	position: relative;
+}
 
 input[type="text"],
 input[type="password"],
 textarea,
 select {
+	font-size: 1em;
+	font-family: Tahoma, Sans-serif;
 	background: #F6F6F6 url(/images/input-field-background.png);
 	border: 1px solid #bbbbbb;
 	padding: 4px 5px 2px 5px;
+	margin: 2px 0px;
+}
+
+input:focus[type="text"],
+input:focus[type="password"],
+select:focus,
+textarea:focus{
+	background: #dadae6 !important;
+	border: 1px solid #909090;
 }
 
 option {
@@ -274,7 +293,7 @@ table tr td ul li {
 	color: #666666;
 }
 
-.error {
+.errorMessage {
 	padding: 10px;
 	margin: 15px 0px;
 	border: 2px solid #FF0000;
@@ -435,6 +454,10 @@ table tr td ul li {
 	padding: 0px 22px 0px 0px;
 	background: url(../images/cover-shadow.png) bottom right no-repeat;
 }
+.flat.cover {
+	background: none !important;
+}
+
 .cover.width180 {
 	width: 180px;
 }
@@ -617,8 +640,10 @@ table tr td ul li {
 	margin-top: 2px;
 }
 
-.reply-fullname {
-	
+.reply-firstname a:visited,
+.reply-firstname a:link {
+	font-weight: bold;
+	color: #000;
 }
 
 .reply-tip {
@@ -630,13 +655,20 @@ table tr td ul li {
 	height: 10px;
 }
 .reply-when {
+	width: 80px;
+	display: block;
+	position: absolute;
+	top: 6px;
+	right: 50px;
+	font-size: 0.8em;
 	margin: 0px 0px 0px 5px;
+	color: #AAA;
 }
 
 .reply-body {
 	padding: 10px 5px 10px 10px;
-	border: 1px solid #DDDDDD;
-	background: #F6F6F6;
+	border-bottom: 3px solid #E4E4E4;
+	background: #F0F0F0;
 }
 
 .miniMenuAnchor {
@@ -761,6 +793,41 @@ table tr td ul li {
 	background: url(/images/wallpaper-ending.png) 0px 0px repeat-x;
 }
 
+.memberAvatar {
+	padding: 2px;
+	background: #ebebeb;
+	border-bottom: 2px solid #bbbbbb;
+}
+
+.topicMenu {
+	width: 540px;
+	font-weight: 0.9em;
+	margin: 2px 0px 4px 0px;
+}
+
+.topicMenu ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	text-align: right;
+}
+
+.topicMenu ul li {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	display: inline;
+}
+
+.topicMenu ul li a:visited,
+.topicMenu ul li a:link {
+	color: #000000;
+	font-weight: bold;
+}
+
+
+
+
 /* ICON SPRITES */
 #icon li {
    background: url(csg-492b468123075.png) no-repeat top left;
@@ -769,3 +836,4 @@ table tr td ul li {
 .img-comment { background-position: 0 -76px; } 
 .img-flush { background-position: 0 -122px; } 
 .img-member-signup { background-position: 0 -168px; }
+

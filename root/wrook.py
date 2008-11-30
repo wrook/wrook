@@ -878,13 +878,25 @@ class ViewBook(WrookRequestHandler):
 				else: userIsAuthor = False
 				if userIsAuthor or self.CurrentMember.isAdmin: userCanEdit = True
 				else: userCanEdit = False
+
+				topicFormData = {
+					'parentKey': book.key(),
+					'parentTitle': book.Title,
+					'parentURL': '/Books/%s' % book.key(),
+					'recipient': book.Author.key()
+				}
+				topicFormData.update(self.Model)
+				renderedTopicForm = talk.renderTopicForm(book, topicFormData)
+
 				self.Model.update({
 					"book": book,
 					"chapters": chapters,
 					"firstChapter": book.firstChapter(),
 					"chapterCount": chapterCount,
 					"userIsAuthor": userIsAuthor,
-					"userCanEdit": userCanEdit
+					"userCanEdit": userCanEdit,
+					"renderedTopics": talk.renderTopicsList(book, 5),
+					"renderedTopicForm": renderedTopicForm
 					})
 				self.render('views/books-view.html')
 			else: self.error(404)
@@ -1124,6 +1136,29 @@ class Books_Edit(WrookRequestHandler):
 					'form': form
 					})
 				self.render("views/books-edit.html")
+		else: self.requestLogin()
+
+class Books_Talk(WrookRequestHandler):
+	def get(self, key):
+		onRequest(self)
+		if self.CurrentMember:
+			book = Book.get(key)
+			if book:
+				topicFormData = {
+					'parentKey': book.key(),
+					'parentTitle': book.Title,
+					'parentURL': '/Books/%s' % book.key(),
+					'recipient': book.Author.key()
+				}
+				topicFormData.update(self.Model)
+				renderedTopicForm = talk.renderTopicForm(book, topicFormData)
+				self.Model.update({
+					'book': book,
+					'renderedTopics': talk.renderTopicsList(book),
+					'renderedTopicForm': renderedTopicForm
+					})
+				self.render('views/books-talk.html')
+			else: self.error(404)
 		else: self.requestLogin()
 
 class Book_ReorderChapters(WrookRequestHandler):
@@ -1655,6 +1690,7 @@ class StoryMemberPostMessageToABook(stories.Story):
 		targets.append(params["member"])
 		return targets
 
+
 # This story warns all admins that the site cache has been flushed
 class StorySiteCacheIsFlushed(stories.Story):
 	ID = "SiteCacheIsFlushed"
@@ -1702,6 +1738,7 @@ URLMappings = [
 	(r'/Books/Delete/(.*)', DeleteBook),
 	(r'/Books/Chapters/(.*)/Rev/(.*)', Revisions_View),
 	(r'/Books/Chapters/(.*)/Rev', Revisions_List),
+	(r'/Books/(.*)/Talk', Books_Talk),
 	(r'/Books/(.*)', ViewBook),
 	( '/Members', Members),
 	(r'/Members/(.*)/Covers', MembersCoversList),

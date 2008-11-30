@@ -137,8 +137,7 @@ var storyPostHandler = new miniMenuHandler();
 storyPostHandler.addMenuItem("comment", "Comment", function(context, menuItemId, id){
 	$.getJSON("/Talk/Post/" + id + "/Reply/MiniForm/JSON", function(data){
 		if (data.errorCode == 0) {
-			console.debug("commenting on:", id);
-			$("#" + id).append(data.html);
+			$("#" + id).prepend(data.html);
 		} else if(data.errorCode > 0) {
 			alert("Oups! A problem occured: " + data.errorMessage + " (Error code:" + data.errorCode + ")");
 		}
@@ -161,7 +160,13 @@ storyPostReplyHandler.addMenuItem("delete", "Delete", function(context, id){
 	console.debug("delete", context, menuItemId, id)
 });
 
+var topicHandler = new miniMenuHandler();
+topicHandler.addMenuItem("delete", "Delete", function(context, id){
+	console.debug("delete", context, menuItemId, id)
+});
+
 var miniMenu = new MiniMenu();
+miniMenu.registerHandler("topic", topicHandler);
 miniMenu.registerHandler("storyPost", storyPostHandler);
 miniMenu.registerHandler("storyPostReply", storyPostReplyHandler);
 //REFACTOR: SHIT!!! TEST WITH INSTANCE NAME DIFFERENT FROM miniMenu !!!

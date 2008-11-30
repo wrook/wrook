@@ -1,0 +1,13 @@
+{% load i18n %}
+<div id="TopicsList">
+	<div id="newTopicsPlaceholder"></div>
+	{% for topic in topics %}
+		{% include "talk-part-topic.html" %}
+		<div class="topicMenu">
+			<ul>
+				<li><a href="/Talk/Topic/{{ topic.key }}/">{% trans "View topic" %}</a></li>
+			</ul>
+		</div>
+	{% endfor %}
+</div>
+
