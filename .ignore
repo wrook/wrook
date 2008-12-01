@@ -1,2 +1,0 @@
-*.pyc  # Will exclude all compile python files
-apidoc\*  # The path starts at the $GIT_DIR and not '/'
