@@ -200,7 +200,7 @@ table tr td {
 #pageContent {
 	position: relative;
 	top: 10px;
-	margin-left: 190px;
+	margin-left: 210px;
 	padding: 10px;
 	width: 980px;
 
@@ -398,7 +398,7 @@ ul#siteMenu li a:link {
 }
 
 #sidebar {
-	width: 180px;
+	width: 200px;
 	position: absolute;
 	top: 0px;
 	left: 0px;
