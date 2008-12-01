@@ -1,4 +1,4 @@
-html, div, p, table, tr, td, th, ul, ol, li {
+html, div, table, tr, td, th, ul, ol, li {
 	font-size: 12px; /* To prevent OS Screen DPI settings to affect the layout */
 }
 

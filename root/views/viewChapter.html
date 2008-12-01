@@ -1,6 +1,11 @@
 ﻿{% extends "template-main-d.html" %}
 {% load i18n %}
 {% block pageName %}ViewChapter{% endblock %}
+{% block title %}
+	<h1>
+		{{ chapter.Book.Title }} <span style="font-weight: normal; font-size: 0.7em;"> {% trans "by " %} {{ chapter.Book.authorName }}</span>
+	</h1>
+{% endblock %}
 {% block notices %}
 	{% ifnotequal chapter.Stage "final" %}
 		<div class="notice">
@@ -31,31 +36,26 @@
 				{{ chapter.Name|escape }}
 			{% endif %}
 		</h1>
-		<div class="bookTitle">
-			<a href="/Books/{{ chapter.Book.key }}">{{ chapter.Book.Title|escape }}</a>
-		</div>
-		<div class="authorName">
-			<a href="/Author/{{ chapter.Book.Author.key }}">{{ chapter.Book.authorName|escape }}</a>
-		</div>
 	</div>
-
-	{% if chapter.Synopsis %}
-		<div class="Synopsis">
-			"&#160;{{ chapter.Synopsis|escape }}&#160;"
-		</div>
-	{% endif %}
-
-	{% if chapter.getLatestRevision %}
-		<div class="chapterText">
-			{{ chapter.getLatestRevision.markdownText }}
-		</div>
-	{% endif %}
-
-	{% if not chapter.nextChapter %}
-		<div style="margin: 40px 0px;">
-			<strong>{% trans "This was the last chapter!" %}</strong>
-		</div>
-	{% endif %}
+	<div>
+		{% if chapter.Synopsis %}
+			<div class="Synopsis">
+				"&#160;{{ chapter.Synopsis|escape }}&#160;"
+			</div>
+		{% endif %}
+	
+		{% if chapter.getLatestRevision %}
+			<div class="chapterText">
+				{{ chapter.getLatestRevision.markdownText }}
+			</div>
+		{% endif %}
+	
+		{% if not chapter.nextChapter %}
+			<div style="margin: 40px 0px;">
+				<strong>{% trans "This was the last chapter!" %}</strong>
+			</div>
+		{% endif %}
+	</div>
 
 	<div class="buttonBar">
 		<ul>
@@ -73,7 +73,7 @@
 {% block sidebar %}
 	<div class="sidebarPanel">
 		{% if chapter.Book.getCover %}
-			<div style="text-align: center; margin: 20px 0px">
+			<div style="text-align: center; margin-top: 40px">
 				<a href="/Books/{{ chapter.Book.key }}">
 					<img src='/Covers/Thumbnail/{{ chapter.Book.getCover.key }}'>
 					{% if chapter.Book.getCover.isReusable %}
