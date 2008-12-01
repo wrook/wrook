@@ -3,7 +3,9 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from django.utils import simplejson
 from google.appengine.ext import db
 from google.appengine.api import memcache
-from feathers import webapp, membership
+import webapp
+import membership
+import talk
 
 # FEED Module for Google App Engine
 
@@ -170,10 +172,9 @@ class StoryPostDeleteJSON(webapp.RequestHandler):
 			if storyPost:
 				member = storyPost.Member
 				if member.key() == self.CurrentMember.key():
-					topic = storyPost.Topic
-					if topic:
-						db.delete(topic.Replies)
-						db.delete(topic)
+					#TODO: Deleting a post and all its childs should be put in a transaction
+					for reply in talk.getReplies(storyPost):
+						db.delete(reply)
 					db.delete(storyPost)
 					memcache.delete("wrookMemberPosts-%s" % member.key())
 					

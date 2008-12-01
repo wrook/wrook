@@ -4,7 +4,8 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from django.utils import simplejson
 from google.appengine.ext import db
 from google.appengine.ext.webapp import template
-from feathers import webapp, membership, stories
+import webapp
+import membership
 from string import Template
 #TODO: This template import should become useless after rafactoring the Stories module..
 
@@ -127,6 +128,7 @@ class Topic_View(webapp.RequestHandler):
 		else: self.requestLogin()
 
 class Topic_New(webapp.RequestHandler):
+#	import talk_stories
 	def get(self, key):
 		self.post(key)
 	def post(self, key):
@@ -147,13 +149,13 @@ class Topic_New(webapp.RequestHandler):
 					)
 				topic.put()
 				#Post this as a story and publish
-				StoryMemberPostsTopicOnBook().createOccurence({
-					"member": self.CurrentMember,
-					"topic": topic,
-					"parentURL": parentURL,
-					"parentTitle": parentTitle,
-					"recipient": recipient
-					}).publish()
+#				StoryMemberPostsTopicOnBook().createOccurence({
+#					"member": self.CurrentMember,
+#					"topic": topic,
+#					"parentURL": parentURL,
+#					"parentTitle": parentTitle,
+#					"recipient": recipient
+#					}).publish()
 				self.response.out.write(renderTopic(topic))
 			else:
 				self.error(404)
@@ -225,52 +227,4 @@ class ReplyMiniFormJSONPost(webapp.RequestHandler):
 				"errorCode":1004,
 				"errorMessage": _("You must be logged in to post a comment.")
 				}))
-
-class StoryMemberPostsTopicOnBook(stories.Story):
-	ID = "MemberPostsTopicOnBook"
-	TitleTemplate = _('<a href="/Members/$MemberKey">$MemberFullname</a> has posted a new topic under <a href="ParentURL">$ParentTitle</a>')
-	BodyTemplate = _('''
-<strong>The message said: $TopicTitle </strong>
-<br />"&#160;$TopicBody&#160;"
-''')
-	Icon = "comment.png"
-
-	#The way by which the data "property bag" is handled is needlessly
-	#Cumbersome... this should be simplified
-	def getTitle(self, params):
-		member = params["member"]
-		parentURL = params["parentURL"]
-		parentTitle = params["parentTitle"]
-		data = {
-			"MemberFullname": member.fullname(),
-			"MemberKey": member.key(),
-			"ParentTitle": parentTitle,
-			"ParentURL": parentURL
-			}
-		template = Template(self.TitleTemplate)
-		return template.safe_substitute(data)
-
-	def getBody(self, params):
-		member = params["member"]
-		topic = params["topic"]
-		parentURL = params["parentURL"]
-		parentTitle = params["parentTitle"]
-		data = {
-			"MemberFullname": member.fullname(),
-			"MemberAvatar": member.gravatar30(),
-			"MemberKey": member.key(),
-			"ParentTitle": parentTitle,
-			"ParentURL": parentURL,
-			"TopicTitle": topic.Title,
-			"TopicBody": topic.Body
-			}
-		template = Template(self.BodyTemplate)
-		return template.safe_substitute(data)
-
-	def getTargets(self, params): #Get the list of member who will receive the story posts
-		targets = []
-		if params["recipient"]:
-			targets.append(membership.Member.get(params["recipient"]))
-		targets.append(params["member"])
-		return targets
 
