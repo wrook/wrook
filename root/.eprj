@@ -70,6 +70,8 @@
             <string>feathers\talk-script-topicForm.js</string>
             <key>script-t</key>
             <string>feathers\views\talk-script-topicForm.js</string>
+            <key>sideba</key>
+            <string>views\books-view-sidebar.html</string>
             <key>stor</key>
             <string>feathers\stories.py</string>
             <key>stori</key>

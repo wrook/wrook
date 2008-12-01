@@ -1,14 +1,6 @@
 {% load i18n %}
 
-	{% if firstChapter %}
-		<div class="buttonBar" style="margin-bottom: 10px;">
-			<ul>
-				<li><a href="/ViewChapter/{{ firstChapter.key }}"><span>{% trans "Start reading" %}</span></a></li>
-			</ul>
-		</div>
-	{% endif %}
-
-	<div style="width: 190px; float:right; z-index: 1000; position: relative; margin-left: 20px; margin-top: -30px;">
+	<div style="width: 190px; float:left; z-index: 1000; position: relative; margin-right:20px;">
 		{% if book.getCover %}
 			<div class="cover width180">
 				<img src='/Covers/Thumbnail/{{ book.getCover.key }}?width=180'>
@@ -19,31 +11,42 @@
 		{% endif %}
 	</div>
 
-
-	{% if book.Synopsis %}
-		<div class="Synopsis">
-			"&#160;{{ book.Synopsis|escape }}&#160;"
-		</div>
-	{% endif %}
-	{% if book.Author.About %}
-		<h3>
-			{% trans "Contributed by" %}
-		</h3>
-		<div style="position: relative">
-			<div class="avatar" style="float: left; margin: 0px 5px 5px 0px;"><a href="/Member/{{ book.Author.key }}"><img src="{{ book.Author.gravatar50 }}" width="50" height="50" /></a></div>
-			<p>
-				<a href="/Member/{{ book.Author.key }}">{{ book.Author.fullname }}</a>
-				<br />
-				{{ book.Author.About }}
-			</p>
-		</div>
-	{% endif %}
-	<div style="clear:left"></div>
-	{% if book.NoteFromAuthor %}
-		<h3>
-			{% trans "A note from the contributor" %}
-		</h3>
-		<div class="NoteFromAuthor">
-			{{ book.NoteFromAuthor|escape }}
-		</div>
-	{% endif %}
+	<div style="float: left; width: 440px;">
+		{% if firstChapter %}
+			<div class="buttonBar" style="margin-bottom: 10px;">
+				<ul>
+					<li><a href="/ViewChapter/{{ firstChapter.key }}"><span>{% trans "Start reading" %}</span></a></li>
+				</ul>
+			</div>
+		{% endif %}
+	
+	
+		{% if book.Synopsis %}
+			<div class="Synopsis">
+				"&#160;{{ book.Synopsis|escape }}&#160;"
+			</div>
+		{% endif %}
+		{% if book.Author.About %}
+			<h3>
+				{% trans "Contributed by" %}
+			</h3>
+			<div style="position: relative">
+				<div class="avatar" style="float: left; margin: 0px 5px 5px 0px;"><a href="/Member/{{ book.Author.key }}"><img src="{{ book.Author.gravatar50 }}" width="50" height="50" /></a></div>
+				<p>
+					<a href="/Member/{{ book.Author.key }}">{{ book.Author.fullname }}</a>
+					<br />
+					{{ book.Author.About }}
+				</p>
+			</div>
+		{% endif %}
+		<div style="clear:left"></div>
+		{% if book.NoteFromAuthor %}
+			<h3>
+				{% trans "A note from the contributor" %}
+			</h3>
+			<div class="NoteFromAuthor">
+				{{ book.NoteFromAuthor|escape }}
+			</div>
+		{% endif %}
+	</div>
+	<div class="clearfix"></div>

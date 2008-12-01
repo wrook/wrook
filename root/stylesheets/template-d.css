@@ -477,3 +477,8 @@ ul#siteMenu li a:link {
 	color: #fff;
 	font-weight: bold;
 }
+
+#secondarySidebar h3 {
+	font-size: 1.5em;
+	font-weight: normal;
+}
