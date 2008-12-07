@@ -44,11 +44,11 @@
 				<div class="sectionBodyContent">
 					<h2>{% trans "Start a topic or leave feedback" %}</h2>
 					<div>
-						{{ renderedTopicForm }}
+						{{ book.render_topic_form }}
 					</div>
 					<h2>{% trans "Recent topics" %}</h2>
 					<div>
-						{{ renderedTopics }}
+						{{ book.render_recent_topics_list }}
 					</div>
 
 					<div class="buttonBar" style="margin-bottom: 10px;">

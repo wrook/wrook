@@ -9,9 +9,11 @@
             <key>app</key>
             <string>app.yaml</string>
             <key>book</key>
-            <string>views\books-talk.html</string>
+            <string>views\books-view.html</string>
             <key>book-</key>
             <string>views\books-view.html</string>
+            <key>book-talk</key>
+            <string>views\books-talk.html</string>
             <key>bookIn</key>
             <string>views\section-bookInfo.html</string>
             <key>booki</key>
@@ -24,10 +26,14 @@
             <string>views\books-talk.html</string>
             <key>books-view-sidebar.html</key>
             <string>views\books-view-sidebar.html</string>
+            <key>cache</key>
+            <string>feathers\cachetree.py</string>
             <key>d.c</key>
             <string>stylesheets\template-d.css</string>
             <key>d.css</key>
             <string>stylesheets\template-d.css</string>
+            <key>emoiz</key>
+            <string>memoize.py</string>
             <key>example</key>
             <string>scripts\jquery\jquery.example.js</string>
             <key>form</key>
@@ -42,6 +48,8 @@
             <string>views\template-main.html</string>
             <key>main.c</key>
             <string>stylesheets\main.css</string>
+            <key>main.cs</key>
+            <string>stylesheets\main.css</string>
             <key>main.j</key>
             <string>scripts\main.js</string>
             <key>member</key>
@@ -50,6 +58,10 @@
             <string>feathers\membership.py</string>
             <key>membershi</key>
             <string>feathers\views\membership-inviteNew.html</string>
+            <key>memoiz</key>
+            <string>memoize.py</string>
+            <key>part-</key>
+            <string>feathers\views\talk-part-topic.html</string>
             <key>part-T</key>
             <string>feathers\views\talk-part-topic.html</string>
             <key>part-repl</key>
@@ -62,6 +74,12 @@
             <string>views\part-replies.html</string>
             <key>repli</key>
             <string>views\part-replies.html</string>
+            <key>replies</key>
+            <string>feathers\views\talk-part-replies.html</string>
+            <key>reply</key>
+            <string>feathers\views\talk-part-replyForm.html</string>
+            <key>replyF</key>
+            <string>feathers\views\talk-part-replyForm.html</string>
             <key>replyFor</key>
             <string>feathers\views\talk-part-replyForm.html</string>
             <key>scrip</key>
@@ -70,6 +88,10 @@
             <string>feathers\talk-script-topicForm.js</string>
             <key>script-t</key>
             <string>feathers\views\talk-script-topicForm.js</string>
+            <key>showMoreR</key>
+            <string>feathers\views\talk-part-showMoreReplies.html</string>
+            <key>showMoreReplies</key>
+            <string>feathers\views\talk-part-showMoreReplies.html</string>
             <key>sideba</key>
             <string>views\books-view-sidebar.html</string>
             <key>stor</key>
@@ -86,8 +108,14 @@
             <string>feathers\views\talk-part-topicForm.html</string>
             <key>talk-Topi</key>
             <string>feathers\views\talk-TopicView.html</string>
+            <key>talk-TopicView</key>
+            <string>feathers\views\talk-TopicView.html</string>
+            <key>talk-TopicView.html</key>
+            <string>feathers\views\talk-TopicView.html</string>
             <key>talk-pa</key>
             <string>feathers\views\talk-part-topicForm.html</string>
+            <key>talk-par</key>
+            <string>feathers\views\talk-part-topics.html</string>
             <key>talk-part</key>
             <string>feathers\views\talk-part-topic.html</string>
             <key>talk-part-</key>
@@ -96,6 +124,10 @@
             <string>feathers\views\talk-part-replies.html</string>
             <key>talk-part-reply</key>
             <string>feathers\views\talk-part-reply.html</string>
+            <key>talk-part-reply.html</key>
+            <string>feathers\views\talk-part-reply.html</string>
+            <key>talk-part-topic.html</key>
+            <string>feathers\views\talk-part-topic.html</string>
             <key>talk-s</key>
             <string>feathers\views\talk-script-topicForm.js</string>
             <key>talk-sc</key>
@@ -121,7 +153,7 @@
             <key>test</key>
             <string>tests\testMembership.py</string>
             <key>topic</key>
-            <string>feathers\views\talk-TopicView.html</string>
+            <string>feathers\views\talk-part-topic.html</string>
             <key>topicF</key>
             <string>feathers\views\talk-part-topicForm.html</string>
             <key>topicFOr</key>

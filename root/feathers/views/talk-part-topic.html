@@ -7,7 +7,7 @@
 		<div style="position: absolute; top: 5px; right: 5px; z-index: 1000" class="miniMenuAnchor" id="topic-{{ topic.key }}"></div>
 		<h3 style="margin: 0px; padding: 0px;">{{ topic.Title }}</h3>
 		<div style="font-size: 1.1em">
-			"&#160;{{ topic.Body }}&#160;"
+			"&#160;{{ topic.Body }}&#160;"&#160;-&#160;<a style="text-decoration: none; color: #999999;" href="/Members/{{ topic.From.key }}" title="{{ topic.From.fullname }}" >{{ topic.From.Firstname }}</a> 
 		</div>
 	</div>
 </div>

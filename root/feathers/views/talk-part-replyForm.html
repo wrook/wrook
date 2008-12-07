@@ -24,13 +24,10 @@
 	</h2>
 	<div style="position: relative">
 		<div class="memberAvatar" style="position:absolute; top:0px; right:0px;">
-			<img style="width: 40px; height: 40px;" src="{{currentMember.gravatar40}}" />
+			<img style="width: 40px; height: 40px;" src="{{ currentMember.gravatar40 }}" />
 		</div>
 		<div style="background: #f1f1f1; padding: 10px; border-bottom: 2px solid #bbbbbb; width:514px;">
-			<form action="/Talk/Reply/New/{{parentKey}}/" method="post" id="frmAddNewReply">
-				<input type="hidden" name="parentTitle" value="{{parentTitle}}" />
-				<input type="hidden" name="parentURL" value="{{parentURL}}" />
-				<input type="hidden" name="recipient" value="{{recipient}}" />
+			<form action="/Talk/Reply/New/{{ parent.key }}/" method="post" id="frmAddNewReply">
 				<div>
 					<textarea style="background: #fff; width: 500px; height: 40px;" id="frmAddNewReply-body" name="body" title="{% trans "Your message..." %}"></textarea>
 				</div>

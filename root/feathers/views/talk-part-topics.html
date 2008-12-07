@@ -3,9 +3,10 @@
 	<div id="newTopicsPlaceholder"></div>
 	{% for topic in topics %}
 		{% include "talk-part-topic.html" %}
+		{{ topic.render_recent_replies }}
 		<div class="topicMenu">
 			<ul>
-				<li><a href="/Talk/Topic/{{ topic.key }}/">{% trans "View topic" %}</a></li>
+				<li><a href="{{topic.permalink}}">{% trans "View topic" %}</a></li>
 			</ul>
 		</div>
 	{% endfor %}

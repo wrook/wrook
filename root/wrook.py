@@ -52,6 +52,8 @@ def onRequest(self):
 	'''
 	Initialization method triggered before a request is processed.
 	'''
+	webapp.currentRequest = self
+	# Use to reference the ongoing request without having to do injection
 	self.Model = {}
 	self.MasterTemplate = os.path.join(os.path.dirname(__file__), "views/template-main-d.html") # Sets the default template to be used by hosted modules
 	self.TemplateBase = os.path.join(os.path.dirname(__file__), "views/template-main.html") # Sets the default template to be used by hosted modules
@@ -108,7 +110,7 @@ class Cover(db.Model):
 		if self.is_saved():
 			return "http://www.wrook.org/Covers/Image/%s" % self.key()
 
-class Book(db.Model):
+class Book(talk.Topicable):
 	'''
 	A book contributed by a member
 	'''
@@ -124,6 +126,8 @@ class Book(db.Model):
 	AttribAuthorIsAuthor = db.BooleanProperty(default=True, verbose_name=_("Are you the author"))
 	AttribAuthorName = db.StringProperty(verbose_name=_("Author's name"))
 	
+	def permalink(self):
+		return "/Books/%s/" % self.key()
 
 	def clearCache(self):
 		memcache.delete("wordcount-%s" % self.key) # Removes the wordCount cache
@@ -870,7 +874,9 @@ class ViewBook(WrookRequestHandler):
 			if len(book) > 0: book = book[0]
 			else: book = Book.get(key)
 			if book:
+				#TODO: This should be methodized as ordered_chapters
 				chapters = Chapter.all().filter("Book =", book).order("Number").fetch(limit=999)
+				#TODO: This should be methodized as chapter_count
 				chapterCount = len(chapters)
 				if book.Author:
 					self.setVisitedMember(book.Author)
@@ -879,24 +885,13 @@ class ViewBook(WrookRequestHandler):
 				if userIsAuthor or self.CurrentMember.isAdmin: userCanEdit = True
 				else: userCanEdit = False
 
-				topicFormData = {
-					'parentKey': book.key(),
-					'parentTitle': book.Title,
-					'parentURL': '/Books/%s' % book.key(),
-					'recipient': book.Author.key()
-				}
-				topicFormData.update(self.Model)
-				renderedTopicForm = talk.renderTopicForm(book, topicFormData)
-
 				self.Model.update({
 					"book": book,
 					"chapters": chapters,
 					"firstChapter": book.firstChapter(),
 					"chapterCount": chapterCount,
 					"userIsAuthor": userIsAuthor,
-					"userCanEdit": userCanEdit,
-					"renderedTopics": talk.renderTopicsList(book, 5),
-					"renderedTopicForm": renderedTopicForm
+					"userCanEdit": userCanEdit
 					})
 				self.render('views/books-view.html')
 			else: self.error(404)
@@ -1144,19 +1139,7 @@ class Books_Talk(WrookRequestHandler):
 		if self.CurrentMember:
 			book = Book.get(key)
 			if book:
-				topicFormData = {
-					'parentKey': book.key(),
-					'parentTitle': book.Title,
-					'parentURL': '/Books/%s' % book.key(),
-					'recipient': book.Author.key()
-				}
-				topicFormData.update(self.Model)
-				renderedTopicForm = talk.renderTopicForm(book, topicFormData)
-				self.Model.update({
-					'book': book,
-					'renderedTopics': talk.renderTopicsList(book),
-					'renderedTopicForm': renderedTopicForm
-					})
+				self.Model.update({'book': book})
 				self.render('views/books-talk.html')
 			else: self.error(404)
 		else: self.requestLogin()
@@ -1869,6 +1852,7 @@ def profile_html_main():
 	print "</pre></div>"
 
 main = real_main
+#main = profile_html_main
 
 if __name__ == '__main__':
 	main()

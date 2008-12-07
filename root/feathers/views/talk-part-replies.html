@@ -1,5 +1,6 @@
 {% load i18n %}
-<div id="RepliesList">
+<div id="RepliesList-{{ parentKey }}">
+	{{ renderedShowMoreRepliesLink }}
 	{% for reply in replies %}
 		{% include "talk-part-reply.html" %}
 	{% endfor %}
