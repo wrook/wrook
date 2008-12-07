@@ -98,6 +98,12 @@ class Replyable(cachetree.Cachable):
 	
 	def unread_replies(self):
 		return self.replies.filter("isRead =", False).fetch(limit=999)
+	
+	def touch_up(self, childItem):
+		if childItem:
+			if childItem.__class__.__name__ == "Reply":
+				cachetree.touch("%s-replies" % self.key())
+			super(Replyable, self).touch_up(childItem)
 
 class Topicable(cachetree.Cachable):
 
@@ -113,15 +119,16 @@ class Topicable(cachetree.Cachable):
 	def render_recent_topics_list(self, maxResults=maxRecentTopics):
 		return self.render_topics_list(maxResults)
 
-	def render_topics_list(self, maxResults=maxTopicsPerPage):
-		key = "topicable-%s::topicList-%s" % (self.key(), maxResults)
-		topicList = cachetree.get(key)
-		if not topicList:
+	def render_topics_list(self, maxResults=maxTopicsPerPage, offset=0):
+		cacheKey = "%s-renderedTopicList-%s-%s" % (self.key(), maxResults, offset)
+		renderedTopicList = cachetree.get_fresh_cache(cacheKey,
+			["%s-topicsWithReplies" % self.key()])
+		if not renderedTopicList:
 			templateSource = "%s/views/talk-part-topics.html" % os.path.dirname(__file__)
 			model = {"topics": self.topics(maxResults)}
-			topicList = template.render(templateSource, model)
-			cachetree.set(key, topicList)
-		return topicList
+			renderedTopicList = template.render(templateSource, model)
+			cachetree.set(cacheKey, renderedTopicList)
+		return renderedTopicList
 
 	def render_topic_form(self, model={}):
 		if webapp.currentRequest:
@@ -129,6 +136,16 @@ class Topicable(cachetree.Cachable):
 		model.update({'parent': self})
 		templateSource = "%s/views/talk-part-topicForm.html" % os.path.dirname(__file__)
 		return template.render(templateSource, model)
+
+	def touch_up(self, childItem):
+		if childItem:
+			if childItem.__class__.__name__ == "Reply":
+				cachetree.touch("%s-topicsWithReplies" % self.key())
+			elif childItem.__class__.__name__ == "Topic":
+				cachetree.touch("%s-topicsWithReplies" % self.key())
+				cachetree.touch("%s-topics" % self.key())
+			super(Topicable, self).touch_up(childItem)
+
 
 class Post(db.Model):
 	From = db.ReferenceProperty(
@@ -147,9 +164,6 @@ class Topic(Post, Replyable):
 	def permalink(self):
 		return "/Talk/Topic/%s/" % self.key()
 	
-	def invalidate_cache_collections(self):
-		cachetree.touch("%s-topics" % self.parent().key())
-
 	def render(self):
 		cacheKey = "topic-%s" % self.key()
 		renderedTopic = cachetree.get(cacheKey)
@@ -161,10 +175,6 @@ class Topic(Post, Replyable):
 		return renderedTopic
 
 class Reply(Post, cachetree.Cachable):
-
-	def invalidate_cache_collections(self):
-		logging.debug("invalidating collection: %s" % "%s-replies" % self.parent().key())
-		cachetree.touch("%s-replies" % self.parent().key())
 
 	def permalink(self):
 		return "%s#%s" % (parent.permalink(), self.key())

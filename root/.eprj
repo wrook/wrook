@@ -60,12 +60,16 @@
             <string>feathers\views\membership-inviteNew.html</string>
             <key>memoiz</key>
             <string>memoize.py</string>
+            <key>part</key>
+            <string>feathers\views\talk-part-reply.html</string>
             <key>part-</key>
             <string>feathers\views\talk-part-topic.html</string>
             <key>part-T</key>
             <string>feathers\views\talk-part-topic.html</string>
             <key>part-repl</key>
             <string>feathers\views\talk-part-replies.html</string>
+            <key>part-top</key>
+            <string>feathers\views\talk-part-topic.html</string>
             <key>part-topics</key>
             <string>feathers\views\talk-part-topics.html</string>
             <key>partre</key>
@@ -153,7 +157,7 @@
             <key>test</key>
             <string>tests\testMembership.py</string>
             <key>topic</key>
-            <string>feathers\views\talk-part-topic.html</string>
+            <string>feathers\views\talk-TopicView.html</string>
             <key>topicF</key>
             <string>feathers\views\talk-part-topicForm.html</string>
             <key>topicFOr</key>
@@ -176,6 +180,8 @@
             <string>feathers\views\talk-part-topics.html</string>
             <key>topicv</key>
             <string>feathers\views\talk-TopicView.html</string>
+            <key>tree</key>
+            <string>feathers\cachetree.py</string>
             <key>twoSid</key>
             <string>views\template-twoSidebars.html</string>
             <key>viewC</key>

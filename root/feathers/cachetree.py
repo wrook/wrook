@@ -14,7 +14,20 @@ class Cachable(db.Model):
 	def touch(self):
 		self.Timestamp = datetime.datetime.now()
 		self.update_cache()
-		self.invalidate_cache_collections()
+		self.touch_up(self)
+
+	def touch_up(self, childItem):
+		'''
+		Bubble up the touch event without systematically touching
+		each parents in the process. By default, this process goes up
+		the hierarchy of the entity group.
+		
+		Classes inheriting from Cachable should simply call the super class
+		to let the bubbling chain continue its course.
+		'''
+		if self.parent():
+			if self.parent().touch_up:
+				self.parent().touch_up(childItem)
 
 	def update_cache(self):
 		logging.debug("self = %s " % self)
@@ -32,10 +45,6 @@ class Cachable(db.Model):
 		# Should be overwritten if something more specific is needed
 		return "%s" % self.key()
 	
-	def invalidate_cache_collections():
-		# This method should be overwritten with the logic necessary
-		# to invalidate the cache meta for collections containing this entity
-		pass
 
 def get_fresh_cache(key, dependencyKeys):
 	isFresh = True
