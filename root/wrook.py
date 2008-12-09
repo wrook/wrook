@@ -4,8 +4,8 @@ Wrook's main module
 #!python
 # coding: utf-8
 
-#Non GAE imports
-#None for now
+#TODO: Start moving importslocally to methods and classes
+#TODO: SPlit the main wrook module into smaller packages
 
 #GAE imports
 import os
@@ -30,16 +30,14 @@ from django.utils import translation
 from django.utils.translation import gettext as _
 from django.conf import settings
 from django.db import models
-#from django import newforms as forms 
-from django import forms 
+#from django import newforms as forms
+from django import forms
 
 #Feathers imports
 from feathers import webapp, stories, utils, customize, membership, labs, proforma, talk
 
-#Wrook imports
-import licensing
-
 #-------------------- i18n FIX start --------------------
+#TODO: Figure out what this means and if its necessary
 settings._target = None
 #-------------------- i18n FIX end --------------------
 
@@ -98,20 +96,21 @@ class Cover(db.Model):
 	CreatedBy = db.ReferenceProperty(membership.Member, collection_name="Covers", verbose_name=_("Created by"))
 	isReusable = db.BooleanProperty(default=False, verbose_name=_("Is this cover reusable for other books?"))
 	isSharedWithEveryone = db.BooleanProperty(default=False, verbose_name=_("Share with everyone"))
-
+	
 	def thumbURL(self):
 		if self.is_saved():
 			return "/Covers/Thumbnail/%s?width=120" % self.key()
-
+	
 	def thumbURL45(self):
 		if self.is_saved():
 			return "/Covers/Thumbnail/%s?width=45" % self.key()
-
+	
 	def imageURL(self):
 		if self.is_saved():
 			return "http://www.wrook.org/Covers/Image/%s" % self.key()
 
 class Book(talk.Topicable):
+	import licensing
 	'''
 	A book contributed by a member
 	'''
@@ -129,10 +128,10 @@ class Book(talk.Topicable):
 	
 	def permalink(self):
 		return "/Books/%s/" % self.key()
-
+	
 	def clearCache(self):
 		memcache.delete("wordcount-%s" % self.key) # Removes the wordCount cache
-
+	
 	# Does a word count of all chapters, any chapter missings its word count will do it on the fly
 	# Cache results for an undeterminate time
 	def wordCount(self):
@@ -144,32 +143,32 @@ class Book(talk.Topicable):
 				wordCount += chapter.getLatestRevision().calculateWordCount()
 			memcache.add(wordCountKey, wordCount)
 		return wordCount
-
+	
 	def authorName(self):
 		if self.AttribAuthorIsAuthor: return self.Author.fullname()
 		elif self.AttribAuthorName: return self.AttribAuthorName
 		else: return _("Mr. Unknown")
-
+	
 	def getCover(self):
 		if self.Cover: return self.Cover
 		else:
 			appConfig = getWrookAppConfig()
 			if appConfig: return appConfig.DefaultCover
 		return None
-
+	
 	def firstChapter(self):
 		chapter = Chapter.all().filter("Book =", self).fetch(limit=1)
 		if len(chapter) > 0:
 			return chapter[0]
-
+	
 	def lastRevisedChapter(self):
 		revision = Revision.all().filter("Book =", self).order("-Created").fetch(limit=1)
 		if len(revision) > 0:
 			return revision[0].Chapter
-
+	
 	def countReaders(self):
 		return len(Bookmark().all().filter("Book =", self).fetch(limit=999))
-
+	
 	def markdownAttribDetailed(self):
 		import markdown2
 		return markdown2.markdown(self.AttribDetailed)
@@ -206,7 +205,7 @@ class Chapter(db.Model):
 	Synopsis = db.TextProperty()
 	Created = db.DateTimeProperty(auto_now_add=True)
 	isDeleted = db.BooleanProperty(default = False) # An author can mark a chapter as being deleted without loosing the revision history
-
+	
 	def addRevision(self, text):
 		LatestRevisionVersion = 0
 		latestRevision = self.getLatestRevision()
@@ -227,38 +226,36 @@ class Chapter(db.Model):
 			return None
 		else:
 			return latest[0]
-
+	
 	def getLatestPublishedRevision(self):
 		latest = self.Revisions.filter("isPublished", True).order("-Created").fetch(limit=1)
 		if len(latest) == 0:
 			return None
 		else:
 			return latest[0]
-
+	
 	def setBookmark(self, member):
 		chapter = self
 		bookmarks = Bookmark.all().filter("Reader =", member).filter("Book =", chapter.Book).fetch(limit=999)
 		# If this is a first read, a story is posted
-		if len(bookmarks) == 0: 
+		if len(bookmarks) == 0:
 			story = StoryMemberStartReadingBook()
 			occurence = story.createOccurence({
 				"member": member,
 				"book": self.Book
 				})
 			occurence.publish()
-
 		db.delete(bookmarks)
 		bookmark = Bookmark(
 			Chapter = chapter,
 			Book = chapter.Book,
 			Author = chapter.Book.Author,
-			Reader = member
-		)
+			Reader = member)
 		bookmark.put()
 		member.isReader = True
 		member.put()
 		return chapter
-
+	
 	def nextChapter(self):
 		#chapters = self.Book.Chapters()
 		chapters = Chapter.all().filter("Book =", self.Book).fetch(limit=999)
@@ -268,7 +265,7 @@ class Chapter(db.Model):
 				if i+1 < len(chapters):
 					return chapters[i+1]
 			i=i+1
-
+	
 	def previousChapter(self):
 		#chapters = self.Book.Chapters()
 		chapters = Chapter.all().filter("Book =", self.Book).fetch(limit=999)
@@ -300,27 +297,27 @@ class Revision(db.Model):
 	NoteFromAuthor = db.TextProperty()
 	Created =  db.DateTimeProperty(auto_now_add=True)
 	isPublished = db.BooleanProperty(default = True)
-
+	
 	def calculateWordCount(self):
 		if self.WordCount: return self.WordCount
 		else:
 			self.WordCount = utils.wordCount(self.Text)
 			return self.WordCount
-
+	
 	def markdownText(self):
 		import markdown2
 		return markdown2.markdown(self.Text)
-
+	
 	def diffFromLatest(self):
 		latest = self.Chapter.getLatestRevision()
 		if latest.key != self.key:
 			return diff.textDiff(latest.Text, self.Text)
 		else:
 			return self.Text
-			
+	
 	def diffFromPrevious(self):
 		if self.Version > 1:
-			previousRevision = Revision.all().filter("Chapter =", self.Chapter).filter("Version =", self.Version-1).fetch(limit=1)[0] 
+			previousRevision = Revision.all().filter("Chapter =", self.Chapter).filter("Version =", self.Version-1).fetch(limit=1)[0]
 			return diff.textDiff(previousRevision.Text, self.Text)
 		else:
 			return self.Text
@@ -331,24 +328,6 @@ class Bookmark(db.Model):
 	Author = db.ReferenceProperty(membership.Member, collection_name="ReaderBookmarks")
 	Reader = db.ReferenceProperty(membership.Member, collection_name="Bookmarks")
 	When = db.DateTimeProperty(auto_now_add=True)
-
-#TODO: Refactor -  Replace with the Talk module
-class Message(db.Model):
-	Chapter = db.ReferenceProperty(Chapter, collection_name="Feedback")
-	Book = db.ReferenceProperty(Book, collection_name="Feedback")
-	Author = db.ReferenceProperty(membership.Member, collection_name="FeedbackReceived", required=True)
-	From = db.ReferenceProperty(membership.Member, collection_name="FeedbackGiven", required=True)
-	Topic = db.StringProperty()
-	Text = db.TextProperty(required=True)
-	Sent = db.DateTimeProperty(auto_now_add=True)
-	ReplyTo = db.SelfReferenceProperty(collection_name="Replies")
-	isPrivate = db.BooleanProperty(default = False) # Only the author of the book will see this message
-	isForcedPrivate = db.BooleanProperty(default = False) # The author has forced this message to be private
-	targetType = db.StringProperty(required=True, choices=set(["chapter", "book", "author"]))
-
-	def forcePrivate(self):
-		self.isPrivate = True
-		self.isForcedPrivate = True
 
 class CoverForm(djangoforms.ModelForm):
 	class Meta:
@@ -410,7 +389,7 @@ class CoverEdit(WrookRequestHandler):
 				})
 			self.render('views/covers-edit.html')
 		else: self.requestLogin()
-
+	
 	def post(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -478,14 +457,14 @@ class CoverImage(WrookRequestHandler):
 			image = images.Image(cover.ThumbnailImage)
 			image.rotate(0)
 			thumbnailData = image.execute_transforms(output_encoding=images.PNG)
-
+			
 			self.response.headers['content-type'] = "image/png"
 			self.response.headers['cache-control'] = "public, max-age=600" # 10 minute cache
 			self.response.headers["Expires"] = "Thu, 01 Dec 2014 16"
 			self.response.out.write(thumbnailData)
 		else:
 			self.error(404)
-
+	
 	def post(self, key):
 		onRequest(self)
 		cover = Cover.get(key)
@@ -500,7 +479,6 @@ class CoverImage(WrookRequestHandler):
 			self.response.out.write("Done!")
 		else:
 			self.error(404)
-		
 	
 
 class CoverList(WrookRequestHandler):
@@ -593,7 +571,7 @@ class Login(WrookRequestHandler):
 				'password': password
 				})
 			self.render('views/login.html')
-
+	
 	def post(self):
 		onRequest(self)
 		username = self.request.get("username")
@@ -608,20 +586,18 @@ class Login(WrookRequestHandler):
 				error = _("<strong>Login failed:</strong> ") + result.ErrorMessage
 		else:
 			error = _("<strong>Login failed:</strong> Username and password are both mandatory!")
-
+		
 		self.Model.update({
 			'error': error,
 			'username': username,
 			'password': password
 			})
 		self.render('views/login.html')
-		
 
 class Logout(WrookRequestHandler):
 	def get(self):
 		membership.logout(self)
 		self.redirect("/")
-
 class Join(WrookRequestHandler):
 	def get(self, key):
 		onRequest(self)
@@ -637,7 +613,7 @@ class Join(WrookRequestHandler):
 				"lastname": invite.Lastname.strip()
 				})
 			self.render('views/join.html')
-
+	
 	def post(self, key): #TODO: Refactor -  This handler should be moved to the membership module and actuel business logic should be in separate methods
 		onRequest(self)
 		if key: invite = membership.Invite.get(key)
@@ -690,7 +666,6 @@ class Join(WrookRequestHandler):
 				invite.put()
 			self.redirect("/ResetPassword/%s" % member.key())
 
-
 class AccountView(WrookRequestHandler):
 	def get(self):
 		onRequest(self)
@@ -720,7 +695,7 @@ class EditAccount(WrookRequestHandler):
 				})
 			self.render('views/editAccount.html')
 		else: self.requestLogin()
-
+	
 	def post(self):
 		onRequest(self)
 		if self.CurrentMember:
@@ -767,7 +742,7 @@ class AccountChangeProfilePhoto(WrookRequestHandler):
 				})
 			self.render('views/account-changePhoto.html')
 		else: self.requestLogin()
-
+	
 	def post(self):
 		onRequest(self)
 		if self.CurrentMember:
@@ -796,7 +771,7 @@ class AccountChangePassword(WrookRequestHandler):
 			self.setVisitedMember(self.CurrentMember)
 			self.render('views/account-changePassword.html')
 		else: self.requestLogin()
-
+	
 	def post(self):
 		onRequest(self)
 		if self.CurrentMember:
@@ -829,20 +804,20 @@ class Home(WrookRequestHandler):
 			self.setVisitedMember(self.CurrentMember)
 			BeginnerBook = []
 			BeginnerBookmark = []
-			hasReadWrookForBeginners = False 
+			hasReadWrookForBeginners = False
 			# Refactor: Put in a cached method
 			# BeginnerBook = Book.all().filter("Slug =", "wrook-for-beginners").fetch(limit=1)
 			# if len(BeginnerBook) > 0:
 				# BeginnerBookmark = Bookmark.all().filter("Reader = ", self.CurrentMember).filter("Book =", BeginnerBook[0]).fetch(limit=1)
 			# if len(BeginnerBookmark) > 0:
 				# hasReadWrookForBeginners = True
-
+			
 			cacheKey = "wrookMemberPosts-%s" % self.CurrentMember.key()
 			posts = memcache.get(cacheKey)
 			if not posts:
 				posts = self.CurrentMember.ReceivedStoryPosts.order("-WhenOccured").fetch(limit=50)
 				memcache.add(cacheKey, posts)
-
+			
 			self.Model.update({
 				"posts": posts,
 				"hasReadWrookForBeginners": hasReadWrookForBeginners
@@ -885,7 +860,7 @@ class ViewBook(WrookRequestHandler):
 				else: userIsAuthor = False
 				if userIsAuthor or self.CurrentMember.isAdmin: userCanEdit = True
 				else: userCanEdit = False
-
+				
 				self.Model.update({
 					"book": book,
 					"chapters": chapters,
@@ -897,7 +872,6 @@ class ViewBook(WrookRequestHandler):
 				self.render('views/books-view.html')
 			else: self.error(404)
 		else: self.requestLogin()
-
 
 class MembersProfile(WrookRequestHandler):
 	def get(self, key):
@@ -915,7 +889,7 @@ class MembersProfile(WrookRequestHandler):
 
 #TODO: Refactor -  Put back in the chapter object
 def deleteChapter(chapter):
-	db.delete(chapter.Feedback)
+	#TODO: Also delete topics
 	db.delete(chapter.Revisions)
 	db.delete(chapter.Bookmarks)
 	db.delete(chapter)
@@ -924,7 +898,7 @@ def deleteChapter(chapter):
 def deleteBook(book):
 	for chapter in book.Chapters:
 		deleteChapter(chapter)
-	db.delete(book.Feedback)
+	#TODO: Also delete topics
 	db.delete(book.Bookmarks)
 	db.delete(book)
 
@@ -941,7 +915,7 @@ class DeleteChapter(WrookRequestHandler):
 				else: return
 			else: self.error(404)
 		else: self.requestLogin()
-
+	
 	def post(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -979,7 +953,7 @@ class ResetPassword(WrookRequestHandler):
 			else: self.error(404)
 		else:
 			self.render("views/resetPassword.html")
-
+	
 	def post(self, key):
 		onRequest(self)
 		if not key:
@@ -1011,7 +985,7 @@ class DeleteBook(WrookRequestHandler):
 				else: return
 			else: self.error(404)
 		else: self.requestLogin()
-
+	
 	def post(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -1027,7 +1001,7 @@ class DeleteBook(WrookRequestHandler):
 				else: return
 			else: self.error(404)
 		else: self.requestLogin()
-	
+
 class ViewChapter(WrookRequestHandler):
 	def get(self, key):
 		onRequest(self)
@@ -1044,7 +1018,6 @@ class ViewChapter(WrookRequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-
 class EditChapterOptions(WrookRequestHandler):
 	def get( self, key ):
 		onRequest(self)
@@ -1059,7 +1032,7 @@ class EditChapterOptions(WrookRequestHandler):
 				self.render('views/books-chapter-edit.html')
 			else: self.error(404)
 		else: self.requestLogin()
-
+	
 	def post(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -1105,7 +1078,7 @@ class Books_Edit(WrookRequestHandler):
 		onRequest(self)
 		if self.CurrentMember:
 			if key == "": book = Book(Author=self.CurrentMember)
-			else: book = Book.get(key) 
+			else: book = Book.get(key)
 			form = BookForm(instance=book)
 			self.Model.update({
 				'book': book,
@@ -1113,12 +1086,12 @@ class Books_Edit(WrookRequestHandler):
 				})
 			self.render('views/books-edit.html')
 		else: self.requestLogin()
-
+	
 	def post(self, key):
 		onRequest(self)
 		if self.CurrentMember:
 			if key == "": book = Book(Author=self.CurrentMember)
-			else: book = Book.get(key) 
+			else: book = Book.get(key)
 			form = BookForm(data=self.request.POST, instance=book)
 			if form.is_valid():
 				# Save the form, and redirect to the view page
@@ -1160,7 +1133,7 @@ class Book_ReorderChapters(WrookRequestHandler):
 				self.render('views/books-reorderChapters.html')
 			else: self.error(404)
 		else: self.requestLogin()
-
+	
 	def post(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -1204,11 +1177,11 @@ class Books_Edit_License(WrookRequestHandler):
 				self.render('views/books-edit-license.html')
 			else: self.error(404)
 		else: self.requestLogin()
-
+	
 	def post(self, key):
 		onRequest(self)
 		if self.CurrentMember:
-			book = Book.get(key) 
+			book = Book.get(key)
 			if book:
 				form = BookLicenseForm(data=self.request.POST, instance=book)
 				if form.is_valid():
@@ -1307,7 +1280,7 @@ class NewChapter(WrookRequestHandler):
 				self.render('views/books-chapter-new.html')
 			else: self.error(404)
 		else: self.requestLogin()
-
+	
 	def post(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -1328,22 +1301,7 @@ class NewChapter(WrookRequestHandler):
 					self.render("views/books-chapter-new.html")
 			else: self.error(404)
 		else: self.requestLogin()
-			
-class FeedbackBook(WrookRequestHandler):
-	def get(self, key):
-		onRequest(self)
-		if self.CurrentMember:
-			book = Book.get(key)
-			if book:
-				messages = book.Feedback.order("-Sent")
-				self.Model.update({
-					'book': book,
-					'messages': messages,
-					'targetType': 'book'
-					})
-				self.render('views/messages.html')
-			else: self.error(404)
-		else: self.requestLogin()
+
 
 
 class Revisions_List(WrookRequestHandler):
@@ -1377,54 +1335,6 @@ class Revisions_View(WrookRequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-class PostMessage(WrookRequestHandler):
-	def post(self):
-		onRequest(self)
-		if self.CurrentMember:
-			topic = self.request.get("Topic")
-			if topic == "":
-				topic = None
-			text = self.request.get("Text")
-			targetType = self.request.get("TargetType")
-			isPrivate = (self.request.get("isPrivate") == "true")
-			if targetType == "book":
-				book = db.get(self.request.get("Book"))
-				if book:
-					author = book.Author
-					message = Message(
-						Book = book,
-						Author = author,
-						From = self.CurrentMember,
-						Topic = topic,
-						Text = text,
-						isPrivate = isPrivate,
-						targetType = targetType
-						)
-					message.put()
-					story = StoryMemberPostMessageToABook()
-					occurence = story.createOccurence({
-						"member": self.CurrentMember,
-						"message": message,
-						"book": book
-						})
-					occurence.publish()
-					self.redirect(self.request.get("ComebackUrl"))
-				else: self.error(404)
-			else: self.error(404)
-		else: self.requestLogin()
-
-class DeleteMessage(WrookRequestHandler):
-	def get(self, key):
-		onRequest(self)
-		if self.CurrentMember:
-			message = db.get(key)
-			if message:
-				if message.From.key() == self.CurrentMember.key():
-					message.delete()
-				self.redirect(self.request.get("ComebackUrl"))
-			else: self.error(404)
-		else: self.requestLogin()
-
 class Typewriter(WrookRequestHandler):
 	def get(self, key):
 		onRequest(self)
@@ -1435,7 +1345,7 @@ class Typewriter(WrookRequestHandler):
 				self.render('views/typewriter.html')
 			else: self.error(404)
 		else: self.requestLogin()
-
+	
 	def post(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -1453,7 +1363,7 @@ class AdminCommands(WrookRequestHandler):
 #		if self.CurrentMember:
 		self.render('views/admin-commands.html')
 #		else: self.requestLogin()
-
+	
 	def post(self, key):
 		onRequest(self)
 #		if self.CurrentMember:
@@ -1480,19 +1390,20 @@ class AdminCommands(WrookRequestHandler):
 			book.put()
 		result = CommandResult(ErrorCode=0, Message=_("Empty status properties of all books and chapters have been defaulted!"))
 		return result
-
+	
 	def doSetEncryptionKey(self):
 		appConfig = getWrookAppConfig()
 		appConfig.EncryptionKey = self.request.get("encryptionKey")
 		appConfig.put()
 		result = CommandResult(ErrorCode=0, Message=_("The new encryption key has been set!"))
 		return result
-
+	
 	def doLoadLicenseTypes(self):
+		import licensing
 		licensing.LoadLicenseTypes()
 		result = CommandResult(ErrorCode=0, Message=_("All license types have been loaded into the database!"))
 		return result
-
+	
 	def doDefaultAllChapterNumberTo0(self):
 		for chapter in Chapter.all():
 			chapter.Number=0
@@ -1587,7 +1498,6 @@ class About_who(WrookRequestHandler):
 		onRequest(self)
 		self.render("views/about-who.html")
 
-
 class Suggestions(WrookRequestHandler):
 	def get(self):
 		onRequest(self)
@@ -1595,8 +1505,6 @@ class Suggestions(WrookRequestHandler):
 			self.setVisitedMember(self.CurrentMember)
 			self.render("views/member-suggestions.html")
 		else: self.requestLogin()
-		
-
 
 #============================================================================
 # STORIES
@@ -1606,7 +1514,7 @@ class StoryMemberStartReadingBook(stories.Story):
 	TitleTemplate = _('<a href="/Members/$MemberKey">$MemberFullname</a> started reading <a href="/Books/$BookKey">$BookTitle</a>')
 	BodyTemplate = ""
 	Icon = "book-open.png"
-
+	
 	def getTitle(self, params):
 		member = params["member"]
 		book = params["book"]
@@ -1618,56 +1526,7 @@ class StoryMemberStartReadingBook(stories.Story):
 			}
 		template = Template(self.TitleTemplate)
 		return template.safe_substitute(data)
-
-	def getTargets(self, params): #Get the list of member who will receive the story posts
-		targets = []
-		targets.append(params["book"].Author)
-		targets.append(params["member"])
-		return targets
-
-class StoryMemberPostMessageToABook(stories.Story):
-	ID = "MemberPostMessageToABook"
-	TitleTemplate = _('<a href="/Members/$MemberKey">$MemberFullname</a> left a comment on <a href="/Books/$BookKey">$BookTitle</a>')
-	BodyTemplate = _('''
-<a href="/Feedback/Book/$BookKey" style="float: right; margin-left: 15px;">
-	<img width="45" src="$CoverImage"/>
-</a>
-<a href="/Members/$MemberKey" style="float: left; margin-right: 15px;">
-	<img width="30" src="$MemberAvatar"/>
-</a>
-<strong><a href="/Feedback/Book/$BookKey">The message</a> said: $MessageTitle </strong><br />"&#160;$MessageBody&#160;"
-''')
-	Icon = "comment.png"
-
-	def getTitle(self, params):
-		member = params["member"]
-		book = params["book"]
-		data = {
-			"MemberFullname": member.fullname(),
-			"MemberKey": member.key(),
-			"BookTitle": book.Title,
-			"BookKey": book.key()
-			}
-		template = Template(self.TitleTemplate)
-		return template.safe_substitute(data)
-
-	def getBody(self, params):
-		member = params["member"]
-		message = params["message"]
-		book = params["book"]
-		data = {
-			"MemberFullname": member.fullname(),
-			"MemberAvatar": member.gravatar30(),
-			"MemberKey": member.key(),
-			"BookTitle": book.Title,
-			"BookKey": book.key(),
-			"CoverImage": book.getCover().thumbURL45(),
-			"MessageTitle": message.Topic,
-			"MessageBody": message.Text
-			}
-		template = Template(self.BodyTemplate)
-		return template.safe_substitute(data)
-
+	
 	def getTargets(self, params): #Get the list of member who will receive the story posts
 		targets = []
 		targets.append(params["book"].Author)
@@ -1681,7 +1540,7 @@ class StorySiteCacheIsFlushed(stories.Story):
 	TitleTemplate = _('<a href="/Members/$MemberKey">$MemberFullname</a> has flushed the site cache')
 	BodyTemplate = ""
 	Icon = "flush.png"
-
+	
 	def getTitle(self, params):
 		member = params["member"]
 		data = {
@@ -1690,14 +1549,12 @@ class StorySiteCacheIsFlushed(stories.Story):
 			}
 		template = Template(self.TitleTemplate)
 		return template.safe_substitute(data)
-
+	
 	def getTargets(self, params): #Get the list of member who will receive the story posts
 		return membership.Member.all().filter("isAdmin =", True).fetch(limit=999)
-		
 
 
 #============================================================================
-
 URLMappings = [
 	( '/', Home),
 	(r'/NewChapter/(.*)', NewChapter),
@@ -1705,9 +1562,6 @@ URLMappings = [
 	(r'/Chapter/Delete/(.*)', DeleteChapter),
 	(r'/EditChapter/(.*)', EditChapterOptions),
 	(r'/Typewriter/(.*)', Typewriter),
-	(r'/Feedback/Book/(.*)', FeedbackBook),
-	(r'/Feedback/Delete/(.*)', DeleteMessage),
-	( '/PostMessage', PostMessage),
 	(r'/Join/(.*)', Join), #TODO: Refactor -  Should this be moved in the membership module?
 	( '/EditAccount', EditAccount), #TODO: Refactor -  Should this be moved in part in the membership module?
 	( '/Account/View', AccountView),
@@ -1847,6 +1701,7 @@ def profile_html_main():
 	# stats.print_callees()
 	# stats.print_callers()
 	print "</pre></div>"
+
 
 
 main = real_main
