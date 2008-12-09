@@ -5,10 +5,15 @@ import logging
 from django.utils import simplejson
 from google.appengine.ext import db
 from google.appengine.ext.webapp import template
+#Django imports
+from django.utils import translation
+from django.utils.translation import gettext as _
+
 import webapp
 import membership
+import cachetree
+
 from string import Template
-from feathers import cachetree
 #TODO: This template import should become useless after rafactoring the Stories module..
 
 maxRecentReplies = 3
@@ -20,6 +25,7 @@ currentRequestHandler = None
 def URLMappings():
 	return [
 		(r'/Talk/Topic/New/(.*)/', handler_topic_new),
+		(r'/Talk/Topic/(.*)/Delete/JSON', handler_topic_delete_JSON),
 		(r'/Talk/Topic/(.*)/', handler_topic_view),
 		(r'/Talk/Reply/New/(.*)/', handler_reply_new),
 		(r'/Talk/Post/(.*)/Reply/MiniForm/JSON', handler_reply_miniForm_JSON),
@@ -189,7 +195,42 @@ class Reply(Post, cachetree.Cachable):
 		data = {"reply": self}
 		return template.render(templateSource, data)
 
-
+def delete_topic(topic):
+	replies = topic.replies()
+	topic.clear_cache()
+	#TODO: The following two delete operations shoulod run in a transaction
+	if replies:	db.delete(replies)
+	db.delete(topic)
+	return True
+	
+	
+class handler_topic_delete_JSON(webapp.RequestHandler):
+	def get(self, key):
+		onRequest(self)
+		if self.CurrentMember:
+			if key:
+				topic = Topic.get(key)
+				if topic:
+					if delete_topic(topic):
+						data = {"errorCode":0, "html": _("Topic has been deleted...")}
+						self.response.out.write("(%s)" % simplejson.dumps(data))
+					else:
+						self.response.out.write(simplejson.dumps({
+							"errorCode": 1,
+							"errorMessage": _("An error occured! Sorry!")
+							}))
+				else:
+					#TODO: This error block should not be repeted manually
+					self.response.out.write(simplejson.dumps({
+						"errorCode": 1,
+						"errorMessage": _("An error occured! Sorry!")
+						}))
+				
+		else:
+			self.response.out.write(simplejson.dumps({
+				"errorCode":1004,
+				"errorMessage": _("You must be logged in to post a comment.")
+				}))
 
 class handler_reply_miniForm_JSON(webapp.RequestHandler):
 	def get(self, key):
@@ -208,7 +249,6 @@ class handler_reply_miniForm_JSON(webapp.RequestHandler):
 				"errorCode":1004,
 				"errorMessage": _("You must be logged in to post a comment.")
 				}))
-
 
 class handler_topic_view(webapp.RequestHandler):
 	def get(self, key):

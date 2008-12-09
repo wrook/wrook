@@ -8,6 +8,8 @@
             <string>feathers\talk-script-topicForm.js</string>
             <key>app</key>
             <string>app.yaml</string>
+            <key>app.</key>
+            <string>app.yaml</string>
             <key>book</key>
             <string>views\books-view.html</string>
             <key>book-</key>
@@ -28,6 +30,8 @@
             <string>views\books-view-sidebar.html</string>
             <key>cache</key>
             <string>feathers\cachetree.py</string>
+            <key>cachetr</key>
+            <string>feathers\cachetree.py</string>
             <key>d.c</key>
             <string>stylesheets\template-d.css</string>
             <key>d.css</key>
@@ -43,7 +47,7 @@
             <key>logi</key>
             <string>views\login.html</string>
             <key>main</key>
-            <string>stylesheets\main.css</string>
+            <string>scripts\main.js</string>
             <key>main.</key>
             <string>views\template-main.html</string>
             <key>main.c</key>
@@ -61,7 +65,7 @@
             <key>memoiz</key>
             <string>memoize.py</string>
             <key>part</key>
-            <string>feathers\views\talk-part-reply.html</string>
+            <string>feathers\views\talk-part-topic.html</string>
             <key>part-</key>
             <string>feathers\views\talk-part-topic.html</string>
             <key>part-T</key>
@@ -186,6 +190,8 @@
             <string>views\template-twoSidebars.html</string>
             <key>viewC</key>
             <string>views\viewChapter.html</string>
+            <key>weba</key>
+            <string>feathers\webapp.py</string>
             <key>webapp</key>
             <string>feathers\webapp.py</string>
             <key>wro</key>

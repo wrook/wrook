@@ -14,6 +14,7 @@ import sys
 import cgi
 import datetime
 import logging
+from firepython.middleware import FirePythonWSGI
 import urllib
 import hashlib
 import types
@@ -1815,7 +1816,8 @@ def real_main():
 	#TODO: Find out if there is a way for module folders to be loaded automatically
 	logging.getLogger().setLevel(logging.DEBUG)
 	#TODO: Find out if loggin.DEBUG should be disable on the production servers
-	webapp.run(application)
+	webapp.run(FirePythonWSGI(application))
+	#run_wsgi_app(FirePythonWSGI(application))
 
 def profile_log_main():
 	'''
@@ -1850,6 +1852,7 @@ def profile_html_main():
 	# stats.print_callees()
 	# stats.print_callers()
 	print "</pre></div>"
+
 
 main = real_main
 #main = profile_html_main

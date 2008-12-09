@@ -161,8 +161,17 @@ storyPostReplyHandler.addMenuItem("delete", "Delete", function(context, id){
 });
 
 var topicHandler = new miniMenuHandler();
-topicHandler.addMenuItem("delete", "Delete", function(context, id){
-	console.debug("delete", context, menuItemId, id)
+topicHandler.addMenuItem("delete", "Delete", function(context, menuITemId, id){
+	$.getJSON("/Talk/Topic/" + id + "/Delete/JSON", function(data){
+		if (data.errorCode == 0) {
+			console.debug("deleting:", id, data);
+			$("#" + id + "-topicMenu").hide();
+			$("#" + id).hide();
+			$("#" + id).after($("<strong>" + data.html + "</strong>"));
+		} else if(data.errorCode > 0) {
+			alert("Oups! A problem occured: " + data.errorMessage + " (Error code:" + data.errorCode + ")");
+		}
+	});
 });
 
 var miniMenu = new MiniMenu();

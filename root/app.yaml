@@ -8,7 +8,7 @@ default_expiration: "21d"
 handlers:
 - url: /stylesheets
   static_dir: stylesheets
-  expiration: "1s"
+  expiration: "21d"
 
 - url: /scripts
   static_dir: scripts

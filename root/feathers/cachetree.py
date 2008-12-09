@@ -16,6 +16,15 @@ class Cachable(db.Model):
 		self.update_cache()
 		self.touch_up(self)
 
+	def clear_cache(self):
+		logging.debug("in: clear_cache(%s)" % self.key())
+		key = self.get_cache_key()
+		memcache.delete(key)
+		memcache.delete("%s-meta" % key)
+		self.touch_up(self)
+		logging.debug("out: clear_cache(%s)" % self.key())
+		return True
+
 	def touch_up(self, childItem):
 		'''
 		Bubble up the touch event without systematically touching
