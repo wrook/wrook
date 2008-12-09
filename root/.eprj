@@ -190,6 +190,8 @@
             <string>views\template-twoSidebars.html</string>
             <key>viewC</key>
             <string>views\viewChapter.html</string>
+            <key>we</key>
+            <string>feathers\webapp.py</string>
             <key>weba</key>
             <string>feathers\webapp.py</string>
             <key>webapp</key>

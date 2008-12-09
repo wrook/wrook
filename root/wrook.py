@@ -1814,10 +1814,9 @@ def real_main():
 	sys.path.append(os.path.dirname(__file__))
 	sys.path.append(os.path.join(os.path.dirname(__file__), 'feathers'))
 	#TODO: Find out if there is a way for module folders to be loaded automatically
-	logging.getLogger().setLevel(logging.DEBUG)
+	#logging.getLogger().setLevel(logging.DEBUG)
 	#TODO: Find out if loggin.DEBUG should be disable on the production servers
 	webapp.run(FirePythonWSGI(application))
-	#run_wsgi_app(FirePythonWSGI(application))
 
 def profile_log_main():
 	'''

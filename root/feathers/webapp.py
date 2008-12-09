@@ -4,9 +4,10 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template, util
 
 class Application(webapp.WSGIApplication):
+	pass
 
-	def run(application):
-		util.run_wsgi_app(application)
+def run(application):
+	util.run_wsgi_app(application)
 
 class RequestHandler(webapp.RequestHandler):
 	Model = {}
