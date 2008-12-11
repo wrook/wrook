@@ -1,4 +1,7 @@
-﻿import os, cgi, datetime, logging
+﻿#!python
+# coding=UTF-8
+
+import os, cgi, datetime, logging
 import markdown2
 from google.appengine.ext import db
 from google.appengine.ext.db import djangoforms

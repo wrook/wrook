@@ -1,3 +1,6 @@
+#!python
+# coding=UTF-8
+
 import os, cgi, datetime, logging
 from google.appengine.api import images, memcache
 from google.appengine.ext import db

@@ -1,3 +1,6 @@
+#!python
+# coding=UTF-8
+
 import os
 from google.appengine.api import users
 from google.appengine.ext import webapp

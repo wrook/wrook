@@ -99,7 +99,8 @@ Here's a few more things, you could try:
 		</ul>
 	{% endifequal %}
 	{% ifequal currentMember.memberConversionLevel "complete" %}
-{% blocktrans with currentMember.Firstname as firstname %}
+{% blocktrans with currentMember.test|escape as firstname %}
+
 <h3>
 	Wow! Thank you {{ firstname }}, your seem to have tried all of our features!
 </h3>

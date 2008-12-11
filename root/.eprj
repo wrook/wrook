@@ -4,10 +4,16 @@
     <dict>
         <key>fileTriggers</key>
         <dict>
+            <key>-d.css</key>
+            <string>stylesheets\template-d.css</string>
             <key>.js</key>
             <string>feathers\talk-script-topicForm.js</string>
+            <key>about</key>
+            <string>about.py</string>
+            <key>admin</key>
+            <string>admin.py</string>
             <key>app</key>
-            <string>app.yaml</string>
+            <string>app.py</string>
             <key>app.</key>
             <string>app.yaml</string>
             <key>book</key>
@@ -24,6 +30,8 @@
             <string>views\section-bookInfo.html</string>
             <key>bookinfo</key>
             <string>views\section-bookInfo.html</string>
+            <key>books</key>
+            <string>books.py</string>
             <key>books-</key>
             <string>views\books-talk.html</string>
             <key>books-view-sidebar.html</key>
@@ -32,6 +40,8 @@
             <string>feathers\cachetree.py</string>
             <key>cachetr</key>
             <string>feathers\cachetree.py</string>
+            <key>customi</key>
+            <string>feathers\customize.py</string>
             <key>d.c</key>
             <string>stylesheets\template-d.css</string>
             <key>d.css</key>
@@ -44,6 +54,8 @@
             <string>feathers\views\talk-comment-miniForm.html</string>
             <key>info</key>
             <string>views\section-bookInfo.html</string>
+            <key>labs</key>
+            <string>feathers\labs.py</string>
             <key>logi</key>
             <string>views\login.html</string>
             <key>main</key>
@@ -57,13 +69,23 @@
             <key>main.j</key>
             <string>scripts\main.js</string>
             <key>member</key>
+            <string>members.py</string>
+            <key>member-suggestio</key>
+            <string>views\member-suggestions.html</string>
+            <key>member-suggestions.html</key>
+            <string>views\member-suggestions.html</string>
+            <key>members</key>
             <string>feathers\membership.py</string>
             <key>membersh</key>
             <string>feathers\membership.py</string>
             <key>membershi</key>
             <string>feathers\views\membership-inviteNew.html</string>
+            <key>membes</key>
+            <string>members.py</string>
             <key>memoiz</key>
             <string>memoize.py</string>
+            <key>old</key>
+            <string>old_wrook.py</string>
             <key>part</key>
             <string>feathers\views\talk-part-topic.html</string>
             <key>part-</key>
@@ -78,6 +100,8 @@
             <string>feathers\views\talk-part-topics.html</string>
             <key>partre</key>
             <string>views\part-replies.html</string>
+            <key>proform</key>
+            <string>feathers\proforma.py</string>
             <key>repl</key>
             <string>views\part-replies.html</string>
             <key>repli</key>
@@ -110,6 +134,10 @@
             <string>feathers\stories.pyc</string>
             <key>stories</key>
             <string>feathers\stories.py</string>
+            <key>sugges</key>
+            <string>views\member-suggestions.html</string>
+            <key>suggest</key>
+            <string>views\member-suggestions.html</string>
             <key>talk</key>
             <string>feathers\talk.py</string>
             <key>talk-</key>
@@ -151,7 +179,7 @@
             <key>talkp</key>
             <string>feathers\views\talk-part-topicForm.html</string>
             <key>tem</key>
-            <string>views\template-main.html</string>
+            <string>views\template-main-d.html</string>
             <key>temp</key>
             <string>views\template-main-d.html</string>
             <key>templ</key>
@@ -188,6 +216,8 @@
             <string>feathers\cachetree.py</string>
             <key>twoSid</key>
             <string>views\template-twoSidebars.html</string>
+            <key>utils</key>
+            <string>feathers\utils.py</string>
             <key>viewC</key>
             <string>views\viewChapter.html</string>
             <key>we</key>
@@ -200,6 +230,8 @@
             <string>wrook.py</string>
             <key>wrook</key>
             <string>wrook.py</string>
+            <key>wrookSto</key>
+            <string>wrookStories.py</string>
         </dict>
     </dict>
 </plist>

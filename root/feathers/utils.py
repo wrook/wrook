@@ -1,3 +1,6 @@
+#!python
+# coding=UTF-8
+
 import urllib, hashlib
 		
 def getGravatar(email, default, size):

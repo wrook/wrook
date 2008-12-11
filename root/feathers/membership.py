@@ -1,5 +1,6 @@
 ﻿#!python
-# coding: utf-8 
+# coding=UTF-8
+
 """
 Membership module of Feathers
 
@@ -12,27 +13,37 @@ import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 import cgi, datetime, logging, hashlib
 from string import Template
-from google.appengine.api import users, images, memcache, mail
 from google.appengine.ext import db
 from google.appengine.ext.db import djangoforms
+from google.appengine.api import images
+from google.appengine.api import mail
+from google.appengine.api import memcache
 from django.utils.translation import gettext as _
 from feathers import utils, webapp
 import cookies
 
 # Not used anymore, but kept here as a reminder of how to get the hostname... remove later
-#hostname = os.environ['HTTP_HOST'] 
+#hostname = os.environ['HTTP_HOST']
+
+loginErrorMessage = ""
 
 def URLMappings():
 	return [
+		(r'/Join/(.*)', Join),
 		(r'/Invites', Invites),
 		(r'/Invites/(.*)', InviteEdit),
-		(r'/Membership/ProfilePhoto/Image/(.*)', ProfilePhotoImage)
-	]
+		(r'/Membership/ProfilePhoto/Image/(.*)', ProfilePhotoImage),
+		( '/Login', Login),
+		( '/Logout', Logout),
+		(r'/PasswordSent/(.*)', PasswordSent),
+		(r'/ResetPassword/(.*)', ResetPassword),
+		( '/EditAccount', EditAccount),
+		( '/Account/View', AccountView),
+		( '/Account/ChangeProfilePhoto', AccountChangeProfilePhoto),
+		( '/Account/ChangePassword', AccountChangePassword)]
 
 def onRequest(request): # Event triggering to let the host application intervene
 	pass
-
-loginErrorMessage = ""
 
 def getMemberFromCredentials(username): # Username or Email
 	#Refactor: The cookies should keep the member key for faster retrieval
@@ -70,7 +81,7 @@ class LoginResult():
 		self.Member = Member
 		self.ErrorCode = ErrorCode
 		self.ErrorMessage = ErrorMessage
-	
+
 def memberLogin(requestHandler, username, password):
 	member = getMemberFromCredentials(username)
 	if not member:
@@ -89,20 +100,19 @@ def logout(requestHandler):
 	del _cookies['credentialsHash']
 	del _cookies['username']
 
-
 class MemberConversionAct:
 	Id = ""
 	BeforeLabel = ""
 	AfterLabel = ""
 	Points = 0
 	Done = False
-
 	def __init__(self, id, beforeLabel, afterLabel, points, done):
 		self.Id = id
 		self.BeforeLabel = beforeLabel
 		self.AfterLabel = afterLabel
 		self.Points = points
 		self.Done = done
+
 class Member(db.Model):
 	"""
 	Member.
@@ -128,6 +138,9 @@ class Member(db.Model):
 	Created = db.DateTimeProperty(auto_now_add=True)
 	isAdmin = db.BooleanProperty(default=False)
 
+	def test(self):
+		return "e".encode()
+
 	# Refactor: This method should be implemented as a setter on the password property
 	def setPassword(self, password, secretEncryptionKey):
 		"""Encrypt and set a new password on the user."""
@@ -139,7 +152,7 @@ class Member(db.Model):
 			self.flushCache()
 			return True
 		else: return False;
-
+	
 	def getEncryptedPassword(self, password, secretEncryptionKey):
 		"""Return an MD5 encrypted password built with the password, the member key and the secret site key."""
 		# If a password is not provided, None is returned
@@ -147,10 +160,10 @@ class Member(db.Model):
 			# Encrypts the password with the unique member key and a secreat site key.
 			return hashlib.md5("%s-%s-%s" % (secretEncryptionKey, self.key(), password)).hexdigest()
 		else: return None
-
+	
 	def firstname(self):
 		return str(self.Firstname)
-
+	
 	def memberConversionLevel(self):
 		progress = self.getConversionProgress()
 		if progress == 100: return "complete"
@@ -158,13 +171,14 @@ class Member(db.Model):
 		if progress > 40: return "medium"
 		if progress > 0: return "low"
 		return "none"
-
+	
 	def getConversionActs(self):
 		acts = []
 		cacheKey = "wrookMemberConversionActs-%s" % self.key()
 		acts = memcache.get(cacheKey)
 		if acts == None:
 			acts = []
+			"""
 			acts.append(MemberConversionAct(
 				"uploadedProfilePhoto",
 				_("Upload a profile photo"),
@@ -189,12 +203,13 @@ class Member(db.Model):
 				_("You invited a friend to join Wrook"),
 				1,
 				(len(self.SentInvites.fetch(1))>0)))
+			"""
 			memcache.add(cacheKey, acts)
 		return acts
-
+	
 	def getConversionProgressLeft(self):
 		return 100 - self.getConversionProgress()
-
+	
 	def getConversionProgress(self):
 		cacheKey = "wrookMemberConversionProgress-%s" % self.key()
 		progress = memcache.get(cacheKey)
@@ -210,7 +225,7 @@ class Member(db.Model):
 			progress = progress
 			memcache.add(cacheKey, progress)
 		return progress
-
+	
 	def flushCache(self):
 		"""Flush the caching entries relating to the member."""
 		memcache.delete("wrookMember-%s" % self.Username)
@@ -221,7 +236,7 @@ class Member(db.Model):
 		memcache.delete("profilePhotoThumb80-%s" % self.key())
 		memcache.delete("profilePhotoThumb100-%s" % self.key())
 		memcache.delete("profilePhotoThumb120-%s" % self.key())
-
+	
 	def currentThemeSelection(self):
 		cacheKey = "wrookMemberThemeSelection-%s" % self.key()
 		selection = memcache.get(cacheKey)
@@ -231,23 +246,23 @@ class Member(db.Model):
 			else: selection = None
 			memcache.add(cacheKey, selection)
 		return selection
-
+	
 	def preferedLanguageName(self):
 		if self.PreferedLanguage == "en": return _("English")
 		if self.PreferedLanguage == "fr": return _("French")
 		else: return ""
-
+	
 	def genderName(self):
 		if self.Gender == "male": return _("Male")
 		if self.Gender == "female": return _("Female")
 		else: return ""
-
+	
 	#Refactor: This practice is unsecure and should be redone
 	def login(self, requestHandler):
 		_cookies = cookies.Cookies(requestHandler, max_age=604800) #TODO: This value should be mad common
 		_cookies['credentialsHash'] = self.Password
 		_cookies['username'] = self.Username
-
+	
 	def resetPassword(self, secretEncryptionKey):
 		"""Set a new automatically generated password, and send this new password by email"""
 		password = utils.nicepass()
@@ -255,7 +270,7 @@ class Member(db.Model):
 		self.sendPassword(password)
 		self.put()
 		self.flushCache()
-
+	
 	#Refactor: This is an potentially unsecure feautre, this should be changed!
 	def sendPassword(self, password):
 		"""Sends a newly generated password to the user via email address"""
@@ -286,37 +301,37 @@ http://www.wrook.org
 			body = messageTemplate.safe_substitute(data)
 			)
 		message.send()
-
+	
 	def isNew(self):
 		booksCount = self.Books.all().count()
 		bookmarksCount = self.Bookmarks.all().count()
-		if (booksCount+bookmarksCount > 0): return False 
+		if (booksCount+bookmarksCount > 0): return False
 		else: return True
-
+	
 	def gravatar30(self):
 		if self.ProfilePhoto: return "/Membership/ProfilePhoto/Image/%s?width=30" % self.key()
 		else: return "/images/avatar.png"
-
+	
 	def gravatar40(self):
 		if self.ProfilePhoto: return "/Membership/ProfilePhoto/Image/%s?width=40" % self.key()
 		else: return "/images/avatar.png"
-
+	
 	def gravatar50(self):
 		if self.ProfilePhoto: return "/Membership/ProfilePhoto/Image/%s?width=50" % self.key()
 		else: return "/images/avatar.png"
-
+	
 	def gravatar80(self):
 		if self.ProfilePhoto: return "/Membership/ProfilePhoto/Image/%s?width=80" % self.key()
 		else: return "/images/avatar.png"
-
+	
 	def gravatar100(self):
 		if self.ProfilePhoto: return "/Membership/ProfilePhoto/Image/%s?width=100" % self.key()
 		else: return "/images/avatar.png"
-
+	
 	def gravatar120(self):
 		if self.ProfilePhoto: return "/Membership/ProfilePhoto/Image/%s?width=120" % self.key()
 		else: return "/images/avatar.png"
-
+	
 	def fullname(self):
 		return "%s %s" % (self.Firstname, self.Lastname)
 
@@ -331,7 +346,7 @@ class Invite(db.Expando):
 	WhenSent = db.DateTimeProperty(auto_now_add=True)
 	WhenResent = db.DateTimeProperty()
 	WhenAccepted = db.DateTimeProperty()
-
+	
 	def send(self):
 		sendTo = "%s %s <%s>" % (self.Firstname, self.Lastname, self.Email)
 		message = mail.EmailMessage(
@@ -350,7 +365,7 @@ class Invite(db.Expando):
 		self.WhenSent = datetime.datetime.now()
 		self.put()
 		return self
-
+	
 	def getMessage(self):
 		if self.is_saved(): key = self.key()
 		else: key = ""
@@ -365,7 +380,7 @@ class Invite(db.Expando):
 			return self.inviteTemplateWithMessage.safe_substitute(inviteData)
 		else:
 			return self.inviteTemplate.safe_substitute(inviteData)
-
+	
 	inviteTemplateWithMessage = Template(_('''
 Hello $firstname $lastname,
 
@@ -383,7 +398,7 @@ http://www.wrook.org/Join/$inviteKey
 Thank you,
 The Wrook Team
 '''))
-
+	
 	inviteTemplate = Template(_('''
 Hello $firstname $lastname,
 
@@ -444,7 +459,7 @@ class InviteEdit(webapp.RequestHandler):
 					self.TemplateBaseFolder = os.path.dirname(__file__)
 					self.render('views/membership-inviteNew.html')
 			else: self.error(404)
-
+	
 	def post(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -520,7 +535,7 @@ class ProfilePhotoImage(webapp.RequestHandler):
 					image.rotate(0) # Because there needs to be at least one transformation to output as a JPEG
 					thumbnailData = image.execute_transforms(output_encoding=images.JPEG)
 					if width: memcache.add(imageKey, thumbnailData)
-
+				
 				self.response.headers['content-type'] = "image/png"
 				self.response.headers['cache-control'] = "public, max-age=1814400" # 21 day cache
 				self.response.headers["Expires"] = "Thu, 01 Dec 2014 16"
@@ -529,3 +544,288 @@ class ProfilePhotoImage(webapp.RequestHandler):
 				self.error(404)
 		else:
 			self.error(404)
+
+class Join(webapp.RequestHandler):
+	def get(self, key):
+		onRequest(self)
+		if self.CurrentMember:
+			self.redirect("/") # Refactor: This special case should be handled: "Accept invite while being already logged in"
+		else:
+			if key: invite = Invite.get(key)
+			else: invite = Invite()
+			self.Model.update({
+				"invite": invite,
+				"email": invite.Email.strip().lower(),
+				"firstname": invite.Firstname.strip(),
+				"lastname": invite.Lastname.strip()
+				})
+			self.render('views/join.html')
+	
+	def post(self, key): #TODO: Refactor -  This handler should be moved to the membership module and actuel business logic should be in separate methods
+		onRequest(self)
+		if key: invite = Invite.get(key)
+		else: invite = Invite()
+		username = self.request.get("Username").strip().lower() #TODO: Stripping and lowercasing should also be in the class logic
+		email = self.request.get("Email").strip().lower() #TODO: Stripping and lowercasing should also be in the class logic
+		firstname = self.request.get("Firstname").strip()
+		lastname = self.request.get("Lastname").strip()
+		gender = self.request.get("Gender")
+		preferedLanguage = self.request.get("PreferedLanguage")
+		isValid = True
+		if (firstname == "" or lastname == "" or email == "" or username == ""):
+			isValid = False
+			error = _("Username, email, firstname and lastname are madatory!")
+		elif (not username.isalnum()):
+			isValid = False
+			error = _("Sorry, the username can only contain letters and numbers.")
+		elif (getMemberFromCredentials(email)): #TODO: Refactor -  This constraint should be built into the Member entity
+			isValid = False
+			error = _("This email address is already used by another member")
+		elif (getMemberFromCredentials(username)): #TODO: Refactor -  This constraint should be built into the Member entity
+			isValid = False
+			error = _("This username address is already used by another member")
+		if (not isValid):
+			self.Model.update({
+				'username': username,
+				'email': email,
+				'firstname': firstname,
+				'lastname': lastname,
+				'gender': gender,
+				'preferedLanguage': preferedLanguage,
+				'error': error
+				})
+			self.render("views/join.html")
+		else:
+			member = Member(
+				Username = username,
+				Email = email,
+				Firstname = firstname,
+				Lastname = lastname,
+				Gender = gender,
+				PreferedLanguage = preferedLanguage,
+				)
+			member.put()
+			member.resetPassword(self.AppConfig.EncryptionKey)
+			if invite:
+				invite.AcceptedMember = member
+				invite.Status = "accepted"
+				invite.WhenAccepted = datetime.datetime.now()
+				invite.put()
+			self.redirect("/ResetPassword/%s" % member.key())
+
+
+class Login(webapp.RequestHandler):
+	def get(self):
+		onRequest(self)
+		if self.CurrentMember:
+			self.Model.update({
+				'error': _("You are already logged in. In order to login again, you must first logout.")
+				})
+			self.render('views/login-already.html')
+		else:
+			username = self.request.get("username")
+			password = self.request.get("password")
+			self.Model.update({
+				'username': username,
+				'password': password
+				})
+			self.render('views/login.html')
+	
+	def post(self):
+		onRequest(self)
+		username = self.request.get("username")
+		password = self.request.get("password")
+		error = None
+		if username and password:
+			result = memberLogin(self, username, password)
+			if not result.ErrorCode:
+				self.redirect("/")
+				return
+			else:
+				error = _("<strong>Login failed:</strong> ") + result.ErrorMessage
+		else:
+			error = _("<strong>Login failed:</strong> Username and password are both mandatory!")
+		
+		self.Model.update({
+			'error': error,
+			'username': username,
+			'password': password
+			})
+		self.render('views/login.html')
+
+
+class PasswordSent(webapp.RequestHandler):
+	def get(self, key):
+		onRequest(self)
+		member = Member.get(key)
+		if member:
+			self.Model.update({"member": member})
+			self.render('views/passwordSent.html')
+		else: self.error(404)
+
+class ResetPassword(webapp.RequestHandler):
+	def get(self, key):
+		onRequest(self)
+		if key:
+			member = Member.get(key)
+			if member:
+				member.resetPassword(self.AppConfig.EncryptionKey)
+				self.Model.update({"member": member})
+				self.redirect('/PasswordSent/%s' % member.key())
+			else: self.error(404)
+		else:
+			self.render("views/resetPassword.html")
+	
+	def post(self, key):
+		onRequest(self)
+		if not key:
+			usernameOrEmail = self.request.get("usernameOrEmail")
+			if usernameOrEmail:
+				member = getMemberFromCredentials(usernameOrEmail)
+				if member:
+					member.resetPassword(self.AppConfig.EncryptionKey)
+					self.Model.update({"member": member})
+					self.redirect('/PasswordSent/%s' % member.key())
+				else:
+					self.Model.update({"error": _("No member found with this username or email address!")})
+					self.render("views/resetPassword.html")
+			else:
+				self.Model.update({"error": _("No member found with this username or email address!")})
+				self.render("views/resetPassword.html")
+		else: self.error(404)
+
+class Logout(webapp.RequestHandler):
+	def get(self):
+		logout(self)
+		self.redirect("/")
+
+class AccountView(webapp.RequestHandler):
+	def get(self):
+		onRequest(self)
+		if self.CurrentMember:
+			self.setVisitedMember(self.CurrentMember)
+			self.Model.update({
+				'member': self.CurrentMember
+				})
+			self.render('views/viewAccount.html')
+		else: self.requestLogin()
+
+class EditAccount(webapp.RequestHandler):
+	def get(self):
+		onRequest(self)
+		if self.CurrentMember:
+			self.setVisitedMember(self.CurrentMember)
+			if self.CurrentMember.ProfilePhoto: hasProfilePhoto = True
+			else: hasProfilePhoto = False
+			self.Model.update({
+				'key': self.CurrentMember.key(),
+				'firstname': self.CurrentMember.Firstname,
+				'lastname': self.CurrentMember.Lastname,
+				'hasProfilePhoto': hasProfilePhoto,
+				'gender': self.CurrentMember.Gender,
+				'preferedLanguage': self.CurrentMember.PreferedLanguage,
+				'about': self.CurrentMember.About
+				})
+			self.render('views/editAccount.html')
+		else: self.requestLogin()
+	
+	def post(self):
+		onRequest(self)
+		if self.CurrentMember:
+			self.CurrentMember.flushCache()
+			self.setVisitedMember(self.CurrentMember)
+			firstname = self.request.get("Firstname")
+			lastname = self.request.get("Lastname")
+			preferedLanguage = self.request.get("PreferedLanguage")
+			gender = self.request.get("Gender")
+			about = self.request.get("About")
+			tmpProfilePhoto = self.request.get("profilePhotoProxy")
+			if tmpProfilePhoto: profilePhoto = db.Blob(tmpProfilePhoto)
+			else: profilePhoto = None
+			if (firstname == "" or lastname == ""):
+				self.Model.update({
+					'firstname': firstname,
+					'lastname': lastname,
+					'preferedLanguage': preferedLanguage,
+					'gender': gender,
+					'about': about,
+					'error': _("Firstname and lastname are madatory! You will also have to re-upload your photo!") #Refacfor: There should be a way not to forget the photo... temp area?
+					})
+				self.render('views/editAccount.html')
+			else:
+				member = self.CurrentMember
+				member.Firstname = firstname
+				member.Lastname = lastname
+				member.PreferedLanguage = preferedLanguage
+				member.Gender = gender
+				member.About = about
+				if profilePhoto: member.ProfilePhoto = profilePhoto
+				member.put()
+				member.flushCache()
+				self.redirect("/Account/View")
+		else: self.requestLogin()
+
+class AccountChangeProfilePhoto(webapp.RequestHandler):
+	def get(self):
+		onRequest(self)
+		if self.CurrentMember:
+			self.setVisitedMember(self.CurrentMember)
+			self.Model.update({
+				'member': self.CurrentMember,
+				})
+			self.render('views/account-changePhoto.html')
+		else: self.requestLogin()
+	
+	def post(self):
+		onRequest(self)
+		if self.CurrentMember:
+			self.setVisitedMember(self.CurrentMember)
+			tmpProfilePhoto = self.request.get("profilePhotoProxy")
+			if tmpProfilePhoto: profilePhoto = db.Blob(tmpProfilePhoto)
+			else: profilePhoto = None
+			if not profilePhoto:
+				self.Model.update({
+					'error': _("No file were uploaded!") #Refacfor: There should be a way not to forget the photo... temp area?
+					})
+				self.render('views/editAccount.html')
+			else:
+				member = self.CurrentMember
+				member.ProfilePhoto = profilePhoto
+				member.put()
+				member.flushCache()
+				self.redirect("/Account/View")
+		else: self.requestLogin()
+
+
+class AccountChangePassword(webapp.RequestHandler):
+	def get(self):
+		onRequest(self)
+		if self.CurrentMember:
+			self.setVisitedMember(self.CurrentMember)
+			self.render('views/account-changePassword.html')
+		else: self.requestLogin()
+	
+	def post(self):
+		onRequest(self)
+		if self.CurrentMember:
+			self.setVisitedMember(self.CurrentMember)
+			oldPassword = self.request.get("oldPassword")
+			newPassword = self.request.get("newPassword")
+			oldEncryptedPassword = self.CurrentMember.getEncryptedPassword(oldPassword, self.AppConfig.EncryptionKey)
+			if oldEncryptedPassword == self.CurrentMember.Password and newPassword:
+				passwordChanged = self.CurrentMember.setPassword(newPassword, self.AppConfig.EncryptionKey)
+				self.CurrentMember.login(self) #The user is login's immediatly to prevent a logout after the postback
+				if passwordChanged:
+					self.CurrentMember.flushCache()
+					self.redirect("/Account/View")
+				else:
+					self.Model.update({
+						'error': _("Un unforseen error occured! Your password could not be changed. You should contact the site administrator about this problem.")
+						})
+					self.render('views/account-changePassword.html')
+			else:
+				self.Model.update({
+					'error': _("Changing password failed! You have either not entered a new password or the old one does not match.")
+					})
+				self.render('views/account-changePassword.html')
+		else: self.requestLogin()

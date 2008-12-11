@@ -342,7 +342,7 @@ table tr td {
 #siteBarContent {
 	position: relative;
 	width: 840px;
-	margin: 0px auto;
+	margin: 0px 0px 0px 200px;
 }
 
 #currentMemberAvatar {
