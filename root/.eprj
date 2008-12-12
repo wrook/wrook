@@ -44,6 +44,8 @@
             <string>feathers\cachetree.py</string>
             <key>cachetr</key>
             <string>feathers\cachetree.py</string>
+            <key>custom</key>
+            <string>views\customize.html</string>
             <key>customi</key>
             <string>feathers\customize.py</string>
             <key>d.c</key>
@@ -88,6 +90,8 @@
             <string>views\member-suggestions.html</string>
             <key>member-suggestions.html</key>
             <string>views\member-suggestions.html</string>
+            <key>member.py</key>
+            <string>members.py</string>
             <key>members</key>
             <string>feathers\membership.py</string>
             <key>membersh</key>

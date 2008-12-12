@@ -68,6 +68,7 @@ class MembersFeed(webapp.RequestHandler):
 class Customize(webapp.RequestHandler):
 	def get(self):
 		from feathers import customize
+		import books
 		onRequest(self)
 		if self.CurrentMember:
 			self.Model.update({
