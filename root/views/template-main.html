@@ -35,11 +35,9 @@
 							{% if currentMember %}
 								<div class="sidebarMenu">
 									<ul>
-										<li><a id="menu-home" href="/">{% trans "Welcome" %} {{ currentMember.Firstname }}</a></li>
 										<li><a id="menu-books" href="/Books">{% trans "Books" %}</a></li>
 										<li><a id="menu-readers" href="/Members">{% trans "Members" %}</a></li>
 										<li><a id="menu-customize" href="/Customize">{% trans "Customize" %}</a></li>
-										<li><a id="menu-labs" href="/Labs">{% trans "Labs" %}</a></li>
 										<li><a id="menu-logout" href="/Logout">{% trans "Logout" %}</a></li>
 									</ul>
 								</div>
@@ -60,9 +58,10 @@
 							<h3>{% trans "About" %}</h3>
 							<div class="sidebarMenu">
 								<ul>
-									<li><a href="/About/Who">{% trans "Who is behind Wrook" %}</a></li>
-									<li><a href="/About/OpenSourceLicense">{% trans "Open source license" %}</a></li>
-									<li><a href="/About/Half-Baked-Edition">{% trans "Half Baked Edition" %}</a></li>
+									<li><a id="menuWho" href="/About/Who">{% trans "Who is behind Wrook" %}</a></li>
+									<li><a id="menu-openSourceLicense" href="/About/OpenSourceLicense">{% trans "Open source license" %}</a></li>
+									<li><a id="menu-halfBaked" href="/About/Half-Baked-Edition">{% trans "Half Baked Edition" %}</a></li>
+									<li><a id="menu-labs" href="/Labs">{% trans "Labs" %}</a></li>
 								</ul>
 							</div>
 						</div>
