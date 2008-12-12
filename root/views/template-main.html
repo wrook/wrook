@@ -11,56 +11,64 @@
 		{% endif %}
 		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"></link>
 		<link rel="stylesheet" type="text/css" href="/stylesheets/template-d.css"></link>
-{% if currentTheme %}
-<style>
-#page { background: #000000 url(/Themes/Theme/BackgroundImage/{{ currentTheme.key }}?width=1024) 200px 50px no-repeat; }
-{% endif %}
-</style>
 {% block htmlHead %}{% endblock %}
 	</head>
 	<body id="page-{% block pageId %}none{% endblock %}">
+		{% if currentTheme %}
+			<div id="wallpaper">
+				<img src="/Themes/Theme/BackgroundImage/{{ currentTheme.key }}?width=1024" />
+				<div class="bgFade"></div>
+			</div>
+		{% endif %}
 		<div id="spritesPreload"></div>
 		<div id="page">
-			<div class="bgFade"> </div>
 			<div id="halfBakedLogo"><a href="/About/Half-Baked-Edition"></a></div>
 			<div id="header">
-				<div id="siteBar">
-					<div id="siteBarContent">
-						<div id="siteName"><a href="/">Wrook</a></div>
-						{% if currentMember %}
-							<a href="/" id="currentMemberAvatar"><img width="30" src="{{ currentMember.gravatar30 }}" /></a>
-							<ul id="siteMenu" class="withAvatar">
-								<li><a id="menu-home" href="/">{% trans "Welcome" %} {{ currentMember.Firstname }}</a></li>
-								<li><a id="menu-books" href="/Books">{% trans "Books" %}</a></li>
-								<li><a id="menu-readers" href="/Members">{% trans "Members" %}</a></li>
-								<li><a id="menu-customize" href="/Customize">{% trans "Customize" %}</a></li>
-								<li><a id="menu-labs" href="/Labs">{% trans "Labs" %}</a></li>
-								<li><a id="menu-logout" href="/Logout">{% trans "Logout" %}</a></li>
-							</ul>
-						{% else %}
-							<ul id="siteMenu">
-								<li><a id="menu-home" href="/">{% trans "Home" %}</a></li>
-								<li><a id="menu-join" href="/Join/">{% trans "Join" %}</a></li>
-								<li><a id="menu-login" href="/Login">{% trans "Login" %}</a></li>
-							</ul>
-						{% endif %}
-					</div>
-				</div>
 			</div>
 			<div id="pageInner">
 				<div id="sidebar">
-					{% block sidebar %}{% endblock %}
-					<div class="sidebarPanel">
-						<h3>{% trans "About" %}</h3>
-						<div class="sidebarMenu">
-							<ul>
-								<li><a href="/About/Who">{% trans "Who is behind Wrook" %}</a></li>
-								<li><a href="/About/OpenSourceLicense">{% trans "Open source license" %}</a></li>
-								<li><a href="/About/Half-Baked-Edition">{% trans "Half Baked Edition" %}</a></li>
-							</ul>
+					<div id="sidebar-content">
+						<div class="sidebarPanel">
+							<div id="siteName"><a href="/">Wrook<span id="currentMemberAvatar"><img width="30" src="{{ currentMember.gravatar30 }}" /></span>
+								</a>
+							</div>
+							{% if currentMember %}
+								<div class="sidebarMenu">
+									<ul>
+										<li><a id="menu-home" href="/">{% trans "Welcome" %} {{ currentMember.Firstname }}</a></li>
+										<li><a id="menu-books" href="/Books">{% trans "Books" %}</a></li>
+										<li><a id="menu-readers" href="/Members">{% trans "Members" %}</a></li>
+										<li><a id="menu-customize" href="/Customize">{% trans "Customize" %}</a></li>
+										<li><a id="menu-labs" href="/Labs">{% trans "Labs" %}</a></li>
+										<li><a id="menu-logout" href="/Logout">{% trans "Logout" %}</a></li>
+									</ul>
+								</div>
+							{% else %}
+								<div class="sidebarMenu">
+									<ul>
+										<li><a id="menu-home" href="/">{% trans "Home" %}</a></li>
+										<li><a id="menu-books" href="/Books">{% trans "Books" %}</a></li>
+										<li><a id="menu-readers" href="/Members">{% trans "Members" %}</a></li>
+										<li><a id="menu-join" href="/Join/">{% trans "Join" %}</a></li>
+										<li><a id="menu-login" href="/Login">{% trans "Login" %}</a></li>
+									</ul>
+								</div>
+							{% endif %}
 						</div>
+						{% block sidebar %}{% endblock %}
+						<div class="sidebarPanel">
+							<h3>{% trans "About" %}</h3>
+							<div class="sidebarMenu">
+								<ul>
+									<li><a href="/About/Who">{% trans "Who is behind Wrook" %}</a></li>
+									<li><a href="/About/OpenSourceLicense">{% trans "Open source license" %}</a></li>
+									<li><a href="/About/Half-Baked-Edition">{% trans "Half Baked Edition" %}</a></li>
+								</ul>
+							</div>
+						</div>
+						{% block sidebarBottom %}{% endblock %}
 					</div>
-					{% block sidebarBottom %}{% endblock %}
+					<div id="sidebar-footer"></div>
 				</div>
 				{% block pageContent %}{% endblock %}
 				<div id="pageFooter">

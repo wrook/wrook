@@ -12,17 +12,18 @@ class Cachable(db.Model):
 	Timestamp =  db.DateTimeProperty(auto_now_add=True)
 		
 	def touch(self):
+		logging.info("in: touch(%s)" % self.key())
 		self.Timestamp = datetime.datetime.now()
 		self.update_cache()
 		self.touch_up(self)
 
 	def clear_cache(self):
-		logging.debug("in: clear_cache(%s)" % self.key())
+		logging.info("in: clear_cache(%s)" % self.key())
 		key = self.get_cache_key()
 		memcache.delete(key)
 		memcache.delete("%s-meta" % key)
 		self.touch_up(self)
-		logging.debug("out: clear_cache(%s)" % self.key())
+		logging.info("out: clear_cache(%s)" % self.key())
 		return True
 
 	def touch_up(self, childItem):
@@ -34,13 +35,13 @@ class Cachable(db.Model):
 		Classes inheriting from Cachable should simply call the super class
 		to let the bubbling chain continue its course.
 		'''
+		logging.info("in: touch_up(%s, %s)" % (self.key(), childItem.key()))
 		if self.parent():
 			if self.parent().touch_up:
 				self.parent().touch_up(childItem)
 
 	def update_cache(self):
-		logging.debug("self = %s " % self)
-		logging.debug("update_cache(%s)" % self.get_cache_key())
+		logging.info("update_cache(%s)" % self.get_cache_key())
 		memcache.set(self.get_cache_key(), self)
 		self.update_cache_meta()
 
@@ -61,23 +62,23 @@ def get_fresh_cache(key, dependencyKeys):
 	timestamp = None
 	if itemMeta:
 		for depKey in dependencyKeys:
-			logging.debug("fetching meta: %s-meta " % depKey)
+			logging.info("fetching meta: %s-meta " % depKey)
 			meta = memcache.get("%s-meta" % depKey)
 			if not meta: continue
 			if not meta.get("Timestamp"): continue
-			logging.debug("comparing dep:%s > itm:%s " % (meta.get("Timestamp"), itemMeta.get("Timestamp")))
+			logging.info("comparing dep:%s > itm:%s " % (meta.get("Timestamp"), itemMeta.get("Timestamp")))
 			if (meta.get("Timestamp") > itemMeta.get("Timestamp")):
 				isFresh = False
 				break
 		if isFresh:
-			logging.debug("found: get_fresh_cache(%s, %s)" % (key, dependencyKeys))
+			logging.info("found: get_fresh_cache(%s, %s)" % (key, dependencyKeys))
 			return memcache.get(key)
-		logging.debug("no meta (get_fresh_cache)")
-	logging.debug("not found: get_fresh_cache(%s, %s)" % (key, dependencyKeys))
+		logging.info("no meta (get_fresh_cache)")
+	logging.info("not found: get_fresh_cache(%s, %s)" % (key, dependencyKeys))
 	return None
 
 def old_get(key):
-	logging.debug("cachetree.get(%s)" % key)
+	logging.info("cachetree.get(%s)" % key)
 	#get timestamp from cache metadata
 	if key:
 		parentKey = key.split("::",1)[0]
@@ -85,22 +86,22 @@ def old_get(key):
 		if meta:
 			parentMeta = memcache.get(parentKey)
 			if not parentMeta:
-				logging.debug("Fresh cached data found: %s", key)
+				logging.info("Fresh cached data found: %s", key)
 				return meta.get("data")
-			logging.debug("Comparing timestamps: %s > %s" %
+			logging.info("Comparing timestamps: %s > %s" %
 				(meta.get("timestamp"), parentMeta.get("timestamp")))
 			if meta.get("timestamp") > parentMeta.get("timestamp"):
 				#if still valid get data from cache
-				logging.debug("Fresh cached data found: %s", key)
+				logging.info("Fresh cached data found: %s", key)
 				return meta.get("data")
 			else:
-				logging.debug("Cached data was stale: %s", key)
+				logging.info("Cached data was stale: %s", key)
 				return None
 		else:
-			logging.debug("No cache found: %s", key)
+			logging.info("No cache found: %s", key)
 			return None
 	else:
-		logging.debug("No keys provided")
+		logging.info("No keys provided")
 		return None
 
 
@@ -110,19 +111,19 @@ def touch(key):
 	memcache.set("%s-meta" % key, meta)
 
 def get(key):
-	logging.debug("Getting cache data for : %s" % key )
+	logging.info("Getting cache data for : %s" % key )
 	return memcache.get(key)
 
 def add(key, data):
-	logging.debug("Caching data to : %s" % key )
+	logging.info("Caching data to : %s" % key )
 	memcache.add(key, data)
 	memcache.add("%s-meta" % key, {"Timestamp":datetime.datetime.now()})
-	logging.debug("Done caching to : %s" % key )
+	logging.info("Done caching to : %s" % key )
 
 def set(key, data):
-	logging.debug("Caching data to : %s" % key )
+	logging.info("Caching data to : %s" % key )
 	memcache.set(key, data)
 	memcache.set("%s-meta" % key, {"Timestamp":datetime.datetime.now()})
-	logging.debug("Done caching to : %s" % key )
+	logging.info("Done caching to : %s" % key )
 
 

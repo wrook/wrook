@@ -4,7 +4,7 @@ html, div, table, tr, td, th, ul, ol, li {
 
 body {
 	text-align: left;
-	background: #000000;
+	background: #000;
 	font-family: Tahoma, Sans-serif;
 	margin: 0px;
 	padding: 0px;
@@ -55,16 +55,31 @@ table tr td {
 	width: 1204px;
 	min-height: 1024px;
 	position: relative;
-	background: #000000;
 }
 
 
 #pageInner {
 	position: relative;
-	width: 1204px;
+	width: 1200px;
 	padding: 0px;
 }
 
+
+#wallpaper {
+	position: absolute;
+	width: 1200px;
+}
+#wallpaper img {
+	width: 1200px;
+}
+#wallpaper .bgFade {
+	position: relative;
+	margin-top: -150px;
+	left: 0px;
+	height: 300px;
+	width: 100%;
+	background: url(/images/wallpaper-ending.png) 0px 0px repeat-x;
+}
 
 
 #footer {
@@ -201,7 +216,7 @@ table tr td {
 	position: relative;
 	top: 10px;
 	margin-left: 210px;
-	padding: 10px;
+	padding: 48px 30px 30px 40px;
 	width: 980px;
 
 }
@@ -218,10 +233,12 @@ table tr td {
 	height: 60px;
 }
 .sectionHeader h1 {
+	font-family: courier new, courier, serif;
 	color: #FFFFFF;
-	font-size: 2em;
+	font-size: 1.8em;
 	padding: 10px 0px 0px 10px;
 	height: 24px;
+	font-weight: bold;
 }
 
 .sectionHeader h1 a:visited,
@@ -337,35 +354,31 @@ table tr td {
 	background: #000000;
 	color: #FFFFFF;
 	height: 50px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
 }
 
 #siteBarContent {
 	position: relative;
-	width: 840px;
 	margin: 0px 0px 0px 200px;
 }
 
 #currentMemberAvatar {
-	position: absolute;
-	top: 10px;
-	left: 10em;
+	margin-left: 5px;
 }
 
 #siteName {
-	position: absolute;
 	font-family: courier new, courier, serif;
 	font-size: 3em;
 	font-weight: bold;
-	top: 10px;
-	left: 0px;
+	margin: 10px 36px 0px 0px;
+	text-align: right;
 }
 #siteName a:visited,
 #siteName a:link {
 	text-decoration: none;
 	color: #FFFFFF;
-}
-#siteName.withAvatar {
-	left: 40px;
 }
 
 ul#siteMenu {
@@ -403,12 +416,18 @@ ul#siteMenu li a:link {
 	top: 0px;
 	left: 0px;
 }
+#sidebar-content {
+	background: url(/images/background50black.png);
+	padding: 36px 0px 0px 0px;
+}
+#sidebar-footer {
+	height: 150px;
+	background: url(/images/background50black-fadeOut.png) repeat-x;
+}
 
 .sidebarPanel {
-	background: url(/images/background50black.png);
-	margin: 0px 0px 20px 0px;
 	color: #fff;
-	padding: 10px 10px 10px 10px;
+	padding: 10px 0px 15px 0px;
 }
 .sidebarPanel h3 {
 	text-align: right;
@@ -432,15 +451,15 @@ ul#siteMenu li a:link {
 .sidebarMenu ul li{
 	list-style: none;
 	margin: 0px;
-	padding: 0px 26px 0px 0px;
+	padding: 0px 0px 0px 0px;
 }
 
 .sidebarMenu a:visited,
 .sidebarMenu a:link {
 	display: block;
-	color: #a6a6a6;
+	color: #fff;
 	text-decoration: none;
-	padding: 4px 0px 4px 0px;
+	padding: 4px 36px 4px 10px;
 }
 .sidebarMenu a:hover {
 	background: #000;
@@ -452,7 +471,7 @@ ul#siteMenu li a:link {
 #halfBakedLogo {
 	position: absolute;
 	top: 20px;
-	right: -20px;
+	left: 1100px;
 	z-index: 1000;
 }
 
