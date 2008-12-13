@@ -237,8 +237,9 @@ table tr td {
 	color: #FFFFFF;
 	font-size: 1.8em;
 	padding: 10px 0px 0px 10px;
-	height: 24px;
+	min-height: 24px;
 	font-weight: bold;
+	width: 580px;
 }
 
 .sectionHeader h1 a:visited,

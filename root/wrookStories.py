@@ -3,6 +3,7 @@
 
 from feathers import stories
 from string import Template
+import logging
 
 class StoryMemberStartReadingBook(stories.Story):
 	ID = "MemberStartReadingBook"
@@ -14,12 +15,12 @@ class StoryMemberStartReadingBook(stories.Story):
 		member = params["member"]
 		book = params["book"]
 		data = {
-			"MemberFullname": member.fullname(),
+			"MemberFullname": unicode(member.fullname()),
 			"MemberKey": member.key(),
-			"BookTitle": book.Title,
+			"BookTitle": unicode(book.Title),
 			"BookKey": book.key()
 			}
-		template = Template(self.TitleTemplate)
+		template = Template(unicode(self.TitleTemplate))
 		return template.safe_substitute(data)
 	
 	def getTargets(self, params): #Get the list of member who will receive the story posts

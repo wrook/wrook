@@ -1,11 +1,18 @@
 #!python
 # coding=UTF-8
 
-import os, cgi, datetime, logging
-from google.appengine.api import images, memcache
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+import cgi
+import datetime
+import logging
+from google.appengine.api import images
+from google.appengine.api import memcache
 from google.appengine.ext import db
 from google.appengine.ext.db import djangoforms
-from feathers import membership, utils, webapp
+from feathers import webapp
+from feathers import membership
+from feathers import utils
 
 def URLMappings():
 	return [

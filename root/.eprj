@@ -23,16 +23,20 @@
             <key>app.</key>
             <string>app.yaml</string>
             <key>book</key>
-            <string>views\books-view.html</string>
+            <string>books.py</string>
             <key>book-</key>
             <string>views\books-view.html</string>
             <key>book-talk</key>
             <string>views\books-talk.html</string>
+            <key>book-v</key>
+            <string>views\books-view.html</string>
             <key>bookIn</key>
             <string>views\section-bookInfo.html</string>
             <key>booki</key>
             <string>views\section-bookInfo.html</string>
             <key>bookin</key>
+            <string>views\section-bookInfo.html</string>
+            <key>bookinf</key>
             <string>views\section-bookInfo.html</string>
             <key>bookinfo</key>
             <string>views\section-bookInfo.html</string>
@@ -88,6 +92,8 @@
             <string>scripts\main.js</string>
             <key>main.js</key>
             <string>scripts\main.js</string>
+            <key>memb</key>
+            <string>members.py</string>
             <key>member</key>
             <string>members.py</string>
             <key>member-suggestio</key>
@@ -246,6 +252,8 @@
             <string>views\template-twoSidebars.html</string>
             <key>utils</key>
             <string>feathers\utils.py</string>
+            <key>view</key>
+            <string>views\viewChapter.html</string>
             <key>viewC</key>
             <string>views\viewChapter.html</string>
             <key>we</key>
@@ -259,6 +267,8 @@
             <key>wrook</key>
             <string>wrook.py</string>
             <key>wrookSto</key>
+            <string>wrookStories.py</string>
+            <key>wrooks</key>
             <string>wrookStories.py</string>
         </dict>
     </dict>

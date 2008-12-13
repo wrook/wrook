@@ -2,6 +2,8 @@
 # coding=UTF-8
 
 #Django imports
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from django.utils import translation
 from django.utils.translation import gettext as _
 from django.conf import settings
@@ -201,6 +203,7 @@ class Chapter(db.Model):
 			return latest[0]
 	
 	def setBookmark(self, member):
+		import wrookStories
 		chapter = self
 		bookmarks = Bookmark.all().filter("Reader =", member).filter("Book =", chapter.Book).fetch(limit=999)
 		# If this is a first read, a story is posted
@@ -727,8 +730,8 @@ class CoverSetDefault(webapp.RequestHandler):
 		else: self.requestLogin()
 
 class BookSetCover(webapp.RequestHandler):
-	from feathers import proforma
 	def get(self, key):
+		from feathers import proforma
 		onRequest(self)
 		if self.CurrentMember:
 			book = Book.get(key)
@@ -880,13 +883,14 @@ class CoverSelect(webapp.RequestHandler):
 
 class CoverView(webapp.RequestHandler):
 	def get(self, key):
+		import app
 		onRequest(self)
 		if self.CurrentMember:
 			cover = Cover.get(key)
 			if cover:
 				self.Model.update({
 					'cover': cover,
-					'picnikKey': picnikKey
+					'picnikKey': app.picnikKey
 					})
 				self.render('views/covers-view.html')
 			else: self.error(404)

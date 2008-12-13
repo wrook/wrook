@@ -12,6 +12,13 @@
 	</div>
 
 	<div style="float: left; width: 440px;">
+		<h2 style="font-size: 1.75em;">
+			{{ book.Title }}
+			<br/>
+			<span style="font-weight: normal; font-size: 0.6em;">
+				{% trans "by " %} {{ book.authorName }}
+			</span>
+		</h2>
 		{% if book.Synopsis %}
 			<div class="synopsis">
 				"&#160;{{ book.Synopsis|escape }}&#160;"

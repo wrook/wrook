@@ -3,12 +3,10 @@
 
 {% block pageContent %}
 	<div id="pageContent">
-
-
 		<div class="section">
 			<div class="sectionHeader">
 				<h1>
-					{{ book.Title }} <span style="font-weight: normal; font-size: 0.7em;"> {% trans "by " %} {{ book.authorName }}</span>
+					{% trans "Book details" %}
 				</h1>
 			</div>
 			<div class="sectionBody">
@@ -48,7 +46,7 @@
 	
 		<div class="section">
 			<div class="sectionHeader">
-				<h1>{% trans "Topics and Comments" %}</h1>
+				<h1>{% trans "Discussions" %}</h1>
 			</div>
 			<div class="sectionBody">
 				<div class="sectionBodyContent">
@@ -88,7 +86,6 @@
 			<h3>{% trans "Community" %}</h3>
 			<div class="sidebarMenu">
 				<ul>
-					<li><a href="/Books/{{ book.key }}/Talk">{% trans "Feeback and comments" %}</a></li>
 					<li><a href="/Invites/">{% trans "Invite a friend" %}</a></li>
 				</ul>
 			</div>
