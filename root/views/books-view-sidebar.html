@@ -15,28 +15,6 @@
 		</li>
 	</ul>
 
-	
-	
-	
-	<h3>
-		{% trans "License and attribution" %}
-	</h3>
-	{% if book.License %}
-		<p>
-			<a href="{{ book.License.URL }}">{{ book.License.Title }}</a>
-		</p>
-		{% if book.AttribDetailed %}
-			<p>
-				{{ book.markdownAttribDetailed }}
-			</p>
-		{% endif %}
-	{% else %}
-		<p>
-			{% trans "No license or copyright has been specified" %}</a>
-		</p>
-	{% endif %}
-
-
 	<h3 id="ChapterList">
 		Chapters
 	</h3>

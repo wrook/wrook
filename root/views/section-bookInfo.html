@@ -12,19 +12,55 @@
 	</div>
 
 	<div style="float: left; width: 440px;">
-		{% if firstChapter %}
-			<div class="buttonBar" style="margin-bottom: 10px;">
-				<ul>
-					<li><a href="/ViewChapter/{{ firstChapter.key }}"><span>{% trans "Start reading" %}</span></a></li>
-				</ul>
-			</div>
-		{% endif %}
-	
-	
 		{% if book.Synopsis %}
-			<div class="Synopsis">
+			<div class="synopsis">
 				"&#160;{{ book.Synopsis|escape }}&#160;"
 			</div>
+			<script>
+				$(document).ready(function(){
+					$('.synopsis').expander({
+						slicePoint: 200, 
+						widow: 4,
+						expandEffect: 'fadeIn',
+						expandText: '[read more...]',
+						userCollapseText: '[{% trans "close" %}]',
+						userCollapsePrefix: ' ',
+						userCollapse: true
+					});
+				});
+			</script>
+
+			<h3>
+				{% trans "License and attribution" %}:
+			</h3>
+			{% if book.License %}
+				<div>
+					<a href="{{ book.License.URL }}">{{ book.License.Title }}</a>
+				</div>
+				{% if book.AttribDetailed %}
+					<div class="detailedAttribution">
+						{{ book.markdownAttribDetailed }}
+					</div>
+					<script>
+						$(document).ready(function(){
+							$('.detailedAttribution').expander({
+								slicePoint: 200, 
+								widow: 4,
+								expandEffect: 'fadeIn',
+								expandText: '[read more...]',
+								userCollapseText: '[{% trans "close" %}]',
+								userCollapsePrefix: ' ',
+								userCollapse: true
+							});
+						});
+					</script>
+				{% endif %}
+			{% else %}
+				<p>
+					{% trans "No license or copyright has been specified" %}</a>
+				</p>
+			{% endif %}
+			
 		{% endif %}
 		{% if book.Author.About %}
 			<h3>

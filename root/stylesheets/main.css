@@ -414,7 +414,7 @@ table tr td ul li {
 }
 .cover.width180 img {
 	width: 180px;
-	margin: 0px 10px 10px 0px;
+	margin: 0px 10px 0px 0px;
 }
 .cover.width180 .coverTitle {
 	width: 150px;
@@ -865,9 +865,46 @@ button:hover span{
 }
 
 
+.linkList {
+	margin-top: 4px;
+}
 
+.linkList ul {
+	list-style: none;	
+	margin: 0px;
+	padding: 0px;
+}
 
+.linkList ul li {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	float: left;
+	color: #505050;
+}
 
+.linkList ul li a:visited,
+.linkList ul li a:link {
+	color: #505050;
+	text-decoration: none;
+	font-size: 1.1em;
+}
+.linkList ul li a:hover {
+	color: #000;
+}
+
+.linkList ul li.mainLink a {
+	font-size: 1.2em;
+	font-weight: bold;
+	padding: 4px 0px 4px 26px;
+	background: url(/images/icons/mainLink.png) 0px 3px no-repeat;
+}
+
+.linkList ul li span.separator {
+	color: #505050;
+	font-size: 0.8em;
+	padding: 0px 7px;
+}
 
 /* ICON SPRITES */
 #icon li {

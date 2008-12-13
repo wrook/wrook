@@ -16,6 +16,8 @@
             <string>about.py</string>
             <key>admin</key>
             <string>admin.py</string>
+            <key>analy</key>
+            <string>views\analytics.html</string>
             <key>app</key>
             <string>app.py</string>
             <key>app.</key>
@@ -38,6 +40,8 @@
             <string>books.py</string>
             <key>books-</key>
             <string>views\books-talk.html</string>
+            <key>books-view-sidebar</key>
+            <string>views\books-view-sidebar.html</string>
             <key>books-view-sidebar.html</key>
             <string>views\books-view-sidebar.html</string>
             <key>cache</key>
@@ -71,7 +75,7 @@
             <key>login</key>
             <string>views\login.html</string>
             <key>main</key>
-            <string>scripts\main.js</string>
+            <string>stylesheets\main.css</string>
             <key>main.</key>
             <string>stylesheets\main.css</string>
             <key>main.c</key>
@@ -140,6 +144,8 @@
             <string>feathers\talk-script-topicForm.js</string>
             <key>script-t</key>
             <string>feathers\views\talk-script-topicForm.js</string>
+            <key>scripts</key>
+            <string>feathers\views\scripts.html</string>
             <key>showMoreR</key>
             <string>feathers\views\talk-part-showMoreReplies.html</string>
             <key>showMoreReplies</key>
