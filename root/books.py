@@ -716,7 +716,7 @@ class CoverSetDefault(webapp.RequestHandler):
 			if key:
 				cover = Cover.get(key)
 				if cover:
-					if not self.AppConfig: self.AppConfig = WrookAppConfig()
+					if not self.AppConfig: self.AppConfig = app.WrookAppConfig()
 					self.AppConfig.DefaultCover = cover
 					self.AppConfig.put()
 					page = proforma.SuccessPage()

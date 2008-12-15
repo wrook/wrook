@@ -48,6 +48,14 @@
             <string>views\books-view-sidebar.html</string>
             <key>books-view-sidebar.html</key>
             <string>views\books-view-sidebar.html</string>
+            <key>books.</key>
+            <string>views\books.html</string>
+            <key>books.p</key>
+            <string>books.py</string>
+            <key>cac</key>
+            <string>feathers\cachetree.py</string>
+            <key>cach</key>
+            <string>feathers\cachetree.py</string>
             <key>cache</key>
             <string>feathers\cachetree.py</string>
             <key>cachetr</key>
@@ -152,6 +160,8 @@
             <string>feathers\views\talk-script-topicForm.js</string>
             <key>scripts</key>
             <string>feathers\views\scripts.html</string>
+            <key>settin</key>
+            <string>settings.py</string>
             <key>showMoreR</key>
             <string>feathers\views\talk-part-showMoreReplies.html</string>
             <key>showMoreReplies</key>

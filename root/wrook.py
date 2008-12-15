@@ -11,11 +11,6 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 import logging
 from firepython.middleware import FirePythonWSGI
 
-#GAE API imports
-###from google.appengine.api import urlfetch, users, mail, images, memcache
-###from google.appengine.ext import db
-###from google.appengine.ext.db import djangoforms
-
 #Django imports
 from django.utils import translation
 from django.utils.translation import gettext as _

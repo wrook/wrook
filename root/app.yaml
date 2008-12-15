@@ -1,5 +1,5 @@
 application: wrook
-version: 4
+version: 5
 runtime: python
 api_version: 1
 
@@ -21,6 +21,9 @@ handlers:
 - url: /apidoc
   static_dir: apidoc
   expiration: "21d"
+
+- url: /_flushcache
+  script: flushcache.py
 
 - url: /
   script: wrook.py

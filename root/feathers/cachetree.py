@@ -12,7 +12,7 @@ class Cachable(db.Model):
 	Timestamp =  db.DateTimeProperty(auto_now_add=True)
 		
 	def touch(self):
-		logging.info("in: touch(%s)" % self.key())
+		logging.info("touch(%s)" % self.key())
 		self.Timestamp = datetime.datetime.now()
 		self.update_cache()
 		self.touch_up(self)
@@ -35,7 +35,7 @@ class Cachable(db.Model):
 		Classes inheriting from Cachable should simply call the super class
 		to let the bubbling chain continue its course.
 		'''
-		logging.info("in: touch_up(%s, %s)" % (self.key(), childItem.key()))
+		logging.info("touch_up(%s, %s)" % (self.key(), childItem.key()))
 		if self.parent():
 			if self.parent().touch_up:
 				self.parent().touch_up(childItem)

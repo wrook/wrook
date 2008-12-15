@@ -16,9 +16,6 @@ import webapp
 import membership
 import cachetree
 
-from string import Template
-#TODO: This template import should become useless after rafactoring the Stories module..
-
 maxRecentReplies = 3
 maxRecentTopics = 5
 maxTopicsPerPage = 20
@@ -37,8 +34,8 @@ def URLMappings():
 
 def onRequest(request): # Event triggering to let the host application intervene
 	pass
-
 	
+
 class Replyable(cachetree.Cachable):
 
 #	def old_replies(self, maxResults=999, offset=0):
@@ -62,7 +59,7 @@ class Replyable(cachetree.Cachable):
 			cachetree.set(cacheKey, replies)
 		logging.debug("out: replies(%s)" % self.key())
 		return replies
-
+	
 	def recent_replies(self, maxResults=maxRecentReplies):
 		replies = Reply.all().ancestor(self).order("-Sent")
 		return replies.fetch(limit=maxResults)
@@ -84,7 +81,7 @@ class Replyable(cachetree.Cachable):
 		templateSource = "%s/views/talk-part-showMoreReplies.html" % os.path.dirname(__file__)
 		model = {"parent": self}
 		return template.render(templateSource, model)
-
+	
 	def has_more_replies(self):
 		'''Returns true if the item has more replies than the number of recent replies shown by default.'''
 		return len(self.replies(1, maxRecentReplies)) == 1
@@ -115,7 +112,7 @@ class Replyable(cachetree.Cachable):
 			super(Replyable, self).touch_up(childItem)
 
 class Topicable(cachetree.Cachable):
-
+	
 	def topics(self, maxResults=999, offset=0):
 		key = "topicable-%s::topics-%s-%s" % (self.key(), maxResults, offset)
 		topics = cachetree.get(key)
@@ -124,10 +121,10 @@ class Topicable(cachetree.Cachable):
 				.fetch(limit=maxResults, offset=offset)
 			cachetree.set(key, topics)
 		return topics
-
+	
 	def render_recent_topics_list(self, maxResults=maxRecentTopics):
 		return self.render_topics_list(maxResults)
-
+	
 	def render_topics_list(self, maxResults=maxTopicsPerPage, offset=0):
 		cacheKey = "%s-renderedTopicList-%s-%s" % (self.key(), maxResults, offset)
 		renderedTopicList = cachetree.get_fresh_cache(cacheKey,
@@ -138,14 +135,14 @@ class Topicable(cachetree.Cachable):
 			renderedTopicList = template.render(templateSource, model)
 			cachetree.set(cacheKey, renderedTopicList)
 		return renderedTopicList
-
+	
 	def render_topic_form(self, model={}):
 		if webapp.currentRequest:
 			model.update(webapp.currentRequest.Model)
 		model.update({'parent': self})
 		templateSource = "%s/views/talk-part-topicForm.html" % os.path.dirname(__file__)
 		return template.render(templateSource, model)
-
+	
 	def touch_up(self, childItem):
 		if childItem:
 			if childItem.__class__.__name__ == "Reply":
@@ -184,29 +181,29 @@ class Topic(Post, Replyable):
 		return renderedTopic
 
 class Reply(Post, cachetree.Cachable):
-
+	
 	def permalink(self):
 		return "%s#%s" % (parent.permalink(), self.key())
-
+	
 	def renderBasic(self, request):
 		request.Model.update({"reply": self})
 		request.TemplateBaseFolder = os.path.dirname(__file__)
 		return request.getRender("views/talk-part-replies.html")
-
+	
 	def render(self):
 		templateSource = "%s/views/talk-part-reply.html" % os.path.dirname(__file__)
 		data = {"reply": self}
 		return template.render(templateSource, data)
 
 def delete_topic(topic):
-	replies = topic.replies()
 	topic.clear_cache()
 	#TODO: The following two delete operations shoulod run in a transaction
+	replies = topic.replies()
 	if replies:	db.delete(replies)
 	db.delete(topic)
 	return True
 	
-	
+
 class handler_topic_delete_JSON(webapp.RequestHandler):
 	def get(self, key):
 		onRequest(self)
@@ -228,7 +225,7 @@ class handler_topic_delete_JSON(webapp.RequestHandler):
 						"errorCode": 1,
 						"errorMessage": _("An error occured! Sorry!")
 						}))
-				
+		
 		else:
 			self.response.out.write(simplejson.dumps({
 				"errorCode":1004,
@@ -281,7 +278,7 @@ class handler_topic_view(webapp.RequestHandler):
 						self.TemplateBaseFolder = os.path.dirname(__file__)
 						cachedPage = self.getRender('views/talk-TopicView.html')
 						cachetree.set(cacheKey, cachedPage)
-					self.response.out.write(cachedPage)				
+					self.response.out.write(cachedPage)
 				else: self.error(404)
 			else: self.error(500)
 		else: self.requestLogin()
@@ -289,7 +286,7 @@ class handler_topic_view(webapp.RequestHandler):
 class handler_topic_new(webapp.RequestHandler):
 	def get(self, key):
 		self.post(key)
-
+	
 	def post(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -300,10 +297,11 @@ class handler_topic_new(webapp.RequestHandler):
 				topic = Topic(
 					parent = parent,
 					Title = title,
-					Body = body, 
+					Body = body,
 					From = self.CurrentMember
 					)
 				topic.put()
+				topic.touch()
 				#TODO: This story has been disable because of package dependency problems... needs to be resolved
 				#Post this as a story and publish
 #				StoryMemberPostsTopicOnBook().createOccurence({
@@ -333,7 +331,7 @@ class handler_reply_new(webapp.RequestHandler):
 			if parent:
 				reply = Reply(
 					parent = parent,
-					Body = body, 
+					Body = body,
 					From = self.CurrentMember
 					)
 				reply.put()

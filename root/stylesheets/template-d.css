@@ -424,10 +424,22 @@ ul#siteMenu li a:link {
 	position: absolute;
 	top: 0px;
 	left: 0px;
+	overflow: visible;
+}
+#sidebar #logo a:visited,
+#sidebar #logo a:link {
+	position: absolute;
+	display: block;
+	width: 210px;
+	height: 93px;
+	background: url(/images/logo.png) no-repeat;
+	text-indent: -1000px;
+	z-index: 1000;
 }
 #sidebar-content {
 	background: url(/images/background50black.png);
-	padding: 36px 0px 0px 0px;
+	padding: 0px;
+	margin: 93px 0px 0px 0px;
 }
 #sidebar-footer {
 	height: 150px;

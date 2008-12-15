@@ -27,11 +27,14 @@
 			</div>
 			<div id="pageInner">
 				<div id="sidebar">
+					<div id="logo">
+						<a href="/">{% trans "Wrook" %}</a>
+					</div>
 					<div id="sidebar-content">
+						<!--
+						<span id="currentMemberAvatar"><img width="30" src="{{ currentMember.gravatar30 }}" /></span>
+						-->
 						<div class="sidebarPanel">
-							<div id="siteName"><a href="/">Wrook<span id="currentMemberAvatar"><img width="30" src="{{ currentMember.gravatar30 }}" /></span>
-								</a>
-							</div>
 							{% if currentMember %}
 								<div class="sidebarMenu">
 									<ul>

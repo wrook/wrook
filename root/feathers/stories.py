@@ -130,14 +130,6 @@ class StoryPost(db.Model):
 	WhenPublished = db.DateTimeProperty(auto_now_add=True)
 	Importance = db.IntegerProperty(default=0) #specific to the each users
 
-	def getReplies(self):
-		pass
-#		return talk.getReplies(self)
-
-	def delete(self):
-		for reply in self.getReplies():
-			reply.delete()
-		return super(Story, self).delete()
 """
 class StoryPostReply(webapp.RequestHandler):
 	def post(self, key):
@@ -175,9 +167,6 @@ class StoryPostDeleteJSON(webapp.RequestHandler):
 			if storyPost:
 				member = storyPost.Member
 				if member.key() == self.CurrentMember.key():
-					#TODO: Deleting a post and all its childs should be put in a transaction
-					for reply in talk.getReplies(storyPost):
-						db.delete(reply)
 					db.delete(storyPost)
 					memcache.delete("wrookMemberPosts-%s" % member.key())
 					
