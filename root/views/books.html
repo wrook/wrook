@@ -21,7 +21,7 @@
 	</form>
 	<div class="bookList">
 		<h2>
-			Found {{ books.count() }} books
+			{% trans count=books.count() %}Found {{ count }} books{% endtrans %}
 			{% if Stage %}
 				which are
 				<strong>
