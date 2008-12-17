@@ -44,8 +44,8 @@
 					<div class="cover">
 						<a href="/Books/{{ book.key() }}">
 							<img src='/Covers/Thumbnail/{{ book.getCover().key() }}' title="{{ book.Title }}" alt="{{ book.Title }}">
-							{% if book.getCover.isReusable %}
-								<span class="coverTitle" {% if book.getCover.TitleColor %}style="color: {{ book.getCover.TitleColor }}"{% endif %} >{{ book.Title }}</span> 
+							{% if book.getCover().isReusable %}
+								<span class="coverTitle" {% if book.getCover().TitleColor %}style="color: {{ book.getCover().TitleColor }}"{% endif %} >{{ book.Title }}</span> 
 							{% endif %}
 						</a>
 					</div>
