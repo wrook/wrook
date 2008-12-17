@@ -473,7 +473,7 @@ class Books(webapp.RequestHandler):
 			self.Model.update({'stage': stage})
 		else:
 			self.Model.update({'books': Book.all()})
-		self.render('views/books.html')
+		self.render2('views/books.html')
 
 class Books_Edit(webapp.RequestHandler):
 	def get(self, key):

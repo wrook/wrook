@@ -1,36 +1,35 @@
-﻿{% extends "template-main-d.html" %}
-{% load i18n %}
+{% extends "views/template-main-d2.html" %}
 {% block pageId %}books{% endblock %}
-{% block pageTitle %}{% trans "Books" %}{% endblock %}
+{% block pageTitle %}{% trans %}Books{% endtrans %}{% endblock %}
 {% block title %}
 	<h1>
-		{% trans "Books" %}
+		{% trans %}Books{% endtrans %}
 	</h1>
 {% endblock %}
 {% block content %}
 	<form method="get">
-		<label for="stage">{% trans "Show: " %}
+		<label for="stage">{% trans %}Show{% endtrans %}
 		<select name="stage" value="{{ stage }}">
-			<option value="">{% trans "All books" %}</option>
-			<option value="planning">{% trans "Books in planning" %}</option>
-			<option value="drafting">{% trans "Books in drafting" %}</option>
-			<option value="writing">{% trans "Books in writing" %}</option>
-			<option value="proofing">{% trans "Books in proofing" %}</option>
-			<option value="final">{% trans "Finished books" %}</option>
+			<option value="">{% trans %}All books{% endtrans %}</option>
+			<option value="planning">{% trans %}Books in planning{% endtrans %}</option>
+			<option value="drafting">{% trans %}Books in drafting{% endtrans %}</option>
+			<option value="writing">{% trans %}Books in writing{% endtrans %}</option>
+			<option value="proofing">{% trans %}Books in proofing{% endtrans %}</option>
+			<option value="final">{% trans %}Finished books{% endtrans %}</option>
 		</select>
-		<input type="submit" value="{% trans 'Filter' %}" />
+		<input type="submit" value="{% trans %}Filter{% endtrans %}" />
 	</form>
 	<div class="bookList">
 		<h2>
-			Found {{ books.count }} books
+			Found {{ books.count() }} books
 			{% if Stage %}
 				which are
 				<strong>
-					{% ifequal stage "planning" %} {% trans " in the planning stage" %}{% endifequal %}
-					{% ifequal stage "drafting" %} {% trans " in the drafting stage" %}{% endifequal %}
-					{% ifequal stage "writing" %} {% trans " in the writting stage" %}{% endifequal %}
-					{% ifequal stage "proofing" %} {% trans " in the proofing stage" %}{% endifequal %}
-					{% ifequal stage "final" %} {% trans " finished" %}{% endifequal %}
+					{% if stage=="planning" %} {% trans %} in the planning stage{% endtrans %}{% endif %}
+					{% if stage=="drafting" %} {% trans %} in the drafting stage{% endtrans %}{% endif %}
+					{% if stage=="writing" %} {% trans %} in the writting stage{% endtrans %}{% endif %}
+					{% if stage=="proofing" %} {% trans %} in the proofing stage{% endtrans %}{% endif %}
+					{% if stage=="final" %} {% trans %} finished{% endtrans %}{% endif %}
 				</strong>
 			{% else %}
 				in all categories
@@ -42,34 +41,30 @@
 			{% for book in books %}
 				<td>
 				<div class="book">
-					<div style="display:none">{% cycle 0,0,0,1 as rowChange %}</div>
 					<div class="cover">
-						<a href="/Books/{{ book.key }}">
-							<img src='/Covers/Thumbnail/{{ book.getCover.key }}' title="{{ book.Title }}" alt="{{ book.Title }}">
+						<a href="/Books/{{ book.key() }}">
+							<img src='/Covers/Thumbnail/{{ book.getCover().key() }}' title="{{ book.Title }}" alt="{{ book.Title }}">
 							{% if book.getCover.isReusable %}
 								<span class="coverTitle" {% if book.getCover.TitleColor %}style="color: {{ book.getCover.TitleColor }}"{% endif %} >{{ book.Title }}</span> 
 							{% endif %}
 						</a>
 					</div>
-					{% ifequal book.Stage "planning" %}{% trans "Only planning" %}, {% endifequal %}
-					{% ifequal book.Stage "drafting" %}{% trans "Still in drafting" %}, {% endifequal %}
-					{% ifequal book.Stage "writing" %}{% trans "Still in writing" %}, {% endifequal %}
-					{% ifequal book.Stage "proofing" %}{% trans "Still in proofing" %}, {% endifequal %}
+					{% if book.Stage=="planning" %}{% trans %}Only planning{% endtrans %}, {% endif %}
+					{% if book.Stage=="drafting" %}{% trans %}Still in drafting{% endtrans %}, {% endif %}
+					{% if book.Stage=="writing" %}{% trans %}Still in writing{% endtrans %}, {% endif %}
+					{% if book.Stage=="proofing" %}{% trans %}Still in proofing{% endtrans %}, {% endif %}
 					<br />
-					{% trans "By" %} {{ book.Author.fullname }}
+					{% trans fullname=book.Author.fullname() %}By {{ fullname }}{% endtrans %}
 				</div>
 				</td>
-				{% ifequal rowChange "1" %}
+				{% if loop.cycle(0, 0, 0, 1)==1 %}
 					</tr>
 					<tr>
-				{% endifequal %}
+				{% endif %}
 			{% endfor %}
 			</tr>
 			</table>
 		</div>
 		<div class="clearfix"></div>
 	</div>
-{% endblock %}
-
-{% block sidebar %}
 {% endblock %}

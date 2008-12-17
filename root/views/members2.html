@@ -1,4 +1,4 @@
-﻿{% extends "views/template-main-d2.html" %}
+{% extends "views/template-main-d2.html" %}
 {% block pageId %}members{% endblock %}
 {% block pageTitle %}
 	{% trans %}Members{% endtrans %}
@@ -13,7 +13,7 @@
 		<ul>
 			{% for member in members %}
 				<li>
-					<div class="avatar"><a href="/Members/{{ member.key() }}"><img width="50" src="{{ member.gravatar50() }}" /></a></div>
+					<div class="avatar"><a href="/Members/{{ member.key() }}"><img width="50" alt="{{ member.fullname() }}" src="{{ member.gravatar50() }}" /></a></div>
 					<h3>
 						<a href="/Members/{{ member.key() }}">{{ member.fullname() }}</a>
 					</h3>

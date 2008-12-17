@@ -1,16 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">{% load i18n %}
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>Wrook: {% block pageTitle %}Readers, Writers, Words{% endblock %}</title>
-		<meta http-equiv="content-type" content="text/html;charset=utf-8"></meta>
-		<meta http-equiv="pragma" content="no-cache"></meta>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/packed.css" />
 		<script type="text/javascript" src="/scripts/jquery/jquery.js"></script>
+		<title>Wrook: {% block pageTitle %}Readers, Writers, Words{% endblock %}</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<meta http-equiv="pragma" content="no-cache" />
 		{% if currentMember %}
-			<meta name="wrook.username" content="{{ currentMember.Username }}">
+			<meta name="wrook.username" content="{{ currentMember.Username }}" />
 		{% endif %}
-		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"></link>
-		<link rel="stylesheet" type="text/css" href="/stylesheets/template-d.css"></link>
 {% block htmlHead %}{% endblock %}
 	</head>
 	<body id="page-{% block pageId %}none{% endblock %}">
@@ -83,6 +81,5 @@
 			</div>
 		</div>
 		{% include "scripts.html" %}
-		{% include "analytics.html" %}
 	</body>
 </html>
