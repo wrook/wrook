@@ -420,7 +420,7 @@ ul#siteMenu li a:link {
 }
 
 #sidebar {
-	width: 200px;
+	width: 207px;
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -432,18 +432,18 @@ ul#siteMenu li a:link {
 	display: block;
 	width: 210px;
 	height: 93px;
-	background: url(/images/logo.png) no-repeat;
+	background: url(/images/logoAndBackground.png) no-repeat;
 	text-indent: -1000px;
 	z-index: 1000;
 }
 #sidebar-content {
-	background: url(/images/background50black.png);
+	background: url(/images/logoAndBackground.png) 0px -93px no-repeat;
 	padding: 0px;
 	margin: 93px 0px 0px 0px;
 }
 #sidebar-footer {
 	height: 150px;
-	background: url(/images/background50black-fadeOut.png) repeat-x;
+	background: url(/images/logoAndBackground.png) right bottom no-repeat;
 }
 
 .sidebarPanel {
