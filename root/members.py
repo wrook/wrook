@@ -1,4 +1,4 @@
-#!python
+﻿#!python
 # coding=UTF-8
 
 import os
@@ -53,17 +53,15 @@ class Home(webapp.RequestHandler):
 class MembersFeed(webapp.RequestHandler):
 	def get(self, key):
 		onRequest(self)
-		if self.CurrentMember:
-			member = membership.Member.get(key)
-			if member:
-				self.setVisitedMember(member)
-				posts = member.ReceivedStoryPosts.order("-WhenOccured").filter("Member = ", member.key()).fetch(limit=40)
-				self.Model.update({
-					"posts": posts
-					})
-				self.render('views/members-stories.html')
-			else: self.error(404)
-		else: self.requestLogin()
+		member = membership.Member.get(key)
+		if member:
+			self.setVisitedMember(member)
+			posts = member.ReceivedStoryPosts.order("-WhenOccured").filter("Member = ", member.key()).fetch(limit=40)
+			self.Model.update({
+				"posts": posts
+				})
+			self.render('views/members-stories.html')
+		else: self.error(404)
 
 class Customize(webapp.RequestHandler):
 	def get(self):
@@ -89,25 +87,22 @@ class MembersProfile(webapp.RequestHandler):
 	def get(self, key):
 		import datetime
 		onRequest(self)
-		if self.CurrentMember:
-			visitedMember = membership.Member.get(key)
-			if visitedMember:
-				self.setVisitedMember(visitedMember)
-				self.Model.update({
-					"now": datetime.datetime.now()
-					})
-				self.render('views/MembersProfile.html')
-			else: self.error(404)
-		else: self.requestLogin()
+		visitedMember = membership.Member.get(key)
+		if visitedMember:
+			self.setVisitedMember(visitedMember)
+			self.Model.update({
+				"now": datetime.datetime.now()
+				})
+			self.render('views/MembersProfile.html')
+		else: self.error(404)
 
 class Members(webapp.RequestHandler):
 	def get(self):
 		onRequest(self)
-		if self.CurrentMember:
-			members = membership.Member.all().fetch(limit=200)
-			self.Model.update({'members': members})
-			self.render('views/members.html')
-		else: self.requestLogin()
+		members = membership.Member.all().fetch(limit=100)
+		self.Model.update({'members': members})
+		#self.render('views/members.html')
+		self.render2('views/members2.html')
 
 class MembersCoversList(webapp.RequestHandler):
 	def get(self, key):
@@ -131,17 +126,15 @@ class MembersCoversList(webapp.RequestHandler):
 class MembersBooksList(webapp.RequestHandler):
 	def get(self, key):
 		onRequest(self)
-		if self.CurrentMember:
-			visitedMember = membership.Member.get(key)
-			if visitedMember:
-				self.setVisitedMember(visitedMember)
-				books = visitedMember.Books.fetch(limit=999)
-				self.Model.update({
-					'books': books
-					})
-				self.render('views/members-books-list.html')
-			else: self.error(404)
-		else: self.requestLogin()
+		visitedMember = membership.Member.get(key)
+		if visitedMember:
+			self.setVisitedMember(visitedMember)
+			books = visitedMember.Books.fetch(limit=999)
+			self.Model.update({
+				'books': books
+				})
+			self.render('views/members-books-list.html')
+		else: self.error(404)
 
 class MembersReadingsList(webapp.RequestHandler):
 	def get(self, key):

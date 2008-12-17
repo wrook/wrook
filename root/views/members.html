@@ -19,12 +19,6 @@
 					<h3>
 						<a href="/Members/{{ member.key }}">{{ member.fullname }}</a>
 					</h3>
-					<div class="memberDetails">
-						{% trans "Latest bookmarks:" %} 
-						{% for bookmark in member.Bookmarks %}
-							<a href="/Books/{{ bookmark.Book.key }}">{{ bookmark.Book.Title }}</a>{% if forloop.last %}.{% else %}, {% endif %}
-						{% endfor %}
-					</div>
 				</li>
 			{% endfor %}
 		</ul>

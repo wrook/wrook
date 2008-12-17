@@ -319,34 +319,32 @@ class ChapterFormForCreate(djangoforms.ModelForm):
 class ViewBook(webapp.RequestHandler):
 	def get(self, key):
 		onRequest(self)
-		if self.CurrentMember:
-			#Before loading a book from the key, lets try to find it from the Slug
-			book = Book.all().filter("Slug =", key).fetch(limit=1)
-			if len(book) > 0: book = book[0]
-			else: book = Book.get(key)
-			if book:
-				#TODO: This should be methodized as ordered_chapters
-				chapters = Chapter.all().filter("Book =", book).order("Number").fetch(limit=999)
-				#TODO: This should be methodized as chapter_count
-				chapterCount = len(chapters)
-				if book.Author:
-					self.setVisitedMember(book.Author)
-					userIsAuthor = (self.CurrentMember.key() == book.Author.key())
-				else: userIsAuthor = False
-				if userIsAuthor or self.CurrentMember.isAdmin: userCanEdit = True
-				else: userCanEdit = False
-				
-				self.Model.update({
-					"book": book,
-					"chapters": chapters,
-					"firstChapter": book.firstChapter(),
-					"chapterCount": chapterCount,
-					"userIsAuthor": userIsAuthor,
-					"userCanEdit": userCanEdit
-					})
-				self.render('views/books-view.html')
-			else: self.error(404)
-		else: self.requestLogin()
+		#Before loading a book from the key, lets try to find it from the Slug
+		book = Book.all().filter("Slug =", key).fetch(limit=1)
+		if len(book) > 0: book = book[0]
+		else: book = Book.get(key)
+		if book:
+			#TODO: This should be methodized as ordered_chapters
+			chapters = Chapter.all().filter("Book =", book).order("Number").fetch(limit=999)
+			#TODO: This should be methodized as chapter_count
+			chapterCount = len(chapters)
+			if book.Author:
+				self.setVisitedMember(book.Author)
+				userIsAuthor = (self.CurrentMember.key() == book.Author.key())
+			else: userIsAuthor = False
+			if userIsAuthor or self.CurrentMember.isAdmin: userCanEdit = True
+			else: userCanEdit = False
+			
+			self.Model.update({
+				"book": book,
+				"chapters": chapters,
+				"firstChapter": book.firstChapter(),
+				"chapterCount": chapterCount,
+				"userIsAuthor": userIsAuthor,
+				"userCanEdit": userCanEdit
+				})
+			self.render('views/books-view.html')
+		else: self.error(404)
 
 class DeleteChapter(webapp.RequestHandler):
 	def get(self, key):
@@ -465,19 +463,17 @@ class EditChapterOptions(webapp.RequestHandler):
 class Books(webapp.RequestHandler):
 	def get(self):
 		onRequest(self)
-		if self.CurrentMember:
-			stage = self.request.get("stage")
-			self.Model.update({
-				'true': True,
-				'false': False
-				})
-			if stage:
-				self.Model.update({'books': Book.all().filter("Stage =", stage)})
-				self.Model.update({'stage': stage})
-			else:
-				self.Model.update({'books': Book.all()})
-			self.render('views/books.html')
-		else: self.requestLogin()
+		stage = self.request.get("stage")
+		self.Model.update({
+			'true': True,
+			'false': False
+			})
+		if stage:
+			self.Model.update({'books': Book.all().filter("Stage =", stage)})
+			self.Model.update({'stage': stage})
+		else:
+			self.Model.update({'books': Book.all()})
+		self.render('views/books.html')
 
 class Books_Edit(webapp.RequestHandler):
 	def get(self, key):

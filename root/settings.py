@@ -1,4 +1,5 @@
-# DO NOT DELETE! This is needed by Django
+﻿# DO NOT DELETE! This is needed by Django
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = "en"
+DEFAULT_CHARSET = "utf-8"

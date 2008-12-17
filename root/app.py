@@ -4,7 +4,8 @@
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from google.appengine.ext import db
-from django.utils import translation
+#from django.utils import translation
+import django_trans_patch as translation
 from django.utils.translation import gettext as _
 
 #TODO: Having the picnikKey here is not secure, put in the app config
@@ -50,6 +51,7 @@ def onRequest(self):
 	self.Model = {}
 	self.MasterTemplate = os.path.join(os.path.dirname(__file__), "views/template-main-d.html") # Sets the default template to be used by hosted modules
 	self.TemplateBase = os.path.join(os.path.dirname(__file__), "views/template-main.html") # Sets the default template to be used by hosted modules
+	self.TemplateBase2 = os.path.join(os.path.dirname(__file__), "views/template-main2.html") # Sets the default template to be used by hosted modules
 	self.CurrentMember = membership.loginFromCookies(self) # Load the current member from the google authentication and add it to the requesthandler
 	self.CurrentTheme = getDefaultTheme() # Set the default theme as the current theme
 	self.AppConfig = getWrookAppConfig() # Load the application config from the database

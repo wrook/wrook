@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Wrook: {% block pageTitle %}Readers, Writers, Words{% endblock %}</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"></meta>
+		<meta http-equiv="pragma" content="no-cache"></meta>
+		<script type="text/javascript" src="/scripts/jquery/jquery.js"></script>
+		{% if currentMember %}
+			<meta name="wrook.username" content="}{ currentMember.Username }}">
+		{% endif %}
+		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"></link>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/template-d.css"></link>
+{% block htmlHead %}{% endblock %}
+	</head>
+	<body id="page-{% block pageId %}none{% endblock %}">
+		{% if currentTheme %}
+			<div id="wallpaper">
+				<img src="/Themes/Theme/BackgroundImage/}{ currentTheme.key() }}?width=1024" />
+				<div class="bgFade"></div>
+			</div>
+		{% endif %}
+		<div id="spritesPreload"></div>
+		<div id="page">
+			<div id="halfBakedLogo"><a href="/About/Half-Baked-Edition"></a></div>
+			<div id="header">
+			</div>
+			<div id="pageInner">
+				<div id="sidebar">
+					<div id="logo">
+						<a href="/">{% trans %}Wrook{% endtrans %}</a>
+					</div>
+					<div id="sidebar-content">
+						<div class="sidebarPanel">
+							{% if currentMember %}
+								<div class="sidebarMenu">
+									<ul>
+										<li><a id="menu-books" href="/Books">{% trans %}Books{% endtrans %}</a></li>
+										<li><a id="menu-readers" href="/Members">{% trans %}Members{% endtrans %}</a></li>
+										<li><a id="menu-customize" href="/Customize">{% trans %}Customize{% endtrans %}</a></li>
+										<li><a id="menu-logout" href="/Logout">{% trans %}Logout{% endtrans %}</a></li>
+									</ul>
+								</div>
+							{% else %}
+								<div class="sidebarMenu">
+									<ul>
+										<li><a id="menu-home" href="/">{% trans %}Home{% endtrans %}</a></li>
+										<li><a id="menu-books" href="/Books">{% trans %}Books{% endtrans %}</a></li>
+										<li><a id="menu-readers" href="/Members">{% trans %}Members{% endtrans %}</a></li>
+										<li><a id="menu-join" href="/Join/">{% trans %}Join{% endtrans %}</a></li>
+										<li><a id="menu-login" href="/Login">{% trans %}Login{% endtrans %}</a></li>
+									</ul>
+								</div>
+							{% endif %}
+						</div>
+						{% block sidebar %}{% endblock %}
+						<div class="sidebarPanel">
+							<h3>{% trans %}About{% endtrans %}</h3>
+							<div class="sidebarMenu">
+								<ul>
+									<li><a id="menuWho" href="/About/Who">{% trans %}Who is behind Wrook{% endtrans %}</a></li>
+									<li><a id="menu-openSourceLicense" href="/About/OpenSourceLicense">{% trans %}Open source license{% endtrans %}</a></li>
+									<li><a id="menu-halfBaked" href="/About/Half-Baked-Edition">{% trans %}Half Baked Edition{% endtrans %}</a></li>
+									<li><a id="menu-labs" href="/Labs">{% trans %}Labs{% endtrans %}</a></li>
+								</ul>
+							</div>
+						</div>
+						{% block sidebarBottom %}{% endblock %}
+					</div>
+					<div id="sidebar-footer"></div>
+				</div>
+				{% block pageContent %}{% endblock %}
+				<div id="pageFooter">
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<div id="footerContent">
+			{% block footer %} {% endblock %}
+			</div>
+		</div>
+		{% include "scripts.html" %}
+		{% include "analytics.html" %}
+	</body>
+</html>

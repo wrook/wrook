@@ -1,20 +1,16 @@
-#!python
+﻿#!python
 # coding=UTF-8
 '''
 Wrook's main module
 '''
 
-#TODO: Start moving imports locally to methods and classes
-
 import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
-import logging
-from firepython.middleware import FirePythonWSGI
 
 #Django imports
-from django.utils import translation
-from django.utils.translation import gettext as _
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from django.conf import settings
+
+from firepython.middleware import FirePythonWSGI
 
 #Feathers imports
 from feathers import webapp
@@ -76,6 +72,13 @@ def real_main():
 	The basic main function to start the application
 	on the production servers
 	'''
+	webapp.run(application)
+
+def firepython_main():
+	'''
+	The basic main function to start the application
+	on the production servers
+	'''
 	webapp.run(FirePythonWSGI(application))
 
 def profile_log_main():
@@ -83,7 +86,10 @@ def profile_log_main():
 	Main function used for profiling to the log files.
 	'''
 	#TODO: Find a way to send the profiler log results to FirePython
-	import cProfile, pstats, StringIO
+	import cProfile
+	import logging
+	import pstats
+	import StringIO
 	prof = cProfile.Profile()
 	prof = prof.runctx("real_main()", globals(), locals())
 	stream = StringIO.StringIO()
@@ -112,6 +118,7 @@ application = webapp.Application(
 	debug=True) # Instantiate the main application
 
 main = real_main
+#main = firepython_main
 #main = profile_html_main
 #main = profile_log_main
 

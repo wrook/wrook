@@ -1,1 +1,2 @@
-dev_appserver.py -d .\
+rem dev_appserver.py -d .\
+dev_appserver.py .\
