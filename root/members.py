@@ -96,13 +96,24 @@ class MembersProfile(webapp.RequestHandler):
 			self.render('views/MembersProfile.html')
 		else: self.error(404)
 
+def get_featured_members():
+	return membership.Member.all().filter("hasProfilePhoto =", True).fetch(limit=5)
+
+def get_search_members(searchCriteria):
+	import logging
+	logging.debug("criteria: %s" % searchCriteria)
+	return membership.Member.all().search(searchCriteria).fetch(limit=40)
+
 class Members(webapp.RequestHandler):
 	def get(self):
 		onRequest(self)
-		members = membership.Member.all().fetch(limit=100)
-		self.Model.update({'members': members})
-		#self.render('views/members.html')
-		self.render2('views/members2.html')
+		searchCriteria = self.request.get("searchCriteria")
+		if searchCriteria: members = get_search_members(searchCriteria)
+		else: members = get_featured_members()
+		self.Model.update({
+			'members': members,
+			'searchCriteria': searchCriteria})
+		self.render2('views/members.html')
 
 class MembersCoversList(webapp.RequestHandler):
 	def get(self, key):

@@ -14,6 +14,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 import cgi, datetime, logging, hashlib
 from string import Template
 from google.appengine.ext import db
+from google.appengine.ext import search  
 from google.appengine.ext.db import djangoforms
 from google.appengine.api import images
 from google.appengine.api import mail
@@ -113,7 +114,7 @@ class MemberConversionAct:
 		self.Points = points
 		self.Done = done
 
-class Member(db.Model):
+class Member(search.SearchableModel):
 	"""
 	Member.
 	Among other things, the member entity contains:
@@ -124,6 +125,7 @@ class Member(db.Model):
 	Username = db.StringProperty(default="...", required=True)
 	Email = db.EmailProperty(default="...", required=True)
 	ProfilePhoto = db.BlobProperty(verbose_name="Profile photo")
+	hasProfilePhoto = db.BooleanProperty(required=False, default=False)
 	isEmailValidated = db.BooleanProperty(required=True, default=False)
 	WhenEmailValidated = db.DateTimeProperty()
 	Firstname = db.StringProperty(required=True)
@@ -236,6 +238,7 @@ class Member(db.Model):
 		memcache.delete("profilePhotoThumb80-%s" % self.key())
 		memcache.delete("profilePhotoThumb100-%s" % self.key())
 		memcache.delete("profilePhotoThumb120-%s" % self.key())
+		memcache.delete("profilePhotoThumb160-%s" % self.key())
 	
 	def currentThemeSelection(self):
 		cacheKey = "wrookMemberThemeSelection-%s" % self.key()
@@ -330,6 +333,10 @@ http://www.wrook.org
 	
 	def gravatar120(self):
 		if self.ProfilePhoto: return "/Membership/ProfilePhoto/Image/%s?width=120" % self.key()
+		else: return "/images/avatar.png"
+	
+	def gravatar160(self):
+		if self.ProfilePhoto: return "/Membership/ProfilePhoto/Image/%s?width=160" % self.key()
 		else: return "/images/avatar.png"
 	
 	def fullname(self):
@@ -521,6 +528,9 @@ class ProfilePhotoImage(webapp.RequestHandler):
 				elif paramWidth == "120":
 					width = 120
 					height = 120
+				elif paramWidth == "160":
+					width = 160
+					height = 160
 				elif paramWidth == "original":
 					width = None
 					height = None
@@ -604,7 +614,10 @@ class Join(webapp.RequestHandler):
 				Gender = gender,
 				PreferedLanguage = preferedLanguage,
 				)
-			member.put()
+			member.Firstname = firstname
+			member.Lastname = lastname
+			# attribute assignation is repeated for them to be catched by the searchable model
+			member.save()
 			member.resetPassword(self.AppConfig.EncryptionKey)
 			if invite:
 				invite.AcceptedMember = member
@@ -759,8 +772,10 @@ class EditAccount(webapp.RequestHandler):
 				member.PreferedLanguage = preferedLanguage
 				member.Gender = gender
 				member.About = about
-				if profilePhoto: member.ProfilePhoto = profilePhoto
-				member.put()
+				if profilePhoto:
+					member.ProfilePhoto = profilePhoto
+					member.hasProfilePhoto = True
+				member.save()
 				member.flushCache()
 				self.redirect("/Account/View")
 		else: self.requestLogin()
@@ -791,7 +806,8 @@ class AccountChangeProfilePhoto(webapp.RequestHandler):
 			else:
 				member = self.CurrentMember
 				member.ProfilePhoto = profilePhoto
-				member.put()
+				member.hasProfilePhoto = True
+				member.save()
 				member.flushCache()
 				self.redirect("/Account/View")
 		else: self.requestLogin()

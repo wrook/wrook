@@ -378,28 +378,46 @@ table tr td ul li {
 .memberList ul li {
 	position: relative;
 	list-style: none;
-	margin: 0px;
-	padding: 0px 0px 0px 70px;
-	min-height: 90px;
-}
-
-.memberList ul li .avatar {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	background: #f7f7f7;
-	padding: 3px;
-}
-
-
-.memberList ul li .avatar img {
-	border: none;
-}
-
-.memberList ul li h3 {
-	margin: 0px;
+	margin: 0px 30px 30px 0px;
 	padding: 0px;
+	float: left;
+}
+
+.memberList .avatar {
+	position: relative;
+	background: #f7f7f7;
+	height: 120px;
+	width: 120px;
+}
+
+
+.memberList .avatar img {
+	display: block;
+	border: none;
+	height: 120px;
+	width: 120px;
+}
+
+.memberList h3 {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	width: 120px;
+	padding: 0px;
+	margin: 0px;
+	background: url(/images/background50black.png);
+}
+
+.memberList h3 a:visited,
+.memberList h3 a:link {
+	display: block;
+	color: #ffffff;
 	font-size: 1em;
+	font-weight: normal;
+	text-decoration: none;
+	text-align: center;
+	margin: 2px 3px;
+	padding: 0px;
 }
 
 .memberList .memberDetails {
@@ -905,6 +923,49 @@ button:hover span{
 	font-size: 0.8em;
 	padding: 0px 7px;
 }
+
+
+
+.corner-white5px-c0 {
+	position: absolute;
+	width: 5px;
+	height: 5px;
+	top: 0px;
+	left: 0px;
+	background: url(/images/corner-white5px.png) 0px 0px no-repeat;
+	z-index: 1000;
+}
+.corner-white5px-c90 {
+	position: absolute;
+	width: 5px;
+	height: 5px;
+	top: 0px;
+	right: 0px;
+	background: url(/images/corner-white5px.png) -5px 0px no-repeat;
+	z-index: 1000;
+}
+.corner-white5px-c180 {
+	position: absolute;
+	width: 5px;
+	height: 5px;
+	bottom: 0px;
+	left: 0px;
+	background: url(/images/corner-white5px.png) 0px -5px no-repeat;
+	z-index: 1000;
+}
+.corner-white5px-c270 {
+	position: absolute;
+	width: 5px;
+	height: 5px;
+	background: url(/images/corner-white5px.png) no-repeat;
+	bottom: 0px;
+	right: 0px;
+	background-position: -5px -5px;
+	z-index: 1000;
+}
+
+
+
 
 /* ICON SPRITES */
 #icon li {
