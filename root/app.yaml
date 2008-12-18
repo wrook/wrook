@@ -25,10 +25,14 @@ handlers:
 - url: /_flushcache
   script: flushcache.py
 
+- url: /console/static
+  static_dir: console/app/view/static
+
+- url: /console.*
+  script: console/app/console.py
+
 - url: /
   script: wrook.py
 
 - url: .*
   script: wrook.py
- 
- 
