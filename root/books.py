@@ -330,9 +330,12 @@ class ViewBook(webapp.RequestHandler):
 			chapterCount = len(chapters)
 			if book.Author:
 				self.setVisitedMember(book.Author)
-				userIsAuthor = (self.CurrentMember.key() == book.Author.key())
+				if self.CurrentMember:
+					userIsAuthor = (self.CurrentMember.key() == book.Author.key())
+				else: userIsAuthor = False
 			else: userIsAuthor = False
-			if userIsAuthor or self.CurrentMember.isAdmin: userCanEdit = True
+			if self.CurrentMember:
+				if userIsAuthor or self.CurrentMember.isAdmin: userCanEdit = True
 			else: userCanEdit = False
 			
 			self.Model.update({

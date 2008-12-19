@@ -903,6 +903,7 @@ button:hover span{
 
 .linkList ul li a:visited,
 .linkList ul li a:link {
+	position: relative;
 	color: #505050;
 	text-decoration: none;
 	font-size: 1.1em;
@@ -916,6 +917,11 @@ button:hover span{
 	font-weight: bold;
 	padding: 4px 0px 4px 26px;
 	background: url(/images/icons/mainLink.png) 0px 3px no-repeat;
+}
+.linkList ul li.mainLink a .bullet{
+	position: absolute;
+	top: 2px;
+	left: 0px;
 }
 
 .linkList ul li span.separator {
@@ -965,19 +971,36 @@ button:hover span{
 }
 
 
-
-
-/* ICON SPRITES */
-#icon li {
-   background: url(csg-492b468123075.png) no-repeat top left;
+form label.error {
+	display: block;
+	padding: 2px 0px 5px 0px;
+	background: none;
+	border: none;
+	margin: 0px;
+	font-weight: bold;
+	color: #BB0000;
 }
-.img-book-open { background-position: 0 -30px; } 
-.img-comment { background-position: 0 -76px; } 
-.img-flush { background-position: 0 -122px; } 
-.img-member-signup { background-position: 0 -168px; }
+input.error,
+textarea.error {
+	border: 2px solid #FF0000 !important;
+}
 
 
 
-
+/* SPRITES */
+.spriteIcons {
+	display: block;
+	background: url(/images/iconSprites.png) no-repeat top left;
+}
+.icon-sign-in {
+	background-position: 0 -130px;
+	height: 20px;
+	width: 20px;
+}
+.icon-main-link {
+	background-position: 0 -90px;
+	height: 20px;
+	width: 20px;
+}
 
 

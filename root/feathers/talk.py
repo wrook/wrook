@@ -34,7 +34,7 @@ def URLMappings():
 
 def onRequest(request): # Event triggering to let the host application intervene
 	pass
-	
+
 
 class Replyable(cachetree.Cachable):
 
@@ -140,8 +140,7 @@ class Topicable(cachetree.Cachable):
 		if webapp.currentRequest:
 			model.update(webapp.currentRequest.Model)
 		model.update({'parent': self})
-		templateSource = "%s/views/talk-part-topicForm.html" % os.path.dirname(__file__)
-		return template.render(templateSource, model)
+		return webapp.render("talk-part-topicForm.html", model)
 	
 	def touch_up(self, childItem):
 		if childItem:

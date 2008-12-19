@@ -1,39 +1,25 @@
-{% load i18n %}
-<script>
-{% include "talk-script-topicForm.js" %}
-</script>
-<style>
-	form label.error {
-		display: block;
-		padding: 2px 0px 5px 0px;
-		background: none;
-		border: none;
-		margin: 0px;
-		font-weight: bold;
-		color: #BB0000;
-	}
-	input.error,
-	textarea.error {
-		border: 2px solid #FF0000 !important;
-	}
-
-</style>
-<div style="position: relative; padding: 0px 0px 0px 64px;">
-	<div class="memberAvatar" style="position:absolute; top:0px; left:0px;">
-		<img style="width: 50px; height: 50px;" src="{{currentMember.gravatar50}}" />
+{% import 'wrook-macros.html' as wrook %}
+{% if currentUser %}
+	<script type="text/javascript" src="/scripts/talk-script-topicForm.js" ></script>
+	<div style="position: relative; padding: 0px 0px 0px 64px;">
+		<div class="memberAvatar" style="position:absolute; top:0px; left:0px;">
+			<img style="width: 50px; height: 50px;" src="{{ currentMember.gravatar50() }}" />
+		</div>
+		<div style="background: #f0f279; padding: 10px; border-bottom: 2px solid #cacc66; width:514px;">
+			<form action="/Talk/Topic/New/{{ parent.key() }}/" method="post" id="frmAddNewTopic">
+				<div>
+					<input style="width: 420px" id="frmAddNewTopic-title" type="text" name="title" title="{% trans %}Title or subject of your topic{% endtrans %}"/>
+				</div>
+				<div>
+					<textarea style="width: 420px; height: 40px;" id="frmAddNewTopic-body" name="body" title="{% trans %}Your message...{% endtrans %}"></textarea>
+				</div>
+				<div style="position: absolute; top: 0px; left: 440px;">
+					<input class="loadingMessage" style="display: none; width: 77px; height: 77px;" type="submit" disabled="true" value="{% trans %}Posting...{% endtrans %}" />
+					<input class="submit" style="width: 77px; height: 77px;" type="submit" value="{% trans %}Post{% endtrans %}" />
+				</div>
+			</form>
+		</div>
 	</div>
-	<div style="background: #f0f279; padding: 10px; border-bottom: 2px solid #cacc66; width:514px;">
-		<form action="/Talk/Topic/New/{{parent.key}}/" method="post" id="frmAddNewTopic">
-			<div>
-				<input style="width: 420px" id="frmAddNewTopic-title" type="text" name="title" title="{% trans "Title or subject of your topic" %}"/>
-			</div>
-			<div>
-				<textarea style="width: 420px; height: 40px;" id="frmAddNewTopic-body" name="body" title="{% trans "Your message..." %}"></textarea>
-			</div>
-			<div style="position: absolute; top: 0px; left: 440px;">
-				<input class="loadingMessage" style="display: none; width: 77px; height: 77px;" type="submit" disabled="true" value="{% trans "Posting..." %}" />
-				<input class="submit" style="width: 77px; height: 77px;" type="submit" value="{% trans "Post" %}" />
-			</div>
-		</form>
-	</div>
-</div>
+{% else %}
+	{{ wrook.noticeMustSignIn(_('leave comments')) }}
+{% endif %}

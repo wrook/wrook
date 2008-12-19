@@ -13,6 +13,24 @@ def run(application):
 	from google.appengine.ext.webapp import util
 	util.run_wsgi_app(application)
 
+def render(template_name, model):
+	import django_trans_patch as translation
+	from jinja2 import Environment
+	from jinja2 import FileSystemLoader
+	from jinja2 import TemplateNotFound
+	template_dirs = [
+		os.path.dirname(__file__),
+		os.path.join(os.path.dirname(__file__), 'views'),
+		os.path.join(os.path.dirname(__file__), '..'),
+		os.path.join(os.path.dirname(__file__), '../views')]
+	env = Environment(
+		loader = FileSystemLoader(template_dirs),
+		extensions=['jinja2.ext.i18n'])
+	env.install_gettext_translations(translation)
+	try: template = env.get_template(template_name)
+	except TemplateNotFound: raise TemplateNotFound(template_name)
+	return template.render(model)
+
 class RequestHandler(webapp.RequestHandler):
 	Model = {}
 	Template = ""
@@ -53,6 +71,10 @@ class RequestHandler(webapp.RequestHandler):
 		return templateText # returns the rendered template
 
 	def render2(self, template_name=""):
+		self.Model.update({"masterTemplate": self.MasterTemplate}) # Includes the path of the MasterTemplate in he model
+		self.response.out.write(render(template_name, self.Model))
+
+	def OLD_render2(self, template_name=""):
 		#from django.utils import translation
 		import django_trans_patch as translation
 		from jinja2 import Environment
@@ -73,7 +95,6 @@ class RequestHandler(webapp.RequestHandler):
 		self.Model.update({"masterTemplate": self.MasterTemplate}) # Includes the path of the MasterTemplate in he model
 		content = template.render(self.Model)
 		self.response.out.write(content)
-
 
 	def requestLogin(self):
 		self.redirect("/Login") # Redirects to the standard URL for the Google Account login

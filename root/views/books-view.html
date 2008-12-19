@@ -32,7 +32,9 @@
 			<div class="sectionBodyFooter">
 				<div class="linkList">
 					<ul>
-						<li class="mainLink"><a href="/ViewChapter/{{ firstChapter.key }}"><span>{% trans "Start reading" %}</span></a></li>
+						<li class="mainLink"><a href="/ViewChapter/{{ firstChapter.key }}">
+							<span class="bullet spriteIcons icon-main-link"></span><span>{% trans "Start reading" %}</span></a>
+						</li>
 						<li><span class="separator">|</span></li>
 						<li><a href="/Member/{{ book.Author.key }}"><span>{% trans "Author's profile" %}</span></a></li>
 					</ul>
@@ -50,8 +52,10 @@
 			</div>
 			<div class="sectionBody">
 				<div class="sectionBodyContent">
-					<h2>{% trans "Start a topic or leave feedback" %}</h2>
-					<div>
+					{% if currentUser %}
+						<h2>{% trans "Start a topic or leave feedback" %}</h2>
+					{% endif %}
+					<div style="width: 600px;">
 						{{ book.render_topic_form }}
 					</div>
 					<h2>{% trans "Recent topics" %}</h2>
@@ -65,7 +69,12 @@
 			<div class="sectionBodyFooter">
 				<div class="linkList">
 					<ul>
-						<li class="mainLink"><a href="/Books/{{ book.key }}/Talk"><span>{% trans "Browse all topics" %}</span></a></li>
+						<li class="mainLink">
+							<a href="/Books/{{ book.key }}/Talk">
+								<span class="bullet spriteIcons icon-main-link"></span>
+								<span>{% trans "Browse all topics" %}</span>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>

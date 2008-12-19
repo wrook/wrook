@@ -1,0 +1,29 @@
+{% macro noticeMustSignIn(actionLabel) -%}
+<style>
+.notice.must-login-first {
+	background: #dfe0ff;
+	border-bottom: 2px solid #b8bae9;
+}
+.notice-message {
+	margin-left: 35px;
+}
+.notice-icon {
+	position: absolute;
+	top: 6px;
+	left: 10px;
+}
+</style>
+	<div class="notice must-login-first">
+		<div class="notice-icon spriteIcons icon-sign-in"></div>
+		<span class="notice-message">
+			{% trans action=actionLabel %}If you wish to <strong>{{ action }}</strong>, you must first <a href='/Login'>sign-in</a>.{% endtrans %}
+		</span>
+	</div>
+{%- endmacro %}
+
+{% macro corners(type) -%}
+	<span class="corner-{{ type }}-c0"></span>
+	<span class="corner-{{ type }}-c90"></span>
+	<span class="corner-{{ type }}-c180"></span>
+	<span class="corner-{{ type }}-c270"></span>
+{%- endmacro %}
