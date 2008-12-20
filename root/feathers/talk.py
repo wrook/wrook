@@ -4,7 +4,6 @@
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
-import logging
 from django.utils import simplejson
 from google.appengine.ext import db
 from google.appengine.ext.webapp import template
@@ -15,6 +14,8 @@ from django.utils.translation import gettext as _
 import webapp
 import membership
 import cachetree
+
+import logging
 
 maxRecentReplies = 3
 maxRecentTopics = 5

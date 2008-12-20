@@ -20,6 +20,8 @@ from feathers import talk
 
 import app
 
+import logging
+
 #===============================================================
 # BOOK, CHAPTERS, REVISIONS, TYPEWRITER AND LICENSING
 
@@ -319,6 +321,8 @@ class ChapterFormForCreate(djangoforms.ModelForm):
 class ViewBook(webapp.RequestHandler):
 	def get(self, key):
 		onRequest(self)
+		logging.info("fiou!!")
+		logging.debug("shiatz!")
 		#Before loading a book from the key, lets try to find it from the Slug
 		book = Book.all().filter("Slug =", key).fetch(limit=1)
 		if len(book) > 0: book = book[0]

@@ -3,6 +3,8 @@
 
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+from django.conf import settings
+
 from google.appengine.ext import db
 #from django.utils import translation
 import django_trans_patch as translation

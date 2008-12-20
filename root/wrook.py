@@ -5,8 +5,6 @@ Wrook's main module
 '''
 
 import os
-
-#Django imports
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from django.conf import settings
 
@@ -112,15 +110,33 @@ def profile_html_main():
 	stats.print_stats(300)  # 80 = how many to print
 	print "</pre></div>"
 
+def profile_firepython_main():
+	'''
+	This is the main function for pushing profiling data up to firepythoin
+	'''
+	import cProfile
+	import logging
+	import pstats
+	import StringIO
+	prof = cProfile.Profile()
+	prof = prof.runctx("firepython_main()", globals(), locals())
+	stream = StringIO.StringIO()
+	stats = pstats.Stats(prof, stream=stream)
+	stats.sort_stats("cumulative")  # Or cumulative
+	stats.print_stats(100)  # 80 = how many to print
+	logging.info("pfff!")
+	logging.info("Profile data:\n%s", stream.getvalue())
+
 
 application = webapp.Application(
 	integrate_modules([]),
 	debug=True) # Instantiate the main application
 
 #main = real_main
-main = firepython_main
+#main = firepython_main
 #main = profile_html_main
 #main = profile_log_main
+main = profile_firepython_main
 
 if __name__ == '__main__':
 	main()

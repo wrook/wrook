@@ -3,6 +3,8 @@
 
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+from django.conf import settings
+
 from google.appengine.api import memcache
 from feathers import webapp
 from feathers import membership

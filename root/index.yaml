@@ -23,7 +23,7 @@ indexes:
   - name: When
     direction: desc
 
-# Used 290 times in query history.
+# Used 321 times in query history.
 - kind: Chapter
   properties:
   - name: Book
@@ -106,13 +106,13 @@ indexes:
   - name: When
     direction: desc
 
-# Used 1168 times in query history.
+# Used 1173 times in query history.
 - kind: Reply
   ancestor: yes
   properties:
   - name: Sent
 
-# Used 1255 times in query history.
+# Used 1260 times in query history.
 - kind: Reply
   ancestor: yes
   properties:
@@ -126,7 +126,7 @@ indexes:
   - name: Created
     direction: desc
 
-# Used 1398 times in query history.
+# Used 1428 times in query history.
 - kind: Revision
   properties:
   - name: Chapter
@@ -163,7 +163,7 @@ indexes:
   - name: WhenOccured
     direction: desc
 
-# Used 694 times in query history.
+# Used 695 times in query history.
 - kind: ThemeMemberSelection
   properties:
   - name: Member
@@ -176,7 +176,7 @@ indexes:
   properties:
   - name: Sent
 
-# Used 157 times in query history.
+# Used 158 times in query history.
 - kind: Topic
   ancestor: yes
   properties:

@@ -10,7 +10,7 @@ from google.appengine.api import memcache
 
 class Cachable(db.Model):
 	Timestamp =  db.DateTimeProperty(auto_now_add=True)
-		
+
 	def touch(self):
 		logging.info("touch(%s)" % self.key())
 		self.Timestamp = datetime.datetime.now()
