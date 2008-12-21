@@ -78,12 +78,13 @@ class Test(webapp.RequestHandler):
 class set_default_theme(webapp.RequestHandler): 
 	#TODO: Refactor -  Move back to the Customize module
 	def get(self):
+		import app
 		onRequest(self)
 		if self.CurrentMember:
 			theme = customize.Theme.get(self.request.get("selectedTheme"))
 			if theme and self.CurrentMember.isAdmin:
-				db.delete(Moment.all().filter("isDefault =", True)) # Removes the current default moments
-				moment = Moment(
+				db.delete(app.Moment.all().filter("isDefault =", True)) # Removes the current default moments
+				moment = app.Moment(
 					Title = "Default moment",
 					Theme = theme,
 					isDefault = True

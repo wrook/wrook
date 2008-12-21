@@ -1,7 +1,11 @@
 ﻿#!python
 # coding=UTF-8
 
-import os, cgi, datetime, logging
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+import settings
+
+import cgi, datetime, logging
 from google.appengine.api import images, memcache
 from google.appengine.ext import db
 from google.appengine.ext.db import djangoforms
@@ -15,6 +19,7 @@ def URLMappings():
 		('/Themes/Select', ThemeSelect),
 		(r'/Themes/Theme/Edit/(.*)', ThemeEditWithImageUpload),
 		(r'/Themes/Theme/BackgroundImage/(.*)', ThemeBackgroundImage),
+		(r'/Themes/Theme/BackgroundImageInfo/(.*)', ThemeBackgroundImageInfo),
 		(r'/Themes/Theme/Stylesheet/(.*)', ThemeStylesheet),
 		(r'/Themes/(.*)/MemberSelect', ThemeMemberSelect),
 		(r'/Themes/(.*)', ThemeView)
@@ -186,6 +191,28 @@ class ThemeEditWithImageUpload(webapp.RequestHandler):
 				self.TemplateBaseFolder = os.path.dirname(__file__)
 				self.render("views/customize-themeEdit.html")
 
+class ThemeBackgroundImageInfo(webapp.RequestHandler):
+	def get(self, key):
+		import getimageinfo
+		theme = db.get(key)
+#		image = images.Image(theme.BackgroundImage)
+		info = getimageinfo.getImageInfo(theme.BackgroundImage)
+		self.response.out.write("info : %s, %s, %s" % info)
+"""
+import png
+
+point = (10, 20) # coordinates of pixel to read
+
+reader = png.Reader(filename='image.png') # streams are also accepted
+w, h, pixels, metadata = reader.read()
+pixel_byte_width = 4 if metadata['has_alpha'] else 3
+pixel_position = point[0] + point[1] * w
+print pixels[
+  pixel_position * pixel_byte_width :
+  (pixel_position + 1) * pixel_byte_width]
+
+"""
+
 class ThemeBackgroundImage(webapp.RequestHandler):
 	def get(self, key):
 		theme = db.get(key)
@@ -228,6 +255,7 @@ class ViewThemes(webapp.RequestHandler):
 				})
 			self.TemplateBaseFolder = os.path.dirname(__file__)
 			self.render("views/customize-viewThemes.html")
+			self.response.out.write(settings.TEMPLATE_DIRS)
 
 class ThemeSelect(webapp.RequestHandler):
 	def get(self):

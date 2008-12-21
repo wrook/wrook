@@ -52,6 +52,8 @@ def onRequest(self):
 	# Use to reference the ongoing request without having to do injection
 	self.Model = {}
 	self.MasterTemplate = os.path.join(os.path.dirname(__file__), "views/template-main-d.html") # Sets the default template to be used by hosted modules
+	self.MasterTemplateStylesheets = os.path.join(os.path.dirname(__file__), "views/stylesheets.html") # Sets the default template to be used by hosted modules
+	self.MasterTemplateScripts = os.path.join(os.path.dirname(__file__), "views/scripts.html") # Sets the default template to be used by hosted modules
 	self.TemplateBase = os.path.join(os.path.dirname(__file__), "views/template-main.html") # Sets the default template to be used by hosted modules
 	self.TemplateBase2 = os.path.join(os.path.dirname(__file__), "views/template-main2.html") # Sets the default template to be used by hosted modules
 	self.CurrentMember = membership.loginFromCookies(self) # Load the current member from the google authentication and add it to the requesthandler
@@ -61,6 +63,8 @@ def onRequest(self):
 	else: translation.activate("en") # If not, the default language is set to english
 	self.Model.update({
 		'templateMain': self.MasterTemplate,
+		'templateScripts': self.MasterTemplateScripts,
+		'templateStylesheets': self.MasterTemplateStylesheets,
 		'templateBase': self.TemplateBase,
 		'now': datetime.datetime.now(), # Add the current time tot the model
 		'currentMember': self.CurrentMember, # Add the current user to the model
