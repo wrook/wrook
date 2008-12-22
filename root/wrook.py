@@ -16,7 +16,6 @@ from feathers import stories
 from feathers import utils
 from feathers import customize
 from feathers import membership
-from feathers import labs
 from feathers import proforma
 from feathers import talk
 
@@ -42,12 +41,9 @@ def integrate_modules(URLMappings):
 	# Integrate the admin module
 	URLMappings += books.URLMappings()
 	books.onRequest = app.onRequest
-	# Integrate the Labs module
+	# Integrate the stories module
 	URLMappings += stories.URLMappings()
 	stories.onRequest = app.onRequest
-	# Integrate the Labs module
-	URLMappings += labs.URLMappings()
-	labs.onRequest = app.onRequest
 	# Integrates the Customize module
 	URLMappings += customize.URLMappings()
 	customize.onRequest = app.onRequest

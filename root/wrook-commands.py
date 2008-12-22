@@ -1,3 +1,20 @@
+
+def remove_labs():
+	"""
+	Remove all entities related to the old "Labs" module which has been removed from the project.
+	"""
+	from google.appengine.ext import db
+	class Release(db.Model):
+		pass
+	class Feature(db.Model):
+		pass
+	class Vote(db.Model):
+		pass
+	db.delete(Release.all())
+	db.delete(Feature.all())
+	db.delete(Vote.all())
+
+
 def reset_member_for_searchable_model():
 	"""
 	Resaves member entities for them to support the features of the searchable model.

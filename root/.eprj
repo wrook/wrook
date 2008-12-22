@@ -22,6 +22,10 @@
             <string>app.py</string>
             <key>app.</key>
             <string>app.yaml</string>
+            <key>auto</key>
+            <string>console\autoexec.py</string>
+            <key>autoe</key>
+            <string>console\autoexec.py</string>
             <key>book</key>
             <string>books.py</string>
             <key>book-</key>
@@ -60,6 +64,10 @@
             <string>feathers\cachetree.py</string>
             <key>cachetr</key>
             <string>feathers\cachetree.py</string>
+            <key>comman</key>
+            <string>views\admin-commands.html</string>
+            <key>command</key>
+            <string>wrook-commands.py</string>
             <key>custom</key>
             <string>views\customize.html</string>
             <key>customi</key>
@@ -80,6 +88,8 @@
             <string>views\section-bookInfo.html</string>
             <key>join</key>
             <string>views\join.html</string>
+            <key>lab</key>
+            <string>feathers\labs.py</string>
             <key>labs</key>
             <string>feathers\labs.py</string>
             <key>logi</key>
@@ -226,8 +236,10 @@
             <string>views\template-main-d.html</string>
             <key>templ</key>
             <string>stylesheets\template-d.css</string>
-            <key>template</key>
+            <key>templa</key>
             <string>views\template-main.html</string>
+            <key>template</key>
+            <string>views\template-main2.html</string>
             <key>template-d</key>
             <string>stylesheets\template-d.css</string>
             <key>test</key>
