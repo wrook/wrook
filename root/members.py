@@ -146,7 +146,7 @@ class MembersBooksList(webapp.RequestHandler):
 			self.Model.update({
 				'books': books
 				})
-			self.render('views/members-books-list.html')
+			self.render2('views/members-books-list.html')
 		else: self.error(404)
 
 class MembersReadingsList(webapp.RequestHandler):
@@ -157,10 +157,14 @@ class MembersReadingsList(webapp.RequestHandler):
 			if visitedMember:
 				self.setVisitedMember(visitedMember)
 				bookmarks = visitedMember.Bookmarks.fetch(limit=999)
+				books = []
+				for bookmark in bookmarks:
+					books.append(bookmark.Book)
 				self.Model.update({
-					'bookmarks': bookmarks
+					'bookmarks': bookmarks,
+					'books': books
 					})
-				self.render('views/members-bookmarks-list.html')
+				self.render2('views/members-bookmarks-list.html')
 			else: self.error(404)
 		else: self.requestLogin()
 

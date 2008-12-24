@@ -19,7 +19,7 @@
             <key>analy</key>
             <string>views\analytics.html</string>
             <key>app</key>
-            <string>app.py</string>
+            <string>app.yaml</string>
             <key>app.</key>
             <string>app.yaml</string>
             <key>auto</key>
@@ -44,8 +44,10 @@
             <string>views\section-bookInfo.html</string>
             <key>bookinfo</key>
             <string>views\section-bookInfo.html</string>
+            <key>bookmar</key>
+            <string>views\members-bookmarks-list.html</string>
             <key>books</key>
-            <string>books.py</string>
+            <string>views\books.html</string>
             <key>books-</key>
             <string>views\books-talk.html</string>
             <key>books-view-sidebar</key>
@@ -53,6 +55,8 @@
             <key>books-view-sidebar.html</key>
             <string>views\books-view-sidebar.html</string>
             <key>books.</key>
+            <string>views\books.html</string>
+            <key>books.h</key>
             <string>views\books.html</string>
             <key>books.p</key>
             <string>books.py</string>
@@ -96,6 +100,8 @@
             <string>views\login.html</string>
             <key>login</key>
             <string>views\login.html</string>
+            <key>macro</key>
+            <string>views\wrook-macros.html</string>
             <key>main</key>
             <string>stylesheets\main.css</string>
             <key>main.</key>
@@ -121,7 +127,7 @@
             <key>member.py</key>
             <string>members.py</string>
             <key>members</key>
-            <string>feathers\membership.py</string>
+            <string>views\members.html</string>
             <key>membersh</key>
             <string>feathers\membership.py</string>
             <key>membershi</key>
@@ -132,6 +138,8 @@
             <string>memoize.py</string>
             <key>old</key>
             <string>old_wrook.py</string>
+            <key>pack</key>
+            <string>pack.bat</string>
             <key>part</key>
             <string>feathers\views\talk-part-topic.html</string>
             <key>part-</key>
@@ -142,6 +150,8 @@
             <string>feathers\views\talk-part-replies.html</string>
             <key>part-t</key>
             <string>feathers\views\talk-part-topics.html</string>
+            <key>part-titleBlock.html</key>
+            <string>views\part-titleBlock.html</string>
             <key>part-top</key>
             <string>feathers\views\talk-part-topic.html</string>
             <key>part-topics</key>
@@ -164,6 +174,8 @@
             <string>feathers\views\talk-part-replyForm.html</string>
             <key>scrip</key>
             <string>feathers\views\talk-script-topicForm.js</string>
+            <key>script</key>
+            <string>views\scripts.html</string>
             <key>script-</key>
             <string>feathers\talk-script-topicForm.js</string>
             <key>script-t</key>
@@ -186,6 +198,8 @@
             <string>feathers\stories.pyc</string>
             <key>stories</key>
             <string>feathers\stories.py</string>
+            <key>styles</key>
+            <string>views\stylesheets.html</string>
             <key>sugges</key>
             <string>views\member-suggestions.html</string>
             <key>suggest</key>
@@ -239,7 +253,7 @@
             <key>templa</key>
             <string>views\template-main.html</string>
             <key>template</key>
-            <string>views\template-main2.html</string>
+            <string>views\template-profile.html</string>
             <key>template-d</key>
             <string>stylesheets\template-d.css</string>
             <key>test</key>
@@ -272,6 +286,10 @@
             <string>feathers\cachetree.py</string>
             <key>twoSid</key>
             <string>views\template-twoSidebars.html</string>
+            <key>typ</key>
+            <string>scripts\WrookTypewriter\WrookTypewriter.js</string>
+            <key>typew</key>
+            <string>scripts\WrookTypewriter\WrookTypewriter.html</string>
             <key>utils</key>
             <string>feathers\utils.py</string>
             <key>view</key>

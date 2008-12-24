@@ -28,6 +28,10 @@ function WrookEditor() {
 	}
 
 	this.hookup = function(textFieldId) {
+		$("#mnu-saveAndExit").click(function(){
+			editor.saveAndExit();
+			return false;
+		})
 		editor.typewriterField = $("#wtw-text")[0];
 		
 		$(window).keyup(function (e) {

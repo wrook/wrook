@@ -54,7 +54,7 @@
 					{% if book.Stage=="writing" %}{% trans %}Still in writing{% endtrans %}, {% endif %}
 					{% if book.Stage=="proofing" %}{% trans %}Still in proofing{% endtrans %}, {% endif %}
 					<br />
-					{% trans fullname=book.Author.fullname() %}By {{ fullname }}{% endtrans %}
+					{% trans authorname=book.authorName() %}By {{ authorname }}{% endtrans %}
 				</div>
 				</td>
 				{% if loop.cycle(0, 0, 0, 1)==1 %}

@@ -454,7 +454,9 @@ table tr td ul li {
 
 .cover a:visited,
 .cover a:link{
+	position: relative;
 	text-decoration: none;
+	display: block;
 }
 
 .coverGallery .cover {
@@ -462,14 +464,12 @@ table tr td ul li {
 	float: left;
 	margin: 0px 20px 10px 0px;
 	padding: 0px 22px 0px 0px;
-	background: url(../images/cover-shadow.png) bottom right no-repeat;
 }
 .cover {
 	position: relative;
 	width: 120px;
 	margin: 0px 20px 10px 0px;
 	padding: 0px 22px 0px 0px;
-	background: url(../images/cover-shadow.png) bottom right no-repeat;
 }
 .flat.cover {
 	background: none !important;

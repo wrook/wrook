@@ -1,3 +1,72 @@
+{% macro book_list(books) -%}
+<style>
+.tooltip-content {
+	display: none;
+}
+</style>
+<script>
+<!--
+$(document).ready(function(){
+	$(".cover a").tooltip({ 
+	    track: true, 
+	    delay: 0, 
+	    showURL: false,
+	    top: 10,
+	    left: 10,
+	    width: 300,
+	    bodyHandler: function() {
+	    	return $(".tooltip-content", $(this).parent()).html(); 
+	    }
+	});
+});
+-->
+</script>
+	<div class="bookGallery">
+		<table>
+			<tr>
+				{% if books %}
+					{% for book in books %}
+						<td>
+						<div class="book">
+							<div class="cover">
+								<a href="/Books/{{ book.key() }}">
+									{{ corners("white5px") }}
+									<img src='/Covers/Thumbnail/{{ book.getCover().key() }}'>
+									{% if book.getCover().isReusable %}
+										<span class="coverTitle" {% if book.getCover().TitleColor %}style="color: {{ book.getCover().TitleColor }}"{% endif %} >{{ book.Title }}</span> 
+									{% endif %}
+								</a>
+								<div class="tooltip-content">
+									<h3>{{ book.Title }}</h3>
+									{% trans authorname=book.authorName() %}By {{ authorname }}{% endtrans %}
+									<br />
+									<em>
+										{% if book.Stage=="planning" %}{% trans %}Only planning{% endtrans %}, {% endif %}
+										{% if book.Stage=="drafting" %}{% trans %}Still in drafting{% endtrans %}, {% endif %}
+										{% if book.Stage=="writing" %}{% trans %}Still in writing{% endtrans %}, {% endif %}
+										{% if book.Stage=="proofing" %}{% trans %}Still in proofing{% endtrans %}, {% endif %}
+									</em>
+								</div>
+							</div>
+						</div>
+						</td>
+						{% if loop.cycle(0, 0, 0, 1)==1 %}
+							</tr>
+							<tr>
+						{% endif %}
+					{% endfor %}
+				{% else %}
+					{% if visitedMember.key()==currentMember.key() %}
+						<p>{% trans %}You have not saved any bookmarks yet. We invite you to choose one from <a href='/Books'>all the books</a> which have been contributed by other members.{% endtrans %}</p>
+					{% else %}
+						<p>{% trans %}This member has not saved any bookmarks yet.{% endtrans %}</p>
+					{% endif %}
+				{% endif %}
+			</tr>
+		</table>
+	</div>
+{%- endmacro %}
+
 {% macro noticeMustSignIn(actionLabel) -%}
 <style>
 .notice.must-login-first {
