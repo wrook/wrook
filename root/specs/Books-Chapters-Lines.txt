@@ -1,0 +1,14 @@
+
+
+Book
+
+
+Chapter
+
+
+Line (Searchable)
+	Book reference
+	Chapter reference
+	Index Numeric
+	Text Text
+	WhenLastEdited datetime

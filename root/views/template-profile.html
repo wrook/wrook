@@ -1,39 +1,46 @@
-{% extends templateMain %}
+{% extends "template-main-e.html" %}
 {% load i18n %}
 {% block pageContent %}
 	<div id="pageContent">
-		<div class="section">
-			<div class="sectionHeader withProfileMenu">
-				<div id="memberAvatar">
-					<a href="/Members/{{ visitedMember.key}}"><img width="50" src="{{ visitedMember.gravatar50 }}" /></a>
-				</div>
+		<div class="contentBlock">
+			<div class="blockHeader withSectionMenu">
 				<h1><a href="/Members/{{ visitedMember.key}}">
 					{{ visitedMember.fullname }}
 				</a></h1>
 				<div class="sectionMenu">
 					<ul>
-						<li><a id="menu-memberFeed" href="/Members/{{ visitedMember.key }}">{% trans "Feed" %}</a></li>
-						<li><a id="menu-memberProfile" href="/Members/{{ visitedMember.key }}/Profile">{% trans "Profile" %}</a></li>
-						<li><a id="menu-memberBooks" href="/Members/{{ visitedMember.key }}/Books">{% trans "Books" %}</a></li>
-						<li><a id="menu-memberReadings" href="/Members/{{ visitedMember.key }}/Readings">{% trans "Readings" %}</a></li>
-						<li><a id="menu-memberCovers" href="/Members/{{ visitedMember.key }}/Covers">{% trans "Covers" %}</a></li>
+						<li><a id="menu-memberFeed" href="/Members/{{ visitedMember.key }}"><span>{% trans "Feed" %}</span></a></li>
+						<li><a id="menu-memberProfile" href="/Members/{{ visitedMember.key }}/Profile"><span>{% trans "Profile" %}</span></a></li>
+						<li><a id="menu-memberBooks" href="/Members/{{ visitedMember.key }}/Books"><span>{% trans "Books" %}</span></a></li>
+						<li><a id="menu-memberReadings" href="/Members/{{ visitedMember.key }}/Readings"><span>{% trans "Readings" %}</span></a></li>
+						<li><a id="menu-memberCovers" href="/Members/{{ visitedMember.key }}/Covers"><span>{% trans "Covers" %}</span></a></li>
 						{% ifequal visitedMember.key currentMember.key %}
-							<li><a id="menu-memberInvites" href="/Invites">{% trans "Invites" %}</a></li>
+							<li><a id="menu-memberInvites" href="/Invites"><span>{% trans "Invites" %}</span></a></li>
 						{% endifequal %}
 					</ul>
 				</div>
+				<div class="clearfix"></div>
 			</div>
-			<div class="sectionBody">
-				<div id="notices">
-					{% block notices %}{% endblock %}
+			<div class="blockContent">
+				<div class="blockBody">
+					<div class="top"></div>
+					<div class="middle">
+						<div id="notices">
+							{% block notices %}{% endblock %}
+						</div>
+						{% include "part-titleBlock.html" %}
+						{% block content %}{% endblock %}
+					</div>
+					<div class="bottom"></div>
 				</div>
-				<div class="sectionBodyContent">
-					{% include "part-titleBlock.html" %}
-					{% block content %}{% endblock %}
+				<div class="sidebar">
+					<div id="memberAvatar">
+						<a href="/Members/{{ visitedMember.key }}"><img width="180" height="180" src="{{ visitedMember.gravatar180 }}" /></a>
+					</div>
+					{% block sidebar %}{% endblock %}
 				</div>
 			</div>
+			<div class="blockFooter"></div>
 		</div>
-		<div class="sectionFooter"></div>
-		<div class="clearfix"></div>
 	</div>
 {% endblock %}

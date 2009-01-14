@@ -1,0 +1,35 @@
+{% extends "template-main-e2.html" %}
+{% import 'book-macros.html' as bookMacros %}
+{% block pageContent %}
+	<div id="pageContent">
+		<div class="contentBlock">
+			<div class="blockHeader withSectionMenu">
+				<h1><a href="/Members/{{ book.key() }}">
+					{{ book.Title }}
+				</a></h1>
+				{{ bookMacros.tabs_book(book=book, selected=subSection) }}
+				<div class="clearfix"></div>
+			</div>
+			<div class="blockContent">
+				<div class="blockBody">
+					<div class="top"></div>
+					<div class="middle">
+						<div id="notices">
+							{% block notices %}{% endblock %}
+						</div>
+						{% include "part-titleBlock2.html" %}
+						{% block content %}{% endblock %}
+					</div>
+					<div class="bottom">
+						{% block sectionFooter %}{% endblock %}
+					</div>
+				</div>
+				<div class="sidebar">
+					{% block sidebar %}{% endblock %}
+				</div>
+			</div>
+			<div class="blockFooter">
+			</div>
+		</div>
+	</div>
+{% endblock %}

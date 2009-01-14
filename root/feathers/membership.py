@@ -239,6 +239,7 @@ class Member(search.SearchableModel):
 		memcache.delete("profilePhotoThumb100-%s" % self.key())
 		memcache.delete("profilePhotoThumb120-%s" % self.key())
 		memcache.delete("profilePhotoThumb160-%s" % self.key())
+		memcache.delete("profilePhotoThumb180-%s" % self.key())
 	
 	def currentThemeSelection(self):
 		cacheKey = "wrookMemberThemeSelection-%s" % self.key()
@@ -339,6 +340,10 @@ http://www.wrook.org
 		if self.ProfilePhoto: return "/Membership/ProfilePhoto/Image/%s?width=160" % self.key()
 		else: return "/images/avatar.png"
 	
+	def gravatar180(self):
+		if self.ProfilePhoto: return "/Membership/ProfilePhoto/Image/%s?width=180" % self.key()
+		else: return "/images/avatar.png"
+
 	def fullname(self):
 		return "%s %s" % (self.Firstname, self.Lastname)
 
@@ -531,6 +536,9 @@ class ProfilePhotoImage(webapp.RequestHandler):
 				elif paramWidth == "160":
 					width = 160
 					height = 160
+				elif paramWidth == "180":
+					width = 180
+					height = 180
 				elif paramWidth == "original":
 					width = None
 					height = None

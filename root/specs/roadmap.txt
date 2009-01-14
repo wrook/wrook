@@ -1,0 +1,8 @@
+Topics and replies on books, chapters and paragraphs
+Search (using google search integrations)
+Browse books by tags and/or categories (look for integration)
+Download book as ePub
+Fullscreen online reader (via API)
+Subscribe to a book/author/member feed with RSS/Atom
+Basic activities for members and books
+Mobile versions (targeted thoward iPhone and Android)

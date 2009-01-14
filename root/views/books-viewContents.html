@@ -1,0 +1,73 @@
+{% extends "views/template-book.html" %}
+{% import 'wrook-macros.html' as wrook %}
+{% set section = "book" %}
+{% set subSection = "contents" %}
+{% block pageId %}books-chapters{% endblock %}
+{% block pageTitle %}
+	{{ book.Title }}
+{% endblock %}
+{% block content %}
+	{% if book.Stage!="final" %}
+		{{ wrook.notice(title=_("Notice"), body=book.get_verbose_stage()) }}
+	{% endif %}
+
+	<h2>
+		{% trans %}Chapters{% endtrans %}
+	</h2>
+
+	<div class="chapterList">
+		<ul>
+			{% for chapter in chapters %}
+				<li>
+					<a href="/ViewChapter/{{ chapter.key() }}">
+						{% if chapter.Name %}
+							{{ chapter.Name|escape }}
+						{% endif %}
+						{% if chapter.Title and chapter.Name %}
+							:
+						{% endif %}
+						{% if chapter.Title %}
+							{{ chapter.Title|escape }}
+						{% endif %}
+					</a>
+					{% if book.Stage=="planning" %}({% trans %}Planning{% endtrans %}){% endif %}
+					{% if book.Stage=="drafting" %}({% trans %}Drafting{% endtrans %}){% endif %}
+					{% if book.Stage=="writing" %}({% trans %}Writing{% endtrans %}){% endif %}
+					{% if book.Stage=="proofing" %}({% trans %}Proofing{% endtrans %}){% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+		<div class="clearfix"></div>
+	</div>
+
+	<br/>
+	{% call wrook.calls_to_action() %}
+		<li class="mainLink"><a href="/ViewChapter/{{ firstChapter.key() }}">
+			<span class="bullet spriteIcons icon-main-link"></span><span>{% trans %}Start reading{% endtrans %}</span></a>
+		</li>
+	{% endcall %}
+
+{% endblock %}
+
+{% block sidebar %}
+		{% if userCanEdit %}
+			<div class="sidebarPanel">
+				<h3>
+					{% trans %}Editing{% endtrans %}
+				</h3>
+				<div class="sidebarMenu">
+					<ul>
+						{% if userIsAuthor %}
+							<li><a href="/NewChapter/{{ book.key() }}">{% trans %}Start a new chapter{% endtrans %}</a></li>
+							{% if book.lastRevisedChapter() %}
+								<li><a href="/Typewriter/{{ book.lastRevisedChapter.key() }}">{% trans %}Resume writing{% endtrans %}</a></li>
+							{% endif %}
+						{% endif %}
+						{% if userCanEdit %}
+							<li><a href="/Books/ReorderChapters/{{ book.key() }}">{% trans %}Reorder chapters{% endtrans %}</a></li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		{% endif %}
+{% endblock sidebar %}

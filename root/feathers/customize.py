@@ -227,6 +227,9 @@ class ThemeBackgroundImage(webapp.RequestHandler):
 			elif paramWidth == "1024":
 				width = 1024
 				height = 768
+			elif paramWidth == "980":
+				width = 980
+				height = 735
 			else:
 				width = 160
 				height = 120

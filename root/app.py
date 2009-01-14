@@ -51,7 +51,7 @@ def onRequest(self):
 	webapp.currentRequest = self
 	# Use to reference the ongoing request without having to do injection
 	self.Model = {}
-	self.MasterTemplate = os.path.join(os.path.dirname(__file__), "views/template-main-d.html") # Sets the default template to be used by hosted modules
+	self.MasterTemplate = os.path.join(os.path.dirname(__file__), "views/template-main-e.html") # Sets the default template to be used by hosted modules
 	self.MasterTemplateStylesheets = os.path.join(os.path.dirname(__file__), "views/stylesheets.html") # Sets the default template to be used by hosted modules
 	self.MasterTemplateScripts = os.path.join(os.path.dirname(__file__), "views/scripts.html") # Sets the default template to be used by hosted modules
 	self.TemplateBase = os.path.join(os.path.dirname(__file__), "views/template-main.html") # Sets the default template to be used by hosted modules

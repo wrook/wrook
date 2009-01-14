@@ -1,0 +1,21 @@
+/* SPRITES */
+.spriteIcons {
+	display: block;
+	background: url(/images/iconSprites.png) no-repeat top left;
+}
+.icon-sign-in {
+	background-position: 0 -130px;
+	height: 20px;
+	width: 20px;
+}
+.icon-main-link {
+	background-position: 0 -90px;
+	height: 20px;
+	width: 20px;
+}
+
+.icon-invite {
+	background-position: 0 -150px;
+	height: 20px;
+	width: 20px;
+}

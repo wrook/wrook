@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">{% load i18n %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		{% include templateStylesheets %}
+		<script type="text/javascript" src="/scripts/jquery/jquery-1.2.6.min.js"></script>
+		<title>Wrook: {% block pageTitle %}Readers, Writers, Words{% endblock %}</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<meta http-equiv="pragma" content="no-cache" />
+		{% if currentMember %}
+			<meta name="wrook.username" content="{{ currentMember.Username }}" />
+		{% endif %}
+{% block htmlHead %}{% endblock %}
+	</head>
+	<body id="page-{% block pageId %}none{% endblock %}">
+		{% if currentTheme %}
+			<div id="wallpaper">
+				<div id="shadow"></div>
+				<img alt="{% trans "Wallpaper" %}" src="/Themes/Theme/BackgroundImage/{{ currentTheme.key }}?width=980" />
+				<div class="bgFade"></div>
+			</div>
+		{% endif %}
+		<div id="spritesPreload"></div>
+		<div id="page">
+			<div id="halfBakedLogo"><a id="link-halfBaked" href="/About/Half-Baked-Edition"></a></div>
+			<div id="header">
+				<div id="logo">
+					<a href="/">{% trans "Wrook" %}</a>
+				</div>
+				<div id="nav">
+					{% if currentMember %}
+						<div id="mainMenu">
+							<ul>
+								<li><a id="menu-home" href="/">{% trans "Profile" %}</a></li>
+								<li><a id="menu-books" href="/Books">{% trans "Books" %}</a></li>
+								<li><a id="menu-readers" href="/Members">{% trans "Members" %}</a></li>
+							</ul>
+						</div>
+						<div id="accessMenu">
+							<ul>
+								<li><a id="menu-customize" href="/Customize">{% trans "Customize" %}</a></li>
+								<li><a id="menu-logout" href="/Logout">{% trans "Logout" %}</a></li>
+							</ul>
+						</div>
+					{% else %}
+						<div id="mainMenu">
+							<ul>
+								<li><a id="menu-home" href="/">{% trans "Home" %}</a></li>
+								<li><a id="menu-books" href="/Books">{% trans "Books" %}</a></li>
+								<li><a id="menu-readers" href="/Members">{% trans "Members" %}</a></li>
+							</ul>
+						</div>
+						<div id="accessMenu">
+							<ul>
+								<li><a id="menu-join" href="/Join/">{% trans "Join" %}</a></li>
+								<li><a id="menu-login" href="/Login">{% trans "Login" %}</a></li>
+							</ul>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+			<div id="pageInner">
+				{% block pageContent %}{% endblock %}
+				<div id="pageFooter">
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<div id="footerContent">
+			{% block footer %} {% endblock %}
+			</div>
+		</div>
+		{% include templateScripts %}
+	</body>
+</html>

@@ -8,10 +8,30 @@
             <string>stylesheets\template-d.css</string>
             <key>-d.</key>
             <string>stylesheets\template-d.css</string>
+            <key>-d.c</key>
+            <string>stylesheets\template-d.css</string>
             <key>-d.css</key>
+            <string>stylesheets\template-d.css</string>
+            <key>-main</key>
+            <string>views\template-main-e2.html</string>
+            <key>-pro</key>
+            <string>views\template-profile.html</string>
+            <key>-prof</key>
+            <string>views\template-profile2.html</string>
+            <key>-profi</key>
+            <string>views\template-profile2.html</string>
+            <key>-view</key>
+            <string>views\books-view.html</string>
+            <key>.css</key>
             <string>stylesheets\template-d.css</string>
             <key>.js</key>
             <string>feathers\talk-script-topicForm.js</string>
+            <key>BOOK-CONT</key>
+            <string>views\books-viewContents.html</string>
+            <key>BOOKS</key>
+            <string>books.py</string>
+            <key>STYLE</key>
+            <string>views\stylesheets.html</string>
             <key>about</key>
             <string>about.py</string>
             <key>admin</key>
@@ -19,19 +39,35 @@
             <key>analy</key>
             <string>views\analytics.html</string>
             <key>app</key>
-            <string>app.yaml</string>
+            <string>app.py</string>
             <key>app.</key>
             <string>app.yaml</string>
+            <key>app.p</key>
+            <string>app.py</string>
+            <key>attrib</key>
+            <string>views\about-openSourceAttribution.html</string>
             <key>auto</key>
             <string>console\autoexec.py</string>
             <key>autoe</key>
             <string>console\autoexec.py</string>
-            <key>book</key>
-            <string>books.py</string>
-            <key>book-</key>
+            <key>boks</key>
             <string>views\books-view.html</string>
+            <key>boks.p</key>
+            <string>books.py</string>
+            <key>book</key>
+            <string>views\books-view.html</string>
+            <key>book-</key>
+            <string>views\books-talk.html</string>
+            <key>book-m</key>
+            <string>views\book-macros.html</string>
+            <key>book-rea</key>
+            <string>views\book-readers.html</string>
+            <key>book-ta</key>
+            <string>views\books-talk.html</string>
             <key>book-talk</key>
             <string>views\books-talk.html</string>
+            <key>book-top</key>
+            <string>views\books-topics.html</string>
             <key>book-v</key>
             <string>views\books-view.html</string>
             <key>bookIn</key>
@@ -47,16 +83,24 @@
             <key>bookmar</key>
             <string>views\members-bookmarks-list.html</string>
             <key>books</key>
-            <string>views\books.html</string>
+            <string>books.py</string>
             <key>books-</key>
+            <string>views\books-view.html</string>
+            <key>books-talk.html</key>
             <string>views\books-talk.html</string>
+            <key>books-v</key>
+            <string>views\books-view.html</string>
+            <key>books-view</key>
+            <string>views\books-view.html</string>
             <key>books-view-sidebar</key>
             <string>views\books-view-sidebar.html</string>
             <key>books-view-sidebar.html</key>
             <string>views\books-view-sidebar.html</string>
             <key>books.</key>
-            <string>views\books.html</string>
+            <string>books.py</string>
             <key>books.h</key>
+            <string>views\books.html</string>
+            <key>books.html</key>
             <string>views\books.html</string>
             <key>books.p</key>
             <string>books.py</string>
@@ -72,8 +116,18 @@
             <string>views\admin-commands.html</string>
             <key>command</key>
             <string>wrook-commands.py</string>
+            <key>content</key>
+            <string>views\books-viewContents.html</string>
+            <key>cover</key>
+            <string>views\covers-list.html</string>
+            <key>covers</key>
+            <string>views\covers-list.html</string>
+            <key>cpal</key>
+            <string>views\about-CPAL.html</string>
+            <key>cus</key>
+            <string>feathers\customize.py</string>
             <key>custom</key>
-            <string>views\customize.html</string>
+            <string>feathers\customize.py</string>
             <key>customi</key>
             <string>feathers\customize.py</string>
             <key>d.c</key>
@@ -86,6 +140,10 @@
             <string>scripts\jquery\jquery.example.js</string>
             <key>form</key>
             <string>feathers\views\talk-comment-miniForm.html</string>
+            <key>half</key>
+            <string>views\about-halfBakedEdition.html</string>
+            <key>halfb</key>
+            <string>views\about-halfBakedEdition.html</string>
             <key>home</key>
             <string>views\visitorHome.html</string>
             <key>info</key>
@@ -96,14 +154,24 @@
             <string>feathers\labs.py</string>
             <key>labs</key>
             <string>feathers\labs.py</string>
+            <key>licen</key>
+            <string>views\about-openSourceLicense.html</string>
             <key>logi</key>
             <string>views\login.html</string>
             <key>login</key>
             <string>views\login.html</string>
+            <key>macr</key>
+            <string>views\wrook-macros.html</string>
             <key>macro</key>
             <string>views\wrook-macros.html</string>
             <key>main</key>
             <string>stylesheets\main.css</string>
+            <key>main-</key>
+            <string>views\template-main-e.html</string>
+            <key>main-d</key>
+            <string>views\template-main-d2.html</string>
+            <key>main-e</key>
+            <string>views\template-main-e.html</string>
             <key>main.</key>
             <string>stylesheets\main.css</string>
             <key>main.c</key>
@@ -116,30 +184,60 @@
             <string>scripts\main.js</string>
             <key>main.js</key>
             <string>scripts\main.js</string>
+            <key>main2</key>
+            <string>views\template-main2.html</string>
+            <key>maind</key>
+            <string>views\template-main-d.html</string>
             <key>memb</key>
             <string>members.py</string>
-            <key>member</key>
+            <key>membe</key>
             <string>members.py</string>
+            <key>member</key>
+            <string>views\memberHome.html</string>
+            <key>member-</key>
+            <string>views\members-books-list.html</string>
             <key>member-suggestio</key>
             <string>views\member-suggestions.html</string>
             <key>member-suggestions.html</key>
             <string>views\member-suggestions.html</string>
             <key>member.py</key>
             <string>members.py</string>
+            <key>memberH</key>
+            <string>views\memberHome.html</string>
+            <key>memberh</key>
+            <string>views\memberHome.html</string>
             <key>members</key>
             <string>views\members.html</string>
+            <key>members.h</key>
+            <string>views\members.html</string>
+            <key>members.html</key>
+            <string>feathers\views\membership-invites.html</string>
+            <key>members2.h</key>
+            <string>views\members2.html</string>
             <key>membersh</key>
-            <string>feathers\membership.py</string>
+            <string>views\members.html</string>
             <key>membershi</key>
             <string>feathers\views\membership-inviteNew.html</string>
+            <key>membership</key>
+            <string>feathers\membership.py</string>
             <key>membes</key>
             <string>members.py</string>
             <key>memoiz</key>
             <string>memoize.py</string>
+            <key>nos</key>
+            <string>views\template-main-nosidebar2.html</string>
+            <key>noside</key>
+            <string>views\template-main-nosidebar.html</string>
             <key>old</key>
             <string>old_wrook.py</string>
+            <key>pac</key>
+            <string>pack.bat</string>
             <key>pack</key>
             <string>pack.bat</string>
+            <key>panel</key>
+            <string>views\panels-aboutOpenSource.html</string>
+            <key>panels</key>
+            <string>views\panels-aboutWrook.html</string>
             <key>part</key>
             <string>feathers\views\talk-part-topic.html</string>
             <key>part-</key>
@@ -158,8 +256,16 @@
             <string>feathers\views\talk-part-topics.html</string>
             <key>partre</key>
             <string>views\part-replies.html</string>
+            <key>profi</key>
+            <string>views\template-profile.html</string>
+            <key>profile</key>
+            <string>views\template-profile.html</string>
             <key>proform</key>
             <string>feathers\proforma.py</string>
+            <key>readers</key>
+            <string>views\readers.html</string>
+            <key>reorder</key>
+            <string>views\books-reorderChapters.html</string>
             <key>repl</key>
             <string>views\part-replies.html</string>
             <key>repli</key>
@@ -172,6 +278,8 @@
             <string>feathers\views\talk-part-replyForm.html</string>
             <key>replyFor</key>
             <string>feathers\views\talk-part-replyForm.html</string>
+            <key>reset</key>
+            <string>views\resetPassword.html</string>
             <key>scrip</key>
             <string>feathers\views\talk-script-topicForm.js</string>
             <key>script</key>
@@ -182,6 +290,12 @@
             <string>feathers\views\talk-script-topicForm.js</string>
             <key>scripts</key>
             <string>feathers\views\scripts.html</string>
+            <key>section</key>
+            <string>views\section-bookInfo.html</string>
+            <key>section-bookInfo.html</key>
+            <string>views\section-bookInfo.html</string>
+            <key>seleniu</key>
+            <string>tests\selenium.py</string>
             <key>settin</key>
             <string>settings.py</string>
             <key>showMoreR</key>
@@ -190,6 +304,10 @@
             <string>feathers\views\talk-part-showMoreReplies.html</string>
             <key>sideba</key>
             <string>views\books-view-sidebar.html</string>
+            <key>spri</key>
+            <string>stylesheets\sprites.css</string>
+            <key>sprit</key>
+            <string>stylesheets\sprites.css</string>
             <key>stor</key>
             <string>feathers\stories.py</string>
             <key>stori</key>
@@ -230,6 +348,8 @@
             <string>feathers\views\talk-part-reply.html</string>
             <key>talk-part-topic.html</key>
             <string>feathers\views\talk-part-topic.html</string>
+            <key>talk-part-topics.html</key>
+            <string>feathers\views\talk-part-topics.html</string>
             <key>talk-s</key>
             <string>feathers\views\talk-script-topicForm.js</string>
             <key>talk-sc</key>
@@ -246,17 +366,33 @@
             <string>feathers\views\talk-part-topicForm.html</string>
             <key>tem</key>
             <string>views\template-main-d.html</string>
+            <key>temla</key>
+            <string>views\template-main-d.html</string>
             <key>temp</key>
             <string>views\template-main-d.html</string>
             <key>templ</key>
-            <string>stylesheets\template-d.css</string>
+            <string>views\template-main-d2.html</string>
             <key>templa</key>
             <string>views\template-main.html</string>
+            <key>templat</key>
+            <string>views\template-main-d.html</string>
             <key>template</key>
+            <string>views\template-profile2.html</string>
+            <key>template-</key>
             <string>views\template-profile.html</string>
+            <key>template-bo</key>
+            <string>views\template-book.html</string>
             <key>template-d</key>
             <string>stylesheets\template-d.css</string>
+            <key>template-e</key>
+            <string>views\template-main-e.html</string>
+            <key>template-mai</key>
+            <string>views\template-main.html</string>
             <key>test</key>
+            <string>tests\testMembership.py</string>
+            <key>testC</key>
+            <string>tests\testContentPages.py</string>
+            <key>testM</key>
             <string>tests\testMembership.py</string>
             <key>topic</key>
             <string>feathers\views\talk-TopicView.html</string>
@@ -293,19 +429,25 @@
             <key>utils</key>
             <string>feathers\utils.py</string>
             <key>view</key>
-            <string>views\viewChapter.html</string>
+            <string>views\viewMember.html</string>
             <key>viewC</key>
             <string>views\viewChapter.html</string>
+            <key>visitor</key>
+            <string>views\visitorHome.html</string>
             <key>we</key>
             <string>feathers\webapp.py</string>
             <key>weba</key>
             <string>feathers\webapp.py</string>
             <key>webapp</key>
             <string>feathers\webapp.py</string>
+            <key>who</key>
+            <string>views\about-who.html</string>
             <key>wro</key>
             <string>wrook.py</string>
             <key>wrook</key>
             <string>wrook.py</string>
+            <key>wrook-m</key>
+            <string>views\wrook-macros.html</string>
             <key>wrookSto</key>
             <string>wrookStories.py</string>
             <key>wrooks</key>

@@ -1,4 +1,4 @@
-﻿{% extends "template-main-d.html" %}
+﻿{% extends "template-main-e.html" %}
 {% load i18n %}
 {% block title %}
 	<h1>
@@ -89,4 +89,7 @@ Before you join Wrook, we need to learn a few things about you. After you filled
 
 		</form>
 
+{% endblock %}
+{% block sidebar %}
+	{% include "panels-aboutWrook.html" %}
 {% endblock %}

@@ -1,0 +1,17 @@
+	Fresh	Primed
+
+Initial
+	43503		17090
+
+Removed bookmarks
+	d:	34081		5066
+	p:	 2492		1835
+
+Moved templates to Jinja
+	d:
+	p:	4523		4083
+
+minified scripts
+
+Cached db requests
+

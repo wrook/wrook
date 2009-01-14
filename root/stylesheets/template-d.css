@@ -3,7 +3,7 @@ html, div, table, tr, td, th, ul, ol, li {
 }
 
 body {
-	text-align: left;
+	text-align: center;
 	background: #000;
 	font-family: Tahoma, Sans-serif;
 	margin: 0px;
@@ -12,16 +12,16 @@ body {
 }
 
 h1 {
-	margin: 0px 0px 10px 0px;
-	padding: 0px;
+	margin: 0px;
+	padding: 0px 0px 10px 0px;
 	font-size: 1.7em;
 	color: #000;
 	clear: both;
 }
 
 h2 {
-	margin: 10px 0px 10px 0px;
-	padding: 0px;
+	padding: 10px 0px 10px 0px;
+	margin: 0px;
 	font-size: 1.4em;
 	color: #000000;
 	clear: both;
@@ -52,25 +52,42 @@ table tr td {
 
 #page {
 	color: #ffffff;
-	width: 1204px;
-	min-height: 1024px;
+	margin: 0px auto;
+	width: 980px;
+	min-height: 760px;
 	position: relative;
+	text-align: left;
 }
 
+#page .header {
+	position: relative;
+	height: 60px;
+}
 
 #pageInner {
 	position: relative;
-	width: 1200px;
+	width: 980px;
 	padding: 0px;
 }
 
 
 #wallpaper {
 	position: absolute;
-	width: 1200px;
+	width: 980px;
+	top: 60px;
+	left: 50%;
+	margin-left: -490px;
 }
 #wallpaper img {
-	width: 1200px;
+	width: 980px;
+}
+#wallpaper #shadow {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 980px;
+	background: url(/images/page-top.png) 0px 0px no-repeat;
+	height: 19px;
 }
 #wallpaper .bgFade {
 	position: relative;
@@ -85,7 +102,7 @@ table tr td {
 #footer {
 	position: relative;
 	text-align: left;
-	width: 1024px;
+	width: 980px;
 	padding: 10px auto 100px auto;
 	background: #000;
 	color: #000000;
@@ -96,13 +113,82 @@ table tr td {
 }
 
 
-#memberAvatar {
+#nav {
 	position: absolute;
-	top: 10px;
-	left: 10px;
-	height: 50px;
-	width: 50px;
-	background: #000;
+	top: 0px;
+	left: 0px;
+	height: 60px;
+	width: 800px;
+	z-index: 1500;
+}
+
+#nav #mainMenu {
+	position: absolute;
+	left: 0px;
+	bottom: 5px;
+	font-family: "courier new", courier, serif;
+}
+
+#nav #mainMenu ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#nav #mainMenu ul li {
+	list-style: none;
+	margin: 0px 10px 0px 0px;
+	padding: 0px;
+	display: inline;
+}
+
+#nav #mainMenu ul li a:visited,
+#nav #mainMenu ul li a:link {
+	color: #ffffff;
+	font-size: 1.4em;
+	text-decoration: none;
+}
+#nav #mainMenu ul li a:hover {
+	text-decoration: underline;
+}
+
+
+#nav #accessMenu {
+	position: absolute;
+	right: 0px;
+	bottom: 5px;
+	font-family: courier new, courier, serif;
+}
+
+#nav #accessMenu ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#nav #accessMenu ul li {
+	list-style: none;
+	margin: 0px 0px 0px 10px;
+	padding: 0px;
+	display: inline;
+}
+
+#nav #accessMenu ul li a:visited,
+#nav #accessMenu ul li a:link {
+	color: #ffffff;
+	font-size: 1.25em;
+	text-decoration: none;
+}
+#nav #accessMenu ul li a:hover {
+	text-decoration: underline;
+}
+
+
+#memberAvatar {
+	position: relative;
+	height: 180px;
+	width: 180px;
+	margin-left: 10px;
 }
 #memberName {
 	position: absolute;
@@ -117,6 +203,7 @@ table tr td {
 }
 
 #header {
+	height: 60px;
 }
 
 #headerContent {
@@ -129,6 +216,31 @@ table tr td {
 	background: url(/images/background50black.png);
 }
 
+#header #logo {
+	position: absolute;
+	display: block;
+	left: 730px;
+	top: 0px;
+	width: 262px;
+	height: 57px;
+	overflow: hidden;
+}
+#header #logo a:visited,
+#header #logo a:link {
+	position: absolute;
+	display: block;
+	left: 0px;
+	top: 0px;
+	width: 262px;
+	height: 57px;
+	background: url(/images/logo-smoke.png) no-repeat;
+	text-indent: -1000px;
+	z-index: 1000;
+	border: none;
+}
+#header #logo a:hover {
+	background-position: 0px -57px;	
+}
 
 #pageFooter {
 	clear: both;
@@ -140,8 +252,8 @@ table tr td {
 
 .sectionMenu {
 	position: absolute;
-	left: 68px;
-	top: 40px;
+	left: 12px;
+	bottom: 0px;
 }
 
 .sectionMenu ul {
@@ -155,8 +267,8 @@ table tr td {
 	display: inline;
 	float: left;
 	list-style: none;
-	margin: 0px;
-	padding: 0px;
+	margin: 0px 5px 0px 5px;
+	padding: 0px 0px 0px 0px;
 	text-indent: 0px;
 	font-size: 1.1em;
 }
@@ -164,19 +276,44 @@ table tr td {
 .sectionMenu ul li a:visited,
 .sectionMenu ul li a:link {
 	display: block;
-	margin: 0px 5px 0px 0px;
-	padding: 2px 8px 2px 8px;
+	position: relative;
+	left: 0px;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 5px 0px 0px;
 	color: #fff;
 	text-decoration: none;
 }
+.sectionMenu ul li a span {
+	display: block;
+	position: relative;
+	left: 10px;
+	margin: 0px 0px 0px 0px;
+	padding: 4px 8px 4px 0px;
+}
 
+.sectionMenu ul li.current,
 .sectionMenu ul li a:hover {
-	background: #000;
+	background: url(/images/content-block-body-bg.png) top left no-repeat;
+}
+.sectionMenu ul li.current a span,
+.sectionMenu ul li a:hover span {
+	background: url(/images/content-block-body-bg.png) top right no-repeat;
+	color: #000;
+}
+.sectionMenu ul li.current a span {
+	padding: 8px 16px 0px 0px;
 }
 
 .notice {
 	padding: 10px;
 	background: #f7f561;
+	position: relative;
+	margin-bottom: 5px;
+}
+
+.callsToAction {
+	padding: 10px;
+	background: #eeeeee;
 	position: relative;
 	margin-bottom: 5px;
 }
@@ -213,18 +350,101 @@ table tr td {
 }
 
 #pageContent {
-	position: relative;
-	top: 10px;
-	margin-left: 210px;
-	padding: 48px 30px 30px 40px;
-	width: 980px;
-
+	color: #000000;
+	margin-left: 30px;
+	padding:48px 30px 30px 25px;
+	position:relative;
+	top:10px;
+	width:700px;
 }
+
+
+.contentBlock {
+	position: relative;
+	width: 860px;
+}
+.contentBlock .blockHeader {
+	position: relative;
+	background: url(/images/content-block-bg.png) top left no-repeat;
+	min-height: 10px;
+}
+
+.contentBlock .blockHeader.withSectionMenu {
+	height: 70px;
+}
+
+.contentBlock .blockContent {
+	position: relative;
+	padding: 0px 0px 0px 10px;
+	background: url(/images/background50black.png);
+}
+
+.contentBlock .blockContent .blockBody {
+	position: relative;
+	width: 650px;
+}
+.contentBlock .blockContent .blockBody .top {
+	background: url(/images/content-block-body-bg.png) top left no-repeat;
+	height: 10px;
+}
+.contentBlock .blockContent .blockBody .middle {
+	position: relative;
+	background: #fff;
+	padding: 0px 20px 0px 20px;
+	border: 1px solid #fff;
+}
+.contentBlock .blockContent .blockBody .bottom {
+	background: url(/images/content-block-body-bg.png) bottom left no-repeat;
+	height: 10px;
+}
+
+.contentBlock .blockFooter {
+	background: url(/images/content-block-bg.png) bottom left no-repeat;
+	min-height: 10px;
+}
+
+.contentBlock .sidebar {
+	position: absolute;
+	width: 200px;
+	top: 0px;
+	right: 0px;
+}
+
+.contentBlock .sidebar-content {
+}
+
+.contentBlock .sidebar-footer {
+}
+
+
+.contentBlock .blockHeader h1 {
+	width: 650px;
+	margin: 0px;
+	padding: 10px 0px 5px 15px;
+	color: #FFFFFF;
+	font-size: 1.8em;
+	min-height: 24px;
+	font-weight: normal;
+}
+.contentBlock .blockHeader h1 a:visited,
+.contentBlock .blockHeader h1 a:link {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+
+
+
+
 
 .section {
 	position: relative;
 	background: url(../images/pageSection-shadow.png) no-repeat;
 	width: 712px;
+}
+
+.sectionHeader.withProfileMenu {
+	background: url(../images/pageSection-shadow.png) no-repeat;
 }
 
 .sectionHeader.withProfileMenu {
@@ -259,7 +479,7 @@ table tr td {
 	padding: 10px 20px 10px 20px;
 }
 .sectionBodyFooter {
-	padding: 5px 10px 5px 10px;
+	padding: 5px 0px 5px 10px;
 	margin: 0px 10px 0px 10px;
 	background: #e6e6e6;
 	color: #000;
@@ -377,94 +597,48 @@ table tr td {
 	margin-left: 5px;
 }
 
-#siteName {
-	font-family: courier new, courier, serif;
-	font-size: 3em;
-	font-weight: bold;
-	margin: 10px 36px 0px 0px;
-	text-align: right;
-}
-#siteName a:visited,
-#siteName a:link {
-	text-decoration: none;
-	color: #FFFFFF;
-}
-
-ul#siteMenu {
-	position: absolute;
-	list-style: none;
-	margin: 0px;
-	padding: 0px;
-	text-align: left;
-	top: 26px;
-	left: 8em;
-	font-size: 1.2em;
-}
-ul.withAvatar#siteMenu {
-	left: 10em;
-}
-ul#siteMenu li {
-	position: relative;
-	display: block;
-	float: left;
-	margin-right: 0px 0px 9px 0px;
-	font-size: 1em;
-}
-ul#siteMenu li a:visited,
-ul#siteMenu li a:link {
-	color: #ffffff;
-	position: relative;
-	display: block;
-	float: left;
-	text-decoration: none;
-}
 
 #sidebar {
-	width: 207px;
+	width: 200px;
 	position: absolute;
 	top: 0px;
-	left: 0px;
+	right: 0px;
 	overflow: visible;
 }
-#sidebar #logo a:visited,
-#sidebar #logo a:link {
-	position: absolute;
-	display: block;
-	width: 210px;
-	height: 93px;
-	background: url(/images/logoAndBackground.png) no-repeat;
-	text-indent: -1000px;
-	z-index: 1000;
-}
+
 #sidebar-content {
 	background: url(/images/logoAndBackground.png) 0px -93px no-repeat;
 	padding: 0px;
-	margin: 93px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
 }
 #sidebar-footer {
 	height: 150px;
-	background: url(/images/logoAndBackground.png) right bottom no-repeat;
+	background: url(/images/logoAndBackground.png) left bottom no-repeat;
 }
 
 .sidebarPanel {
 	color: #fff;
 	padding: 10px 0px 15px 0px;
 }
+.panelContent {
+	margin: 0px 10px 0px 10px;
+}
+
 .sidebarPanel h3 {
-	text-align: right;
+	text-align: left;
 	margin: 0px;
-	padding: 0px 30px 10px 0px;
+	padding: 0px 10px 10px 36px;
 	font-size: 1.2em;
 	text-transform: uppercase;
 }
 .sidebarPanel a:visited,
 .sidebarPanel a:link {
-	text-align: right;
+	text-align: left;
 	color: #fff;
 }
 
 .sidebarMenu ul {
-	text-align: right;
+	text-align: left;
 	list-style: none;
 	margin: 0px;
 	padding: 0xp;
@@ -478,12 +652,18 @@ ul#siteMenu li a:link {
 .sidebarMenu a:visited,
 .sidebarMenu a:link {
 	display: block;
+	position: relative;
 	color: #fff;
 	text-decoration: none;
-	padding: 4px 36px 4px 10px;
+	padding: 4px 10px 4px 36px;
 }
 .sidebarMenu a:hover {
 	background: #000;
+}
+.sidebarMenu .icon {
+	position: absolute;
+	left: 10px;
+	top: 0px;
 }
 
 
@@ -491,9 +671,9 @@ ul#siteMenu li a:link {
 
 #halfBakedLogo {
 	position: absolute;
-	top: 20px;
-	left: 1100px;
-	z-index: 1000;
+	top: 45px;
+	left: 950px;
+	z-index: 2000;
 }
 
 #halfBakedLogo a {

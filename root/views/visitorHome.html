@@ -1,4 +1,4 @@
-﻿{% extends "template-main-d.html" %}
+﻿{% extends "template-main-e.html" %}
 {% load i18n %}
 {% block pageId %}home-visitor{% endblock %}
 {% block pageTitle %}{% trans "Welcome" %}{% endblock %}
@@ -33,13 +33,5 @@
 {% endblock %}
 
 {% block sidebarBottom %}
-	<div class="sidebarPanel">
-		<div style="text-align: center; margin-top: 20px;">
-			<a href="http://nanowrimo.org"><img src="/images/NaNoNovember120x238.png"></a>
-		</div>
-{% blocktrans %}
-<p>Wrook is adding features as fast as possible to gear up for the <em>National Novel Writing Month 2008</em></p>
-<p>Join Nanowrimo 2008 by visiting: <a href="http://nanowrimo.org">http://nanowrimo.org</a></p>
-{% endblocktrans %}
-	</div>
+	{% include "panels-aboutWrook.html" %}
 {% endblock %}

@@ -18,6 +18,7 @@ del unpacked.js
 cd ..\stylesheets
 echo Packaging stylesheets...
 type main.css > unpacked.css
+type sprites.css >> unpacked.css
 type template-d.css >> unpacked.css
 type jquery.tooltip.css >> unpacked.css
 echo Compressing stylesheets...

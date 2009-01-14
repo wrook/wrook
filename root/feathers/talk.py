@@ -60,7 +60,7 @@ class Replyable(cachetree.Cachable):
 			cachetree.set(cacheKey, replies)
 		logging.debug("out: replies(%s)" % self.key())
 		return replies
-	
+
 	def recent_replies(self, maxResults=maxRecentReplies):
 		replies = Reply.all().ancestor(self).order("-Sent")
 		return replies.fetch(limit=maxResults)
@@ -76,7 +76,7 @@ class Replyable(cachetree.Cachable):
 			renderedReplies = template.render(templateSource, model)
 			cachetree.set(cacheKey, renderedReplies)
 		logging.debug("out: render_replies_list(%s)" % self.key())
-		return renderedReplies
+		return renderedReplies.decode('utf-8')
 	
 	def render_more_replies_link(self, offset):
 		templateSource = "%s/views/talk-part-showMoreReplies.html" % os.path.dirname(__file__)
@@ -94,14 +94,14 @@ class Replyable(cachetree.Cachable):
 			"replies": self.recent_replies(maxResults),
 			"renderedShowMoreRepliesLink": self.render_more_replies_link( maxResults)
 			}
-		return template.render(templateSource, model)
+		return template.render(templateSource, model).decode('utf-8')
 	
 	def render_reply_form(self, model={}):
 		if webapp.currentRequest:
 			model.update(webapp.currentRequest.Model)
 		model.update({'parent': self})
 		templateSource = "%s/views/talk-part-replyForm.html" % os.path.dirname(__file__)
-		return template.render(templateSource, model)
+		return template.render(templateSource, model).decode('utf-8')
 	
 	def unread_replies(self):
 		return self.replies.filter("isRead =", False).fetch(limit=999)
@@ -135,7 +135,7 @@ class Topicable(cachetree.Cachable):
 			model = {"topics": self.topics(maxResults)}
 			renderedTopicList = template.render(templateSource, model)
 			cachetree.set(cacheKey, renderedTopicList)
-		return renderedTopicList
+		return renderedTopicList.decode('utf-8')
 	
 	def render_topic_form(self, model={}):
 		if webapp.currentRequest:
@@ -253,35 +253,33 @@ class handler_reply_miniForm_JSON(webapp.RequestHandler):
 class handler_topic_view(webapp.RequestHandler):
 	def get(self, key):
 		onRequest(self)
-		if self.CurrentMember:
-			if key:
-				cacheKey = key
-				logging.debug("getting topic from cache: %s" % key)
-				topic = cachetree.get(cacheKey)
-				if not topic:
-					logging.debug("no topic found in cache")
-					topic = Topic.get(key)
-					if topic: cachetree.set(key, topic)
-				if topic:
-					cacheKey = "%s-page-TopicView"\
-						% topic.key()
-					cachedPage = cachetree.get_fresh_cache(
-						cacheKey,
-						["%s" % topic.parent().key(),
-							"%s-replies" % topic.key()])
-					if not cachedPage:
-						self.Model.update({
-							"topic" : topic,
-							"renderedReplies" : topic.render_replies_list(),
-							"renderedReplyForm" : topic.render_reply_form()
-						})
-						self.TemplateBaseFolder = os.path.dirname(__file__)
-						cachedPage = self.getRender('views/talk-TopicView.html')
-						cachetree.set(cacheKey, cachedPage)
-					self.response.out.write(cachedPage)
-				else: self.error(404)
-			else: self.error(500)
-		else: self.requestLogin()
+		if key:
+			cacheKey = key
+			logging.debug("getting topic from cache: %s" % key)
+			topic = cachetree.get(cacheKey)
+			if not topic:
+				logging.debug("no topic found in cache")
+				topic = Topic.get(key)
+				if topic: cachetree.set(key, topic)
+			if topic:
+				cacheKey = "%s-page-TopicView"\
+					% topic.key()
+				cachedPage = cachetree.get_fresh_cache(
+					cacheKey,
+					["%s" % topic.parent().key(),
+						"%s-replies" % topic.key()])
+				if not cachedPage:
+					self.Model.update({
+						"topic" : topic,
+						"renderedReplies" : topic.render_replies_list(),
+						"renderedReplyForm" : topic.render_reply_form()
+					})
+					self.TemplateBaseFolder = os.path.dirname(__file__)
+					cachedPage = self.getRender('views/talk-TopicView.html')
+					cachetree.set(cacheKey, cachedPage)
+				self.response.out.write(cachedPage)
+			else: self.error(404)
+		else: self.error(500)
 
 class handler_topic_new(webapp.RequestHandler):
 	def get(self, key):

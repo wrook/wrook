@@ -1,0 +1,19 @@
+Tags Module
+	.keywords() - cached collection retrieved
+	.keywords.add(String) - static method
+	.keywords.delete(String) - static method
+	.tags(type)
+
+	Keyword Class
+		.Keyword (StringProperty)
+		.tags(type) - cached collection retrieved
+		.count(numeric) - result of sharded counters
+
+	Tagable Class
+		.tags - cached collection retrieved
+		.tags.add(Keyword String)
+		.tags.delete(Keyword String)
+
+	Tag Class
+		.parent (object which was tagged)
+		.Keyword (ReferenceProperty > TagKeyword) (verbose=tags)

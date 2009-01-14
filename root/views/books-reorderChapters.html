@@ -1,4 +1,4 @@
-﻿{% extends "template-main-d.html" %}
+﻿{% extends "template-main-e.html" %}
 {% load i18n %}
 {% block title %}
 	<h1>
@@ -11,7 +11,7 @@
 	</h2>
 	<div class="chapterList">
 		<form method="post">
-			<table>
+			<table style="width: 500px;">
 			{% for chapter in chapters %}
 				<tr>
 					<td>
@@ -32,8 +32,11 @@
 			{% endfor %}
 				<tr>
 					<td colspan="3">
-						<input type="submit" name="update" value="{% trans 'Update' %}" />
-						<input type="submit" name="done" value="{% trans 'Finished' %}" />
+						<button name="update"><span>{% trans 'Save' %}</span></button>
+						<button name="done"><span>{% trans 'Save and done' %}</span></button>
+						<span class="formLinks">
+							<a href="/Books/{{ book.key }}">{% trans 'Back' %}</a>
+						</span>
 					</td>
 				</tr>
 			</table>

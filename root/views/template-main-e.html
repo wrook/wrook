@@ -1,0 +1,30 @@
+{% extends "template-main-nosidebar.html" %}
+{% load i18n %}
+{% block pageContent %}	
+	<div id="pageContent">
+		<div class="contentBlock">
+			<div class="blockHeader">
+				{% block title %}{% endblock %}
+			</div>
+			<div class="blockContent">
+				<div class="blockBody">
+					<div class="top"></div>
+					<div class="middle">
+						<div class="notices">
+							{% block notices %}{% endblock %}
+						</div>
+						{% block content %}{% endblock %}
+					</div>
+					<div class="bottom"></div>
+				</div>
+				<div class="sidebar">
+					{% block sidebarTop %}{% endblock %}
+					{% block sidebar %}{% endblock %}
+					{% block sidebarBottom %}{% endblock %}
+				</div>
+			</div>
+			<div class="blockFooter"></div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+{% endblock %}

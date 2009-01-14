@@ -1,4 +1,5 @@
-{% extends "views/template-main-d2.html" %}
+{% extends "views/template-main-e2.html" %}
+{% import 'wrook-macros.html' as wrook %}
 {% block pageId %}books{% endblock %}
 {% block pageTitle %}{% trans %}Books{% endtrans %}{% endblock %}
 {% block title %}
@@ -17,7 +18,7 @@
 			<option value="proofing">{% trans %}Books in proofing{% endtrans %}</option>
 			<option value="final">{% trans %}Finished books{% endtrans %}</option>
 		</select>
-		<input type="submit" value="{% trans %}Filter{% endtrans %}" />
+		<button><span>{% trans %}Filter{% endtrans %}</span></button>
 	</form>
 	<div class="bookList">
 		<h2>
@@ -43,6 +44,7 @@
 				<div class="book">
 					<div class="cover">
 						<a href="/Books/{{ book.key() }}">
+						{{ wrook.corners("white5px") }}
 							<img src='/Covers/Thumbnail/{{ book.getCover().key() }}' title="{{ book.Title }}" alt="{{ book.Title }}">
 							{% if book.getCover().isReusable %}
 								<span class="coverTitle" {% if book.getCover().TitleColor %}style="color: {{ book.getCover().TitleColor }}"{% endif %} >{{ book.Title }}</span> 

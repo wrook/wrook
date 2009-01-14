@@ -1,0 +1,187 @@
+Investigate: http://www.booksprouts.com/
+Investigate: http://www.shelfari.com/
+Investigate: http://www.feedbooks.com/
+Investigate: http://www.smashwords.com/
+Investigate: http://www.bookglutton.com/
+Investigate: http://www.filedby.com/
+Investigate: http://www.readingtrails.com/
+Investigate: http://mashable.com/2007/09/08/books-toolbox/
+
+Random idea:
+	- STUPID: In the list of a member's readings, dont include his own books!
+	- A members profile could integrate other bookshelfs through syndication or widgetry?
+
+MAIN USABILITY PROBLEMS
+	- The "Home" and "Profile" link are hard to spot
+	- The avatar has to be square, a lot of people dont know how to crop their photos 
+
+BIG CHUNKS TO LEARN HOW TO DO:
+	- Sharded counters
+	- Paging
+	- Tags, Tag browsing and Tag clouds
+	- Simple rendering of RSS/Atom feeds
+	- Fast loading of entity groups
+	- Switching between fresh or packed resources (js/css)
+	- Get profiling data up to firepython
+
+OPTIMIZATION ROUTINE:
+	- Convert template to Jinja
+	- Use sprites for all icons and small images
+	- Only use one or two avatar sizes and downscale them
+	- Defer loading all secondary and "content" images (Ex.: avatars, covers)
+	- Remove all scripts and CSS from inline
+	- Can the buffer be flushed with Jinja
+	- Optimize JQuery and DOM requests
+	- Run pngcrush on images
+
+POST PRODUCTION OPTIMIZATION:
+	- Concatenate javascripts
+	- Minify javascript and CSS
+
+ONE-TIME CHANGES:
+	- First load a low resolution wallpaper ad defer the full rezolution version
+	- Setup a a cached favicon.ico
+	- Enable HTTP GZip on prd server
+	- Link to jquery.js at google
+	- Setup jquery lazyload
+
+http://bkkeepr.com/
+http://www.goodreads.com/
+http://www.epubbooks.com/
+http://www.threepress.org/
+http://www.mindrot.org/projects/py-editdist/
+http://code.activestate.com/recipes/572156/
+http://hetland.org/coding/python/levenshtein.py
+
+Objective: Support downloads in the ePub format
+
+--------------------------------------------------------------------------------
+CURRENT COMMIT
+
+--------------------------------------------------------------------------------
+ONGOING
+- Remove all entities related to the labs
+- Cascading delete on storie posts and their replies
+- Run maintenance commance on prod via the new console! DAMN CANT LOGIN!!!!
+
+--------------------------------------------------------------------------------
+FOR TOPICS AND REPLIES (TALK MODULE):
+
+Todo
+x	- Memoization of topic and reply getters and renderers
+x	- Show a preview of the last few replies for each topic.
+	- Ability for an admin or topic owner to delete a topic.
+	- Ability for a reply to be deleted by the admin, topic owner or by it author
+	- Paging for topics
+	- Bring a topic back on top when there is a new reply posted
+	- Fix cyclic dependencies between stories and talk module
+	- Have a way for a topic owner or participant to be aware of new replies
+	- How a way for an author to follow new topic/replies for a book
+	- Figure out if it is good to Bring back replies under story posts
+	- Remove old commenting/feedback system
+	- Story for 'Member posts topic on book'
+	- New story for 'Member replies to topic'
+-	- Fix the "highlight on create".... which doesnt look good anymore
+?	- Fix the "example" labels in the field inputs
+?	- Get the reply count on each topic (Try using sharded counters)
+
+
+--------------------------------------------------------------------------------
+	Todo: Integrate Diff Match Patch
+	Todo: Integrate MobWrite
+	Todo: Integrate EditArea (http://www.cdolivet.net/editarea/)
+	Optimization: Add the application version number onto Javascript and CSS call to prevent harmfull caching
+	Optimization: Setup the automatic sprite compiler
+
+	Content: Credit and Attribution for Diff MAtch Patch, MobWrite, EditArea
+
+	Codekeeping practices:
+	- Small, manageable and documented commits
+	- Small reusable methods with descriptive names
+--------------------------------------------------------------------------------
+TDD & QA
+
+	Test: Site seeing scenario for each module
+	Test: Automated tests by using Selenium
+	Test: Handle what happens when the database is empty
+	Test: Complete Selenium Automated tests for the registration module
+	Test: Picknik integration
+
+
+--------------------------------------------------------------------------------
+ONGOING & LONG TERM GOALS
+	
+	Goal: Fully documented features and user stories
+	Goal: Full Docstring coverage
+	Goal: Full Doctest coverage
+	Goal: Full i18n coverage
+	Goal: Uniform design for site, wiki, blogs and etc...
+	Goal: Fully secured
+
+--------------------------------------------------------------------------------
+	Install: Install the destop version of Stanza / http://www.lexcycle.com/
+	Investigate: Stanza - http://www.lexcycle.com/
+	Learn:Subscribe: http://www.librarything.com
+	TODO: Start top lebvel taxonomy with data from the Library Thing: http://www.librarything.com/wiki/index.php/Top_Level_Categories
+	TODO: Get a demo from http://demogirl.com/custom-work/
+	TODO: Link to http://openlibrary.org/
+	Lookup: String Metrics http://www.dcs.shef.ac.uk/~sam/stringmetrics.html
+	Learn: Python Style guide : http://www.python.org/dev/peps/pep-0008/
+	Learn: Pythonistas tract http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html
+	Learn: Maybe use fancier test module http://groups.google.com/group/google-appengine/browse_thread/thread/fa81f6abd95aa8b9/efed988b302aafb4?lnk=gst&q=duncan+doctests
+	Learn: iPython for a better shell http://aralbalkan.com/1380
+	Learn: NoseGAE http://pypi.python.org/pypi/NoseGAE/
+	Learn: minimock
+	Learn: pydoctor http://codespeak.net/~mwh/pydoctor/
+	Learn: ohloh https://www.ohloh.net/
+
+	Setup: Move blogs and wiki to new domain names
+	Setup: pages for 404, 500, etc
+	Setup: Configure dev server to send emails
+	Setup: Add themes and book covers on prod server
+	Setup: Set default themes and covers on prod server
+	Setup: Integrate Git and Lighthouse
+
+	Strategy: Expose all documentation, specification and project management to the public
+	Strategy: Adapt the communication strategy around the "participation" of others in the writting process
+	Strategy: Aquire author members who have successfully finished the Nanowrimo
+	Strategy: Find a better tagline than "Social Platform for Free Literature"
+
+	Security: Secure the updating of cover images
+
+
+
+--------------------------------------------------------------------------------
+BLOGS POST IDEAS
+	Blog/Main: The mixup with both Wrook projects
+	Blog/Dev+Main: Why chose Google App Engine
+	Blog/Dev: Some advantages of being open source (Save a few dollars)
+
+
+--------------------------------------------------------------------------------
+MAINTENANCE AND REFACTORING
+
+	TODO: Build a decorator for the following pattern:
+		if self.CurrentMember:
+		...
+		else: self.requestLogin()
+
+	TODO: Remove Cache flushing from the sites features, it already exists in the admin console. 
+
+--------------------------------------------------------------------------------
+STORIES, FEATURES AND BUGS!!!
+
+	TODO: Implement the miniMenu in the invites module
+	Add a remember me option in the signup
+
+Story Feed
+x	Story: Member see's that he has no stories published in his profile.
+	story: scrolls or flip pages to browse older stories
+	Story: Member archives a story
+	Story: Member archives all stories
+	Story: Member browses through archived stories
+	Story: Member see's only the non-archived stories by default
+	Feed story: Member has joined (Sent to self, admins, inviter)
+	Feed story: Member reseted his password (Sent to self, to admins)
+
+

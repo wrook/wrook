@@ -1,0 +1,26 @@
+{% macro tabs_book(book, selected) -%}
+	<div class="sectionMenu">
+		<ul>
+			<li {% if selected=="overview" %}class="current"{% endif %}>
+				<a id="menu-bookOverview" href="/Books/{{ book.key() }}">
+					<span>{% trans %}Overview{% endtrans %}</span>
+				</a>
+			</li>
+			<li {% if selected=="contents" %}class="current"{% endif %}>
+				<a id="menu-bookChapters" href="/Books/{{ book.key() }}/Contents">
+					<span>{% trans %}Contents{% endtrans %}</span>
+				</a>
+			</li>
+			<li {% if selected=="readers" %}class="current"{% endif %}>
+				<a id="menu-bookReaders" href="/Books/{{ book.key() }}/Readers">
+					<span>{% trans %}Readers{% endtrans %}</span>
+				</a>
+			</li>
+			<li {% if selected=="talk" %}class="current"{% endif %}>
+				<a id="menu-bookTalk" href="/Books/{{ book.key() }}/Talk">
+					<span>{% trans %}Talk{% endtrans %}</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+{%- endmacro %}

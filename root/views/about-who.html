@@ -1,4 +1,4 @@
-﻿{% extends "template-main-d.html" %}
+﻿{% extends "template-main-e.html" %}
 {% load i18n %}
 {% block pageId %}about-who{% endblock %}
 {% block pageTitle %}{% trans "Who is behind Wrook?" %}{% endblock %}
@@ -11,7 +11,7 @@
 {% block content %}
 
 {% blocktrans %}
-<div style="float:right; margin: 0px 0px 20px 20px"><img src="/images/mathieu.jpg" alt="Mathieu Sylvain" /></div>
+<div style="float:right; margin: 0px 0px 20px 20px"><img width="180" height="180" src="/images/mathieu.jpg" alt="Mathieu Sylvain" /></div>
 <p>
 My name is Mathieu Sylvain, and I'm a web developper in his thirties with a marvelous girlfriend, a two year-old girl and a day job.
 </p>
@@ -40,4 +40,5 @@ My LinkedIn profile: <a href="http://www.linkedin.com/in/masyl">http://www.linke
 
 {% block sidebar %}
 	{% include "panels-aboutOpenSource.html" %}
+	{% include "panels-aboutWrook.html" %}
 {% endblock %}

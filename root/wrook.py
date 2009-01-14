@@ -8,7 +8,6 @@ import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from django.conf import settings
 
-from firepython.middleware import FirePythonWSGI
 
 #Feathers imports
 from feathers import webapp
@@ -26,9 +25,6 @@ import wrookStories
 import admin
 import books
 import members
-
-#TODO: Figure out what this means and if its necessary
-settings._target = None #i18n fix
 
 def integrate_modules(URLMappings):
 	#TODO:Figure out a better way of integrating modules
@@ -73,6 +69,7 @@ def firepython_main():
 	The basic main function to start the application
 	on the production servers
 	'''
+	from firepython.middleware import FirePythonWSGI
 	webapp.run(FirePythonWSGI(application))
 
 def profile_log_main():
@@ -128,11 +125,11 @@ application = webapp.Application(
 	integrate_modules([]),
 	debug=True) # Instantiate the main application
 
-#main = real_main
+main = real_main
 #main = firepython_main
 #main = profile_html_main
 #main = profile_log_main
-main = profile_firepython_main
+#main = profile_firepython_main
 
 if __name__ == '__main__':
 	main()

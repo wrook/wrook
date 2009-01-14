@@ -1,0 +1,31 @@
+
+Most online writers also maintain a blog,
+	and they use this blog to promote their writing,
+	thus offering the possibility of integrating their blog with
+	wrook would give then the opportunity to build on their existing efforts.
+	Wrook could bring them traffic and vice versa.
+	
+	- RSS Feed for a profile or a book.
+	- Scriptlets for their blogs.
+	- Blog using wrook? Or push a preview of their blog to wrook.
+	- Ability to push their blog posts to their wrook profile/books.
+	- Ability to read a book outside of wrook directly on their site,
+		behaving similar to an embeded reader.
+
+Active authors post their books to multiple online services and try to
+	provide cross-linking between each relevant services,
+	thus Wrook should enable them to add any number of links on the
+	welcome page of their books. Popular services could have a more formal
+	type of link and shown with a reconizable icons. Those formal links could
+	then be presented as options when possible. (ex.: Buy online from:...)
+
+Member use many different online services, many of which are complementary to
+	wrook, thus it could be usefull for them (readers and authors) to be able
+	to provide a list of where else they have a profile.
+
+- geo-locate members and show a map of Wrookers!
+
+- Review the Digital Youth Study : http://digitalyouth.ischool.berkeley.edu/
+
+Online bookshelves and book clubs:
+- http://www.librarything.com/

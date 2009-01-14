@@ -1,4 +1,4 @@
-﻿{% extends "template-main-d.html" %}
+﻿{% extends "template-main-e.html" %}
 {% load i18n %}
 {% block pageId %}login{% endblock %}
 {% block pageTitle %}{% trans "Login" %}{% endblock %}
@@ -13,4 +13,7 @@
 			{{ error }}
 		</div>
 	{% endif %}
+{% endblock %}
+{% block sidebar %}
+	{% include "panels-aboutWrook.html" %}
 {% endblock %}

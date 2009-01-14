@@ -1,4 +1,4 @@
-{% extends "views/template-main-d2.html" %}
+{% extends "views/template-main-e2.html" %}
 {% import 'wrook-macros.html' as wrook %}
 {% block pageId %}members{% endblock %}
 {% block pageTitle %}
@@ -20,20 +20,28 @@
 	{% else %}
 		<h2>{% trans %}A few new members:{% endtrans %}</h2>
 	{% endif %}
-	<div class="memberList">
-		<ul>
-			{% for member in members %}
-				<li>
-					<div class="avatar">
-						{{ wrook.corners("white5px") }}
-						<a href="/Members/{{ member.key() }}"><img width="120" height="120" alt="{{ member.fullname()|e }}" src="{{ member.gravatar120() }}" /></a>
-						<h3>
-							<a href="/Members/{{ member.key() }}">{{ member.Firstname|e }}</a>
-						</h3>
-					</div>
+
+	{{ wrook.members_list(members) }}
+
+{% endblock %}
+{% block sidebar %}
+	<div class="sidebarPanel">
+		<div class="panelContent">
+			<p>
+				{% trans %}
+				Wrook is a new and small community, you can help
+				us by inviting a few of your friends!
+				{% endtrans %}
+			</p>
+		</div>
+		<div class="sidebarMenu">
+			<ul>
+				<li><a href="/Invites">
+					<div class="icon spriteIcons icon-invite"></div>
+					{% trans %}Invite friends{% endtrans %}</a>
+					
 				</li>
-			{% endfor %}
-		</ul>
+			</ul>
+		</div>
 	</div>
-	<div class="clearfix"></div>
 {% endblock %}

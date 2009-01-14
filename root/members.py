@@ -1,4 +1,4 @@
-﻿#!python
+#!python
 # coding=UTF-8
 
 import os
@@ -18,7 +18,6 @@ def URLMappings():
 		(r'/Members/(.*)/Readings', MembersReadingsList),
 		(r'/Members/(.*)/Profile', MembersProfile),
 		(r'/Members/(.*)', MembersFeed),
-		(r'/Readers/Book/(.*)', BookReaders),
 		( '/Customize', Customize),
 		( '/Suggestions', Suggestions)]
 
@@ -166,13 +165,5 @@ class MembersReadingsList(webapp.RequestHandler):
 					})
 				self.render2('views/members-bookmarks-list.html')
 			else: self.error(404)
-		else: self.requestLogin()
-
-class BookReaders(webapp.RequestHandler):
-	def get(self, key):
-		onRequest(self)
-		if self.CurrentMember:
-			self.Model.update({'book': Book.get(key)})
-			self.render('views/readers.html')
 		else: self.requestLogin()
 

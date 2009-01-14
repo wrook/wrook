@@ -96,3 +96,42 @@ $(document).ready(function(){
 	<span class="corner-{{ type }}-c180"></span>
 	<span class="corner-{{ type }}-c270"></span>
 {%- endmacro %}
+
+{% macro members_list(members) -%}
+	<div class="memberList">
+		<ul>
+			{% for member in members %}
+				<li>
+					<div class="avatar">
+						{{ corners("white5px") }}
+						<a href="/Members/{{ member.key() }}"><img width="120" height="120" alt="{{ member.fullname()|e }}" src="{{ member.gravatar120() }}" /></a>
+						<h3>
+							<a href="/Members/{{ member.key() }}">{{ member.Firstname|e }}</a>
+						</h3>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="clearfix"></div>
+{%- endmacro %}
+
+{% macro notice(title, body) -%}
+	<div class="notice">
+		{{ corners("white5px") }}
+		<strong>{{ title }}</strong>
+		{{ body }}
+	</div>
+{%- endmacro %}
+
+{% macro calls_to_action() -%}
+	<div class="callsToAction">
+		{{ corners("white5px") }}
+		<div class="linkList">
+			<ul>
+				{{ caller() }}
+			</ul>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+{%- endmacro %}

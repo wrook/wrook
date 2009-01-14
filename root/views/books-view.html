@@ -1,123 +1,155 @@
-﻿{% extends "template-main.html" %}
-{% load i18n %}
+{% extends "views/template-book.html" %}
+{% import 'wrook-macros.html' as wrook %}
+{% set section = "book" %}
+{% set subSection = "overview" %}
+{% block pageId %}books-overview{% endblock %}
+{% block pageTitle %}
+	{{ book.Title }}
+{% endblock %}
+{% block content %}
+	{% if book.Stage!="final" %}
+		{{ wrook.notice(title=_("Notice"), body=book.get_verbose_stage()) }}
+	{% endif %}
 
-{% block pageContent %}
-	<div id="pageContent">
-		<div class="section">
-			<div class="sectionHeader">
-				<h1>
-					{% trans "Book details" %}
-				</h1>
-			</div>
-			<div class="sectionBody">
+	<h3>
+		{% trans %}About this book{% endtrans %}
+	</h3>
+	<ul>
+		<li>
+			{% trans words=book.wordCount() %}
+				{{ words }} words
+			{% endtrans %}
+		</li>
+	</ul>
 
 
-				{% ifnotequal book.Stage "final" %}
-					<div class="notice">
-						<strong>{% trans "Notice:" %}</strong>
-						{% ifequal book.Stage "planning" %}{% trans "This book is only in the planning stage." %}{% endifequal %}
-						{% ifequal book.Stage "drafting" %}{% trans "This book is only a draft." %}{% endifequal %}
-						{% ifequal book.Stage "writing" %}{% trans "This book is in the process of being writen." %}{% endifequal %}
-						{% ifequal book.Stage "proofing" %}{% trans "This book is still in proofing." %}{% endifequal %}
-					</div>
-				{% endifnotequal %}
-			
-
-
-				<div class="sectionBodyContent">
-					{% include "section-bookInfo.html" %}
-					<div class="clearfix"></div>
-				</div>
-			</div>
-			<div class="sectionBodyFooter">
-				<div class="linkList">
-					<ul>
-						<li class="mainLink"><a href="/ViewChapter/{{ firstChapter.key }}">
-							<span class="bullet spriteIcons icon-main-link"></span><span>{% trans "Start reading" %}</span></a>
-						</li>
-						<li><span class="separator">|</span></li>
-						<li><a href="/Member/{{ book.Author.key }}"><span>{% trans "Author's profile" %}</span></a></li>
-					</ul>
-				</div>
-				<div class="clearfix"></div>
-			</div>
+	{% if book.Synopsis %}
+		<div class="synopsis">
+			"&#160;{{ book.Synopsis|escape }}&#160;"
 		</div>
-		<div class="sectionFooter"></div>
-		<div class="clearfix"></div>
+		<script>
+			$(document).ready(function(){
+				$('.synopsis').expander({
+					slicePoint: 200, 
+					widow: 4,
+					expandEffect: 'fadeIn',
+					expandText: '[{% trans %}read more...{% endtrans %}]',
+					userCollapseText: '[{% trans %}close{% endtrans %}]',
+					userCollapsePrefix: ' ',
+					userCollapse: true
+				});
+			});
+		</script>
+	{% endif %}
 	
+	<h3>
+		{% trans %}License and attribution{% endtrans %}:
+	</h3>
+	{% if book.License %}
+		<div>
+			<a href="{{ book.License.URL }}">{{ book.License.Title }}</a>
+		</div>
+		{% if book.AttribDetailed %}
+			<div class="detailedAttribution">
+				{{ book.markdownAttribDetailed() }}
+			</div>
+			<script>
+				$(document).ready(function(){
+					$('.detailedAttribution').expander({
+						slicePoint: 200, 
+						widow: 4,
+						expandEffect: 'fadeIn',
+						expandText: '[{% trans %}read more...{% endtrans %}]',
+						userCollapseText: '[{% trans %}close{% endtrans %}]',
+						userCollapsePrefix: ' ',
+						userCollapse: true
+					});
+				});
+			</script>
+		{% endif %}
+	{% else %}
+		<p>
+			{% trans %}No license or copyright has been specified.{% endtrans %}</a>
+		</p>
+	{% endif %}
+		
 	
-		<div class="section">
-			<div class="sectionHeader">
-				<h1>{% trans "Discussions" %}</h1>
+	{% if book.Author.About %}
+		<h3>
+			{% trans %}Contributed by{% endtrans %}
+		</h3>
+		<div style="position: relative">
+			<div class="avatar" style="float: left; margin: 0px 5px 5px 0px;">
+				<a href="/Member/{{ book.Author.key() }}"><img src="{{ book.Author.gravatar50() }}" width="50" height="50" /></a>
 			</div>
-			<div class="sectionBody">
-				<div class="sectionBodyContent">
-					{% if currentUser %}
-						<h2>{% trans "Start a topic or leave feedback" %}</h2>
-					{% endif %}
-					<div style="width: 600px;">
-						{{ book.render_topic_form }}
-					</div>
-					<h2>{% trans "Recent topics" %}</h2>
-					<div>
-						{{ book.render_recent_topics_list }}
-					</div>
-
-
-				</div>
-			</div>
-			<div class="sectionBodyFooter">
-				<div class="linkList">
-					<ul>
-						<li class="mainLink">
-							<a href="/Books/{{ book.key }}/Talk">
-								<span class="bullet spriteIcons icon-main-link"></span>
-								<span>{% trans "Browse all topics" %}</span>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
+			<p>
+				<a href="/Member/{{ book.Author.key() }}">{{ book.Author.fullname() }}</a>
+				<br />
+				{{ book.Author.About }}
+			</p>
 		</div>
-		<div class="sectionFooter"></div>
-		<div class="clearfix"></div>
-
-		<div id="secondarySidebar">
-			{% include "books-view-sidebar.html" %}
+	{% endif %}
+	<div style="clear:left"></div>
+	
+	{% if book.NoteFromAuthor %}
+		<h3>
+			{% trans %}A note from the contributor{% endtrans %}
+		</h3>
+		<div class="NoteFromAuthor">
+			{{ book.NoteFromAuthor|escape }}
 		</div>
-
-	</div>	
+	{% endif %}
+	<br/>
+	{% call wrook.calls_to_action() %}
+		<li class="mainLink"><a href="/ViewChapter/{{ firstChapter.key() }}">
+			<span class="bullet spriteIcons icon-main-link"></span><span>{% trans %}Start reading{% endtrans %}</span></a>
+		</li>
+		<li><span class="separator">|</span></li>
+		<li><a href="/Member/{{ book.Author.key() }}"><span>{% trans %}Author's profile{% endtrans %}</span></a></li>
+	{% endcall %}
 
 {% endblock %}
 
+
 {% block sidebar %}
 		<div class="sidebarPanel">
-			<h3>{% trans "Community" %}</h3>
+			<div class="panelContent">
+				{% if book.getCover() %}
+					<div class="cover width180">
+						<img src='/Covers/Thumbnail/{{ book.getCover().key() }}?width=180'>
+						{% if book.getCover().isReusable %}
+							<span class="coverTitle" {% if book.getCover.TitleColor %}style="color: {{ book.getCover().TitleColor }}"{% endif %} >{{ book.Title }}</span> 
+						{% endif %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+		<div class="sidebarPanel">
+			<h3>{% trans %}Community{% endtrans %}</h3>
 			<div class="sidebarMenu">
 				<ul>
-					<li><a href="/Invites/">{% trans "Invite a friend" %}</a></li>
+					<li><a href="/Invites/">{% trans %}Invite a friend{% endtrans %}</a></li>
 				</ul>
 			</div>
 		</div>
 		{% if userCanEdit %}
 			<div class="sidebarPanel">
 				<h3>
-					{% trans "Writing and Editing" %}
+					{% trans %}Writing and Editing{% endtrans %}
 				</h3>
 				<div class="sidebarMenu">
 					<ul>
 						{% if userIsAuthor %}
-							{% if book.lastRevisedChapter %}
-								<li><a href="/Typewriter/{{ book.lastRevisedChapter.key }}">{% trans "Resume writing" %}</a></li>
+							{% if book.lastRevisedChapter() %}
+								<li><a href="/Typewriter/{{ book.lastRevisedChapter.key() }}">{% trans %}Resume writing{% endtrans %}</a></li>
 							{% endif %}
-							<li><a href="/NewChapter/{{ book.key }}">{% trans "Start a new chapter" %}</a></li>
+							<li><a href="/NewChapter/{{ book.key() }}">{% trans %}Start a new chapter{% endtrans %}</a></li>
 						{% endif %}
 						{% if userCanEdit %}
-							<li><a href="/Books/Edit/{{ book.key }}">{% trans "Edit book options" %}</a></li>
-							<li><a href="/Books/ReorderChapters/{{ book.key }}">{% trans "Reorder chapters" %}</a></li>
-							<li><a href="/Books/Edit/License/{{ book.key }}">{% trans "Edit license options" %}</a></li>
-							<li><a href="/Covers/Select?usage={{ book.Title }}&redirect=/Books/SetCover/{{ book.key }}">{% trans "Change book cover" %}</a></li>
-							<li><a href="/Books/Delete/{{ book.key }}">{% trans "Delete whole book" %}</a></li>
+							<li><a href="/Books/Edit/{{ book.key() }}">{% trans %}Edit book options{% endtrans %}</a></li>
+							<li><a href="/Books/Edit/License/{{ book.key() }}">{% trans %}Edit license options{% endtrans %}</a></li>
+							<li><a href="/Covers/Select?usage={{ book.Title }}&redirect=/Books/SetCover/{{ book.key() }}">{% trans %}Change book cover{% endtrans %}</a></li>
+							<li><a href="/Books/Delete/{{ book.key() }}">{% trans %}Delete whole book{% endtrans %}</a></li>
 						{% endif %}
 					</ul>
 				</div>

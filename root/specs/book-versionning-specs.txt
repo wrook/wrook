@@ -1,0 +1,50 @@
+Line operations:
+- Add line
+- Remove line
+- Edit line
+
+Chapter operations:
+- Split chapter
+- Merge chapter
+
+Line types:
+- Text
+- Heading (chapter/section name/title)
+- Break (Chapter, Section, Scene)
+-
+
+Other:
+- Comments (((Interesting comment goes here...)))
+- Footnotes [1]
+
+
+ENTITIES
+
+Chapter()
+
+Line()
+
+Change()
+	Chapter
+	By
+	Date
+	Edit list
+	LevensteinDistance (in number of changes)
+	Size (in bytes)
+	Status
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

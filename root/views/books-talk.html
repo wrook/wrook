@@ -1,39 +1,27 @@
-{% extends "template-twoSidebars.html" %}
-{% load i18n %}
+{% extends "views/template-book.html" %}
+{% import 'wrook-macros.html' as wrook %}
+{% set section = "book" %}
+{% set subSection = "talk" %}
+{% block pageId %}book-talk{% endblock %}
 {% block title %}
 	<h1>
-		{{ book.Title }} <span style="font-weight: normal; font-size: 0.7em;"> {% trans "by " %} {{ book.authorName }}</span>
+		{{ book.Title }} <span style="font-weight: normal; font-size: 0.7em;"> {% trans authorName=book.authorName() %}by {{ authorName }}{% endtrans %}</span>
 	</h1>
 {% endblock %}
 {% block content %}
-	<h2>{% trans "Post a new topic" %}</h2>
+	<h2>
+		{% trans %}Recent topics{% endtrans %}
+	</h2>
 	<div>
-		{{ book.render_topic_form }}
+		{{ book.render_topics_list() }}
 	</div>
-	<h2>{% trans "Recent topics" %}</h2>
+	<h2>
+		{% trans %}Post a new topic{% endtrans %}
+	</h2>
 	<div>
-		{{ book.render_topics_list }}
+		{{ book.render_topic_form() }}
 	</div>
 {% endblock content %}
 
-{% block secondarySidebar %}
-		{% if book.getCover %}
-			<div class="cover flat width180">
-				<img src='/Covers/Thumbnail/{{ book.getCover.key }}?width=180'>
-				{% if book.getCover.isReusable %}
-					<span class="coverTitle" {% if book.getCover.TitleColor %}style="color: {{ book.getCover.TitleColor }}"{% endif %} >{{ book.Title }}</span> 
-				{% endif %}
-			</div>
-		{% endif %}
-{% endblock %}
-
 {% block sidebar %}
-		<div class="sidebarPanel">
-			<h3>{% trans "Options" %}</h3>
-			<div class="sidebarMenu">
-				<ul>
-					<li><a href="/Books/{{ book.key }}">{% trans "Back to the book" %}</a></li>
-				</ul>
-			</div>
-		</div>
-{% endblock sidebar %}
+{% endblock %}

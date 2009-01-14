@@ -1,0 +1,26 @@
+OPTIMIZATION OPPORTUNITIES
+
+- Implement aggressive caching with a "entity instance touched" cache invalidation pattern
+  Investigate the OnChange handler from Aaron Raddon (http://aaronspotlatch.appspot.com/entry/blog-app-engine-caching-data)
+- Optimize code with memcache
+- Optimize the model
+- Test the memoize decorator from "http://hackmap.blogspot.com/2008/10/appengine-memcache-memoize-decorator.html"
+
+
+CODE OPTIMIZATION
+
+From wrook.py:
+	Merging of URLMappings # USE THE REGISTER PATTERN AND CACHE THE COMPOUNDED RESULTS
+
+	In the template: (everything by language)
+	- Cache the signed-in header
+	- Cache the anonymous header
+	- Cache the visited member header
+	- Cache the theme CSS
+	- Review how themes are loaded
+
+MODEL OPTIMIZATION
+- Use entity groups for hierarchical data structuress
+- Stop using .count(), user sharded counters if needed
+- Put Topic and Reply in entity groups
+

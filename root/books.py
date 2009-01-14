@@ -42,7 +42,9 @@ def URLMappings():
 		(r'/Books/Delete/(.*)', DeleteBook),
 		(r'/Books/Chapters/(.*)/Rev/(.*)', Revisions_View),
 		(r'/Books/Chapters/(.*)/Rev', Revisions_List),
+		(r'/Books/(.*)/Readers', handler_book_readers),
 		(r'/Books/(.*)/Talk', Books_Talk),
+		(r'/Books/(.*)/Contents', ViewBook_Contents),
 		(r'/Books/(.*)', ViewBook),
 		( '/Covers/', CoverList),
 		(r'/Covers/Thumbnail/(.*)', CoverThumbnail),
@@ -114,7 +116,21 @@ class Book(talk.Topicable):
 	
 	def permalink(self):
 		return "/Books/%s/" % self.key()
-	
+
+	def getReaders(self):
+		readers = []
+		for bookmark in self.Bookmarks:
+			readers.extend([bookmark.Author])
+		return readers
+
+	def get_verbose_stage(self):
+		if self.Stage=="planning": verboseStage = _("This book is only in the planning stage.")
+		elif self.Stage=="drafting": verboseStage = _("This book is only a draft.")
+		elif self.Stage=="writing": verboseStage = _("This book is in the process of being writen.")
+		elif self.Stage=="proofing": verboseStage =  _("This book is still in proofing.")
+		else: verboseStage = ""
+		return verboseStage
+
 	def clearCache(self):
 		memcache.delete("wordcount-%s" % self.key) # Removes the wordCount cache
 	
@@ -321,8 +337,6 @@ class ChapterFormForCreate(djangoforms.ModelForm):
 class ViewBook(webapp.RequestHandler):
 	def get(self, key):
 		onRequest(self)
-		logging.info("fiou!!")
-		logging.debug("shiatz!")
 		#Before loading a book from the key, lets try to find it from the Slug
 		book = Book.all().filter("Slug =", key).fetch(limit=1)
 		if len(book) > 0: book = book[0]
@@ -350,8 +364,42 @@ class ViewBook(webapp.RequestHandler):
 				"userIsAuthor": userIsAuthor,
 				"userCanEdit": userCanEdit
 				})
-			self.render('views/books-view.html')
+			self.render2('views/books-view.html')
 		else: self.error(404)
+
+class ViewBook_Contents(webapp.RequestHandler):
+	def get(self, key):
+		onRequest(self)
+		#Before loading a book from the key, lets try to find it from the Slug
+		book = Book.all().filter("Slug =", key).fetch(limit=1)
+		if len(book) > 0: book = book[0]
+		else: book = Book.get(key)
+		if book:
+			#TODO: This should be methodized as ordered_chapters
+			chapters = Chapter.all().filter("Book =", book).order("Number").fetch(limit=999)
+			#TODO: This should be methodized as chapter_count
+			chapterCount = len(chapters)
+			if book.Author:
+				self.setVisitedMember(book.Author)
+				if self.CurrentMember:
+					userIsAuthor = (self.CurrentMember.key() == book.Author.key())
+				else: userIsAuthor = False
+			else: userIsAuthor = False
+			if self.CurrentMember:
+				if userIsAuthor or self.CurrentMember.isAdmin: userCanEdit = True
+			else: userCanEdit = False
+			
+			self.Model.update({
+				"book": book,
+				"chapters": chapters,
+				"firstChapter": book.firstChapter(),
+				"chapterCount": chapterCount,
+				"userIsAuthor": userIsAuthor,
+				"userCanEdit": userCanEdit
+				})
+			self.render2('views/books-viewContents.html')
+		else: self.error(404)
+
 
 class DeleteChapter(webapp.RequestHandler):
 	def get(self, key):
@@ -519,17 +567,25 @@ class Books_Edit(webapp.RequestHandler):
 class Books_Talk(webapp.RequestHandler):
 	def get(self, key):
 		onRequest(self)
-		if self.CurrentMember:
-			book = Book.get(key)
-			if book:
-				self.Model.update({'book': book})
-				self.render('views/books-talk.html')
-			else: self.error(404)
-		else: self.requestLogin()
+		book = Book.get(key)
+		if book:
+			self.Model.update({'book': book})
+			self.render2('views/books-talk.html')
+		else: self.error(404)
+
+class handler_book_readers(webapp.RequestHandler):
+	def get(self, key):
+		onRequest(self)
+		book = Book.get(key)
+		if book:
+			self.Model.update({'book': Book.get(key)})
+			self.render2('views/book-readers.html')
+		else: self.error(404)
+
 
 class Book_ReorderChapters(webapp.RequestHandler):
-	from feathers import utils
 	def get(self, key):
+		from feathers import utils
 		chapterCount = utils.buildCountingList(50)
 		onRequest(self)
 		if self.CurrentMember:
@@ -863,9 +919,9 @@ class CoverList(webapp.RequestHandler):
 		onRequest(self)
 		if self.CurrentMember:
 			self.Model.update({
-				'yourPrivateCovers': Cover.all().filter("CreatedBy =", self.CurrentMember).filter("isSharedWithEveryone =", False),
-				'yourSharedCovers': Cover.all().filter("CreatedBy =", self.CurrentMember).filter("isSharedWithEveryone =", True),
-				'allSharedCovers': Cover.all().filter("isSharedWithEveryone =", True)
+				'yourPrivateCovers': Cover.all().filter("CreatedBy =", self.CurrentMember).filter("isSharedWithEveryone =", False).fetch(limit=24),
+				'yourSharedCovers': Cover.all().filter("CreatedBy =", self.CurrentMember).filter("isSharedWithEveryone =", True).fetch(limit=24),
+				'allSharedCovers': Cover.all().filter("isSharedWithEveryone =", True).fetch(limit=24)
 				})
 			self.render('views/covers-list.html')
 		else: self.requestLogin()

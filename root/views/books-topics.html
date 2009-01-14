@@ -1,0 +1,116 @@
+{% extends "views/template-main-e2.html" %}
+{% import 'wrook-macros.html' as wrook %}
+{% block pageContent %}
+	<div id="pageContent">
+		<div class="section">
+			<div class="sectionHeader">
+				<h1>
+					{% trans %}Book details{% endtrans %}
+				</h1>
+			</div>
+			<div class="sectionBody">
+				{% if book.Stage!="final" %}
+					<div class="notice">
+						<strong>{% trans %}Notice{% endtrans %}</strong>
+						{% if book.Stage=="planning" %}{% trans %}This book is only in the planning stage.{% endtrans %}{% endif %}
+						{% if book.Stage=="drafting" %}{% trans %}This book is only a draft.{% endtrans %}{% endif %}
+						{% if book.Stage=="writing" %}{% trans %}This book is in the process of being writen.{% endtrans %}{% endif %}
+						{% if book.Stage=="proofing" %}{% trans %}This book is still in proofing.{% endtrans %}{% endif %}
+					</div>
+				{% endif %}
+
+				<div class="sectionBodyContent">
+					{% include "section-bookInfo.html" %}
+					{% include "books-view-sidebar.html" %}
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="sectionBodyFooter">
+				<div class="linkList">
+					<ul>
+						<li class="mainLink"><a href="/ViewChapter/{{ firstChapter.key() }}">
+							<span class="bullet spriteIcons icon-main-link"></span><span>{% trans %}Start reading{% endtrans %}</span></a>
+						</li>
+						<li><span class="separator">|</span></li>
+						<li><a href="/Member/{{ book.Author.key() }}"><span>{% trans %}Author's profile{% endtrans %}</span></a></li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="sectionFooter"></div>
+		<div class="clearfix"></div>
+	
+	
+		<div class="section">
+			<div class="sectionHeader">
+				<h1>{% trans %}Discussions{% endtrans %}</h1>
+			</div>
+			<div class="sectionBody">
+				<div class="sectionBodyContent">
+					{% if currentUser %}
+						<h2>{% trans %}Start a topic or leave feedback{% endtrans %}</h2>
+					{% endif %}
+					<div style="width: 600px;">
+						{{ book.render_topic_form() }}
+					</div>
+					<h2>{% trans %}Recent topics{% endtrans %}</h2>
+					<div>
+						{{ book.render_recent_topics_list() }}
+					</div>
+				</div>
+			</div>
+			<div class="sectionBodyFooter">
+				<div class="linkList">
+					<ul>
+						<li class="mainLink">
+							<a href="/Books/{{ book.key() }}/Talk">
+								<span class="bullet spriteIcons icon-main-link"></span>
+								<span>{% trans %}Browse all topics{% endtrans %}</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="sectionFooter"></div>
+		<div class="clearfix"></div>
+
+	</div>	
+
+{% endblock %}
+
+{% block sidebar %}
+		<div class="sidebarPanel">
+			<h3>{% trans %}Community{% endtrans %}</h3>
+			<div class="sidebarMenu">
+				<ul>
+					<li><a href="/Invites/">{% trans %}Invite a friend{% endtrans %}</a></li>
+				</ul>
+			</div>
+		</div>
+		{% if userCanEdit %}
+			<div class="sidebarPanel">
+				<h3>
+					{% trans %}Writing and Editing{% endtrans %}
+				</h3>
+				<div class="sidebarMenu">
+					<ul>
+						{% if userIsAuthor %}
+							{% if book.lastRevisedChapter() %}
+								<li><a href="/Typewriter/{{ book.lastRevisedChapter.key() }}">{% trans %}Resume writing{% endtrans %}</a></li>
+							{% endif %}
+							<li><a href="/NewChapter/{{ book.key() }}">{% trans %}Start a new chapter{% endtrans %}</a></li>
+						{% endif %}
+						{% if userCanEdit %}
+							<li><a href="/Books/Edit/{{ book.key() }}">{% trans %}Edit book options{% endtrans %}</a></li>
+							<li><a href="/Books/ReorderChapters/{{ book.key() }}">{% trans %}Reorder chapters{% endtrans %}</a></li>
+							<li><a href="/Books/Edit/License/{{ book.key() }}">{% trans %}Edit license options{% endtrans %}</a></li>
+							<li><a href="/Covers/Select?usage={{ book.Title }}&redirect=/Books/SetCover/{{ book.key() }}">{% trans %}Change book cover{% endtrans %}</a></li>
+							<li><a href="/Books/Delete/{{ book.key() }}">{% trans %}Delete whole book{% endtrans %}</a></li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		{% endif %}
+{% endblock sidebar %}

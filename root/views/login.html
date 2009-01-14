@@ -1,4 +1,4 @@
-﻿{% extends "template-main-d.html" %}
+﻿{% extends "template-main-e.html" %}
 {% load i18n %}
 {% block pageId %}login{% endblock %}
 {% block pageTitle %}{% trans "Login" %}{% endblock %}
@@ -31,7 +31,7 @@
 			</tr>
 			<tr>
 				<td>
-					<button name="submit" value="login"><span>{% trans 'Login' %}</span></button>
+					<button name="submit" id="login" value="login"><span>{% trans 'Login' %}</span></button>
 					<span style="margin-left: 20px;"><a href="/ResetPassword/">Forgot your password?</a></span>
 				</td>
 			</tr>
@@ -41,4 +41,7 @@
 		{% trans 'If you have any difficulties logging in, you can contact the janitor at <a href="mailto:admin@wrook.org">admin@wrook.org</a>.' %}
 	</p>
 	
+{% endblock %}
+{% block sidebar %}
+	{% include "panels-aboutWrook.html" %}
 {% endblock %}

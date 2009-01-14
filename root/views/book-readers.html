@@ -1,0 +1,14 @@
+{% extends "views/template-book.html" %}
+{% import 'wrook-macros.html' as wrook %}
+{% set section = "book" %}
+{% set subSection = "readers" %}
+{% block pageId %}book-readers{% endblock %}
+{% block content %}
+
+	<h2>
+		{% trans %}Latest readers{% endtrans %}
+	</h2>
+
+	{{ wrook.members_list(book.getReaders()) }}
+
+{% endblock %}
