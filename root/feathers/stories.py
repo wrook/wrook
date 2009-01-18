@@ -5,6 +5,7 @@ import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from django.utils import simplejson
 from google.appengine.ext import db
+from google.appengine.ext.db import polymodel
 from google.appengine.api import memcache
 import webapp
 import membership
@@ -56,6 +57,10 @@ class Story:
 	TitleTemplate = ""
 	BodyTemplate = ""
 	Icon = ""
+	StoryOccurenceClass = None
+
+	def __init__(self):
+		StoryOccurenceClass = StoryOccurence
 
 	def getTitle(self, params):
 		return self.TitleTemplate
@@ -67,17 +72,21 @@ class Story:
 		return None
 
 	def createOccurence(self, params): #factory pattern to instanciate a StoryOccurence
-		occurence = StoryOccurence(
+		occurence = self.StoryOccurenceClass(
 			StoryID = self.ID,
 			Icon = self.Icon,
 			FromMember = params["member"]
 			)
 		occurence.Story = self
 		occurence.setParams(params)
-		occurence.put()
+		occurence = self.on_create_occurence(occurence, params)
+		if occurence: occurence.put()
 		return occurence
 
-class StoryOccurence(db.Model):
+	def on_create_occurence(self, occurence, params):
+		return occurence
+
+class StoryOccurence(polymodel.PolyModel):
 	Story = None #The reference story of this occurence
 	StoryID = db.StringProperty(required=True)
 	Title = db.StringProperty(default="")

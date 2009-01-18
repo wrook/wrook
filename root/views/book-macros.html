@@ -21,6 +21,11 @@
 					<span>{% trans %}Talk{% endtrans %}</span>
 				</a>
 			</li>
+			<li {% if selected=="feed" %}class="current"{% endif %}>
+				<a id="menu-bookFeed" href="/Books/{{ book.key() }}/Feed">
+					<span>{% trans %}Feed{% endtrans %}</span>
+				</a>
+			</li>
 		</ul>
 	</div>
 {%- endmacro %}

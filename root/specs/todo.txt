@@ -6,6 +6,8 @@ Investigate: http://www.bookglutton.com/
 Investigate: http://www.filedby.com/
 Investigate: http://www.readingtrails.com/
 Investigate: http://mashable.com/2007/09/08/books-toolbox/
+Investigate: http://www.overdrive.com/
+Investigate: http://shortcovers.com/splash/
 
 Random idea:
 	- STUPID: In the list of a member's readings, dont include his own books!

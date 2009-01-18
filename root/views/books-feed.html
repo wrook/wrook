@@ -1,0 +1,79 @@
+{% extends "views/template-book.html" %}
+{% import 'wrook-macros.html' as wrook %}
+{% set section = "book" %}
+{% set subSection = "feed" %}
+{% block pageId %}books-feed{% endblock %}
+{% block pageTitle %}
+	{{ book.Title }}
+{% endblock %}
+
+{% block contentTop %}
+{% endblock %}
+
+{% block content %}
+
+	<h2>
+		{% trans %}What's new{% endtrans%}
+	</h2>
+	{% if posts %}
+		<div class="storyPosts">
+			{% for post in posts %}
+				{{ wrook.storyPost(post) }}
+			{% endfor %}
+		</div>
+	{% else %}
+		<div>
+			{% trans %}There is no activity to show!{% endtrans %}
+		</div>
+	{% endif %}
+	
+
+{% endblock %}
+
+{% block contentBottom %}
+{% endblock %}
+
+{% block sidebar %}
+		{% if userCanEdit %}
+			<div class="sidebarPanel">
+				<h3>
+					{% trans %}Writing and Editing{% endtrans %}
+				</h3>
+				<div class="sidebarMenu">
+					<ul>
+						{% if userIsAuthor %}
+							{% if book.lastRevisedChapter() %}
+								<li><a href="/Typewriter/{{ book.lastRevisedChapter.key() }}">{% trans %}Resume writing{% endtrans %}</a></li>
+							{% endif %}
+							<li><a href="/NewChapter/{{ book.key() }}">{% trans %}Start a new chapter{% endtrans %}</a></li>
+						{% endif %}
+						{% if userCanEdit %}
+							<li><a href="/Books/Edit/{{ book.key() }}">{% trans %}Edit book options{% endtrans %}</a></li>
+							<li><a href="/Books/Edit/License/{{ book.key() }}">{% trans %}Edit license options{% endtrans %}</a></li>
+							<li><a href="/Covers/Select?usage={{ book.Title }}&redirect=/Books/SetCover/{{ book.key() }}">{% trans %}Change book cover{% endtrans %}</a></li>
+							<li><a href="/Books/Delete/{{ book.key() }}">{% trans %}Delete whole book{% endtrans %}</a></li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		{% endif %}
+		<div class="sidebarPanel">
+			<div class="panelContent">
+				{% if book.getCover() %}
+					<div class="cover width180">
+						<img src='/Covers/Thumbnail/{{ book.getCover().key() }}?width=180'>
+						{% if book.getCover().isReusable %}
+							<span class="coverTitle" {% if book.getCover.TitleColor %}style="color: {{ book.getCover().TitleColor }}"{% endif %} >{{ book.Title }}</span> 
+						{% endif %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+		<div class="sidebarPanel">
+			<div class="sidebarMenu">
+				<ul>
+					<li><a href="/Invites/">{% trans %}Invite a friend{% endtrans %}</a></li>
+				</ul>
+			</div>
+		</div>
+{% endblock sidebar %}

@@ -22,10 +22,14 @@
             <string>views\template-profile2.html</string>
             <key>-view</key>
             <string>views\books-view.html</string>
+            <key>.bat</key>
+            <string>pack.bat</string>
             <key>.css</key>
             <string>stylesheets\template-d.css</string>
             <key>.js</key>
             <string>feathers\talk-script-topicForm.js</string>
+            <key>.py</key>
+            <string>feathers\customize.py</string>
             <key>BOOK-CONT</key>
             <string>views\books-viewContents.html</string>
             <key>BOOKS</key>
@@ -44,6 +48,8 @@
             <string>app.yaml</string>
             <key>app.p</key>
             <string>app.py</string>
+            <key>app.y</key>
+            <string>app.yaml</string>
             <key>attrib</key>
             <string>views\about-openSourceAttribution.html</string>
             <key>auto</key>
@@ -58,6 +64,8 @@
             <string>views\books-view.html</string>
             <key>book-</key>
             <string>views\books-talk.html</string>
+            <key>book-f</key>
+            <string>views\books-feed.html</string>
             <key>book-m</key>
             <string>views\book-macros.html</string>
             <key>book-rea</key>
@@ -69,6 +77,8 @@
             <key>book-top</key>
             <string>views\books-topics.html</string>
             <key>book-v</key>
+            <string>views\books-view.html</string>
+            <key>book-vi</key>
             <string>views\books-view.html</string>
             <key>bookIn</key>
             <string>views\section-bookInfo.html</string>
@@ -204,10 +214,12 @@
             <string>members.py</string>
             <key>memberH</key>
             <string>views\memberHome.html</string>
+            <key>memberHom</key>
+            <string>views\memberHome.html</string>
             <key>memberh</key>
             <string>views\memberHome.html</string>
             <key>members</key>
-            <string>views\members.html</string>
+            <string>members.py</string>
             <key>members.h</key>
             <string>views\members.html</string>
             <key>members.html</key>
@@ -215,7 +227,7 @@
             <key>members2.h</key>
             <string>views\members2.html</string>
             <key>membersh</key>
-            <string>views\members.html</string>
+            <string>feathers\membership.py</string>
             <key>membershi</key>
             <string>feathers\views\membership-inviteNew.html</string>
             <key>membership</key>
@@ -246,6 +258,8 @@
             <string>feathers\views\talk-part-topic.html</string>
             <key>part-repl</key>
             <string>feathers\views\talk-part-replies.html</string>
+            <key>part-stories.html</key>
+            <string>views\part-stories.html</string>
             <key>part-t</key>
             <string>feathers\views\talk-part-topics.html</string>
             <key>part-titleBlock.html</key>
@@ -316,6 +330,10 @@
             <string>feathers\stories.pyc</string>
             <key>stories</key>
             <string>feathers\stories.py</string>
+            <key>stories.</key>
+            <string>feathers\stories.py</string>
+            <key>stories.p</key>
+            <string>stories.py</string>
             <key>styles</key>
             <string>views\stylesheets.html</string>
             <key>sugges</key>
@@ -422,6 +440,8 @@
             <string>feathers\cachetree.py</string>
             <key>twoSid</key>
             <string>views\template-twoSidebars.html</string>
+            <key>txt</key>
+            <string>specs\todo.txt</string>
             <key>typ</key>
             <string>scripts\WrookTypewriter\WrookTypewriter.js</string>
             <key>typew</key>
@@ -448,9 +468,17 @@
             <string>wrook.py</string>
             <key>wrook-m</key>
             <string>views\wrook-macros.html</string>
+            <key>wrook.</key>
+            <string>views\wrook-macros.html</string>
+            <key>wrookSt</key>
+            <string>wrookStories.py</string>
             <key>wrookSto</key>
             <string>wrookStories.py</string>
             <key>wrooks</key>
+            <string>wrookStories.py</string>
+            <key>wrooksr</key>
+            <string>wrookStories.py</string>
+            <key>wrookst</key>
             <string>wrookStories.py</string>
         </dict>
     </dict>

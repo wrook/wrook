@@ -309,13 +309,14 @@ table tr td {
 	background: #f7f561;
 	position: relative;
 	margin-bottom: 5px;
+	border-collapse: separate;
 }
 
 .callsToAction {
+	margin: 10px 0px 0px 0px;
 	padding: 10px;
-	background: #eeeeee;
+	background: #dddddd;
 	position: relative;
-	margin-bottom: 5px;
 }
 
 .sidebarNotice,
@@ -384,18 +385,24 @@ table tr td {
 	width: 650px;
 }
 .contentBlock .blockContent .blockBody .top {
+	position: relative;
 	background: url(/images/content-block-body-bg.png) top left no-repeat;
-	height: 10px;
+	min-height: 1px;
+	padding: 10px  10px 0px  10px;
+	border-bottom: 1px solid #fff;
 }
 .contentBlock .blockContent .blockBody .middle {
 	position: relative;
 	background: #fff;
-	padding: 0px 20px 0px 20px;
+	padding: 0px 10px 0px 20px;
 	border: 1px solid #fff;
 }
 .contentBlock .blockContent .blockBody .bottom {
+	position: relative;
 	background: url(/images/content-block-body-bg.png) bottom left no-repeat;
-	height: 10px;
+	min-height: 1px;
+	padding: 0px  10px 10px  10px;
+	border-top: 1px solid #fff;
 }
 
 .contentBlock .blockFooter {

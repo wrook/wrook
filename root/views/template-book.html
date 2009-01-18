@@ -4,7 +4,7 @@
 	<div id="pageContent">
 		<div class="contentBlock">
 			<div class="blockHeader withSectionMenu">
-				<h1><a href="/Members/{{ book.key() }}">
+				<h1><a href="/Books/{{ book.key() }}">
 					{{ book.Title }}
 				</a></h1>
 				{{ bookMacros.tabs_book(book=book, selected=subSection) }}
@@ -12,7 +12,9 @@
 			</div>
 			<div class="blockContent">
 				<div class="blockBody">
-					<div class="top"></div>
+					<div class="top">
+						{% block contentTop %}{% endblock %}
+					</div>
 					<div class="middle">
 						<div id="notices">
 							{% block notices %}{% endblock %}
@@ -21,7 +23,7 @@
 						{% block content %}{% endblock %}
 					</div>
 					<div class="bottom">
-						{% block sectionFooter %}{% endblock %}
+						{% block contentBottom %}{% endblock %}
 					</div>
 				</div>
 				<div class="sidebar">

@@ -44,6 +44,7 @@ def URLMappings():
 		(r'/Books/Chapters/(.*)/Rev', Revisions_List),
 		(r'/Books/(.*)/Readers', handler_book_readers),
 		(r'/Books/(.*)/Talk', Books_Talk),
+		(r'/Books/(.*)/Feed', Books_Feed),
 		(r'/Books/(.*)/Contents', ViewBook_Contents),
 		(r'/Books/(.*)', ViewBook),
 		( '/Covers/', CoverList),
@@ -124,12 +125,20 @@ class Book(talk.Topicable):
 		return readers
 
 	def get_verbose_stage(self):
-		if self.Stage=="planning": verboseStage = _("This book is only in the planning stage.")
-		elif self.Stage=="drafting": verboseStage = _("This book is only a draft.")
-		elif self.Stage=="writing": verboseStage = _("This book is in the process of being writen.")
-		elif self.Stage=="proofing": verboseStage =  _("This book is still in proofing.")
-		else: verboseStage = ""
-		return verboseStage
+		if self.Stage=="planning": stageLabel = _("This book is only in the planning stage.")
+		elif self.Stage=="drafting": stageLabel = _("This book is only a draft.")
+		elif self.Stage=="writing": stageLabel = _("This book is in the process of being writen.")
+		elif self.Stage=="proofing": stageLabel =  _("This book is still in proofing.")
+		else: stageLabel = ""
+		return stageLabel
+
+	def get_short_stage(self):
+		if self.Stage=="planning": stageLabel = _("Planning")
+		elif self.Stage=="drafting": stageLabel = _("Drafting")
+		elif self.Stage=="writing": stageLabel = _("Writing")
+		elif self.Stage=="proofing": stageLabel =  _("Proofing")
+		else: stageLabel = ""
+		return stageLabel
 
 	def clearCache(self):
 		memcache.delete("wordcount-%s" % self.key) # Removes the wordCount cache
@@ -191,6 +200,14 @@ class Chapter(db.Model):
 	Synopsis = db.TextProperty()
 	Created = db.DateTimeProperty(auto_now_add=True)
 	isDeleted = db.BooleanProperty(default = False) # An author can mark a chapter as being deleted without loosing the revision history
+
+	def get_short_stage(self):
+		if self.Stage=="planning": stageLabel = _("Planning")
+		elif self.Stage=="drafting": stageLabel = _("Drafting")
+		elif self.Stage=="writing": stageLabel = _("Writing")
+		elif self.Stage=="proofing": stageLabel =  _("Proofing")
+		else: stageLabel = ""
+		return stageLabel
 	
 	def addRevision(self, text):
 		LatestRevisionVersion = 0
@@ -571,6 +588,23 @@ class Books_Talk(webapp.RequestHandler):
 		if book:
 			self.Model.update({'book': book})
 			self.render2('views/books-talk.html')
+		else: self.error(404)
+
+class Books_Feed(webapp.RequestHandler):
+	def get(self, key):
+		onRequest(self)
+		book = Book.get(key)
+		if book:
+			cacheKey = "wrookMemberPosts-%s" % book.key()
+			posts = memcache.get(cacheKey)
+			if not posts:
+				posts = book.ReceivedStoryPosts.order("-WhenOccured").fetch(limit=50)
+				memcache.add(cacheKey, posts)
+			self.Model.update({
+				"posts": posts,
+				'book': book
+				})
+			self.render2('views/books-feed.html')
 		else: self.error(404)
 
 class handler_book_readers(webapp.RequestHandler):

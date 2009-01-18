@@ -6,15 +6,14 @@
 {% block pageTitle %}
 	{{ book.Title }}
 {% endblock %}
+
+{% block contentTop %}
+{% endblock %}
+
 {% block content %}
-	{% if book.Stage!="final" %}
-		{{ wrook.notice(title=_("Notice"), body=book.get_verbose_stage()) }}
-	{% endif %}
-
 	<h2>
-		{% trans %}Chapters{% endtrans %}
+		{% trans %}Table of Contents{% endtrans %}
 	</h2>
-
 	<div class="chapterList">
 		<ul>
 			{% for chapter in chapters %}
@@ -30,23 +29,25 @@
 							{{ chapter.Title|escape }}
 						{% endif %}
 					</a>
-					{% if book.Stage=="planning" %}({% trans %}Planning{% endtrans %}){% endif %}
-					{% if book.Stage=="drafting" %}({% trans %}Drafting{% endtrans %}){% endif %}
-					{% if book.Stage=="writing" %}({% trans %}Writing{% endtrans %}){% endif %}
-					{% if book.Stage=="proofing" %}({% trans %}Proofing{% endtrans %}){% endif %}
+					<span class="stageLabel">
+						{% if book.get_short_stage() %}
+							- {{ chapter.get_short_stage() }}
+						{% endif %}
+					</span>
 				</li>
 			{% endfor %}
 		</ul>
 		<div class="clearfix"></div>
 	</div>
 
-	<br/>
+{% endblock %}
+
+{% block contentBottom %}
 	{% call wrook.calls_to_action() %}
 		<li class="mainLink"><a href="/ViewChapter/{{ firstChapter.key() }}">
 			<span class="bullet spriteIcons icon-main-link"></span><span>{% trans %}Start reading{% endtrans %}</span></a>
 		</li>
 	{% endcall %}
-
 {% endblock %}
 
 {% block sidebar %}

@@ -207,6 +207,19 @@ table tr td ul li {
 	color: #fff;
 }
 
+.chapterList ul li {
+	font-size: 1.2em;
+	list-style: none;
+	padding: 0px;
+	margin: 0px 0px 5px 0px;;
+}
+
+.chapterList ul li .stageLabel {
+	font-size: 1em;
+	color: #666666;
+}
+
+
 .chapterText {
 	margin: 10px 0px;
 	padding: 20px 40px 20px 40px;
