@@ -166,6 +166,8 @@
             <string>feathers\labs.py</string>
             <key>licen</key>
             <string>views\about-openSourceLicense.html</string>
+            <key>licens</key>
+            <string>licensing.py</string>
             <key>logi</key>
             <string>views\login.html</string>
             <key>login</key>
@@ -203,7 +205,7 @@
             <key>membe</key>
             <string>members.py</string>
             <key>member</key>
-            <string>views\memberHome.html</string>
+            <string>views\members-books-list.html</string>
             <key>member-</key>
             <string>views\members-books-list.html</string>
             <key>member-suggestio</key>
@@ -229,7 +231,7 @@
             <key>membersh</key>
             <string>feathers\membership.py</string>
             <key>membershi</key>
-            <string>feathers\views\membership-inviteNew.html</string>
+            <string>feathers\membership.py</string>
             <key>membership</key>
             <string>feathers\membership.py</string>
             <key>membes</key>
@@ -406,6 +408,8 @@
             <string>views\template-main-e.html</string>
             <key>template-mai</key>
             <string>views\template-main.html</string>
+            <key>template-profile2.</key>
+            <string>views\template-profile2.html</string>
             <key>test</key>
             <string>tests\testMembership.py</string>
             <key>testC</key>

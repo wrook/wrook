@@ -110,7 +110,20 @@ class Book(talk.Topicable):
 	Cover = db.ReferenceProperty(Cover, collection_name="Books", verbose_name=_("Cover"))
 	Synopsis = db.TextProperty(verbose_name=_("Synopsis"))
 	NoteFromAuthor = db.TextProperty(verbose_name=_("Note from the author"))
-	License = db.ReferenceProperty(licensing.LicenseType, collection_name="Books", verbose_name=_("License"))
+	License = db.StringProperty(default="", verbose_name=_("License"),
+		choices=set([
+			u"",
+			u"deriv-fair-use",
+			u"copyright",
+			u"public-domain",
+			u"cc-by",
+			u"cc-by-nc",
+			u"cc-by-nd",
+			u"cc-by-sa",
+			u"cc-by-nc-nd",
+			u"cc-by-nc-sa",
+			u"free-art-license",
+			u"other"]))
 	AttribDetailed = db.TextProperty(verbose_name=_("Attribution"))
 	AttribAuthorIsAuthor = db.BooleanProperty(default=True, verbose_name=_("Are you the author"))
 	AttribAuthorName = db.StringProperty(verbose_name=_("Author's name"))

@@ -13,7 +13,7 @@
 						<li><a id="menu-memberBooks" href="/Members/{{ visitedMember.key() }}/Books"><span>{% trans %}Books{% endtrans %}</span></a></li>
 						<li><a id="menu-memberReadings" href="/Members/{{ visitedMember.key() }}/Readings"><span>{% trans %}Readings{% endtrans %}</span></a></li>
 						<li><a id="menu-memberCovers" href="/Members/{{ visitedMember.key() }}/Covers"><span>{% trans %}Covers{% endtrans %}</span></a></li>
-						{% if visitedMember.key()==currentMember.key() %}
+						{% if visitedMember==currentMember %}
 							<li><a id="menu-memberInvites" href="/Invites"><span>{% trans %}Invites{% endtrans %}</span></a></li>
 						{% endif %}
 					</ul>

@@ -142,7 +142,11 @@ class MembersBooksList(webapp.RequestHandler):
 		if visitedMember:
 			self.setVisitedMember(visitedMember)
 			books = visitedMember.Books.fetch(limit=999)
+			hasEditRights = False # Getting rights should be refactored.. this is half-assed
+			if (self.CurrentMember!=None) & (visitedMember!=None):
+				hasEditRights = self.CurrentMember.isAdmin or self.CurrentMember == self.VisitedMember
 			self.Model.update({
+				'hasEditRights': hasEditRights,
 				'books': books
 				})
 			self.render2('views/members-books-list.html')
