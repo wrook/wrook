@@ -183,10 +183,17 @@ class Book(talk.Topicable):
 		return None
 	
 	def firstChapter(self):
-		chapter = Chapter.all().filter("Book =", self).fetch(limit=1)
+		chapter = Chapter.all().filter("Book =", self).order("Number").fetch(limit=1)
 		if len(chapter) > 0:
 			return chapter[0]
+		return None
 	
+	def lastChapter(self):
+		chapter = Chapter.all().filter("Book =", self).order("-Number").fetch(limit=1)
+		if len(chapter) > 0:
+			return chapter[0]
+		return None
+
 	def lastRevisedChapter(self):
 		revision = Revision.all().filter("Book =", self).order("-Created").fetch(limit=1)
 		if len(revision) > 0:
@@ -754,6 +761,12 @@ class NewChapter(webapp.RequestHandler):
 				if form.is_valid():
 					# Save the form, and redirect to the view page
 					entity = form.save(commit=False)
+					lastChapter = book.lastChapter()
+					chapterNumber = 0
+					if lastChapter:
+						if lastChapter.Number:
+							chapterNumber = lastChapter.Number + 1
+					entity.Number = chapterNumber
 					entity.put()
 					self.redirect("/Typewriter/%s" % chapter.key())
 				else:

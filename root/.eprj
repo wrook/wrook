@@ -244,6 +244,8 @@
             <string>members.py</string>
             <key>memoiz</key>
             <string>memoize.py</string>
+            <key>new</key>
+            <string>views\newChapter.html</string>
             <key>nos</key>
             <string>views\template-main-nosidebar2.html</string>
             <key>noside</key>
