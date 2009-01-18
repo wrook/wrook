@@ -46,7 +46,7 @@
 	
 		{% if chapter.getLatestRevision %}
 			<div class="chapterText">
-				{{ chapter.getLatestRevision.markdownText }}
+				{{ chapter.getLatestRevision.text_with_linebreaks }}
 			</div>
 		{% endif %}
 	
@@ -73,7 +73,7 @@
 {% block sidebar %}
 	<div class="sidebarPanel">
 		{% if chapter.Book.getCover %}
-			<div style="text-align: center; margin-top: 40px">
+			<div class="cover" style="text-align: center; margin: 40px 0px 0px 20px">
 				<a href="/Books/{{ chapter.Book.key }}">
 					<img src='/Covers/Thumbnail/{{ chapter.Book.getCover.key }}'>
 					{% if chapter.Book.getCover.isReusable %}

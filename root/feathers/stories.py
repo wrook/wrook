@@ -60,7 +60,7 @@ class Story:
 	StoryOccurenceClass = None
 
 	def __init__(self):
-		StoryOccurenceClass = StoryOccurence
+		self.StoryOccurenceClass = StoryOccurence
 
 	def getTitle(self, params):
 		return self.TitleTemplate

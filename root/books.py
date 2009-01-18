@@ -304,6 +304,14 @@ class Revision(db.Model):
 	Created =  db.DateTimeProperty(auto_now_add=True)
 	isPublished = db.BooleanProperty(default = True)
 	
+	def text_with_linebreaks(self):
+		import re
+		text = ""
+#		_paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
+#		p = self.Text
+#		text = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', '<br>\n') for p in _paragraph_re.split(escape(value)))
+		return text
+
 	def calculateWordCount(self):
 		from feathers import utils
 		if self.WordCount: return self.WordCount

@@ -56,6 +56,8 @@
             <string>console\autoexec.py</string>
             <key>autoe</key>
             <string>console\autoexec.py</string>
+            <key>bokVi</key>
+            <string>views\books-view.html</string>
             <key>boks</key>
             <string>books.py</string>
             <key>boks.p</key>
@@ -122,6 +124,8 @@
             <string>feathers\cachetree.py</string>
             <key>cachetr</key>
             <string>feathers\cachetree.py</string>
+            <key>chapter</key>
+            <string>views\viewChapter.html</string>
             <key>comman</key>
             <string>views\admin-commands.html</string>
             <key>command</key>
@@ -393,7 +397,7 @@
             <key>templ</key>
             <string>views\template-main-d2.html</string>
             <key>templa</key>
-            <string>views\template-main.html</string>
+            <string>views\template-book.html</string>
             <key>templat</key>
             <string>views\template-main-d.html</string>
             <key>template</key>
