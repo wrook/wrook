@@ -60,6 +60,8 @@
             <string>views\books-view.html</string>
             <key>boks</key>
             <string>books.py</string>
+            <key>boks-v</key>
+            <string>views\books-view.html</string>
             <key>boks.p</key>
             <string>books.py</string>
             <key>book</key>
@@ -400,8 +402,10 @@
             <string>views\template-book.html</string>
             <key>templat</key>
             <string>views\template-main-d.html</string>
+            <key>templat-b</key>
+            <string>views\template-book.html</string>
             <key>template</key>
-            <string>views\template-profile2.html</string>
+            <string>views\template-book.html</string>
             <key>template-</key>
             <string>views\template-profile.html</string>
             <key>template-bo</key>
@@ -457,8 +461,10 @@
             <key>utils</key>
             <string>feathers\utils.py</string>
             <key>view</key>
-            <string>views\viewMember.html</string>
+            <string>views\viewChapter.html</string>
             <key>viewC</key>
+            <string>views\viewChapter.html</string>
+            <key>viewChapter</key>
             <string>views\viewChapter.html</string>
             <key>visitor</key>
             <string>views\visitorHome.html</string>
@@ -472,9 +478,13 @@
             <string>views\about-who.html</string>
             <key>wro</key>
             <string>wrook.py</string>
+            <key>wrok</key>
+            <string>wrook.py</string>
             <key>wrook</key>
             <string>wrook.py</string>
             <key>wrook-m</key>
+            <string>views\wrook-macros.html</string>
+            <key>wrook-ma</key>
             <string>views\wrook-macros.html</string>
             <key>wrook.</key>
             <string>views\wrook-macros.html</string>

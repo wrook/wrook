@@ -61,7 +61,7 @@
 						{% if userIsAuthor %}
 							<li><a href="/NewChapter/{{ book.key() }}">{% trans %}Start a new chapter{% endtrans %}</a></li>
 							{% if book.lastRevisedChapter() %}
-								<li><a href="/Typewriter/{{ book.lastRevisedChapter.key() }}">{% trans %}Resume writing{% endtrans %}</a></li>
+								<li><a href="/Typewriter/{{ book.lastRevisedChapter().key() }}">{% trans %}Resume writing{% endtrans %}</a></li>
 							{% endif %}
 						{% endif %}
 						{% if userCanEdit %}

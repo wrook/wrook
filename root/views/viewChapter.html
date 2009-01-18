@@ -1,29 +1,23 @@
-﻿{% extends "template-main-d.html" %}
-{% load i18n %}
-{% block pageName %}ViewChapter{% endblock %}
-{% block title %}
-	<h1>
-		{{ chapter.Book.Title }} <span style="font-weight: normal; font-size: 0.7em;"> {% trans "by " %} {{ chapter.Book.authorName }}</span>
-	</h1>
+{% extends "template-book.html" %}
+{% import 'wrook-macros.html' as wrook %}
+{% import 'book-macros.html' as bookMacros %}
+{% set section = "book" %}
+{% set subSection = "contents" %}
+{% block pageId %}books-read{% endblock %}
+{% block pageTitle %}
+	{{ chapter.Book.Title }}
 {% endblock %}
-{% block notices %}
-	{% ifnotequal chapter.Stage "final" %}
-		<div class="notice">
-			<Strong>{% trans "Note:" %}</strong>
-			{% ifequal chapter.Stage "planning" %}{% trans "This chapter is only in the planning stage." %}{% endifequal %}
-			{% ifequal chapter.Stage "drafting" %}{% trans "This chapter is only a draft." %}{% endifequal %}
-			{% ifequal chapter.Stage "writing" %}{% trans "This chapter is in the process of being writen." %}{% endifequal %}
-			{% ifequal chapter.Stage "proofing" %}{% trans "This chapter is still in proofing." %}{% endifequal %}
-		</div>
+
+{% block contentTop %}
+	{% if chapter.Stage!="final" %}
+		{{ wrook.notice(title=_("Notice"), body=chapter.get_verbose_stage()) }}
 	{% else %}
-		{% ifnotequal chapter.Book.Stage "final" %}
-			<div class="notice">
-				<Strong>{% trans "Note:" %}</strong>
-				{% trans "Altough this book is not finished, this chapter is final." %}
-			</div>
-		{% endifnotequal %}
-	{% endifnotequal %}
+		{% if chapter.Book.Stage!="final" %}
+			{{ wrook.notice(title=_("Notice"), body=_("Altough this book is not completed, this chapter is final.")) }}
+		{% endif %}
+	{% endif %}
 {% endblock %}
+
 {% block content %}
 	<div class="chapterInfo">
 		<h1>
@@ -44,95 +38,67 @@
 			</div>
 		{% endif %}
 	
-		{% if chapter.getLatestRevision %}
+		{% if chapter.getLatestRevision() %}
 			<div class="chapterText">
-				{{ chapter.getLatestRevision.text_with_linebreaks }}
+				{{ chapter.getLatestRevision().text_with_linebreaks() }}
 			</div>
 		{% endif %}
 	
-		{% if not chapter.nextChapter %}
+		{% if not chapter.nextChapter() %}
 			<div style="margin: 40px 0px;">
-				<strong>{% trans "This was the last chapter!" %}</strong>
+				<strong>{% trans %}This was the last chapter!{% endtrans %}</strong>
 			</div>
 		{% endif %}
 	</div>
 
 	<div class="buttonBar">
 		<ul>
-			{% if chapter.nextChapter %}
-				<li><a href="/ViewChapter/{{ chapter.nextChapter.key }}"><span>{% trans "Open next chapter" %}</span></a></li>
+			{% if chapter.nextChapter() %}
+				<li><a href="/ViewChapter/{{ chapter.nextChapter().key() }}"><span>{% trans %}Next chapter{% endtrans %}</span></a></li>
 			{% endif %}
-			{% if chapter.previousChapter %}
-				<li><a href="/ViewChapter/{{ chapter.previousChapter.key }}"><span>{% trans "Previous chapter" %}</span></a></li>
+			{% if chapter.previousChapter() %}
+				<li><a href="/ViewChapter/{{ chapter.previousChapter().key() }}"><span>{% trans %}Previous chapter{% endtrans %}</span></a></li>
 			{% endif %}
-			<li><a href="/Books/{{ chapter.Book.key }}"><span>{% trans "Back to cover" %}</span></a></li>
+			<li><a href="/Books/{{ chapter.Book.key() }}"><span>{% trans %}Back to overview{% endtrans %}</span></a></li>
 		</ul>
 	</div>
 {% endblock %}
 
 {% block sidebar %}
 	<div class="sidebarPanel">
-		{% if chapter.Book.getCover %}
-			<div class="cover" style="text-align: center; margin: 40px 0px 0px 20px">
-				<a href="/Books/{{ chapter.Book.key }}">
-					<img src='/Covers/Thumbnail/{{ chapter.Book.getCover.key }}'>
-					{% if chapter.Book.getCover.isReusable %}
-						<span class="coverTitle" {% if chapter.Book.getCover.TitleColor %}style="color: {{ chapter.Book.getCover.TitleColor }}"{% endif %} >{{ chapter.Book.Title }}</span> 
-					{% endif %}
-				</a>
-			</div>
-		{% endif %}
-	</div>
-
-	<div class="sidebarPanel">
-		<h3>{% trans "Options" %}</h3>
+		<h3>{% trans %}Options{% endtrans %}</h3>
 		<div class="sidebarMenu">
 			<ul>
-				{% if chapter.nextChapter %}
-					<li><a href="/ViewChapter/{{ chapter.nextChapter.key }}">{% trans "Next chapter" %}</a></li>
+				{% if chapter.nextChapter() %}
+					<li><a href="/ViewChapter/{{ chapter.nextChapter().key() }}">{% trans %}Next chapter{% endtrans %}</a></li>
 				{% endif %}
-				{% if chapter.previousChapter %}
-					<li><a href="/ViewChapter/{{ chapter.previousChapter.key }}">{% trans "Previous chapter" %}</a></li>
+				{% if chapter.previousChapter() %}
+					<li><a href="/ViewChapter/{{ chapter.previousChapter().key() }}">{% trans %}Previous chapter{% endtrans %}</a></li>
 				{% endif %}
-				<li><a href="/Books/{{ chapter.Book.key }}">{% trans "Back to cover" %}</a></li>
+				<li><a href="/Books/{{ chapter.Book.key() }}">{% trans %}Back to cover{% endtrans %}</a></li>
 			</ul>
 		</div>
 	</div>
 
 	<div class="sidebarPanel">
-		<h3>{% trans "Editing" %}</h3>
+		<h3>{% trans %}Editing options{% endtrans%}</h3>
 		<div class="sidebarMenu">
 			{% if userIsAuthor %}
 				<ul>
-					<li><a href="/Typewriter/{{ chapter.key }}">{% trans "Write chapter" %}</a></li>
-					<li><a href="/NewChapter/{{ book.key }}">{% trans "Start a new chapter" %}</a></li>
-					<li><a href="/EditChapter/{{ chapter.key }}">{% trans "Edit chapter options" %}</a></li>
-					<li><a href="/Chapter/Delete/{{ chapter.key }}">{% trans "Delete chapter" %}</a></li>
+					<li><a href="/Typewriter/{{ chapter.key() }}">{% trans %}Edit chapter{% endtrans %}</a></li>
+					<li><a href="/EditChapter/{{ chapter.key() }}">{% trans %}Chapter options{% endtrans %}</a></li>
+					<li><a href="/Chapter/Delete/{{ chapter.key() }}">{% trans %}Delete chapter{% endtrans %}</a></li>
 				</ul>
 			{% endif %}
 		</div>
 	</div>
 
 	<div class="sidebarPanel">
-		<h3>{% trans "About this chapter" %}</h3>
+		<h3>{% trans %}About this chapter{% endtrans %}</h3>
 		<div class="sidebarMenu">
 			<ul>
 				<li>
-					<a href="/Books/Chapters/{{ chapter.key }}/Rev">{{ chapter.Revisions.count }} {% trans "Revisions" %}</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-
-	<div class="sidebarPanel">
-		<h3>{% trans "About this book" %}</h3>
-		<div class="sidebarMenu">
-			<ul>
-				<li>
-					<a href="/Readers/Book/{{ chapter.Book.key }}">{{ chapter.Book.Bookmarks.count }} {% trans "Readers" %}</a>
-				</li>
-				<li>
-					<a href="/Feedback/Book/{{ chapter.Book.key }}">{{ chapter.Book.Feedback.count }} {% trans "Book feedback" %}</a>
+					<a href="/Books/Chapters/{{ chapter.key() }}/Rev">{{ chapter.Revisions.count() }} {% trans %}Revisions{% endtrans %}</a>
 				</li>
 			</ul>
 		</div>
@@ -140,7 +106,7 @@
 
 	{% if chapter.Book.NoteFromAuthor %}
 		<div class="sidebarPanel">
-			<h3>{% trans "Note from the author" %}</h3>
+			<h3>{% trans %}Note from the author{% endtrans %}</h3>
 			<div class="NoteFromAuthor">
 				{{ chapter.Book.NoteFromAuthor|escape }}
 			</div>

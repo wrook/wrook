@@ -14,7 +14,17 @@
 {% endblock %}
 
 {% block content %}
-
+	<div style="float: right; margin: 0px 0px 0px 20px;">
+				{% if book.getCover() %}
+					<div style="position:relative">
+						{{ wrook.corners("white5px")}}
+						<img src='/Covers/Thumbnail/{{ book.getCover().key() }}?width=180'>
+						{% if book.getCover().isReusable %}
+							<span class="coverTitle" {% if book.getCover.TitleColor %}style="color: {{ book.getCover().TitleColor }}"{% endif %} >{{ book.Title }}</span> 
+						{% endif %}
+					</div>
+				{% endif %}
+	</div>
 	{% if book.Synopsis %}
 		<div class="synopsis">
 			"&#160;{{ book.Synopsis|escape }}&#160;"
@@ -138,7 +148,7 @@
 		{% if userCanEdit %}
 			<div class="sidebarPanel">
 				<h3>
-					{% trans %}Writing and Editing{% endtrans %}
+					{% trans %}Editing Options{% endtrans %}
 				</h3>
 				<div class="sidebarMenu">
 					<ul>
@@ -158,18 +168,6 @@
 				</div>
 			</div>
 		{% endif %}
-		<div class="sidebarPanel">
-			<div class="panelContent">
-				{% if book.getCover() %}
-					<div class="cover width180">
-						<img src='/Covers/Thumbnail/{{ book.getCover().key() }}?width=180'>
-						{% if book.getCover().isReusable %}
-							<span class="coverTitle" {% if book.getCover.TitleColor %}style="color: {{ book.getCover().TitleColor }}"{% endif %} >{{ book.Title }}</span> 
-						{% endif %}
-					</div>
-				{% endif %}
-			</div>
-		</div>
 		<div class="sidebarPanel">
 			<div class="sidebarMenu">
 				<ul>

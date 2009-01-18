@@ -12,6 +12,17 @@
 	<div class="chapterList">
 		<form method="post">
 			<table style="width: 500px;">
+				<tr>
+					<th>
+						{% trans 'Label' %}
+					</th>
+					<th>
+						{% trans 'Title' %}
+					</th>
+					<th>
+						{% trans 'Order' %}
+					</th>
+				</tr>
 			{% for chapter in chapters %}
 				<tr>
 					<td>
@@ -35,7 +46,7 @@
 						<button name="update"><span>{% trans 'Save' %}</span></button>
 						<button name="done"><span>{% trans 'Save and done' %}</span></button>
 						<span class="formLinks">
-							<a href="/Books/{{ book.key }}">{% trans 'Back' %}</a>
+							<a href="/Books/{{ book.key }}/Contents">{% trans 'Back' %}</a>
 						</span>
 					</td>
 				</tr>

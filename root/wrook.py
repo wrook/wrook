@@ -125,8 +125,8 @@ application = webapp.Application(
 	integrate_modules([]),
 	debug=True) # Instantiate the main application
 
-main = real_main
-#main = firepython_main
+#main = real_main
+main = firepython_main
 #main = profile_html_main
 #main = profile_log_main
 #main = profile_firepython_main

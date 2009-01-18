@@ -29,7 +29,7 @@ import logging
 def URLMappings():
 	return [
 		(r'/NewChapter/(.*)', NewChapter),
-		(r'/ViewChapter/(.*)', ViewChapter),
+		(r'/ViewChapter/(.*)', handler_chapter_read),
 		(r'/Chapter/Delete/(.*)', DeleteChapter),
 		(r'/EditChapter/(.*)', EditChapterOptions),
 		(r'/Typewriter/(.*)', Typewriter),
@@ -216,6 +216,14 @@ class Chapter(db.Model):
 	Created = db.DateTimeProperty(auto_now_add=True)
 	isDeleted = db.BooleanProperty(default = False) # An author can mark a chapter as being deleted without loosing the revision history
 
+	def get_verbose_stage(self):
+		if self.Stage=="planning": stageLabel = _("This chapter is only in the planning stage.")
+		elif self.Stage=="drafting": stageLabel = _("This chapter is only a draft.")
+		elif self.Stage=="writing": stageLabel = _("This chapter is in the process of being writen.")
+		elif self.Stage=="proofing": stageLabel =  _("This chapter is still in proofing.")
+		else: stageLabel = ""
+		return stageLabel
+
 	def get_short_stage(self):
 		if self.Stage=="planning": stageLabel = _("Planning")
 		elif self.Stage=="drafting": stageLabel = _("Drafting")
@@ -276,7 +284,6 @@ class Chapter(db.Model):
 		return chapter
 	
 	def nextChapter(self):
-		#chapters = self.Book.Chapters()
 		chapters = Chapter.all().filter("Book =", self.Book).fetch(limit=999)
 		i = 0
 		for chapter in chapters:
@@ -286,7 +293,6 @@ class Chapter(db.Model):
 			i=i+1
 	
 	def previousChapter(self):
-		#chapters = self.Book.Chapters()
 		chapters = Chapter.all().filter("Book =", self.Book).fetch(limit=999)
 		i = 0
 		for chapter in chapters:
@@ -294,6 +300,7 @@ class Chapter(db.Model):
 				if i > 0:
 					return chapters[i-1]
 			i=i+1
+
 class Revision(db.Model):
 	Book = db.ReferenceProperty(Book, collection_name="ChapterRevisions")
 	Chapter = db.ReferenceProperty(Chapter, collection_name="Revisions")
@@ -306,10 +313,8 @@ class Revision(db.Model):
 	
 	def text_with_linebreaks(self):
 		import re
-		text = ""
-#		_paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
-#		p = self.Text
-#		text = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', '<br>\n') for p in _paragraph_re.split(escape(value)))
+		_paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
+		text = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', '<br>\n') for p in _paragraph_re.split(self.Text))
 		return text
 
 	def calculateWordCount(self):
@@ -501,7 +506,7 @@ class DeleteBook(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-class ViewChapter(webapp.RequestHandler):
+class handler_chapter_read(webapp.RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -510,10 +515,11 @@ class ViewChapter(webapp.RequestHandler):
 				userIsAuthor = (self.CurrentMember.key() == chapter.Book.Author.key())
 				self.Model.update({
 					"chapter": chapter,
+					"book": chapter.Book,
 					"userIsAuthor": userIsAuthor
 					})
 				chapter.setBookmark(self.CurrentMember)
-				self.render('views/viewChapter.html')
+				self.render2('views/viewChapter.html')
 			else: self.error(404)
 		else: self.requestLogin()
 
