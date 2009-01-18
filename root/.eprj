@@ -57,7 +57,7 @@
             <key>autoe</key>
             <string>console\autoexec.py</string>
             <key>boks</key>
-            <string>views\books-view.html</string>
+            <string>books.py</string>
             <key>boks.p</key>
             <string>books.py</string>
             <key>book</key>

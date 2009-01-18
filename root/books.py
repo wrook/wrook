@@ -164,7 +164,9 @@ class Book(talk.Topicable):
 		if not wordCount:
 			wordCount = 0
 			for chapter in self.Chapters:
-				wordCount += chapter.getLatestRevision().calculateWordCount()
+				latestRevision = chapter.getLatestRevision()
+				if latestRevision:
+					wordCount += latestRevision.calculateWordCount()
 			memcache.add(wordCountKey, wordCount)
 		return wordCount
 	
