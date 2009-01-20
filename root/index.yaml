@@ -23,7 +23,7 @@ indexes:
   - name: When
     direction: desc
 
-# Used 492 times in query history.
+# Used 494 times in query history.
 - kind: Chapter
   properties:
   - name: Book
@@ -79,7 +79,7 @@ indexes:
   - name: Sent
     direction: desc
 
-# Used 2803 times in query history.
+# Used 2804 times in query history.
 - kind: Moment
   properties:
   - name: isDefault
@@ -126,7 +126,7 @@ indexes:
   - name: Sent
     direction: desc
 
-# Used 810 times in query history.
+# Used 812 times in query history.
 - kind: Revision
   properties:
   - name: Book
@@ -155,7 +155,7 @@ indexes:
   - name: WhenOccured
     direction: desc
 
-# Used 429 times in query history.
+# Used 430 times in query history.
 - kind: StoryPost
   properties:
   - name: Member
@@ -170,7 +170,7 @@ indexes:
   - name: WhenOccured
     direction: desc
 
-# Used 712 times in query history.
+# Used 713 times in query history.
 - kind: ThemeMemberSelection
   properties:
   - name: Member

@@ -52,9 +52,11 @@ def integrate_modules(URLMappings):
 	# Integrate the Talk module
 	URLMappings += talk.URLMappings()
 	talk.onRequest = app.onRequest
-	# Integrate the Talk module
+	# Integrate the Members module
 	URLMappings += members.URLMappings()
 	members.onRequest = app.onRequest
+	# Integrate the main App module
+	URLMappings += app.URLMappings()
 	return URLMappings
 
 def real_main():

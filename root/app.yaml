@@ -6,6 +6,10 @@ api_version: 1
 default_expiration: "21d"
 
 handlers:
+- url: /admin/.*
+  script: $PYTHON_LIB/google/appengine/ext/admin
+  login: admin
+
 - url: /stylesheets
   static_dir: stylesheets
   expiration: "21d"
@@ -35,4 +39,7 @@ handlers:
   script: wrook.py
 
 - url: .*
+  script: wrook.py
+
+- url: /.*
   script: wrook.py

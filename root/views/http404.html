@@ -1,0 +1,32 @@
+{% extends "template-main-e2.html" %}
+{% set section = "404" %}
+{% block pageId %}http404{% endblock %}
+{% block pageTitle %}{% trans %}Sorry... Page not found!{% endtrans %}{% endblock %}
+{% block title %}
+	<h1>
+		{% trans %}Sorry... Page not found!{% endtrans %}
+	</h1>
+{% endblock %}
+
+{% block content %}
+
+{% trans %}
+<p>
+	<strong>Sorry, the page or resource you requested cannot be found.</strong>
+</p>
+<p>
+	If you have problems finding what you were looking for, feel free to contact
+	me at <a href="mailto:admin@wrook.org">admin@wrook.org</a>. Dont forget to include
+	some details about what you were looking for or trying to do in your message.
+</p>
+<p>
+	Sorry again for the inconvenience.
+</p>
+<p>
+	<em>Mathieu Sylvain</em>
+	<br/>
+	Wrook Administrator
+</p>
+{% endtrans %}
+
+{% endblock %}

@@ -9,9 +9,14 @@ from google.appengine.ext import db
 #from django.utils import translation
 import django_trans_patch as translation
 from django.utils.translation import gettext as _
+from feathers import webapp
 
 #TODO: Having the picnikKey here is not secure, put in the app config
 picnikKey = "eb44efec693047ac4f4b2a429bc0be5a" # Developper Key for the Picnik API
+
+def URLMappings():
+	return [('/.*', handler_http404)]
+
 
 class Moment(db.Model):
 	'''
@@ -97,3 +102,16 @@ def getWrookAppConfig():
 			wrookAppConfig = cfg[0]
 			memcache.add("wrookAppConfig", wrookAppConfig)
 	return wrookAppConfig
+
+class handler_http404(webapp.RequestHandler):
+	def get(self):
+		onRequest(self)
+		self.error(404)
+		self.Model.update({
+			})
+		self.render2('views/http404.html')
+
+class handler_http500(webapp.RequestHandler):
+	def get(self):
+		self.error(500)
+		self.response.out.write('<html><body>An unforseen error occured! Sorry!</body></html>')

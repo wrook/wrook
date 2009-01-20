@@ -26,10 +26,14 @@
             <string>pack.bat</string>
             <key>.css</key>
             <string>stylesheets\template-d.css</string>
+            <key>.html</key>
+            <string>views\about-who.html</string>
             <key>.js</key>
             <string>feathers\talk-script-topicForm.js</string>
             <key>.py</key>
             <string>feathers\customize.py</string>
+            <key>404</key>
+            <string>views\http404.html</string>
             <key>BOOK-CONT</key>
             <string>views\books-viewContents.html</string>
             <key>BOOKS</key>
@@ -418,6 +422,8 @@
             <string>views\template-main-e.html</string>
             <key>template-mai</key>
             <string>views\template-main.html</string>
+            <key>template-main-e2</key>
+            <string>views\template-main-e2.html</string>
             <key>template-profile2.</key>
             <string>views\template-profile2.html</string>
             <key>test</key>
@@ -468,6 +474,8 @@
             <string>views\viewChapter.html</string>
             <key>viewChapter</key>
             <string>views\viewChapter.html</string>
+            <key>visi</key>
+            <string>views\visitorHome.html</string>
             <key>visitor</key>
             <string>views\visitorHome.html</string>
             <key>we</key>
