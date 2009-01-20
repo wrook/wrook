@@ -68,6 +68,10 @@ table tr td {
 	position: relative;
 	width: 980px;
 	padding: 0px;
+	background: #CCC;
+}
+#page-http500 #pageInner {
+	background: #0000CC;
 }
 
 

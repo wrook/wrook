@@ -111,7 +111,15 @@ class handler_http404(webapp.RequestHandler):
 			})
 		self.render2('views/http404.html')
 
-class handler_http500(webapp.RequestHandler):
-	def get(self):
-		self.error(500)
-		self.response.out.write('<html><body>An unforseen error occured! Sorry!</body></html>')
+def handle_exception(requestHandler, exception, debug_mode):
+	if not debug_mode:
+		onRequest(requestHandler)
+		requestHandler.CurrentTheme = None
+		requestHandler.error(500)
+		requestHandler.Model.update({
+				"currentTheme": None
+			})
+		requestHandler.render2('views/http500.html')
+	else:
+		super(requestHandler, exception, debug_mode)
+

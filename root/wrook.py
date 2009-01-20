@@ -55,6 +55,7 @@ def integrate_modules(URLMappings):
 	# Integrate the Members module
 	URLMappings += members.URLMappings()
 	members.onRequest = app.onRequest
+	webapp.RequestHandler.handle_exception = app.handle_exception
 	# Integrate the main App module
 	URLMappings += app.URLMappings()
 	return URLMappings
@@ -125,10 +126,11 @@ def profile_firepython_main():
 
 application = webapp.Application(
 	integrate_modules([]),
-	debug=True) # Instantiate the main application
+	debug=False
+	) # Instantiate the main application
 
-#main = real_main
-main = firepython_main
+main = real_main
+#main = firepython_main
 #main = profile_html_main
 #main = profile_log_main
 #main = profile_firepython_main

@@ -1,0 +1,35 @@
+{% extends "template-main-e2.html" %}
+{% set section = "500" %}
+{% block pageId %}http500{% endblock %}
+{% block pageTitle %}{% trans %}Sorry... Page not found!{% endtrans %}{% endblock %}
+{% block title %}
+	<h1>
+		{% trans %}Oups!{% endtrans %}
+	</h1>
+{% endblock %}
+
+{% block content %}
+
+{% trans %}
+<p>
+	<strong>Sorry, an unforseen error occured during your last request.</strong> 
+</p>
+<p>
+	Sorry for this inconvenience. If the problem persists I invite you to contact
+	me at <a href="mailto:admin@wrook.org">admin@wrook.org</a>. Dont forget to include
+	some details about what you were trying to do when the problem occured.
+</p>
+<p>
+	I take all bugs seriously, but please, keep in mind that Wrook is still <a href="/About/Half-Baked-Edition">Half Baked</a>. Another interesting way to provide me with feedback is to use the "Feedback" button available on the left side of the screen.
+</p>
+<p>
+	Sorry again for the inconvenience.
+</p>
+<p>
+	<em>Mathieu Sylvain</em>
+	<br/>
+	Wrook Administrator
+</p>
+{% endtrans %}
+
+{% endblock %}

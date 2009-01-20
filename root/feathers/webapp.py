@@ -52,8 +52,6 @@ class RequestHandler(webapp.RequestHandler):
 		self.CurrentTheme = theme
 		self.Model.update({"currentTheme":self.CurrentTheme})
 
-		import os
-
 	def render(self, templateFile=""):
 		from google.appengine.ext.webapp import template
 		self.Model.update({"masterTemplate": self.MasterTemplate}) # Includes the path of the MasterTemplate in he model

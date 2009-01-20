@@ -166,6 +166,8 @@
             <string>views\about-halfBakedEdition.html</string>
             <key>home</key>
             <string>views\visitorHome.html</string>
+            <key>http</key>
+            <string>views\http404.html</string>
             <key>info</key>
             <string>views\section-bookInfo.html</string>
             <key>join</key>
