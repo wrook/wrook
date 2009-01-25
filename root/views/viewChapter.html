@@ -80,18 +80,18 @@
 		</div>
 	</div>
 
-	<div class="sidebarPanel">
-		<h3>{% trans %}Editing options{% endtrans%}</h3>
-		<div class="sidebarMenu">
-			{% if userIsAuthor %}
+	{% if userIsAuthor %}
+		<div class="sidebarPanel">
+			<h3>{% trans %}Editing options{% endtrans%}</h3>
+			<div class="sidebarMenu">
 				<ul>
 					<li><a href="/Typewriter/{{ chapter.key() }}">{% trans %}Edit chapter{% endtrans %}</a></li>
 					<li><a href="/EditChapter/{{ chapter.key() }}">{% trans %}Chapter options{% endtrans %}</a></li>
 					<li><a href="/Chapter/Delete/{{ chapter.key() }}">{% trans %}Delete chapter{% endtrans %}</a></li>
 				</ul>
-			{% endif %}
+			</div>
 		</div>
-	</div>
+	{% endif %}
 
 	<div class="sidebarPanel">
 		<h3>{% trans %}About this chapter{% endtrans %}</h3>

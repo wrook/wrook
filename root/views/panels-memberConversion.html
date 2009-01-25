@@ -2,10 +2,11 @@
 {% ifnotequal currentMember.memberConversionLevel "none" %}
 	<div class="sidebarPanel">
 		<h3>{% trans "Suggestions" %}</h3>
-		<div class="progressBar">
-			<div class="completed" style="width:{{currentMember.getConversionProgress}}%"></div>
-		</div>
-{% ifequal currentMember.memberConversionLevel "low" %}
+		<div class="panelContent">
+			<div class="progressBar">
+				<div class="completed" style="width:{{currentMember.getConversionProgress}}%"></div>
+			</div>
+	{% ifequal currentMember.memberConversionLevel "low" %}
 {% blocktrans with currentMember.getConversionProgress as progress %}
 <p>
 Up to now you have tried <strong>{{ progress }}&#37;</strong> of our features! <strong><a href="/Suggestions">Try more...</a></strong>
@@ -33,5 +34,6 @@ Wow! Your seem to have tried all of our features, <strong><a href="/Suggestions"
 </p>
 {% endblocktrans %}
 {% endifequal %}
+</div>
 	</div>
 {% endifnotequal %}

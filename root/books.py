@@ -319,10 +319,8 @@ class Revision(db.Model):
 	isPublished = db.BooleanProperty(default = True)
 	
 	def text_with_linebreaks(self):
-		import re
-		_paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
-		text = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', '<br>\n') for p in _paragraph_re.split(self.Text))
-		return text
+		from feathers import utils
+		return utils.text_to_linebreaks(self.Text)
 
 	def calculateWordCount(self):
 		from feathers import utils
@@ -528,7 +526,7 @@ class handler_chapter_read(webapp.RequestHandler):
 				chapter.setBookmark(self.CurrentMember)
 				self.render2('views/viewChapter.html')
 			else: self.error(404)
-		else: self.requestLogin()
+		else: self.requestLogin(comeback="/ViewChapter/%s" % key)
 
 class EditChapterOptions(webapp.RequestHandler):
 	def get( self, key ):
@@ -747,7 +745,7 @@ class NewChapter(webapp.RequestHandler):
 					'book': book,
 					'form': form
 					})
-				self.render('views/books-chapter-new.html')
+				self.render2('views/books-chapter-new.html')
 			else: self.error(404)
 		else: self.requestLogin()
 	

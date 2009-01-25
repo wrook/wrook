@@ -2,6 +2,11 @@
 # coding=UTF-8
 
 import urllib, hashlib
+
+def text_to_linebreaks(txt):
+	import re
+	_paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
+	return u'\n\n'.join(u'%s' % p.replace('\n', '<br>\n') for p in _paragraph_re.split(txt))
 		
 def getGravatar(email, default, size):
 	url = "http://www.gravatar.com/avatar.php?"  

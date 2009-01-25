@@ -20,72 +20,24 @@
 						{{ wrook.corners("white5px")}}
 						<img src='/Covers/Thumbnail/{{ book.getCover().key() }}?width=180'>
 						{% if book.getCover().isReusable %}
-							<span class="coverTitle" {% if book.getCover.TitleColor %}style="color: {{ book.getCover().TitleColor }}"{% endif %} >{{ book.Title }}</span> 
+							<span class="coverTitle" style="width: 160px; font-size: 22px; text-align: center; {% if book.getCover.TitleColor %}color: {{ book.getCover().TitleColor }}{% endif %}" >{{ book.Title }}</span> 
 						{% endif %}
 					</div>
 				{% endif %}
+				{% if userCanEdit %}
+					<div style="margin: 5px 0px; position:relative; clear:right;">
+					{{ wrook.iconButton(label=_("Change cover"), name="editCover", icon="edit-glow", url="/Covers/Select?usage=%s&redirect=/Books/SetCover/%s" % (book.Title, book.key())) }}
+					</div>
+				{% endif %}
 	</div>
-	{% if book.Synopsis %}
-		<div class="synopsis">
-			"&#160;{{ book.Synopsis|escape }}&#160;"
-		</div>
-		<script>
-			$(document).ready(function(){
-				$('.synopsis').expander({
-					slicePoint: 200, 
-					widow: 4,
-					expandEffect: 'fadeIn',
-					expandText: '[{% trans %}read more...{% endtrans %}]',
-					userCollapseText: '[{% trans %}close{% endtrans %}]',
-					userCollapsePrefix: ' ',
-					userCollapse: true
-				});
-			});
-		</script>
-	{% endif %}
-	<br/>
-	<div>
-		<span>
-			{% trans wordcount=book.wordCount() %}
-				{{ wordcount }} words
-			{% endtrans %}
-		</span>
-		<span class="sep">-</span>
-		<span>
-			<a href="/Books/{{ book.key() }}/Contents">
-				{% trans chapterCount=book.Chapters.count() -%}
-					{{ chapterCount }} chapter
-				{%- pluralize -%}
-					{{ chapterCount }} chapters
-				{%- endtrans %}
-			</a>
-		</span>
-		<span class="sep">-</span>
-		<span>
-			<a href="/Books/{{ book.key() }}/Readers">
-				{% trans readerCount=book.Bookmarks.count() -%}
-					{{ readerCount }} reader
-				{%- pluralize -%}
-					{{ readerCount }} readers
-				{%- endtrans %}
-			</a>
-		</span>
-	</div>
-		
-	<h3>
-		{% trans %}License and attribution{% endtrans %}:
-	</h3>
-	{% if book.License %}
-		<div>
-			<a href="{{ book.License.URL }}">{{ book.License.Title }}</a>
-		</div>
-		{% if book.AttribDetailed %}
-			<div class="detailedAttribution">
-				{{ book.markdownAttribDetailed() }}
+	<div style="width: 450px">
+		{% if book.Synopsis %}
+			<div class="synopsis">
+				"&#160;{{ book.Synopsis|escape }}&#160;"
 			</div>
 			<script>
 				$(document).ready(function(){
-					$('.detailedAttribution').expander({
+					$('.synopsis').expander({
 						slicePoint: 200, 
 						widow: 4,
 						expandEffect: 'fadeIn',
@@ -97,39 +49,103 @@
 				});
 			</script>
 		{% endif %}
-	{% else %}
-		<p>
-			{% trans %}No license or copyright has been specified.{% endtrans %}</a>
-		</p>
-	{% endif %}
-		
-	
-	{% if book.Author.About %}
-		<h3>
-			{% trans %}Contributed by{% endtrans %}
-		</h3>
-		<div style="position: relative">
-			<div class="avatar" style="float: left; margin: 0px 5px 5px 0px;">
-				<a href="/Member/{{ book.Author.key() }}"><img src="{{ book.Author.gravatar50() }}" width="50" height="50" /></a>
+		{% if userCanEdit %}
+			<div style="margin: 5px 0px;">
+				{{ wrook.iconButton(label=_("Edit books details"), name="editDetails", icon="edit-glow", url="/Books/Edit/%s" % book.key()) }}
 			</div>
-			<p>
-				<a href="/Member/{{ book.Author.key() }}">{{ book.Author.fullname() }}</a>
-				<br />
-				{{ book.Author.About }}
-			</p>
+		{% endif %}
+		<br/>
+		<div>
+			<span>
+				{% trans wordcount=book.wordCount() %}
+					{{ wordcount }} words
+				{% endtrans %}
+			</span>
+			<span class="sep">-</span>
+			<span>
+				<a href="/Books/{{ book.key() }}/Contents">
+					{% trans chapterCount=book.Chapters.count() -%}
+						{{ chapterCount }} chapter
+					{%- pluralize -%}
+						{{ chapterCount }} chapters
+					{%- endtrans %}
+				</a>
+			</span>
+			<span class="sep">-</span>
+			<span>
+				<a href="/Books/{{ book.key() }}/Readers">
+					{% trans readerCount=book.Bookmarks.count() -%}
+						{{ readerCount }} reader
+					{%- pluralize -%}
+						{{ readerCount }} readers
+					{%- endtrans %}
+				</a>
+			</span>
 		</div>
-	{% endif %}
-	<div style="clear:left"></div>
-	
-	{% if book.NoteFromAuthor %}
+			
 		<h3>
-			{% trans %}A note from the contributor{% endtrans %}
+			{% trans %}License and attribution{% endtrans %}:
 		</h3>
-		<div class="NoteFromAuthor">
-			{{ book.NoteFromAuthor|escape }}
-		</div>
-	{% endif %}
-
+		{% if book.License %}
+			<div>
+				<a href="{{ book.License.URL }}">{{ book.License.Title }}</a>
+			</div>
+			{% if book.AttribDetailed %}
+				<div class="detailedAttribution">
+					{{ book.markdownAttribDetailed() }}
+				</div>
+				<script>
+					$(document).ready(function(){
+						$('.detailedAttribution').expander({
+							slicePoint: 200, 
+							widow: 4,
+							expandEffect: 'fadeIn',
+							expandText: '[{% trans %}read more...{% endtrans %}]',
+							userCollapseText: '[{% trans %}close{% endtrans %}]',
+							userCollapsePrefix: ' ',
+							userCollapse: true
+						});
+					});
+				</script>
+			{% endif %}
+		{% else %}
+			<p>
+				{% trans %}No license or copyright has been specified.{% endtrans %}</a>
+			</p>
+		{% endif %}
+		{% if userCanEdit %}
+			<div style="margin: 5px 0px;">
+				{{ wrook.iconButton(label=_("Edit Licensing"), name="editLicensing", icon="edit-glow", url="/Books/Edit/License/%s" % book.key()) }}
+			</div>
+		{% endif %}		
+		
+		{% if book.Author.About %}
+			<h3>
+				{% trans %}Contributed by{% endtrans %}
+			</h3>
+			<div style="position: relative">
+				<div class="avatar" style="float: left; margin: 0px 5px 5px 0px;">
+					<a href="/Member/{{ book.Author.key() }}"><img src="{{ book.Author.gravatar50() }}" width="50" height="50" /></a>
+				</div>
+				<p>
+					<a href="/Member/{{ book.Author.key() }}">{{ book.Author.fullname() }}</a>
+					<br />
+					{{ book.Author.About }}
+				</p>
+			</div>
+		{% endif %}
+		<div style="clear:left"></div>
+		
+		{% if book.NoteFromAuthor %}
+			<h3>
+				{% trans %}A note from the contributor{% endtrans %}
+			</h3>
+			<div class="NoteFromAuthor">
+				{{ book.NoteFromAuthor|escape }}
+			</div>
+		{% endif %}
+		<div style="clear:both"></div>
+	</div>
 {% endblock %}
 
 {% block contentBottom %}
@@ -156,12 +172,8 @@
 							{% if book.lastRevisedChapter() %}
 								<li><a href="/Typewriter/{{ book.lastRevisedChapter().key() }}">{% trans %}Resume writing{% endtrans %}</a></li>
 							{% endif %}
-							<li><a href="/NewChapter/{{ book.key() }}">{% trans %}Start a new chapter{% endtrans %}</a></li>
 						{% endif %}
 						{% if userCanEdit %}
-							<li><a href="/Books/Edit/{{ book.key() }}">{% trans %}Edit book options{% endtrans %}</a></li>
-							<li><a href="/Books/Edit/License/{{ book.key() }}">{% trans %}Edit license options{% endtrans %}</a></li>
-							<li><a href="/Covers/Select?usage={{ book.Title }}&redirect=/Books/SetCover/{{ book.key() }}">{% trans %}Change book cover{% endtrans %}</a></li>
 							<li><a href="/Books/Delete/{{ book.key() }}">{% trans %}Delete whole book{% endtrans %}</a></li>
 						{% endif %}
 					</ul>

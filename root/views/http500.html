@@ -11,25 +11,25 @@
 {% block content %}
 
 {% trans %}
-<p>
-	<strong>Sorry, an unforseen error occured during your last request.</strong> 
-</p>
+<h3>
+	An error has occured during your last request.
+</h3>
 <p>
 	Sorry for this inconvenience. If the problem persists I invite you to contact
-	me at <a href="mailto:admin@wrook.org">admin@wrook.org</a>. Dont forget to include
+	us at <a href="mailto:admin@wrook.org">admin@wrook.org</a>. Dont forget to include
 	some details about what you were trying to do when the problem occured.
 </p>
 <p>
-	I take all bugs seriously, but please, keep in mind that Wrook is still <a href="/About/Half-Baked-Edition">Half Baked</a>. Another interesting way to provide me with feedback is to use the "Feedback" button available on the left side of the screen.
+	We take all bugs and feedback seriously, but please, keep in mind that Wrook is still <a href="/About/Half-Baked-Edition">Half Baked</a>. Another interesting way for you to be heard is to use the "Feedback" button available on the left side of the screen.
 </p>
 <p>
-	Sorry again for the inconvenience.
-</p>
-<p>
-	<em>Mathieu Sylvain</em>
-	<br/>
-	Wrook Administrator
+	Again, sorry for the inconvenience.
 </p>
 {% endtrans %}
 
+<h3>{% trans %}Technical details{% endtrans %}</h3>
+<p>{% trans %}To assist us in solving this problem, we invite you to copy-paste the following details into your message: {% endtrans %}</p>
+	<div style="border: 10px solid #DDD; width: 90%; max-height: 200px; overflow: scroll; background: #EEE; padding: 10px;font-size: 0.8em; font-family: arial, 'sans serif'; color: #990000;">
+		{{ trace }}
+	</div>
 {% endblock %}

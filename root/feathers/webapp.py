@@ -94,5 +94,5 @@ class RequestHandler(webapp.RequestHandler):
 		content = template.render(self.Model)
 		self.response.out.write(content)
 
-	def requestLogin(self):
-		self.redirect("/Login") # Redirects to the standard URL for the Google Account login
+	def requestLogin(self, comeback=None):
+		self.redirect("/Login?comeback=%s" % comeback)

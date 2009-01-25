@@ -112,12 +112,23 @@ class handler_http404(webapp.RequestHandler):
 		self.render2('views/http404.html')
 
 def handle_exception(requestHandler, exception, debug_mode):
+	import cgi
+	import sys
+	import traceback
+	import jsonpickle
+	from feathers import utils
 	if not debug_mode:
+		trace = ''.join(traceback.format_exception(*sys.exc_info()))
+		try:
+			trace = trace + "\n\n\nRequest state:\n" + jsonpickle.encode(requestHandler)
+		except:
+			trance = trace + "\n\n\nState request unavailable" 
 		onRequest(requestHandler)
 		requestHandler.CurrentTheme = None
 		requestHandler.error(500)
 		requestHandler.Model.update({
-				"currentTheme": None
+				"currentTheme": None,
+				"trace": utils.text_to_linebreaks(trace)
 			})
 		requestHandler.render2('views/http500.html')
 	else:

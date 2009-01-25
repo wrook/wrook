@@ -39,7 +39,11 @@
 		</ul>
 		<div class="clearfix"></div>
 	</div>
-
+	<br/>
+	{% if userCanEdit %}
+		{{ wrook.iconButton(label=_("Add chapter"), name="addChapter", icon="add-glow", url="/NewChapter/%s" % book.key()) }}
+		{{ wrook.iconButton(label=_("Edit chapter list"), name="editAll", icon="edit-glow", url="/Books/ReorderChapters/%s" % book.key()) }}
+	{% endif %}
 {% endblock %}
 
 {% block contentBottom %}
@@ -59,7 +63,6 @@
 				<div class="sidebarMenu">
 					<ul>
 						{% if userIsAuthor %}
-							<li><a href="/NewChapter/{{ book.key() }}">{% trans %}Start a new chapter{% endtrans %}</a></li>
 							{% if book.lastRevisedChapter() %}
 								<li><a href="/Typewriter/{{ book.lastRevisedChapter().key() }}">{% trans %}Resume writing{% endtrans %}</a></li>
 							{% endif %}

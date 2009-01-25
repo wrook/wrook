@@ -29,11 +29,13 @@
             <key>.html</key>
             <string>views\about-who.html</string>
             <key>.js</key>
-            <string>feathers\talk-script-topicForm.js</string>
+            <string>scripts\main.js</string>
             <key>.py</key>
             <string>feathers\customize.py</string>
             <key>404</key>
             <string>views\http404.html</string>
+            <key>500</key>
+            <string>views\http500.html</string>
             <key>BOOK-CONT</key>
             <string>views\books-viewContents.html</string>
             <key>BOOKS</key>
@@ -46,6 +48,8 @@
             <string>admin.py</string>
             <key>analy</key>
             <string>views\analytics.html</string>
+            <key>ap</key>
+            <string>app.yaml</string>
             <key>app</key>
             <string>app.py</string>
             <key>app.</key>
@@ -53,6 +57,8 @@
             <key>app.p</key>
             <string>app.py</string>
             <key>app.y</key>
+            <string>app.yaml</string>
+            <key>app.ya</key>
             <string>app.yaml</string>
             <key>attrib</key>
             <string>views\about-openSourceAttribution.html</string>
@@ -69,7 +75,7 @@
             <key>boks.p</key>
             <string>books.py</string>
             <key>book</key>
-            <string>views\books-view.html</string>
+            <string>books.py</string>
             <key>book-</key>
             <string>views\books-talk.html</string>
             <key>book-f</key>
@@ -104,6 +110,8 @@
             <string>books.py</string>
             <key>books-</key>
             <string>views\books-view.html</string>
+            <key>books-co</key>
+            <string>views\books-viewContents.html</string>
             <key>books-talk.html</key>
             <string>views\books-talk.html</string>
             <key>books-v</key>
@@ -131,7 +139,7 @@
             <key>cachetr</key>
             <string>feathers\cachetree.py</string>
             <key>chapter</key>
-            <string>views\viewChapter.html</string>
+            <string>views\books-chapter-new.html</string>
             <key>comman</key>
             <string>views\admin-commands.html</string>
             <key>command</key>
@@ -168,6 +176,8 @@
             <string>views\visitorHome.html</string>
             <key>http</key>
             <string>views\http404.html</string>
+            <key>http500</key>
+            <string>views\http500.html</string>
             <key>info</key>
             <string>views\section-bookInfo.html</string>
             <key>join</key>
@@ -183,6 +193,8 @@
             <key>logi</key>
             <string>views\login.html</string>
             <key>login</key>
+            <string>views\login.html</string>
+            <key>login.h</key>
             <string>views\login.html</string>
             <key>macr</key>
             <string>views\wrook-macros.html</string>
@@ -234,6 +246,8 @@
             <string>views\memberHome.html</string>
             <key>members</key>
             <string>members.py</string>
+            <key>members.</key>
+            <string>members.py</string>
             <key>members.h</key>
             <string>views\members.html</string>
             <key>members.html</key>
@@ -263,7 +277,7 @@
             <key>pack</key>
             <string>pack.bat</string>
             <key>panel</key>
-            <string>views\panels-aboutOpenSource.html</string>
+            <string>views\panels-aboutWrook.html</string>
             <key>panels</key>
             <string>views\panels-aboutWrook.html</string>
             <key>part</key>
@@ -338,6 +352,8 @@
             <string>stylesheets\sprites.css</string>
             <key>sprit</key>
             <string>stylesheets\sprites.css</string>
+            <key>sprites</key>
+            <string>stylesheets\sprites.css</string>
             <key>stor</key>
             <string>feathers\stories.py</string>
             <key>stori</key>
@@ -403,7 +419,7 @@
             <key>temla</key>
             <string>views\template-main-d.html</string>
             <key>temp</key>
-            <string>views\template-main-d.html</string>
+            <string>views\template-main2.html</string>
             <key>templ</key>
             <string>views\template-main-d2.html</string>
             <key>templa</key>
@@ -413,7 +429,7 @@
             <key>templat-b</key>
             <string>views\template-book.html</string>
             <key>template</key>
-            <string>views\template-book.html</string>
+            <string>views\template-main-d2.html</string>
             <key>template-</key>
             <string>views\template-profile.html</string>
             <key>template-bo</key>
@@ -484,6 +500,8 @@
             <string>feathers\webapp.py</string>
             <key>weba</key>
             <string>feathers\webapp.py</string>
+            <key>webap</key>
+            <string>feathers\webapp.py</string>
             <key>webapp</key>
             <string>feathers\webapp.py</string>
             <key>who</key>
@@ -491,7 +509,7 @@
             <key>wro</key>
             <string>wrook.py</string>
             <key>wrok</key>
-            <string>wrook.py</string>
+            <string>views\wrook-macros.html</string>
             <key>wrook</key>
             <string>wrook.py</string>
             <key>wrook-m</key>
@@ -504,6 +522,8 @@
             <string>wrookStories.py</string>
             <key>wrookSto</key>
             <string>wrookStories.py</string>
+            <key>wrookm</key>
+            <string>views\wrook-macros.html</string>
             <key>wrooks</key>
             <string>wrookStories.py</string>
             <key>wrooksr</key>

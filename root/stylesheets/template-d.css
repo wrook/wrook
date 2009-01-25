@@ -64,16 +64,17 @@ table tr td {
 	height: 60px;
 }
 
-#pageInner {
+#page {
 	position: relative;
 	width: 980px;
 	padding: 0px;
-	background: #CCC;
 }
 #page-http500 #pageInner {
-	background: #0000CC;
+	background: #0000CC !important;
 }
-
+#page-http500 #wallpaper{
+	display: none;
+}
 
 #wallpaper {
 	position: absolute;
@@ -320,6 +321,13 @@ table tr td {
 	margin: 10px 0px 0px 0px;
 	padding: 10px;
 	background: #dddddd;
+	position: relative;
+}
+
+.callsToAction.cta-editing {
+	margin: 10px 0px 0px 0px;
+	padding: 3px;
+	background: #cec;
 	position: relative;
 }
 

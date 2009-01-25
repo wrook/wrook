@@ -858,7 +858,7 @@ table tr td ul li {
 }
 
 /* BUTTON */
-
+/*
 button {
 	position: relative;
 	margin: 0px;
@@ -901,6 +901,7 @@ button:hover span{
 	background: url(/images/button.png) right -28px no-repeat;
 }
 
+*/
 
 .linkList {
 	margin-top: 4px;

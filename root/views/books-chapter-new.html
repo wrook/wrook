@@ -1,8 +1,7 @@
-﻿{% extends "template-main-d.html" %}
-{% load i18n %}
+{% extends "template-main-e2.html" %}
 {% block title %}
 	<h1>
-		{% trans "New chapter for" %} "{{ book.Title }}"
+		{% trans %}Add a chapter{% endtrans %}
 	</h1>
 {% endblock %}
 {% block content %}
@@ -13,7 +12,7 @@
 				<tr>
 					<td></td>
 					<td>
-						<input type="submit" name="doSave" value="{% trans 'Start writing' %}" />
+						<button name="doSave"><span>{% trans %}Start writing{% endtrans %}</span></button>
 					</td>
 				</tr>
 			</tbody>

@@ -107,7 +107,6 @@ def get_search_members(searchCriteria):
 
 class Members(webapp.RequestHandler):
 	def get(self):
-		self.yataa()		
 		onRequest(self)
 		searchCriteria = self.request.get("searchCriteria")
 		if searchCriteria: members = get_search_members(searchCriteria)

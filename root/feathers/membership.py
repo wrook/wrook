@@ -639,28 +639,36 @@ class Login(webapp.RequestHandler):
 	def get(self):
 		onRequest(self)
 		if self.CurrentMember:
-			self.Model.update({
-				'error': _("You are already logged in. In order to login again, you must first logout.")
-				})
-			self.render('views/login-already.html')
+			if comeback:
+				self.redirect(comeback)
+				return
+			else:
+				self.Model.update({
+					'error': _("You are already logged in. In order to login again, you must first logout.")
+					})
+				self.render('views/login-already.html')
 		else:
 			username = self.request.get("username")
 			password = self.request.get("password")
+			comeback = self.request.get("comeback")
 			self.Model.update({
+				'comeback': comeback,
 				'username': username,
 				'password': password
 				})
 			self.render('views/login.html')
-	
+
 	def post(self):
 		onRequest(self)
 		username = self.request.get("username")
 		password = self.request.get("password")
+		comeback = self.request.get("comeback")
 		error = None
 		if username and password:
 			result = memberLogin(self, username, password)
 			if not result.ErrorCode:
-				self.redirect("/")
+				if comeback: self.redirect(comeback)
+				else: self.redirect("/")
 				return
 			else:
 				error = _("<strong>Login failed:</strong> ") + result.ErrorMessage
@@ -669,6 +677,7 @@ class Login(webapp.RequestHandler):
 		
 		self.Model.update({
 			'error': error,
+			'comeback': comeback,
 			'username': username,
 			'password': password
 			})

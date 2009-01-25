@@ -136,6 +136,84 @@ $(document).ready(function(){
 	</div>
 {%- endmacro %}
 
+{% macro calls_to_action_editing() -%}
+	<div class="callsToAction cta-editing">
+		{{ corners("white5px") }}
+		<div class="linkList">
+			<ul>
+				<li><strong>{% trans %}Editing:{% endtrans %}</strong></li>
+				{{ caller() }}
+			</ul>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+{%- endmacro %}
+
+{% macro iconButton(label, url=None, name="", icon="", isDimmed=False) -%}
+<button class="{{ name }}" {% if url %}onclick="document.location='{{ url }}'"{% endif %}>
+	<span class="spriteIcons icon-{{ icon }}"></span>
+	<span class="label">
+		{{ label }}
+	</span>
+</button>
+<style>
+/* BUTTON */
+button .spriteIcons {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1000;
+}
+
+button {
+	position: relative;
+	margin: 0px;
+	padding: 0px 0px 0px 5px;
+	height: 16px;
+	background: url(/images/iconButton.png) left 0px no-repeat;
+	color: #fff;
+	border: 0;
+	cursor: pointer;
+	line-height: 16px;
+}
+button::-moz-focus-inner {
+	border: 0 none;
+	padding: 0px;
+	margin: 0px 0px 0px 0px;
+}
+button:focus::-moz-focus-inner {
+	border-color: transparent ! important;
+	border: 0 none;
+	padding: 0px;
+	margin: 0px 0px 0px 0px;
+}
+button span.label {
+	position: relative; 
+	white-space: nowrap; 
+	display: block !important;
+	padding: 0px 10px 0px 20px;
+	margin: 0px 0px 0px 0px;
+	line-height: 16px;
+	height: 16px;
+	background: url(/images/iconButton.png) right 0px no-repeat;
+	border: 0;
+	font-size: 9px;
+	font-weight: bold;
+	color: #505050;
+}
+button:focus,
+button:hover {
+	background: url(/images/iconButton.png) left -16px no-repeat;
+}
+button:focus span.label,
+button:hover span.label{
+	background: url(/images/iconButton.png) right -16px no-repeat;
+	color: #ffffff;
+}
+</style>
+
+{%- endmacro %}
+
 {% macro storyPost(post, hasEditRights) -%}
 <div id="{{ post.key() }}" class='storyPosts-item miniMenuContext'>
 	<div>

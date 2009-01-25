@@ -3,13 +3,13 @@
 	display: block;
 	background: url(/images/iconSprites.png) no-repeat top left;
 }
-.icon-sign-in {
-	background-position: 0 -130px;
+.icon-main-link {
+	background-position: 0 -90px;
 	height: 20px;
 	width: 20px;
 }
-.icon-main-link {
-	background-position: 0 -90px;
+.icon-sign-in {
+	background-position: 0 -130px;
 	height: 20px;
 	width: 20px;
 }
@@ -19,3 +19,28 @@
 	height: 20px;
 	width: 20px;
 }
+
+.icon-add {
+	background-position: -16 -230px;
+	height: 16px;
+	width: 16px;
+}
+
+.icon-add-glow {
+	background-position: 0px -230px;
+	height: 16px;
+	width: 16px;
+}
+
+.icon-edit {
+	background-position: -17 -246px;
+	height: 16px;
+	width: 17px;
+}
+
+.icon-edit-glow {
+	background-position: 0px -246px;
+	height: 16px;
+	width: 17px;
+}
+
