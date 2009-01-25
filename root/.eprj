@@ -307,7 +307,7 @@
             <key>proform</key>
             <string>feathers\proforma.py</string>
             <key>readers</key>
-            <string>views\readers.html</string>
+            <string>views\book-readers.html</string>
             <key>reorder</key>
             <string>views\books-reorderChapters.html</string>
             <key>repl</key>

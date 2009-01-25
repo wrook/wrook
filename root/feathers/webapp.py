@@ -72,27 +72,5 @@ class RequestHandler(webapp.RequestHandler):
 		self.Model.update({"masterTemplate": self.MasterTemplate}) # Includes the path of the MasterTemplate in he model
 		self.response.out.write(render(template_name, self.Model))
 
-	def OLD_render2(self, template_name=""):
-		#from django.utils import translation
-		import django_trans_patch as translation
-		from jinja2 import Environment
-		from jinja2 import FileSystemLoader
-		from jinja2 import TemplateNotFound
-		if template_name != "": self.Template = template_name #  If a template path is specified it overrides the one set previously
-		template_dirs = []
-		#template_dirs.append(os.path.join(os.path.dirname(__file__), 'views'))
-		template_dirs.append(self.TemplateBaseFolder)
-		env = Environment(
-			loader = FileSystemLoader(template_dirs),
-			extensions=['jinja2.ext.i18n'])
-		env.install_gettext_translations(translation)
-		try:
-			template = env.get_template(template_name)
-		except TemplateNotFound:
-			raise TemplateNotFound(template_name)
-		self.Model.update({"masterTemplate": self.MasterTemplate}) # Includes the path of the MasterTemplate in he model
-		content = template.render(self.Model)
-		self.response.out.write(content)
-
 	def requestLogin(self, comeback=None):
 		self.redirect("/Login?comeback=%s" % comeback)

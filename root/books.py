@@ -134,7 +134,7 @@ class Book(talk.Topicable):
 	def getReaders(self):
 		readers = []
 		for bookmark in self.Bookmarks:
-			readers.extend([bookmark.Author])
+			readers.extend([bookmark.Reader])
 		return readers
 
 	def get_verbose_stage(self):
