@@ -31,8 +31,8 @@ loginErrorMessage = ""
 def URLMappings():
 	return [
 		(r'/Join/(.*)', Join),
-		(r'/Invites', Invites),
 		(r'/Invites/(.*)', InviteEdit),
+		(r'/Invites', Invites),
 		(r'/Membership/ProfilePhoto/Image/(.*)', ProfilePhotoImage),
 		( '/Login', Login),
 		( '/Logout', Logout),
@@ -346,6 +346,62 @@ http://www.wrook.org
 
 	def fullname(self):
 		return "%s %s" % (self.Firstname, self.Lastname)
+
+	def get_relationship_status(self, member, relationshipType):
+		relationship = self.get_relationship(member, relationshipType)
+		if relationship:
+			return relationship.Status
+		else:
+			return None
+
+	def get_relationship(self, member, relationshipType):
+		relationships = self.RelationshipsFrom.filter("Type =", relationshipType).filter("To =", member).fetch(1)
+		if len(relationships) > 0:
+			return relationships[0]
+		else:
+			return None
+
+	def start_relationship_with(self, member, relationshipType):
+		relationship = self.get_relationship(member, relationshipType)
+		if not relationship:
+			relationship = Relationship(
+				From=self,
+				To=member,
+				Type=relationshipType)
+			relationship.put()
+			return relationship
+		else:
+			return relationship
+
+	def start_follower_relationship_with(self, member):
+		return self.start_relationship_with(member, "follower")
+
+	def get_relationships_members_to(self, relationshipType, relationshipStatus="ok"):
+		relationships = self.RelationshipsTo.filter("Type =", relationshipType).filter("Status =", relationshipStatus).fetch(limit=999)
+		members = []
+		for relationship in relationships:
+			members.extend([relationship.From])
+		if members == []:
+			return None
+		else:
+			return members
+		
+	def get_relationships_members_from(self, relationshipType, relationshipStatus="ok"):
+		relationships = self.RelationshipsFrom.filter("Type =", relationshipType).filter("Status =", relationshipStatus).fetch(limit=999)
+		members = []
+		for relationship in relationships:
+			members.extend([relationship.To])
+		if members == []:
+			return None
+		else:
+			return members
+
+class Relationship(db.Model):
+	From = db.ReferenceProperty(Member, required=True, collection_name="RelationshipsFrom")
+	To = db.ReferenceProperty(Member, required=True, collection_name="RelationshipsTo")
+	Type = db.StringProperty(required=True, default="follower", choices=set(["follower"]))
+	Status = db.StringProperty(required=True, default="ok", choices=set(["requested", "rejected", "ok", "blocked"]))
+	WhenCreated = db.DateTimeProperty(auto_now_add=True)
 
 class Invite(db.Expando):
 	FromMember = db.ReferenceProperty(Member, collection_name="SentInvites")

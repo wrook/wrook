@@ -1,21 +1,20 @@
-﻿{% extends "template-profile.html" %}
-{% load i18n %}
+{% extends "template-profile2.html" %}
 {% block pageId %}members-stories{% endblock %}
-{% block pageTitle %}{% trans "What's new" %}{% endblock %}
+{% block pageTitle %}{% trans %}What's new{% endtrans %}{% endblock %}
 {% block title %}
 {% endblock %}
 {% block content %}
 	<h2>
-		{% trans "What's new" %}
+		{% trans %}What's new{% endtrans %}
 	</h2>
 	<div class="storyPosts">
-		{% for post in posts %}{% include "part-stories.html" %}{% endfor %}
+		{% for post in posts %}{% include "part-stories2.html" %}{% endfor %}
 	</div>
 {% endblock %}
 
 {% block sidebar %}
 	<div class="sidebarPanel">
-		<h3>{% trans "Your options" %}</h3>
+		<h3>{% trans %}Your options{% endtrans %}</h3>
 		<div class="sidebarMenu">
 			<ul>
 			</ul>

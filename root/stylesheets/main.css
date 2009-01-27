@@ -399,6 +399,9 @@ table tr td ul li {
 	padding: 0px;
 	float: left;
 }
+.memberList.small ul li {
+	margin: 0px 10px 10px 0px;
+}
 
 .memberList .avatar {
 	position: relative;
@@ -406,13 +409,20 @@ table tr td ul li {
 	height: 120px;
 	width: 120px;
 }
-
+.memberList.small .avatar {
+	height: 50px;
+	width: 50px;
+}
 
 .memberList .avatar img {
 	display: block;
 	border: none;
 	height: 120px;
 	width: 120px;
+}
+.memberList.small .avatar img {
+	height: 50px;
+	width: 50px;
 }
 
 .memberList h3 {

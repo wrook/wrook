@@ -17,6 +17,7 @@ def URLMappings():
 		(r'/Members/(.*)/Books', MembersBooksList),
 		(r'/Members/(.*)/Readings', MembersReadingsList),
 		(r'/Members/(.*)/Profile', MembersProfile),
+		(r'/Members/(.*)/Follow', MembersFollow),
 		(r'/Members/(.*)', MembersFeed),
 		( '/Customize', Customize),
 		( '/Suggestions', Suggestions)]
@@ -61,7 +62,7 @@ class MembersFeed(webapp.RequestHandler):
 			self.Model.update({
 				"posts": posts
 				})
-			self.render('views/members-stories.html')
+			self.render2('views/members-stories.html')
 		else: self.error(404)
 
 class Customize(webapp.RequestHandler):
@@ -96,6 +97,27 @@ class MembersProfile(webapp.RequestHandler):
 				})
 			self.render('views/MembersProfile.html')
 		else: self.error(404)
+
+class MembersFollow(webapp.RequestHandler):
+	def get(self, key):
+		from django.utils import simplejson
+		onRequest(self)
+		member = membership.Member.get(key)
+		if self.CurrentMember!=None and member!=None:
+			newRelationship = self.CurrentMember.start_follower_relationship_with(member)
+			if newRelationship:
+				data = {"errorCode":0, "html": _("Done!")}
+				self.response.out.write("(%s)" % simplejson.dumps(data))
+			else:
+				self.response.out.write(simplejson.dumps({
+					"errorCode": 1,
+					"errorMessage": _("An error occured! Sorry!")
+					}))
+		else:
+			self.response.out.write(simplejson.dumps({
+				"errorCode": 1,
+				"errorMessage": _("An error occured! Sorry!")
+				}))
 
 def get_featured_members():
 	return membership.Member.all().filter("hasProfilePhoto =", True).fetch(limit=5)
@@ -161,9 +183,13 @@ class MembersReadingsList(webapp.RequestHandler):
 				self.setVisitedMember(visitedMember)
 				bookmarks = visitedMember.Bookmarks.fetch(limit=999)
 				books = []
+				following = visitedMember.get_relationships_members_from("follower")
+				followers = visitedMember.get_relationships_members_to("follower")
 				for bookmark in bookmarks:
 					books.append(bookmark.Book)
 				self.Model.update({
+					'following': following,
+					'followers': followers,
 					'bookmarks': bookmarks,
 					'books': books
 					})

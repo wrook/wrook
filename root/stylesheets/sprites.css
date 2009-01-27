@@ -44,3 +44,16 @@
 	width: 17px;
 }
 
+
+.icon-profile-added {
+	background-position: -20px -262px;
+	height: 20px;
+	width: 20px;
+}
+
+.icon-profile-add {
+	background-position: 0px -262px;
+	height: 20px;
+	width: 20px;
+}
+

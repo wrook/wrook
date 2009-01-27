@@ -1,5 +1,18 @@
 {% extends "template-main-e2.html" %}
 {% block pageContent %}
+	<script>
+function call_stop_following(url, elem) {
+}
+function call_follow(url, elem) {
+	$.getJSON(url, function(data){
+		if (data.errorCode == 0) {
+			console.log(elem);
+		} else if(data.errorCode > 0) {
+			alert("Oups! A problem occured: " + data.errorMessage + " (Error code:" + data.errorCode + ")");
+		}
+	});
+}
+	</script>
 	<div id="pageContent">
 		<div class="contentBlock">
 			<div class="blockHeader withSectionMenu">
@@ -35,6 +48,25 @@
 				<div class="sidebar">
 					<div id="memberAvatar">
 						<a href="/Members/{{ visitedMember.key() }}"><img width="180" height="180" src="{{ visitedMember.gravatar180() }}" /></a>
+					</div>
+					<div class="sidebarPanel">
+						<div class="sidebarMenu">
+							<ul>
+								{% if currentMember.key() != visitedMember.key() %}
+									{% if currentMember.get_relationship_status(visitedMember, "follower") == "ok" %}
+										<li>
+											<a onclick="call_stop_following('/Members/{{ visitedMember.key() }}/StopFollowing'); return false;" href="">
+											<span class="spriteIcons icon-profile-added"></span>
+											{% trans %}Following{% endtrans %}</a></li>
+									{% else %}
+										<li>
+											<a onclick="call_follow('/Members/{{ visitedMember.key() }}/Follow', this); return false;" href="#">
+											<span class="spriteIcons icon-profile-add"></span>
+											{% trans %}Follow!{% endtrans %}</a></li>
+									{% endif %}
+								{% endif %}
+							</ul>
+						</div>
 					</div>
 					{% block sidebar %}{% endblock %}
 				</div>

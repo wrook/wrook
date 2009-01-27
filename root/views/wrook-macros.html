@@ -116,6 +116,47 @@ $(document).ready(function(){
 	<div class="clearfix"></div>
 {%- endmacro %}
 
+{% macro members_list_small(members) -%}
+<style>
+.tooltip-content {
+	display: none;
+}
+</style>
+<script>
+<!--
+$(document).ready(function(){
+	$(".avatar a").tooltip({ 
+	    track: true, 
+	    delay: 0, 
+	    showURL: false,
+	    top: 10,
+	    left: 10,
+	    width: 300,
+	    bodyHandler: function() {
+	    	return $(".tooltip-content", $(this).parent()).html(); 
+	    }
+	});
+});
+-->
+</script>
+	<div class="memberList small">
+		<ul>
+			{% for member in members %}
+				<li>
+					<div class="avatar">
+						{{ corners("white5px") }}
+						<a href="/Members/{{ member.key() }}"><img width="50" height="50" alt="{{ member.fullname()|e }}" src="{{ member.gravatar50() }}" /></a>
+						<div class="tooltip-content">
+							{{ member.fullname()|e }}
+						</div>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="clearfix"></div>
+{%- endmacro %}
+
 {% macro notice(title, body) -%}
 	<div class="notice">
 		{{ corners("white5px") }}

@@ -1,0 +1,19 @@
+<div id="{{ post.key() }}" class='storyPosts-item miniMenuContext'>
+	<div>
+		<div style="position: absolute; top: 5px; right: 3px; z-index: 1000" class="miniMenuAnchor" id="storyPost-{{ post.key() }}"></div>
+		{% if post.Icon %}<span class="icon"><img src="/images/storyIcons/{{ post.Icon }}" /></span>{% endif %}
+		<span class="moreLink"></span>
+		<h4>
+			<span class="title">{{ post.Title }}</span>
+			<span class="when">{% trans timeAgo=post.WhenOccured %} {{timeAgo}} ago {% endtrans %}</span>
+		</h4>
+	</div>
+	<div class="more">
+		{% if post.Body %}
+			<div class="body">
+				{{ post.Body }}
+				<div class="clearfix"></div>
+			</div>
+		{% endif %}
+	</div>
+</div>

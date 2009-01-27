@@ -663,6 +663,7 @@ table tr td {
 	padding: 0xp;
 }
 .sidebarMenu ul li{
+	position: relative;
 	list-style: none;
 	margin: 0px;
 	padding: 0px 0px 0px 0px;
@@ -679,6 +680,7 @@ table tr td {
 .sidebarMenu a:hover {
 	background: #000;
 }
+.sidebarMenu .spriteIcons,
 .sidebarMenu .icon {
 	position: absolute;
 	left: 10px;
