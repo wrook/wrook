@@ -1,17 +1,48 @@
 {% extends "template-main-e2.html" %}
 {% block pageContent %}
 	<script>
-function call_stop_following(url, elem) {
-}
-function call_follow(url, elem) {
-	$.getJSON(url, function(data){
-		if (data.errorCode == 0) {
-			console.log(elem);
-		} else if(data.errorCode > 0) {
-			alert("Oups! A problem occured: " + data.errorMessage + " (Error code:" + data.errorCode + ")");
-		}
-	});
-}
+$(document).ready(function(){
+	var doFollow = function(e) {
+		var linkElem = this
+		url="/Members/{{ visitedMember.key() }}/Follow";
+		
+		$(".label", linkElem)[0].innerHTML = "Adding...";
+
+		$.getJSON(url, function(data){
+			if (data.errorCode == 0) {
+				$(linkElem).unbind("click")
+				$(linkElem).click(doStopFollowing)
+				$(".label", linkElem)[0].innerHTML = "Following";
+				$(".spriteIcons", linkElem).addClass("icon-profile-added");
+				$(".spriteIcons", linkElem).removeClass("icon-profile-add");
+			} else if(data.errorCode > 0) {
+				alert("Oups! A problem occured: " + data.errorMessage + " (Error code:" + data.errorCode + ")");
+			}
+		});
+		return false;
+	}
+	var doStopFollowing = function(e) {
+		var linkElem = this
+		url="/Members/{{ visitedMember.key() }}/StopFollowing";
+	
+		$(".label", linkElem)[0].innerHTML = "Removing...";
+	
+		$.getJSON(url, function(data){
+			if (data.errorCode == 0) {
+				$(linkElem).unbind("click")
+				$(linkElem).click(doFollow)
+				$(".label", linkElem)[0].innerHTML = "Follow!";
+				$(".spriteIcons", linkElem).addClass("icon-profile-add");
+				$(".spriteIcons", linkElem).removeClass("icon-profile-added");
+			} else if(data.errorCode > 0) {
+				alert("Oups! A problem occured: " + data.errorMessage + " (Error code:" + data.errorCode + ")");
+			}
+		});
+		return false;
+	}
+	$("#doFollow").click(doFollow)
+	$("#doStopFollowing").click(doStopFollowing)
+})
 	</script>
 	<div id="pageContent">
 		<div class="contentBlock">
@@ -34,6 +65,39 @@ function call_follow(url, elem) {
 				<div class="clearfix"></div>
 			</div>
 			<div class="blockContent">
+				<div class="sidebar">
+					<div id="memberAvatar">
+						<a href="/Members/{{ visitedMember.key() }}"><img width="180" height="180" src="{{ visitedMember.gravatar180() }}" /></a>
+					</div>
+					<div class="sidebarPanel">
+						<div class="sidebarMenu">
+							<ul>
+								{% if currentMember.key() != visitedMember.key() %}
+									{% if currentMember.get_relationship_status(visitedMember, "follower") == "ok" %}
+										<li>
+											<a id="doStopFollowing" href="#">
+												<span class="spriteIcons icon-profile-added"></span>
+												<span class="label">
+													{% trans %}Following{% endtrans %}
+												</span>
+											</a>
+										</li>
+									{% else %}
+										<li>
+											<a id="doFollow" href="#">
+												<span class="spriteIcons icon-profile-add"></span>
+												<span class="label">
+													{% trans %}Follow!{% endtrans %}
+												</span>
+											</a>
+										</li>
+									{% endif %}
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+					{% block sidebar %}{% endblock %}
+				</div>
 				<div class="blockBody">
 					<div class="top"></div>
 					<div class="middle">
@@ -45,31 +109,7 @@ function call_follow(url, elem) {
 					</div>
 					<div class="bottom"></div>
 				</div>
-				<div class="sidebar">
-					<div id="memberAvatar">
-						<a href="/Members/{{ visitedMember.key() }}"><img width="180" height="180" src="{{ visitedMember.gravatar180() }}" /></a>
-					</div>
-					<div class="sidebarPanel">
-						<div class="sidebarMenu">
-							<ul>
-								{% if currentMember.key() != visitedMember.key() %}
-									{% if currentMember.get_relationship_status(visitedMember, "follower") == "ok" %}
-										<li>
-											<a onclick="call_stop_following('/Members/{{ visitedMember.key() }}/StopFollowing'); return false;" href="">
-											<span class="spriteIcons icon-profile-added"></span>
-											{% trans %}Following{% endtrans %}</a></li>
-									{% else %}
-										<li>
-											<a onclick="call_follow('/Members/{{ visitedMember.key() }}/Follow', this); return false;" href="#">
-											<span class="spriteIcons icon-profile-add"></span>
-											{% trans %}Follow!{% endtrans %}</a></li>
-									{% endif %}
-								{% endif %}
-							</ul>
-						</div>
-					</div>
-					{% block sidebar %}{% endblock %}
-				</div>
+				<div class="clearfix"></div>
 			</div>
 			<div class="blockFooter"></div>
 		</div>

@@ -184,4 +184,11 @@ $(document).ready(function(){
 	/* DOESNT SEEM TO BE CACHED */
 	// $("head").append('<script type="text/javascript" src="/scripts/main-lazy.js"></script>');
 	miniMenu.load();
+
+	/* Adjusts the height of the content column to match the height of the sidebar	*/
+	sidebarHeight = $(".sidebar")[0].offsetHeight
+	contentHeight = $(".blockBody .middle")[0].offsetHeight
+	if (contentHeight < sidebarHeight) {
+		$(".blockBody .middle")[0].style.height = sidebarHeight + "px"
+	}
 });

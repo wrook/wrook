@@ -12,6 +12,8 @@
             <string>stylesheets\template-d.css</string>
             <key>-d.css</key>
             <string>stylesheets\template-d.css</string>
+            <key>-d.s</key>
+            <string>stylesheets\template-d.css</string>
             <key>-main</key>
             <string>views\template-main-e2.html</string>
             <key>-pro</key>
@@ -19,6 +21,8 @@
             <key>-prof</key>
             <string>views\template-profile2.html</string>
             <key>-profi</key>
+            <string>views\template-profile2.html</string>
+            <key>-profil</key>
             <string>views\template-profile2.html</string>
             <key>-view</key>
             <string>views\books-view.html</string>
@@ -45,7 +49,7 @@
             <key>about</key>
             <string>about.py</string>
             <key>admin</key>
-            <string>admin.py</string>
+            <string>adminCommands.py</string>
             <key>analy</key>
             <string>views\analytics.html</string>
             <key>ap</key>
@@ -53,7 +57,7 @@
             <key>app</key>
             <string>app.py</string>
             <key>app.</key>
-            <string>app.yaml</string>
+            <string>app.py</string>
             <key>app.p</key>
             <string>app.py</string>
             <key>app.y</key>
@@ -151,7 +155,7 @@
             <key>cover</key>
             <string>views\covers-list.html</string>
             <key>covers</key>
-            <string>views\covers-list.html</string>
+            <string>views\members-covers-list.html</string>
             <key>cpal</key>
             <string>views\about-CPAL.html</string>
             <key>cus</key>
@@ -192,6 +196,8 @@
             <string>views\about-openSourceLicense.html</string>
             <key>licens</key>
             <string>licensing.py</string>
+            <key>list</key>
+            <string>views\members-covers-list.html</string>
             <key>logi</key>
             <string>views\login.html</string>
             <key>login</key>
@@ -203,7 +209,7 @@
             <key>macro</key>
             <string>views\wrook-macros.html</string>
             <key>main</key>
-            <string>stylesheets\main.css</string>
+            <string>scripts\main.js</string>
             <key>main-</key>
             <string>views\template-main-e.html</string>
             <key>main-d</key>
@@ -211,7 +217,7 @@
             <key>main-e</key>
             <string>views\template-main-e.html</string>
             <key>main.</key>
-            <string>stylesheets\main.css</string>
+            <string>scripts\main.js</string>
             <key>main.c</key>
             <string>stylesheets\main.css</string>
             <key>main.cs</key>
@@ -289,7 +295,7 @@
             <key>panels</key>
             <string>views\panels-aboutWrook.html</string>
             <key>part</key>
-            <string>feathers\views\talk-part-topic.html</string>
+            <string>views\part-stories2.html</string>
             <key>part-</key>
             <string>feathers\views\talk-part-topic.html</string>
             <key>part-T</key>
@@ -338,8 +344,10 @@
             <string>feathers\views\talk-part-replyForm.html</string>
             <key>reset</key>
             <string>views\resetPassword.html</string>
+            <key>scr</key>
+            <string>views\scripts.html</string>
             <key>scrip</key>
-            <string>feathers\views\talk-script-topicForm.js</string>
+            <string>views\scripts.html</string>
             <key>script</key>
             <string>views\scripts.html</string>
             <key>script-</key>
@@ -382,6 +390,8 @@
             <string>feathers\stories.py</string>
             <key>stories.p</key>
             <string>stories.py</string>
+            <key>style</key>
+            <string>views\stylesheets.html</string>
             <key>styles</key>
             <string>views\stylesheets.html</string>
             <key>sugges</key>
@@ -445,7 +455,7 @@
             <key>templat-b</key>
             <string>views\template-book.html</string>
             <key>template</key>
-            <string>views\template-main-d2.html</string>
+            <string>stylesheets\template-d.css</string>
             <key>template-</key>
             <string>views\template-profile.html</string>
             <key>template-bo</key>

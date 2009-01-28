@@ -16,7 +16,7 @@ h1 {
 	padding: 0px 0px 10px 0px;
 	font-size: 1.7em;
 	color: #000;
-	clear: both;
+	clear: left;
 }
 
 h2 {
@@ -24,11 +24,12 @@ h2 {
 	margin: 0px;
 	font-size: 1.4em;
 	color: #000000;
-	clear: both;
 	font-weight: normal;
+	clear: left;
 }
 
 h3 {
+	clear: left;
 }
 
 table tbody tr th {

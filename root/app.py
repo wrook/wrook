@@ -49,6 +49,7 @@ def onRequest(self):
 	'''
 	import os
 	import datetime
+	import random
 	from feathers import webapp
 	from feathers import membership
 
@@ -67,6 +68,7 @@ def onRequest(self):
 	if self.CurrentMember: translation.activate(self.CurrentMember.PreferedLanguage) # If the is a current member, his prefered language is activated
 	else: translation.activate("en") # If not, the default language is set to english
 	self.Model.update({
+		'random': random.random(),
 		'templateMain': self.MasterTemplate,
 		'templateScripts': self.MasterTemplateScripts,
 		'templateStylesheets': self.MasterTemplateStylesheets,

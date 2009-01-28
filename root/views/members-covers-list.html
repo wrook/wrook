@@ -21,6 +21,7 @@
 			</div>
 		{% endfor %}
 	</div>
+	<div class="clearleft"></div>
 	{% if permissionMemberCanSeePrivateCovers %}
 		{% ifequal currentMember.key visitedMember.key %}
 			<h2>{% trans "Your private covers" %}</h2>
@@ -39,6 +40,7 @@
 				</div>
 			{% endfor %}
 		</div>
+		<div class="clearleft"></div>
 	{% endif %}
 {% endblock %}
 

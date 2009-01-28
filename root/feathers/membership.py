@@ -373,8 +373,16 @@ http://www.wrook.org
 		else:
 			return relationship
 
+	def stop_relationship_with(self, member, relationshipType):
+		relationships = self.RelationshipsFrom.filter("Type =", relationshipType).filter("To =", member)
+		db.delete(relationships)
+		return True
+
 	def start_follower_relationship_with(self, member):
 		return self.start_relationship_with(member, "follower")
+
+	def stop_follower_relationship_with(self, member):
+		return self.stop_relationship_with(member, "follower")
 
 	def get_relationships_members_to(self, relationshipType, relationshipStatus="ok"):
 		relationships = self.RelationshipsTo.filter("Type =", relationshipType).filter("Status =", relationshipStatus).fetch(limit=999)

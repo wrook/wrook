@@ -9,6 +9,10 @@ h1 {
 	clear: both;
 	height: 1px;
 }
+.clearleft { 
+	clear: left;
+	height: 1px;
+}
 
 a,
 a:link,

@@ -18,6 +18,7 @@ def URLMappings():
 		(r'/Members/(.*)/Readings', MembersReadingsList),
 		(r'/Members/(.*)/Profile', MembersProfile),
 		(r'/Members/(.*)/Follow', MembersFollow),
+		(r'/Members/(.*)/StopFollowing', MembersStopFollowing),
 		(r'/Members/(.*)', MembersFeed),
 		( '/Customize', Customize),
 		( '/Suggestions', Suggestions)]
@@ -106,6 +107,27 @@ class MembersFollow(webapp.RequestHandler):
 		if self.CurrentMember!=None and member!=None:
 			newRelationship = self.CurrentMember.start_follower_relationship_with(member)
 			if newRelationship:
+				data = {"errorCode":0, "html": _("Done!")}
+				self.response.out.write("(%s)" % simplejson.dumps(data))
+			else:
+				self.response.out.write(simplejson.dumps({
+					"errorCode": 1,
+					"errorMessage": _("An error occured! Sorry!")
+					}))
+		else:
+			self.response.out.write(simplejson.dumps({
+				"errorCode": 1,
+				"errorMessage": _("An error occured! Sorry!")
+				}))
+
+class MembersStopFollowing(webapp.RequestHandler):
+	def get(self, key):
+		from django.utils import simplejson
+		onRequest(self)
+		member = membership.Member.get(key)
+		if self.CurrentMember!=None and member!=None:
+			result = self.CurrentMember.stop_follower_relationship_with(member)
+			if result:
 				data = {"errorCode":0, "html": _("Done!")}
 				self.response.out.write("(%s)" % simplejson.dumps(data))
 			else:
