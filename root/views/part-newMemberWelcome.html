@@ -1,14 +1,1 @@
-﻿{% ifequal session.Member.isNew True %}
-	<div>
-		{% if not hasReadWrookForBeginners %}
-			<div class="genericNotice">
-		<h2>
-			{% trans "Welcome" %} {{ session.Member.fullname }}
-		</h2>
-{% blocktrans %}
-<strong>New to wrook?</strong> We invite all our new members to learn about Wrook by reading <a href="/Books/wrook-for-beginners">Wrook for beginners</a>. This introduction is actually a short book hosted on wrook as any other book would be. Reading this, will both be informative and let you experience how to read books on Wrook. So, go ahead and <a href="/Books/wrook-for-beginners">Start reading</a>!
-{% endblocktrans %}
-			</div>
-		{% endif %}
-	</div>
-{% endifequal %}
+﻿

@@ -1,4 +1,5 @@
 {% extends "template-profile2.html" %}
+{% set subSection = "readings" %}
 {% import "wrook-macros.html" as wrook %}
 {% block title %}
 	<h1>
@@ -14,6 +15,6 @@
 		<h2>{% trans %}Followed by:{% endtrans %}</h2>
 		{{ wrook.members_list_small(followers) }}
 	{% endif %}
-	<h2>Books</h2>
+	<h2>Bookmarks</h2>
 	{{ wrook.book_list(books) }}
 {% endblock %}

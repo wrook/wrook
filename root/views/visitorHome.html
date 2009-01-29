@@ -1,10 +1,9 @@
-﻿{% extends "template-main-e.html" %}
-{% load i18n %}
+﻿{% extends "template-main-e2.html" %}
 {% block pageId %}home-visitor{% endblock %}
 {% block pageTitle %}{% trans "Welcome" %}{% endblock %}
 {% block title %}
 	<h1>
-		{% trans "Read Write Share!" %}
+		{% trans %}Read Write Share!{% endtrans %}
 	</h1>
 {% endblock %}
 
@@ -13,25 +12,25 @@
 	<div style="float: right; width: 300px; margin-left: 20px; position: relative;">
 <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="300" height="200" id="viddler"><param name="movie" value="http://www.viddler.com/simple_on_site/8bb67e83" /><param name="allowScriptAccess" value="always" /><param name="allowFullScreen" value="true" /><param name="wmode" value="transparent" /> <embed src="http://www.viddler.com/simple_on_site/8bb67e83" width="300" height="200" type="application/x-shockwave-flash" allowScriptAccess="always" allowFullScreen="true" wmode="transparent" name="viddler" ></embed></object>
 	</div>
-{% blocktrans %}
+{% trans %}
 <p>Wrook is a community for readers and writers who share a passion for literatures of all kinds.</p>
 <ul>
 <li><strong>Read free litterature</strong> submitted by members: Stories, Novels, Poetry and more.</li>
 <li><strong>Write, publish and share</strong> your own writtings with your fans and other members.</li>
 <li>Get access to <strong>usefull tools</strong> for reading, writing and publishing litterature.</li>
 </ul>
-{% endblocktrans %}
+{% endtrans %}
 	<br/>
 	<form action="/Join/"><button><span>Join</span></button></form>
 
 	</div>
 
-	<h2>{% trans "Latest news" %}</h2>
+	<h2>{% trans %}Latest news{% endtrans %}</h2>
 	<div class="tumblr-blog">
 		<script type="text/javascript" src="http://wrook.tumblr.com/js"></script> 
 	</div>
 {% endblock %}
 
 {% block sidebarBottom %}
-	{% include "panels-aboutWrook.html" %}
+	{% include "panels-aboutWrook2.html" %}
 {% endblock %}

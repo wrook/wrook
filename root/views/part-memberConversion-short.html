@@ -1,5 +1,4 @@
-{% load i18n %}
-{% ifequal currentMember.memberConversionLevel "none" %}
+{% if currentMember.memberConversionLevel()=="none" %}
 	<style>
 		.memberConversion {
 			border: 2px solid #d9d75c;
@@ -11,10 +10,10 @@
 		}
 	</style>
 	<div class="memberConversion">
-{% blocktrans with currentMember.firstname as firstname %}
+{% trans firstname=currentMember.firstname %}
 <strong>Welcome {{ firstname }}!</strong> Since you are a new member we have a
 few suggestions you might find interesting.
 <a href="/Suggestions">Read more...</a>
-{% endblocktrans %}
+{% endtrans %}
 	</div>
-{% endifequal %}
+{% endif %}

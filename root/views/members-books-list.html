@@ -1,4 +1,5 @@
 {% extends "template-profile2.html" %}
+{% set subSection = "books" %}
 {% import "wrook-macros.html" as wrook %}
 {% block title %}
 	<h1>
@@ -8,6 +9,7 @@
 {% block content %}
 	<h2>{% trans firstname=visitedMember.Firstname %}{{ firstname}}'s books{% endtrans %}</h2>
 	{{ wrook.book_list(books) }}
+	<div class="clearfix"></div>
 {% endblock %}
 
 {% block sidebar %}
@@ -15,7 +17,7 @@
 		<h3>{% trans %}Options{% endtrans %}</h3>
 		<div class="sidebarMenu">
 			<ul>
-				{% if hasEditRights %}
+				{% if visitedMember.key()==currentMember.key() %}
 					<li><a href="/Books/Edit/">{% trans %}Start a new book{% endtrans %}</a></li>
 				{% endif %}
 			</ul>

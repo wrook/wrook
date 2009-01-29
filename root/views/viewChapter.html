@@ -93,17 +93,6 @@
 		</div>
 	{% endif %}
 
-	<div class="sidebarPanel">
-		<h3>{% trans %}About this chapter{% endtrans %}</h3>
-		<div class="sidebarMenu">
-			<ul>
-				<li>
-					<a href="/Books/Chapters/{{ chapter.key() }}/Rev">{{ chapter.Revisions.count() }} {% trans %}Revisions{% endtrans %}</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-
 	{% if chapter.Book.NoteFromAuthor %}
 		<div class="sidebarPanel">
 			<h3>{% trans %}Note from the author{% endtrans %}</h3>

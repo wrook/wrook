@@ -31,13 +31,6 @@ class Home(webapp.RequestHandler):
 			self.setVisitedMember(self.CurrentMember)
 			BeginnerBook = []
 			BeginnerBookmark = []
-			hasReadWrookForBeginners = False
-			# Refactor: Put in a cached method
-			# BeginnerBook = Book.all().filter("Slug =", "wrook-for-beginners").fetch(limit=1)
-			# if len(BeginnerBook) > 0:
-				# BeginnerBookmark = Bookmark.all().filter("Reader = ", self.CurrentMember).filter("Book =", BeginnerBook[0]).fetch(limit=1)
-			# if len(BeginnerBookmark) > 0:
-				# hasReadWrookForBeginners = True
 			
 			cacheKey = "wrookMemberPosts-%s" % self.CurrentMember.key()
 			posts = memcache.get(cacheKey)
@@ -46,12 +39,11 @@ class Home(webapp.RequestHandler):
 				memcache.add(cacheKey, posts)
 			
 			self.Model.update({
-				"posts": posts,
-				"hasReadWrookForBeginners": hasReadWrookForBeginners
+				"posts": posts
 				})
-			self.render('views/memberHome.html')
+			self.render2('views/memberHome.html')
 		else:
-			self.render('views/visitorHome.html')
+			self.render2('views/visitorHome.html')
 
 class MembersFeed(webapp.RequestHandler):
 	def get(self, key):
@@ -96,7 +88,7 @@ class MembersProfile(webapp.RequestHandler):
 			self.Model.update({
 				"now": datetime.datetime.now()
 				})
-			self.render('views/MembersProfile.html')
+			self.render2('views/MembersProfile.html')
 		else: self.error(404)
 
 class MembersFollow(webapp.RequestHandler):
@@ -175,7 +167,7 @@ class MembersCoversList(webapp.RequestHandler):
 					'privateCovers': privateCovers,
 					'permissionMemberCanSeePrivateCovers': permissionMemberCanSeePrivateCovers
 					})
-				self.render('views/members-covers-list.html')
+				self.render2('views/members-covers-list.html')
 			else: self.error(404)
 		else: self.requestLogin()
 

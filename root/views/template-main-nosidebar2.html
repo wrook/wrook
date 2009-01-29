@@ -11,7 +11,7 @@
 		{% endif %}
 {% block htmlHead %}{% endblock %}
 	</head>
-	<body id="page-{% block pageId %}none{% endblock %}">
+	<body class="section-{{ section }}" id="page-{% block pageId %}none{% endblock %}">
 		{% if currentTheme %}
 			<div id="wallpaper">
 				<div id="shadow"></div>
@@ -30,9 +30,10 @@
 					{% if currentMember %}
 						<div id="mainMenu">
 							<ul>
-								<li><a id="menu-home" href="/">{% trans %}Profile{% endtrans %}</a></li>
+								<li><a id="menu-home" href="/">{% trans %}Home{% endtrans %}</a></li>
 								<li><a id="menu-books" href="/Books">{% trans %}Books{% endtrans %}</a></li>
 								<li><a id="menu-readers" href="/Members">{% trans %}Members{% endtrans %}</a></li>
+								<li><a id="menu-invites" href="/Invites">{% trans %}Invites{% endtrans %}</a></li>
 							</ul>
 						</div>
 						<div id="accessMenu">

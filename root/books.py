@@ -40,8 +40,6 @@ def URLMappings():
 		(r'/Books/SetCover/(.*)', BookSetCover),
 		(r'/Books/ReorderChapters/(.*)', Book_ReorderChapters),
 		(r'/Books/Delete/(.*)', DeleteBook),
-		(r'/Books/Chapters/(.*)/Rev/(.*)', Revisions_View),
-		(r'/Books/Chapters/(.*)/Rev', Revisions_List),
 		(r'/Books/(.*)/Readers', handler_book_readers),
 		(r'/Books/(.*)/Talk', Books_Talk),
 		(r'/Books/(.*)/Feed', Books_Feed),
@@ -773,37 +771,6 @@ class NewChapter(webapp.RequestHandler):
 						'book': book
 						})
 					self.render("views/books-chapter-new.html")
-			else: self.error(404)
-		else: self.requestLogin()
-
-class Revisions_List(webapp.RequestHandler):
-	def get(self, key):
-		onRequest(self)
-		if self.CurrentMember:
-			chapter = Chapter.get(key)
-			if chapter:
-				self.Model.update({
-					'chapter': chapter,
-					'revisions': chapter.Revisions.order("-Version").fetch(limit=999)
-					})
-				self.render('views/revisions-list.html')
-			else: self.error(404)
-		else: self.requestLogin()
-
-class Revisions_View(webapp.RequestHandler):
-	def get(self, key, version):
-		onRequest(self)
-		if self.CurrentMember:
-			chapter = Chapter.get(key)
-			if chapter:
-				revision = chapter.Revisions.filter("Version =", int(version)).fetch(limit=1)
-				if len(revision) > 0:
-					self.Model.update({
-						'chapter': chapter,
-						'revision': revision[0]
-						})
-					self.render('views/revisions-view.html')
-				else: self.error(404)
 			else: self.error(404)
 		else: self.requestLogin()
 

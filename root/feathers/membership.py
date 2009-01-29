@@ -801,7 +801,7 @@ class AccountView(webapp.RequestHandler):
 			self.Model.update({
 				'member': self.CurrentMember
 				})
-			self.render('views/viewAccount.html')
+			self.render2('views/viewAccount.html')
 		else: self.requestLogin()
 
 class EditAccount(webapp.RequestHandler):

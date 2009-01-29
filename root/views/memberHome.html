@@ -1,22 +1,19 @@
-﻿{% extends "template-profile.html" %}
-{% load i18n %}
+{% extends "template-profile2.html" %}
+{% set subSection = "news" %}
 {% block pageId %}home-member{% endblock %}
-{% block pageTitle %}{% trans "Home" %}{% endblock %}
-{% block title %}
-{% endblock %}
+{% block pageTitle %}{% trans %}Home{% endtrans %}{% endblock %}
 {% block content %}
 	{% include "part-memberConversion-short.html" %}
-	{% include "template-part-newMemberWelcome.html" %}
 	<h2>
-		{% trans "What's new" %}
+		{% trans %}What's new{% endtrans %}
 	</h2>
 	{% if posts %}
 		<div class="storyPosts">
-			{% for post in posts %}{% include "part-stories.html" %}{% endfor %}
+			{% for post in posts %}{% include "part-stories2.html" %}{% endfor %}
 		</div>
 	{% else %}
 		<div>
-		{% trans "There is no activity to show!" %}
+		{% trans %}There is no activity to show!{% endtrans %}
 		</div>
 	{% endif %}
 {% endblock %}
@@ -25,9 +22,8 @@
 	<div class="sidebarPanel">
 		<div class="sidebarMenu">
 			<ul>
-				<li><a id="sidebarMenu-startNewBook" href="/Books/Edit/">{% trans "Start a new book" %}</a></li>
-				<li><a id="sidebarMenu-publicProfile" href="/Members/{{ currentMember.key }}">{% trans "Public profile" %}</a></li>
-				<li><a id="sidebarMenu-accountSettings" href="/Account/View">{% trans "Account settings" %}</a></li>
+				<li><a id="sidebarMenu-publicProfile" href="/Members/{{ currentMember.key() }}">{% trans %}Your public profile{% endtrans %}</a></li>
+				<li><a id="sidebarMenu-accountSettings" href="/Account/View">{% trans %}Account settings{% endtrans %}</a></li>
 			</ul>
 		</div>
 	</div>

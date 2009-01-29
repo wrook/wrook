@@ -1,4 +1,6 @@
 {% extends "template-main-e2.html" %}
+{% import 'member-macros.html' as memberMacros %}
+{% set section="member-profile" %}
 {% block pageContent %}
 	<script>
 $(document).ready(function(){
@@ -50,18 +52,7 @@ $(document).ready(function(){
 				<h1><a href="/Members/{{ visitedMember.key() }}">
 					{{ visitedMember.fullname() }}
 				</a></h1>
-				<div class="sectionMenu">
-					<ul>
-						<li><a id="menu-memberFeed" href="/Members/{{ visitedMember.key() }}"><span>{% trans %}Feed{% endtrans %}</span></a></li>
-						<li><a id="menu-memberProfile" href="/Members/{{ visitedMember.key() }}/Profile"><span>{% trans %}Profile{% endtrans %}</span></a></li>
-						<li><a id="menu-memberBooks" href="/Members/{{ visitedMember.key() }}/Books"><span>{% trans %}Books{% endtrans %}</span></a></li>
-						<li><a id="menu-memberReadings" href="/Members/{{ visitedMember.key() }}/Readings"><span>{% trans %}Readings{% endtrans %}</span></a></li>
-						<li><a id="menu-memberCovers" href="/Members/{{ visitedMember.key() }}/Covers"><span>{% trans %}Covers{% endtrans %}</span></a></li>
-						{% if visitedMember==currentMember %}
-							<li><a id="menu-memberInvites" href="/Invites"><span>{% trans %}Invites{% endtrans %}</span></a></li>
-						{% endif %}
-					</ul>
-				</div>
+				{{ memberMacros.tabs_profile(visitedMember, subSection) }}
 				<div class="clearfix"></div>
 			</div>
 			<div class="blockContent">
@@ -69,10 +60,10 @@ $(document).ready(function(){
 					<div id="memberAvatar">
 						<a href="/Members/{{ visitedMember.key() }}"><img width="180" height="180" src="{{ visitedMember.gravatar180() }}" /></a>
 					</div>
-					<div class="sidebarPanel">
-						<div class="sidebarMenu">
-							<ul>
-								{% if currentMember.key() != visitedMember.key() %}
+					{% if currentMember.key() != visitedMember.key() %}
+						<div class="sidebarPanel">
+							<div class="sidebarMenu">
+								<ul>
 									{% if currentMember.get_relationship_status(visitedMember, "follower") == "ok" %}
 										<li>
 											<a id="doStopFollowing" href="#">
@@ -92,10 +83,10 @@ $(document).ready(function(){
 											</a>
 										</li>
 									{% endif %}
-								{% endif %}
-							</ul>
+								</ul>
+							</div>
 						</div>
-					</div>
+					{% endif %}
 					{% block sidebar %}{% endblock %}
 				</div>
 				<div class="blockBody">

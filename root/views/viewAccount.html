@@ -1,37 +1,36 @@
-﻿{% extends "template-main-d.html" %}
-{% load i18n %}
+{% extends "template-main-e2.html" %}
 {% block pageId %}account-view{% endblock %}
-{% block pageTitle %}{% trans "Your account" %}{% endblock %}
+{% block pageTitle %}{% trans %}Your account{% endtrans %}{% endblock %}
 {% block title %}
 	<h1>
-		{% trans "Your account" %}
+		{% trans %}Your account{% endtrans %}
 	</h1>
 {% endblock %}
 {% block content %}
 	<table>
 		<tbody>
 			<tr>
-				<th>Name</th>
+				<th>{% trans %}Name{% endtrans %}</th>
 				<td id="valFirstname">{{ member.Firstname }} {{ member.Lastname }}</td>
 			</tr>
 			<tr>
-				<th>Username</th>
+				<th>{% trans %}Username{% endtrans %}</th>
 				<td id="valUsername">{{ member.Username }}</td>
 			</tr>
 			<tr>
-				<th>Email</th>
+				<th>{% trans %}Email{% endtrans %}</th>
 				<td id="valEmail">{{ member.Email }}</td>
 			</tr>
 			<tr>
-				<th>Prefered language</th>
-				<td id="valPreferedLanguage">{{ member.preferedLanguageName }}</td>
+				<th>{% trans %}Prefered language{% endtrans %}</th>
+				<td id="valPreferedLanguage">{{ member.preferedLanguageName() }}</td>
 			</tr>
 			<tr>
-				<th>Gender</th>
-				<td id="Gender">{{ member.genderName }}</td>
+				<th>{% trans %}Gender{% endtrans %}</th>
+				<td id="Gender">{{ member.genderName() }}</td>
 			</tr>
 			<tr>
-				<th>About you</th>
+				<th>{% trans %}About you{% endtrans %}</th>
 				<td id="valAbout">
 					{% if member.About %}
 						{{ member.About }}
@@ -44,7 +43,7 @@
 					<div class="buttonBar">
 						<ul>
 							<li><a id="btnEditAccount" href="/EditAccount"><span>
-								{% trans "Edit account" %}
+								{% trans %}Edit account{% endtrans %}
 							</span></a></li>
 						</ul>
 					</div>
@@ -56,11 +55,11 @@
 
 {% block sidebar %}
 	<div class="sidebarPanel">
-		<h3>{% trans "Options" %}</h3>
+		<h3>{% trans %}Options{% endtrans %}</h3>
 		<div class="sidebarMenu">
 			<ul>
-				<li><a id="sidebarMenu-changePassword" href="/Account/ChangePassword">{% trans "Change password" %}</a></li>
-				<li><a id="sidebarMenu-changeProfilePhoto" href="/Account/ChangeProfilePhoto">{% trans "Change profile photo" %}</a></li>
+				<li><a id="sidebarMenu-changePassword" href="/Account/ChangePassword">{% trans %}Change password{% endtrans %}</a></li>
+				<li><a id="sidebarMenu-changeProfilePhoto" href="/Account/ChangeProfilePhoto">{% trans %}Change profile photo{% endtrans %}</a></li>
 			</ul>
 		</div>
 	</div>

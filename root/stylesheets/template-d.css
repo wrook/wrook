@@ -132,7 +132,6 @@ table tr td {
 	position: absolute;
 	left: 0px;
 	bottom: 5px;
-	font-family: "courier new", courier, serif;
 }
 
 #nav #mainMenu ul {
@@ -387,6 +386,7 @@ table tr td {
 	height: 70px;
 }
 
+
 .contentBlock .blockContent {
 	position: relative;
 	padding: 0px 0px 0px 10px;
@@ -626,6 +626,7 @@ table tr td {
 	overflow: visible;
 }
 
+
 #sidebar-content {
 	background: url(/images/logoAndBackground.png) 0px -93px no-repeat;
 	padding: 0px;
@@ -723,4 +724,30 @@ table tr td {
 #secondarySidebar h3 {
 	font-size: 1.5em;
 	font-weight: normal;
+}
+
+
+
+
+
+
+
+
+.section-member-profile .sidebar {
+	left: 0px;
+	top: -60px;
+	z-index: 5000;
+}
+.section-member-profile .sidebar h1 {
+	padding-left: 15px;
+}
+.section-member-profile .blockHeader {
+	padding-left: 190px;
+}
+.section-member-profile .blockBody {
+	padding-left: 190px;
+}
+.section-member-profile .sectionMenu {
+	top: 2px;
+	position: relative;
 }
