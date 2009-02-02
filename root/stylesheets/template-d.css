@@ -162,7 +162,6 @@ table tr td {
 	position: absolute;
 	right: 0px;
 	bottom: 5px;
-	font-family: courier new, courier, serif;
 }
 
 #nav #accessMenu ul {
@@ -657,6 +656,18 @@ table tr td {
 	text-align: left;
 	color: #fff;
 }
+
+.sidebar a:visited,
+.sidebar a:link {
+	text-align: left;
+	color: #fff;
+	text-decoration: none;
+}
+.sidebar a strong {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
 
 .sidebarMenu ul {
 	text-align: left;

@@ -14,6 +14,8 @@
             <string>stylesheets\template-d.css</string>
             <key>-d.s</key>
             <string>stylesheets\template-d.css</string>
+            <key>-macro</key>
+            <string>views\wrook-macros.html</string>
             <key>-main</key>
             <string>views\template-main-e2.html</string>
             <key>-pro</key>
@@ -23,6 +25,8 @@
             <key>-profi</key>
             <string>views\template-profile2.html</string>
             <key>-profil</key>
+            <string>views\template-profile2.html</string>
+            <key>-profile2</key>
             <string>views\template-profile2.html</string>
             <key>-view</key>
             <string>views\books-view.html</string>
@@ -116,6 +120,8 @@
             <string>views\members-bookmarks-list.html</string>
             <key>bookmarks</key>
             <string>views\members-bookmarks-list.html</string>
+            <key>bookmarks-list</key>
+            <string>views\members-bookmarks-list.html</string>
             <key>bookmars</key>
             <string>views\members-bookmarks-list.html</string>
             <key>books</key>
@@ -124,6 +130,10 @@
             <string>views\books-view.html</string>
             <key>books-co</key>
             <string>views\books-viewContents.html</string>
+            <key>books-l</key>
+            <string>views\books-talk.html</string>
+            <key>books-list</key>
+            <string>views\members-books-list.html</string>
             <key>books-talk.html</key>
             <string>views\books-talk.html</string>
             <key>books-v</key>
@@ -176,6 +186,8 @@
             <string>feathers\customize.py</string>
             <key>d.c</key>
             <string>stylesheets\template-d.css</string>
+            <key>d.cs</key>
+            <string>stylesheets\template-d.css</string>
             <key>d.css</key>
             <string>stylesheets\template-d.css</string>
             <key>e2.h</key>
@@ -184,6 +196,8 @@
             <string>memoize.py</string>
             <key>example</key>
             <string>scripts\jquery\jquery.example.js</string>
+            <key>expander</key>
+            <string>scripts\jquery\jquery.expander.js</string>
             <key>form</key>
             <string>feathers\views\talk-comment-miniForm.html</string>
             <key>half</key>
@@ -204,6 +218,8 @@
             <string>feathers\labs.py</string>
             <key>labs</key>
             <string>feathers\labs.py</string>
+            <key>layout</key>
+            <string>views\layout-macros.html</string>
             <key>licen</key>
             <string>views\about-openSourceLicense.html</string>
             <key>licens</key>
@@ -220,8 +236,10 @@
             <string>views\wrook-macros.html</string>
             <key>macro</key>
             <string>views\book-macros.html</string>
+            <key>macros</key>
+            <string>views\book-macros.html</string>
             <key>main</key>
-            <string>scripts\main.js</string>
+            <string>stylesheets\main.css</string>
             <key>main-</key>
             <string>views\template-main-e.html</string>
             <key>main-d</key>
@@ -255,8 +273,10 @@
             <key>member</key>
             <string>views\members-stories.html</string>
             <key>member-</key>
-            <string>views\members-books-list.html</string>
+            <string>views\members-stories.html</string>
             <key>member-m</key>
+            <string>views\member-macros.html</string>
+            <key>member-ma</key>
             <string>views\member-macros.html</string>
             <key>member-s</key>
             <string>views\members-stories.html</string>
@@ -287,12 +307,16 @@
             <key>memberpr</key>
             <string>views\MembersProfile.html</string>
             <key>members</key>
-            <string>views\members-stories.html</string>
+            <string>members.py</string>
             <key>members-</key>
             <string>views\members-books-list.html</string>
             <key>members-b</key>
             <string>views\members-books-list.html</string>
+            <key>members-book</key>
+            <string>views\members-bookmarks-list.html</string>
             <key>members-s</key>
+            <string>views\members-stories.html</string>
+            <key>members-stories.html</key>
             <string>views\members-stories.html</string>
             <key>members.</key>
             <string>members.py</string>
@@ -300,10 +324,14 @@
             <string>views\members.html</string>
             <key>members.html</key>
             <string>feathers\views\membership-invites.html</string>
+            <key>members.m</key>
+            <string>views\member-macros.html</string>
             <key>members.p</key>
             <string>members.py</string>
             <key>members2.h</key>
             <string>views\members2.html</string>
+            <key>membersPro</key>
+            <string>views\MembersProfile-About.html</string>
             <key>membersh</key>
             <string>feathers\membership.py</string>
             <key>membershi</key>
@@ -328,6 +356,8 @@
             <string>views\template-main-nosidebar2.html</string>
             <key>noside</key>
             <string>views\template-main-nosidebar2.html</string>
+            <key>nosideba</key>
+            <string>views\template-main-nosidebar.html</string>
             <key>old</key>
             <string>old_wrook.py</string>
             <key>pac</key>
@@ -352,6 +382,8 @@
             <string>views\part-stories.html</string>
             <key>part-stories.html</key>
             <string>views\part-stories.html</string>
+            <key>part-stories2.html</key>
+            <string>views\part-stories2.html</string>
             <key>part-t</key>
             <string>feathers\views\talk-part-topics.html</string>
             <key>part-titleBlock.html</key>
@@ -366,12 +398,16 @@
             <string>views\template-profile.html</string>
             <key>profil</key>
             <string>views\template-profile2.html</string>
-            <key>profile</key>
+            <key>profil2</key>
             <string>views\template-profile2.html</string>
+            <key>profile</key>
+            <string>views\MembersProfile.html</string>
             <key>profile2</key>
             <string>views\template-profile2.html</string>
             <key>proform</key>
             <string>feathers\proforma.py</string>
+            <key>r-ma</key>
+            <string>views\member-macros.html</string>
             <key>readers</key>
             <string>views\book-readers.html</string>
             <key>reorder</key>
@@ -424,6 +460,8 @@
             <string>stylesheets\sprites.css</string>
             <key>sprites</key>
             <string>stylesheets\sprites.css</string>
+            <key>sprites.</key>
+            <string>stylesheets\sprites.css</string>
             <key>stor</key>
             <string>feathers\stories.py</string>
             <key>stori</key>
@@ -431,7 +469,7 @@
             <key>storie</key>
             <string>feathers\stories.pyc</string>
             <key>stories</key>
-            <string>feathers\stories.py</string>
+            <string>views\members-stories.html</string>
             <key>stories.</key>
             <string>feathers\stories.py</string>
             <key>stories.p</key>

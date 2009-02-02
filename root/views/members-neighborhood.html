@@ -1,0 +1,18 @@
+{% extends "template-profile2.html" %}
+{% set subSection = "neighborhood" %}
+{% import "wrook-macros.html" as wrook %}
+{% block title %}
+	<h1>
+		{% trans %}Neighborhood{% endtrans %}
+	</h1>
+{% endblock %}
+{% block content %}
+	{% if following %}
+		<h2>{% trans %}Following:{% endtrans %}</h2>
+		{{ wrook.members_list_small(following) }}
+	{% endif %}
+	{% if followers %}
+		<h2>{% trans %}Followed by:{% endtrans %}</h2>
+		{{ wrook.members_list_small(followers) }}
+	{% endif %}
+{% endblock %}

@@ -1,49 +1,42 @@
 {% extends "template-profile2.html" %}
 {% set subSection = "profile" %}
-{% block title %}
-	<h1>
-		{% trans %}Profile{% endtrans %}
-	</h1>
-{% endblock %}
+{% import "wrook-macros.html" as wrookMacros %}
+{% import "layout-macros.html" as layout %}
+{% block pageTitle %}{{ visitedMember.fullname() }} - {% trans %}Profile{% endtrans %}{% endblock %}
 {% block content %}
-	{% if visitedMember.About %}
-		<div>
-			<h2>
-				{% trans firstname=visitedMember.Firstname %}Some details about {{ firstname }}{% endtrans %}
-			</h2>
-			{% if visitedMember.About %}
-				<div>
-					"&#160;{{ visitedMember.About|e }}&#160;"
-				</div>
-				<br/>
-			{% endif %}
-			<table>
-				<tbody>
-					{% if visitedMember.Gender %}
-						<tr>
-							<th>{% trans %}Gender{% endtrans %}:</th><td>{{ visitedMember.genderName() }}</td>
-						</tr>
-					{% endif %}
-					{% if visitedMember.Birthdate %}
-						<tr>
-							<th>{% trans %}Birth date{% endtrans %}:</th><td>{{ visitedMember.Birthdate }}</td>
-						</tr>
-					{% endif %}
-					<tr>
-						<th>{% trans %}Member since{% endtrans %}:</th><td>{{ visitedMember.Created }}</td>
-					</tr>
-					<tr>
-						<th>{% trans %}Prefered language{% endtrans %}:</th><td>{{ visitedMember.preferedLanguageName() }}</td>
-					</tr>
-					{% if visitedMember.isAdmin %}
-						<tr>
-							<th>{% trans %}Member status:{% endtrans %}</th><td>{% trans %}Administrator{% endtrans %}</td>
-						</tr>
-					{% endif %}
-				</tbody>
-			</table>
-		</div>
-	{% endif %}
+	{% call layout.columns()%}
+		{% call layout.column("58%")%}
+			{% include "MembersProfile-About.html" %}
 
+			<div style="position: relative;">
+				<a href="/Members/{{ visitedMember.key() }}/Feed/RSS" style="font-size: 1em; position: absolute; top: 15px; right: 0px; padding-right: 22px;">
+					{% trans %}Subscribe {% endtrans %}
+					<span style="position: absolute; top: 0px; right: 0px;" width="16" height="16" class="spriteIcons icon-rss"></span>
+				</a>
+				<h2>
+					{% trans %}What's new{% endtrans %}
+				</h2>
+			</div>
+			{% if posts %}
+				<div class="storyPosts">
+					{% for post in posts %}{% include "part-stories2.html" %}{% endfor %}
+				</div>
+			{% else %}
+				<div>
+				{% trans %}There is no activity to show!{% endtrans %}
+				</div>
+			{% endif %}
+
+		{% endcall %}
+		{{ layout.column("2%") }}
+		{% call layout.column("40%")%}
+			<h2>
+				Authored books go here...
+			</h2>
+			<h2>
+				Bookmarks go here...
+			</h2>
+		{% endcall %}
+	{% endcall %}
 {% endblock content %}
 

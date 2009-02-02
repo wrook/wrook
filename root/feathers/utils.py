@@ -4,15 +4,16 @@
 import urllib, hashlib
 
 def text_to_linebreaks(txt):
-	import re
-#	_paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
-#	return u'\n\n'.join(u'%s<br/>' % p.replace('\n', '<br/>\n') for p in _paragraph_re.split(txt))
-	from django.utils.html import linebreaks
-	return linebreaks(txt)
+	if txt:
+		import re
+		from django.utils.html import linebreaks
+		return linebreaks(txt)
+	else:
+		return None
 		
 def getGravatar(email, default, size):
 	url = "http://www.gravatar.com/avatar.php?"  
-	url += urllib.urlencode({'gravatar_id':hashlib.md5(email.lower()).hexdigest(), 'default':default, 'size':str(size)})    
+	url += urllib.urlencode({'gravatar_id':hashlib.md5(email.lower()).hexdigest(), 'default':default, 'size':str(size)})
 	return url
 
 def styleSourceToDict(sourceCode):

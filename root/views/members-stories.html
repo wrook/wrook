@@ -1,24 +1,20 @@
 {% extends "template-profile2.html" %}
-{% set subSection = "news" %}
+{% set subSection = "feed" %}
 {% block pageId %}members-stories{% endblock %}
 {% block pageTitle %}{% trans %}What's new{% endtrans %}{% endblock %}
 {% block title %}
 {% endblock %}
 {% block content %}
-	<h2>
-		{% trans %}What's new{% endtrans %}
-	</h2>
+	<div style="position: relative;">
+		<a href="/Members/{{ visitedMember.key() }}/Feed/RSS" style="font-size: 1em; position: absolute; top: 15px; right: 0px; padding-right: 22px;">
+			{% trans %}Subscribe {% endtrans %}
+			<span style="position: absolute; top: 0px; right: 0px;" width="16" height="16" class="spriteIcons icon-rss"></span>
+		</a>
+		<h2>
+			{% trans %}What's new{% endtrans %}
+		</h2>
+	</div>
 	<div class="storyPosts">
 		{% for post in posts %}{% include "part-stories2.html" %}{% endfor %}
-	</div>
-{% endblock %}
-
-{% block sidebar %}
-	<div class="sidebarPanel">
-		<h3>{% trans %}Your options{% endtrans %}</h3>
-		<div class="sidebarMenu">
-			<ul>
-			</ul>
-		</div>
 	</div>
 {% endblock %}

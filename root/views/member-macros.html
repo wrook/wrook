@@ -1,24 +1,31 @@
 {% macro tabs_profile(member, selected) -%}
 	<div class="sectionMenu">
 		<ul>
-			<li {% if selected=="news" %}class="current"{% endif %}>
-				<a id="menu-memberNews" href="/Members/{{ member.key() }}">
-					<span>{% trans %}News{% endtrans %}</span>
-				</a>
-			</li>
-			<li {% if selected=="books" %}class="current"{% endif %}>
-				<a id="menu-memberBooks" href="/Members/{{ member.key() }}/Books">
-					<span>{% trans %}Books{% endtrans %}</span>
-				</a>
-			</li>
 			<li {% if selected=="profile" %}class="current"{% endif %}>
-				<a id="menu-memberProfile" href="/Members/{{ member.key() }}/Profile">
+				<a id="menu-memberProfile" href="/Members/{{ member.key() }}">
 					<span>{% trans %}Profile{% endtrans %}</span>
 				</a>
 			</li>
-			<li {% if selected=="readings" %}class="current"{% endif %}>
-				<a id="menu-memberReadings" href="/Members/{{ member.key() }}/Readings">
-					<span>{% trans %}Readings{% endtrans %}</span>
+			<li {% if selected=="feed" %}class="current"{% endif %}>
+				<a id="menu-memberFeed" href="/Members/{{ member.key() }}/Feed">
+					<span>{% trans %}Feed{% endtrans %}</span>
+				</a>
+			</li>
+			{% if member.Books %}
+				<li {% if selected=="books" %}class="current"{% endif %}>
+					<a id="menu-memberBooks" href="/Members/{{ member.key() }}/Books">
+						<span>{% trans %}Books{% endtrans %}</span>
+					</a>
+				</li>
+			{% endif %}
+			<li {% if selected=="bookmarks" %}class="current"{% endif %}>
+				<a id="menu-memberBookmarks" href="/Members/{{ member.key() }}/Bookmarks">
+					<span>{% trans %}Bookmarks{% endtrans %}</span>
+				</a>
+			</li>
+			<li {% if selected=="neighborhood" %}class="current"{% endif %}>
+				<a id="menu-memberNeighborhood" href="/Members/{{ member.key() }}/Neighborhood">
+					<span>{% trans %}Neighborhood{% endtrans %}</span>
 				</a>
 			</li>
 			<li {% if selected=="covers" %}class="current"{% endif %}>

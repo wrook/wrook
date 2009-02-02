@@ -1,0 +1,16 @@
+{% macro columns(width) -%}
+	<div class="layoutColumns">
+		{{ caller() }}
+		<div class="clearfix"></div>
+	</div>
+{%- endmacro %}
+
+{% macro column(width) -%}
+	<div style="float: left; width:{{ width }}" class="layoutColumn">
+		{% if caller %}
+			{{ caller() }}
+		{% else %}
+			&#160;
+		{% endif %}
+	</div>
+{%- endmacro %}

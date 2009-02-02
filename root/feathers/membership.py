@@ -404,6 +404,21 @@ http://www.wrook.org
 		else:
 			return members
 
+	def get_neighborhood(self, top=999):
+		followers = self.get_relationships_members_from("follower")
+		followeds = self.get_relationships_members_to("follower")
+		memberKeys = {}
+		members = []
+		if followers:
+			for member in followers:
+				memberKeys.update({member.key():member})
+		if followeds:
+			for member in followeds:
+				memberKeys.update({member.key():member})
+		for member in memberKeys.itervalues():
+			members.extend([member])
+		return members[0:top]
+
 class Relationship(db.Model):
 	From = db.ReferenceProperty(Member, required=True, collection_name="RelationshipsFrom")
 	To = db.ReferenceProperty(Member, required=True, collection_name="RelationshipsTo")

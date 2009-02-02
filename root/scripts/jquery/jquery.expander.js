@@ -34,6 +34,7 @@
         // end script if text length isn't long enough.
        	if ( endText.replace(/\s+$/,'').split(' ').length < o.widow ) { return; }
        	// otherwise, continue...    
+	      o.onCollapse($this, false);
        	if (endText.indexOf('</') > -1) {
          	endTags = endText.match(/<(\/)?[^>]*>/g);
           for (var i=0; i < endTags.length; i++) {
@@ -113,6 +114,7 @@
     function reCollapse(el) {
        el.hide()
         .prev('span.read-more').show();
+        
     }
     function delayCollapse(option, $collapseEl) {
       if (option.collapseTimer) {

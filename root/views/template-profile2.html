@@ -1,6 +1,10 @@
 {% extends "template-main-e2.html" %}
 {% import 'member-macros.html' as memberMacros %}
+{% import 'wrook-macros.html' as wrookMacros %}
 {% set section="member-profile" %}
+{% block htmlHead %}
+	<link rel="alternate" type="application/rss+xml" title="{% trans name=visitedMember.fullname() %} RSS Feed for {{ name }}{% endtrans %}" href="/Members/{{ visitedMember.key() }}/Feed/RSS" />
+{% endblock %}
 {% block pageContent %}
 	<script>
 $(document).ready(function(){
@@ -60,6 +64,15 @@ $(document).ready(function(){
 					<div id="memberAvatar">
 						<a href="/Members/{{ visitedMember.key() }}"><img width="180" height="180" src="{{ visitedMember.gravatar180() }}" /></a>
 					</div>
+					{% set neighborhood=visitedMember.get_neighborhood(top=6) %}
+					{% if neighborhood %}
+						<div class="panelContent" style="margin-top: 10px;">
+							{{ wrookMacros.members_list_small(neighborhood, roundedCorners=False) }} 
+							<a href="/Members/{{ visitedMember.key() }}/Neighborhood">
+								{% trans count=neighborhood|length %}View all <strong>neighborhood</strong> ({{ count }}){% endtrans %}
+							</a>
+						</div>
+					{% endif %}
 					{% if currentMember.key() != visitedMember.key() %}
 						<div class="sidebarPanel">
 							<div class="sidebarMenu">

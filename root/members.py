@@ -15,11 +15,13 @@ def URLMappings():
 		( '/Members', Members),
 		(r'/Members/(.*)/Covers', MembersCoversList),
 		(r'/Members/(.*)/Books', MembersBooksList),
-		(r'/Members/(.*)/Readings', MembersReadingsList),
-		(r'/Members/(.*)/Profile', MembersProfile),
+		(r'/Members/(.*)/Bookmarks', MembersBookmarks),
+		(r'/Members/(.*)/Neighborhood', MembersNeighborhood),
+		(r'/Members/(.*)/Feed/RSS', MembersFeedRSS),
+		(r'/Members/(.*)/Feed', MembersFeed),
 		(r'/Members/(.*)/Follow', MembersFollow),
 		(r'/Members/(.*)/StopFollowing', MembersStopFollowing),
-		(r'/Members/(.*)', MembersFeed),
+		(r'/Members/(.*)', MembersProfile),
 		( '/Customize', Customize),
 		( '/Suggestions', Suggestions)]
 
@@ -44,6 +46,36 @@ class Home(webapp.RequestHandler):
 			self.render2('views/memberHome.html')
 		else:
 			self.render2('views/visitorHome.html')
+
+class MembersFeedRSS(webapp.RequestHandler):
+	def get(self, key):
+		import datetime
+		import PyRSS2Gen
+		onRequest(self)
+		member = membership.Member.get(key)
+		if member:
+			self.setVisitedMember(member)
+			posts = member.ReceivedStoryPosts.order("-WhenOccured").filter("Member = ", member.key()).fetch(limit=40)
+			rssItems = []
+			for post in posts:
+				rssItems.extend([
+					PyRSS2Gen.RSSItem(
+						title = post.Title,
+						link = "http://www.wrook.org/Members/%s/Feed" % self.VisitedMember.key(),
+						description = post.Body,
+						guid = PyRSS2Gen.Guid("http://www.wrook.org/guid/%s" % post.key()),
+						pubDate = post.WhenOccured
+					)])
+			rss = PyRSS2Gen.RSS2(
+				title = "%s at Wrook.org" % self.VisitedMember.fullname(),
+				link = "http://www.wrook.org/Members/%s/Feed" % self.VisitedMember.key(),
+				description = "",
+				lastBuildDate = datetime.datetime.now(),
+				items = rssItems
+				)
+			self.response.headers['content-type'] = "application/rss+xml"
+			self.response.out.write(rss.to_xml())
+		else: self.error(404)
 
 class MembersFeed(webapp.RequestHandler):
 	def get(self, key):
@@ -85,8 +117,14 @@ class MembersProfile(webapp.RequestHandler):
 		visitedMember = membership.Member.get(key)
 		if visitedMember:
 			self.setVisitedMember(visitedMember)
+			cacheKey = "wrookMemberPosts-Preview-%s" % visitedMember.key()
+			posts = memcache.get(cacheKey)
+			if not posts:
+				posts = visitedMember.ReceivedStoryPosts.order("-WhenOccured").fetch(limit=10)
+				memcache.add(cacheKey, posts)
 			self.Model.update({
-				"now": datetime.datetime.now()
+				"now": datetime.datetime.now(),
+				"posts": posts
 				})
 			self.render2('views/MembersProfile.html')
 		else: self.error(404)
@@ -155,21 +193,19 @@ class Members(webapp.RequestHandler):
 class MembersCoversList(webapp.RequestHandler):
 	def get(self, key):
 		onRequest(self)
-		if self.CurrentMember:
-			visitedMember = membership.Member.get(key)
-			if visitedMember:
-				self.setVisitedMember(visitedMember)
-				sharedCovers = visitedMember.Covers.filter("isSharedWithEveryone =", True).fetch(limit=100)
-				privateCovers = visitedMember.Covers.filter("isSharedWithEveryone =", False).fetch(limit=100)
-				permissionMemberCanSeePrivateCovers = self.CurrentMember.isAdmin or self.CurrentMember == self.VisitedMember
-				self.Model.update({
-					'sharedCovers': sharedCovers,
-					'privateCovers': privateCovers,
-					'permissionMemberCanSeePrivateCovers': permissionMemberCanSeePrivateCovers
-					})
-				self.render2('views/members-covers-list.html')
-			else: self.error(404)
-		else: self.requestLogin()
+		visitedMember = membership.Member.get(key)
+		if visitedMember:
+			self.setVisitedMember(visitedMember)
+			sharedCovers = visitedMember.Covers.filter("isSharedWithEveryone =", True).fetch(limit=100)
+			privateCovers = visitedMember.Covers.filter("isSharedWithEveryone =", False).fetch(limit=100)
+			permissionMemberCanSeePrivateCovers = self.CurrentMember.isAdmin or self.CurrentMember == self.VisitedMember
+			self.Model.update({
+				'sharedCovers': sharedCovers,
+				'privateCovers': privateCovers,
+				'permissionMemberCanSeePrivateCovers': permissionMemberCanSeePrivateCovers
+				})
+			self.render2('views/members-covers-list.html')
+		else: self.error(404)
 
 class MembersBooksList(webapp.RequestHandler):
 	def get(self, key):
@@ -188,26 +224,34 @@ class MembersBooksList(webapp.RequestHandler):
 			self.render2('views/members-books-list.html')
 		else: self.error(404)
 
-class MembersReadingsList(webapp.RequestHandler):
+class MembersBookmarks(webapp.RequestHandler):
 	def get(self, key):
 		onRequest(self)
-		if self.CurrentMember:
-			visitedMember = membership.Member.get(key)
-			if visitedMember:
-				self.setVisitedMember(visitedMember)
-				bookmarks = visitedMember.Bookmarks.fetch(limit=999)
-				books = []
-				following = visitedMember.get_relationships_members_from("follower")
-				followers = visitedMember.get_relationships_members_to("follower")
-				for bookmark in bookmarks:
-					books.append(bookmark.Book)
-				self.Model.update({
-					'following': following,
-					'followers': followers,
-					'bookmarks': bookmarks,
-					'books': books
-					})
-				self.render2('views/members-bookmarks-list.html')
-			else: self.error(404)
-		else: self.requestLogin()
+		visitedMember = membership.Member.get(key)
+		if visitedMember:
+			self.setVisitedMember(visitedMember)
+			bookmarks = visitedMember.Bookmarks.fetch(limit=999)
+			books = []
+			for bookmark in bookmarks:
+				books.append(bookmark.Book)
+			self.Model.update({
+				'bookmarks': bookmarks,
+				'books': books
+				})
+			self.render2('views/members-bookmarks-list.html')
+		else: self.error(404)
 
+class MembersNeighborhood(webapp.RequestHandler):
+	def get(self, key):
+		onRequest(self)
+		visitedMember = membership.Member.get(key)
+		if visitedMember:
+			self.setVisitedMember(visitedMember)
+			following = visitedMember.get_relationships_members_from("follower")
+			followers = visitedMember.get_relationships_members_to("follower")
+			self.Model.update({
+				'following': following,
+				'followers': followers
+				})
+			self.render2('views/members-neighborhood.html')
+		else: self.error(404)

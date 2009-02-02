@@ -1,0 +1,65 @@
+{% import "wrook-macros.html" as wrookMacros %}
+<script>
+$(document).ready(function(){
+$('#profileAbout').expander({
+	slicePoint: 100, 
+	widow: 4,
+	expandEffect: 'fadeIn',
+	expandText: '{% trans %}read more...{% endtrans %}',
+	userCollapseText: '{% trans %}close{% endtrans %}',
+	userCollapsePrefix: ' ',
+	userCollapse: true,
+	beforeExpand: function($thisEl) {
+		$("#profileReadMore").hide();
+		$("#profileClose").hide();
+		$("#profileDetails").show();
+	},
+	onCollapse: function($thisEl, byUser) {
+		$("#profileReadMore").hide();
+		$("#profileDetails").hide();
+		if (byUser==false) { $("#profileReadMore").hide() }
+	}
+});
+$('#profileClose a').click(function(){
+	$("#profileDetails").hide();
+	$("#profileReadMore").show();
+	$("#profileClose").hide();
+	return false;
+});
+$('#profileReadMore a').click(function(){
+	$("#profileDetails").show();
+	$("#profileReadMore").hide();
+	$("#profileClose").show();
+	return false;
+})
+});
+</script>
+<div style="position: relative; background: #fffc66; padding: 10px;">
+	{{ wrookMacros.corners("white5px") }}
+	{% if visitedMember.About %}
+		<div style="font-size: 0.9em;">
+			<div id="profileAbout">
+			"&#160;{{ visitedMember.About|e }}&#160;"
+			</div>
+		</div>
+	{% endif %}
+	<div id="profileReadMore" style="margin-top: 5px; font-size: 0.9em;">
+		<a href="#" style="color: #000;">{% trans %}More details{% endtrans %}</a>
+	</div>
+	<div id="profileDetails" style="display: none; font-size: 0.9em; margin-top: 10px;">
+		{% if visitedMember.Gender %}
+			{% trans %}Gender{% endtrans %}: {{ visitedMember.genderName() }}<br/>
+		{% endif %}
+		{% if visitedMember.Birthdate %}
+			{% trans %}Birth date{% endtrans %}: {{ visitedMember.Birthdate }}<br/>
+		{% endif %}
+			{% trans %}Member since{% endtrans %}: {{ visitedMember.Created }}<br/>
+			{% trans %}Prefered language{% endtrans %}: {{ visitedMember.preferedLanguageName() }}<br/>
+		{% if visitedMember.isAdmin %}
+			{% trans %}Member status{% endtrans %}: {% trans %}Administrator{% endtrans %}<br/>
+		{% endif %}
+		<div id="profileClose" style="margin-top: 5px; font-size: 0.9em;">
+			<a href="#" style="color: #000;">{% trans %}Close{% endtrans %}</a>
+		</div>
+	</div>
+</div>
