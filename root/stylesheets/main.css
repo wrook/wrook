@@ -872,8 +872,7 @@ table tr td ul li {
 }
 
 /* BUTTON */
-/*
-button {
+button.formButton {
 	position: relative;
 	margin: 0px;
 	padding: 0px 0px 0px 20px;
@@ -884,18 +883,18 @@ button {
 	cursor: pointer;
 	line-height: 28px;
 }
-button::-moz-focus-inner {
+button.formButton::-moz-focus-inner {
 	border: 0 none;
 	padding: 0px;
 	margin: 0px 0px 0px 0px;
 }
-button:focus::-moz-focus-inner {
+button.formButton:focus::-moz-focus-inner {
 	border-color: transparent ! important;
 	border: 0 none;
 	padding: 0px;
 	margin: 0px 0px 0px 0px;
 }
-button span {
+button.formButton span {
 	position: relative; 
 	white-space: nowrap; 
 	display: block !important;
@@ -906,16 +905,15 @@ button span {
 	background: url(/images/button.png) right 0px no-repeat;
 	border: 0;
 }
-button:focus,
-button:hover {
+button.formButton:focus,
+button.formButton:hover {
 	background: url(/images/button.png) left -28px no-repeat;
 }
-button:focus span,
-button:hover span{
+button.formButton:focus span,
+button.formButton:hover span{
 	background: url(/images/button.png) right -28px no-repeat;
 }
 
-*/
 
 .linkList {
 	margin-top: 4px;

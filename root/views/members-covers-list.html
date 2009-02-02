@@ -1,4 +1,5 @@
 {% extends "template-profile2.html" %}
+{% import "wrook-macros.html" as wrook %}
 {% set subSection = "covers" %}
 {% block title %}
 	<h1>
@@ -13,6 +14,7 @@
 		{% for cover in sharedCovers %}
 			<div class="cover">
 				<a href='/Covers/{{ cover.key() }}'>
+					{{ wrook.corners("white5px") }}
 					<img src='/Covers/Thumbnail/{{ cover.key() }}'>
 					{% if cover.isReusable %}
 						<span class="coverTitle" {% if cover.TitleColor %}style="color: {{ cover.TitleColor }}"{% endif %} >{{ cover.SampleTitle }}</span> 
@@ -44,24 +46,14 @@
 	{% endif %}
 {% endblock %}
 
-{% block sidebar %}
-	<div class="sidebarPanel">
-		<h3>{% trans %}Options{% endtrans %}</h3>
-		<div class="sidebarMenu">
-			<ul>
-				<li><a href="/Covers/Edit/">{% trans %}Create a new cover{% endtrans %}</a></li>
-				<li><a href="/Covers/">{% trans %}Browse all covers{% endtrans %}</a></li>
-			</ul>
-		</div>
-	</div>
-	{% if currentMember.isAdmin %}
-		<div class="sidebarPanel">
-			<h3>{% trans %}Admin options{% endtrans %}</h3>
-			<div class="sidebarMenu">
-				<ul>
-					<li><a href="/Covers/Select?usage=Books without a cover&redirect=/Covers/SetDefault">{% trans %}Select the default cover{% endtrans %}</a></li>
-				</ul>
-			</div>
-		</div>
-	{% endif %}
+{% block contentBottom %}
+	{% call wrook.calls_to_action() %}
+		<li class="mainLink"><a href="/Covers/">
+			<span class="bullet spriteIcons icon-main-link"></span><span>{% trans %}Browse all covers{% endtrans %}</span></a>
+		</li>
+		{% if visitedMember.key() == currentMember.key() %}
+			<li><span class="separator">|</span></li>
+			<li><a href="/Covers/Edit/">{% trans %}Add a new cover{% endtrans %}</a></li>
+		{% endif %}
+	{% endcall %}
 {% endblock %}

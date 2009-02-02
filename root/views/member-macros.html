@@ -1,6 +1,13 @@
-{% macro tabs_profile(member, selected) -%}
+{% macro tabs_profile(member, selected, isCurrentMember=False) -%}
 	<div class="sectionMenu">
 		<ul>
+			{% if isCurrentMember %}
+				<li {% if selected=="home" %}class="current"{% endif %}>
+					<a id="menu-memberHome" href="/">
+						<span>{% trans %}Home{% endtrans %}</span>
+					</a>
+				</li>
+			{% endif %}
 			<li {% if selected=="profile" %}class="current"{% endif %}>
 				<a id="menu-memberProfile" href="/Members/{{ member.key() }}">
 					<span>{% trans %}Profile{% endtrans %}</span>

@@ -1,45 +1,13 @@
-﻿{% extends "template-main-e.html" %}
-{% load i18n %}
-{% block title %}
-	<h1>
-		{% trans "Book covers" %}
-	</h1>
-{% endblock %}
+{% extends "template-main-e2.html" %}
+{% import "wrook-macros.html" as wrook %}
 {% block content %}
-	<h2>{% trans "Your private book covers" %}</h2>
-	<div class="coverGallery">
-		{% for cover in yourPrivateCovers %}
-			<div class="cover">
-				<a href='/Covers/{{ cover.key }}'>
-					<img src='/Covers/Thumbnail/{{ cover.key }}'>
-					{% if cover.isReusable %}
-						<span class="coverTitle" {% if cover.TitleColor %}style="color: {{ cover.TitleColor }}"{% endif %} >{{ cover.SampleTitle }}</span> 
-					{% endif %}
-				</a>
-			</div>
-		{% endfor %}
-		<div class="clearfix"></div>
-	</div>
-	<h2>{% trans "Your shared book covers" %}</h2>
-	<div class="coverGallery">
-		{% for cover in yourSharedCovers %}
-			<div class="cover">
-				<a href='/Covers/{{ cover.key }}'>
-					<img src='/Covers/Thumbnail/{{ cover.key }}'>
-					{% if cover.isReusable %}
-						<span class="coverTitle" {% if cover.TitleColor %}style="color: {{ cover.TitleColor }}"{% endif %} >{{ cover.SampleTitle }}</span> 
-					{% endif %}
-				</a>
-			</div>
-		{% endfor %}
-		<div class="clearfix"></div>
-	</div>
-	<h2>{% trans "All shared book covers" %}</h2>
+	<h2>{% trans %}Shared book covers{% endtrans %}</h2>
 	<div class="coverGallery">
 		{% for cover in allSharedCovers %}
 			<div class="cover">
-				<a href='/Covers/{{ cover.key }}'>
-					<img src='/Covers/Thumbnail/{{ cover.key }}'>
+				<a href='/Covers/{{ cover.key() }}'>
+					{{ wrook.corners("white5px") }}
+					<img src='/Covers/Thumbnail/{{ cover.key() }}'>
 					{% if cover.isReusable %}
 						<span class="coverTitle" {% if cover.TitleColor %}style="color: {{ cover.TitleColor }}"{% endif %} >{{ cover.SampleTitle }}</span> 
 					{% endif %}
@@ -50,19 +18,24 @@
 	</div>
 {% endblock %}
 
+{% block contentBottom %}
+	{% call wrook.calls_to_action() %}
+		<li class="mainLink"><a href="/Covers/Edit/">
+			<span class="bullet spriteIcons icon-main-link"></span><span>{% trans %}Add a new cover{% endtrans %}</span></a>
+		</li>
+		{% if currentMember %}
+			<li><span class="separator">|</span></li>
+			<li><a href="/Members/{{ currentMember.key() }}/Covers">{% trans %}View your covers{% endtrans %}</a></li>
+		{% endif %}
+	{% endcall %}
+{% endblock %}
+
 {% block sidebar %}
 	<div class="sidebarPanel">
+		<h3>{% trans %}Admin options{% endtrans %}</h3>
 		<div class="sidebarMenu">
 			<ul>
-				<li><a href="/Covers/Edit/">{% trans "Add a new cover" %}</a></li>
-			</ul>
-		</div>
-	</div>
-	<div class="sidebarPanel">
-		<h3>{% trans "Admin options" %}</h3>
-		<div class="sidebarMenu">
-			<ul>
-				<li><a href="/Covers/Select?usage=Books without a cover&redirect=/Covers/SetDefault">{% trans "Select the default cover" %}</a></li>
+				<li><a href="/Covers/Select?usage=Books without a cover&redirect=/Covers/SetDefault">{% trans %}Select the default cover{% endtrans %}</a></li>
 			</ul>
 		</div>
 	</div>

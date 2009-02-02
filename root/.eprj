@@ -10,10 +10,14 @@
             <string>stylesheets\template-d.css</string>
             <key>-d.c</key>
             <string>stylesheets\template-d.css</string>
+            <key>-d.cs</key>
+            <string>stylesheets\template-d.css</string>
             <key>-d.css</key>
             <string>stylesheets\template-d.css</string>
             <key>-d.s</key>
             <string>stylesheets\template-d.css</string>
+            <key>-macr</key>
+            <string>views\wrook-macros.html</string>
             <key>-macro</key>
             <string>views\wrook-macros.html</string>
             <key>-main</key>
@@ -94,6 +98,8 @@
             <string>views\books-feed.html</string>
             <key>book-m</key>
             <string>views\book-macros.html</string>
+            <key>book-ma</key>
+            <string>views\book-macros.html</string>
             <key>book-rea</key>
             <string>views\book-readers.html</string>
             <key>book-ta</key>
@@ -106,6 +112,8 @@
             <string>views\books-view.html</string>
             <key>book-vi</key>
             <string>views\books-view.html</string>
+            <key>book-vie</key>
+            <string>views\books-viewContents.html</string>
             <key>bookIn</key>
             <string>views\section-bookInfo.html</string>
             <key>booki</key>
@@ -175,7 +183,7 @@
             <key>cover</key>
             <string>views\covers-list.html</string>
             <key>covers</key>
-            <string>views\members-covers-list.html</string>
+            <string>views\covers-edit.html</string>
             <key>cpal</key>
             <string>views\about-CPAL.html</string>
             <key>cus</key>
@@ -190,6 +198,8 @@
             <string>stylesheets\template-d.css</string>
             <key>d.css</key>
             <string>stylesheets\template-d.css</string>
+            <key>e2.</key>
+            <string>views\template-main-e2.html</string>
             <key>e2.h</key>
             <string>views\template-main-e2.html</string>
             <key>emoiz</key>
@@ -262,6 +272,8 @@
             <string>views\template-main2.html</string>
             <key>maind</key>
             <string>views\template-main-d.html</string>
+            <key>mains</key>
+            <string>stylesheets\main.css</string>
             <key>make</key>
             <string>makemessages.bat</string>
             <key>meber</key>
@@ -309,9 +321,9 @@
             <key>memberpr</key>
             <string>views\MembersProfile.html</string>
             <key>members</key>
-            <string>members.py</string>
+            <string>views\members-neighborhood.html</string>
             <key>members-</key>
-            <string>views\members-books-list.html</string>
+            <string>views\members-neighborhood.html</string>
             <key>members-b</key>
             <string>views\members-books-list.html</string>
             <key>members-book</key>
@@ -376,6 +388,8 @@
             <string>feathers\views\talk-part-topic.html</string>
             <key>part-T</key>
             <string>feathers\views\talk-part-topic.html</string>
+            <key>part-r</key>
+            <string>feathers\views\talk-part-reply.html</string>
             <key>part-repl</key>
             <string>feathers\views\talk-part-replies.html</string>
             <key>part-sto</key>
@@ -476,6 +490,8 @@
             <string>feathers\stories.py</string>
             <key>stories.p</key>
             <string>stories.py</string>
+            <key>styl</key>
+            <string>views\stylesheets.html</string>
             <key>style</key>
             <string>views\stylesheets.html</string>
             <key>styles</key>
@@ -487,7 +503,7 @@
             <key>talk</key>
             <string>feathers\talk.py</string>
             <key>talk-</key>
-            <string>feathers\views\talk-part-topicForm.html</string>
+            <string>feathers\views\talk-part-showMoreReplies.html</string>
             <key>talk-Topi</key>
             <string>feathers\views\talk-TopicView.html</string>
             <key>talk-TopicView</key>
@@ -495,11 +511,11 @@
             <key>talk-TopicView.html</key>
             <string>feathers\views\talk-TopicView.html</string>
             <key>talk-pa</key>
-            <string>feathers\views\talk-part-topicForm.html</string>
+            <string>feathers\views\talk-part-topic.html</string>
             <key>talk-par</key>
             <string>feathers\views\talk-part-topics.html</string>
             <key>talk-part</key>
-            <string>feathers\views\talk-part-topic.html</string>
+            <string>feathers\views\talk-part-replies.html</string>
             <key>talk-part-</key>
             <string>feathers\views\talk-part-topics.html</string>
             <key>talk-part-replies</key>
@@ -535,15 +551,17 @@
             <key>templ</key>
             <string>views\template-main-d2.html</string>
             <key>templa</key>
-            <string>views\template-book.html</string>
+            <string>stylesheets\template-d.css</string>
             <key>templat</key>
             <string>views\template-main-d.html</string>
             <key>templat-b</key>
             <string>views\template-book.html</string>
             <key>template</key>
-            <string>stylesheets\template-d.css</string>
+            <string>views\template-book.html</string>
             <key>template-</key>
             <string>views\template-profile.html</string>
+            <key>template-b</key>
+            <string>views\template-book.html</string>
             <key>template-bo</key>
             <string>views\template-book.html</string>
             <key>template-d</key>
@@ -613,6 +631,8 @@
             <key>viewChapter</key>
             <string>views\viewChapter.html</string>
             <key>visi</key>
+            <string>views\visitorHome.html</string>
+            <key>visito</key>
             <string>views\visitorHome.html</string>
             <key>visitor</key>
             <string>views\visitorHome.html</string>

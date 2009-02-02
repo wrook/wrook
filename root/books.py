@@ -395,7 +395,6 @@ class ViewBook(webapp.RequestHandler):
 			#TODO: This should be methodized as chapter_count
 			chapterCount = len(chapters)
 			if book.Author:
-				self.setVisitedMember(book.Author)
 				if self.CurrentMember:
 					userIsAuthor = (self.CurrentMember.key() == book.Author.key())
 				else: userIsAuthor = False
@@ -428,7 +427,6 @@ class ViewBook_Contents(webapp.RequestHandler):
 			#TODO: This should be methodized as chapter_count
 			chapterCount = len(chapters)
 			if book.Author:
-				self.setVisitedMember(book.Author)
 				if self.CurrentMember:
 					userIsAuthor = (self.CurrentMember.key() == book.Author.key())
 				else: userIsAuthor = False
@@ -861,7 +859,7 @@ class CoverEdit(webapp.RequestHandler):
 			self.Model.update({
 				'form': form
 				})
-			self.render('views/covers-edit.html')
+			self.render2('views/covers-edit.html')
 		else: self.requestLogin()
 	
 	def post(self, key):
@@ -958,14 +956,10 @@ class CoverImage(webapp.RequestHandler):
 class CoverList(webapp.RequestHandler):
 	def get(self):
 		onRequest(self)
-		if self.CurrentMember:
-			self.Model.update({
-				'yourPrivateCovers': Cover.all().filter("CreatedBy =", self.CurrentMember).filter("isSharedWithEveryone =", False).fetch(limit=24),
-				'yourSharedCovers': Cover.all().filter("CreatedBy =", self.CurrentMember).filter("isSharedWithEveryone =", True).fetch(limit=24),
-				'allSharedCovers': Cover.all().filter("isSharedWithEveryone =", True).fetch(limit=24)
-				})
-			self.render('views/covers-list.html')
-		else: self.requestLogin()
+		self.Model.update({
+			'allSharedCovers': Cover.all().filter("isSharedWithEveryone =", True).fetch(limit=48)
+			})
+		self.render2('views/covers-list.html')
 
 class CoverSelect(webapp.RequestHandler):
 	def get(self):

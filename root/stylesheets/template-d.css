@@ -156,7 +156,10 @@ table tr td {
 #nav #mainMenu ul li a:hover {
 	text-decoration: underline;
 }
-
+#nav #mainMenu ul li.secondaryMenuItem a:visited,
+#nav #mainMenu ul li.secondaryMenuItem a:link {
+	font-size: 1.1em;
+}
 
 #nav #accessMenu {
 	position: absolute;
@@ -180,7 +183,7 @@ table tr td {
 #nav #accessMenu ul li a:visited,
 #nav #accessMenu ul li a:link {
 	color: #ffffff;
-	font-size: 1.25em;
+	font-size: 1.1em;
 	text-decoration: none;
 }
 #nav #accessMenu ul li a:hover {

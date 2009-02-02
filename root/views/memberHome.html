@@ -1,11 +1,11 @@
 {% extends "template-profile2.html" %}
-{% set subSection = "news" %}
+{% set subSection = "home" %}
 {% block pageId %}home-member{% endblock %}
 {% block pageTitle %}{% trans %}Home{% endtrans %}{% endblock %}
 {% block content %}
 	{# {% include "part-memberConversion-short.html" %} #}
 	<h2>
-		{% trans %}What's new{% endtrans %}
+		{% trans %}News from your neighborhood{% endtrans %}
 	</h2>
 	{% if posts %}
 		<div class="storyPosts">
@@ -19,14 +19,6 @@
 {% endblock %}
 
 {% block sidebar %}
-	<div class="sidebarPanel">
-		<div class="sidebarMenu">
-			<ul>
-				<li><a id="sidebarMenu-publicProfile" href="/Members/{{ currentMember.key() }}">{% trans %}Your public profile{% endtrans %}</a></li>
-				<li><a id="sidebarMenu-accountSettings" href="/Account/View">{% trans %}Account settings{% endtrans %}</a></li>
-			</ul>
-		</div>
-	</div>
 	{#
 		{% include "panels-memberConversion.html" %}
 	#}
