@@ -274,6 +274,8 @@
             <string>views\members-stories.html</string>
             <key>member-</key>
             <string>views\members-stories.html</string>
+            <key>member-bo</key>
+            <string>views\members-books-list.html</string>
             <key>member-m</key>
             <string>views\member-macros.html</string>
             <key>member-ma</key>

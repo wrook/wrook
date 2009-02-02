@@ -8,7 +8,7 @@
 {% endblock %}
 {% block content %}
 	<h2>{% trans firstname=visitedMember.Firstname %}{{ firstname}}'s books{% endtrans %}</h2>
-	{{ wrook.book_list(books) }}
+	{{ wrookMacros.book_list(books) }}
 	<div class="clearfix"></div>
 {% endblock %}
 
