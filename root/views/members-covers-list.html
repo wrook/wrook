@@ -34,6 +34,7 @@
 			{% for cover in privateCovers %}
 				<div class="cover">
 					<a href='/Covers/{{ cover.key() }}'>
+						{{ wrook.corners("white5px") }}
 						<img src='/Covers/Thumbnail/{{ cover.key() }}'>
 						{% if cover.isReusable %}
 							<span class="coverTitle" {% if cover.TitleColor %}style="color: {{ cover.TitleColor }}"{% endif %} >{{ cover.SampleTitle }}</span> 

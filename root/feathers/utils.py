@@ -30,6 +30,12 @@ def wordCount(text):
 	wordcount = len(words)
 	return wordcount
 
+def firstWords(text, wordsCutoff):
+	if text: return " ".join(text.split(" ")[:wordsCutoff])
+
+def lastWords(text, wordsCutoff):
+	if text: return " ".join(text.split(" ")[wordsCutoff:])
+
 def buildCountingList(count):
 	countingList = []
 	count = 1

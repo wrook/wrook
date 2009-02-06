@@ -52,6 +52,8 @@
             <string>views\books-viewContents.html</string>
             <key>BOOKS</key>
             <string>books.py</string>
+            <key>BOOKS.</key>
+            <string>books.py</string>
             <key>STYLE</key>
             <string>views\stylesheets.html</string>
             <key>about</key>
@@ -160,6 +162,8 @@
             <string>views\books.html</string>
             <key>books.p</key>
             <string>books.py</string>
+            <key>books.py</key>
+            <string>books.py</string>
             <key>cac</key>
             <string>feathers\cachetree.py</string>
             <key>cach</key>
@@ -233,6 +237,8 @@
             <key>licen</key>
             <string>views\about-openSourceLicense.html</string>
             <key>licens</key>
+            <string>licensing.py</string>
+            <key>licensin</key>
             <string>licensing.py</string>
             <key>list</key>
             <string>views\members-covers-list.html</string>
@@ -326,8 +332,12 @@
             <string>views\members-neighborhood.html</string>
             <key>members-b</key>
             <string>views\members-books-list.html</string>
+            <key>members-boo</key>
+            <string>views\members-books-list.html</string>
             <key>members-book</key>
             <string>views\members-bookmarks-list.html</string>
+            <key>members-co</key>
+            <string>views\members-covers-list.html</string>
             <key>members-s</key>
             <string>views\members-stories.html</string>
             <key>members-stories.html</key>
@@ -564,6 +574,8 @@
             <string>views\template-book.html</string>
             <key>template-bo</key>
             <string>views\template-book.html</string>
+            <key>template-bok</key>
+            <string>views\template-book.html</string>
             <key>template-d</key>
             <string>stylesheets\template-d.css</string>
             <key>template-e</key>
@@ -575,7 +587,7 @@
             <key>template-pro</key>
             <string>views\template-profile2.html</string>
             <key>template-prof</key>
-            <string>views\template-profile.html</string>
+            <string>views\template-profile2.html</string>
             <key>template-profil</key>
             <string>views\template-profile2.html</string>
             <key>template-profile</key>
@@ -667,6 +679,8 @@
             <key>wrookSto</key>
             <string>wrookStories.py</string>
             <key>wrookm</key>
+            <string>views\wrook-macros.html</string>
+            <key>wrookma</key>
             <string>views\wrook-macros.html</string>
             <key>wrookmac</key>
             <string>views\wrook-macros.html</string>

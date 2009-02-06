@@ -29,3 +29,77 @@
 		</ul>
 	</div>
 {%- endmacro %}
+
+{% macro showChapter(chapter, onlyFirstWords=False, currentMember=None) -%}
+	<div class="chapterInfo">
+		<h1>
+			{% if chapter.Title %}
+				<div style="margin-bottom: 20px; font-size: 0.8em; font-weight: normal;">
+					{{ chapter.Name|escape }}
+				</div>
+				{{ chapter.Title|escape }}
+			{% else %}
+				{{ chapter.Name|escape }}
+			{% endif %}
+		</h1>
+	</div>
+	<div>
+		{% if chapter.Synopsis %}
+			<div class="Synopsis">
+				"&#160;{{ chapter.Synopsis|escape }}&#160;"
+			</div>
+		{% endif %}
+
+		{% set lastRevision=chapter.getLatestRevision() %}
+		{% if chapter.getLatestRevision() %}
+			{% if onlyFirstWords %}
+				<div class="chapterText">
+					{% if lastRevision.wordCount() > 1000 %}
+						{{ chapter.getLatestRevision().text_first_words() }}[ ... ]
+					{% else %}
+						{{ chapter.getLatestRevision().text_with_linebreaks() }}
+					{% endif %}
+
+					<div style="font-size: 1em">
+						{% if not currentMember %}
+							<p><em>
+								{% trans
+								loginURL="/Login?comeback=/ViewChapter/%s#continueReading" % chapter.key(),
+								joinURL="/Join/?comeback=/ViewChapter/%s#continueReading" % chapter.key()
+								%}
+								<strong>This books preview ends here</strong>. To continue reading (without restrictions), you must either <a href="{{loginURL}}">Login</a> or <a href="{{joinURL}}">Sign-Up</a> for a free account.
+								{% endtrans %}	
+							</em></p>
+						{% else %}
+							{% if lastRevision.wordCount() > 1000 %}
+								<p><em>
+									{% set continueReadingURL = "/ViewChapter/%s#continueReading" % chapter.key() %}
+									{% trans continueReadingURL = continueReadingURL %}
+									<strong>The preview ends here</strong>. We invite you to <a href="{{continueReadingURL}}">continue reading this chapter</a>.
+									After which, this book will be added to your bookmarks.
+									{% endtrans %}	
+								</em></p>
+							{% else %}
+								<p><em>
+									{% set continueReadingURL = "/ViewChapter/%s#continueReading" % chapter.nextChapter().key() %}
+									{% trans continueReadingURL=continueReadingURL %}
+									<strong>The preview ends here</strong>. We invite you to <a href="{{continueReadingURL}}">start reading the next chapter</a>.
+									After which, this book will be added to your bookmarks.
+									{% endtrans %}
+								</em></p>
+							{% endif %}
+							<div style="font-size: 1.2em">
+								<a href="{{continueReadingURL}}">{% trans %}Continue reading...{% endtrans %}</a>
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			{% else %}
+				<div class="chapterText">
+					{{ chapter.getLatestRevision().text_with_linebreaks() }}
+				</div>
+			{% endif %}
+		{% endif %}
+
+	</div>
+{%- endmacro %}

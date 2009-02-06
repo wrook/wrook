@@ -16,40 +16,23 @@
 			{{ wrook.notice(title=_("Notice"), body=_("Altough this book is not completed, this chapter is final.")) }}
 		{% endif %}
 	{% endif %}
+	{% if userCanEdit %}
+		<div style="margin: 5px 0px;">
+			{{ wrook.iconButton(label=_("Set starting point"), alt="Set this chapter as the readers starting point.", name="setStartingPoint", icon="edit-glow", url="/Books/%s/Chapters/%s/Set" % (book.key(), chapter.key())) }}
+		</div>
+	{% endif %}
+	
 {% endblock %}
 
 {% block content %}
-	<div class="chapterInfo">
-		<h1>
-			{% if chapter.Title %}
-				<div style="margin-bottom: 20px; font-size: 0.8em; font-weight: normal;">
-					{{ chapter.Name|escape }}
-				</div>
-				{{ chapter.Title|escape }}
-			{% else %}
-				{{ chapter.Name|escape }}
-			{% endif %}
-		</h1>
-	</div>
-	<div>
-		{% if chapter.Synopsis %}
-			<div class="Synopsis">
-				"&#160;{{ chapter.Synopsis|escape }}&#160;"
-			</div>
-		{% endif %}
-	
-		{% if chapter.getLatestRevision() %}
-			<div class="chapterText">
-				{{ chapter.getLatestRevision().text_with_linebreaks() }}
-			</div>
-		{% endif %}
-	
-		{% if not chapter.nextChapter() %}
-			<div style="margin: 40px 0px;">
-				<strong>{% trans %}This was the last chapter!{% endtrans %}</strong>
-			</div>
-		{% endif %}
-	</div>
+
+	{{ bookMacros.showChapter(chapter, currentMember=currentMember) }}
+
+	{% if not chapter.nextChapter() %}
+		<div style="margin: 40px 0px;">
+			<strong>{% trans %}This was the last chapter!{% endtrans %}</strong>
+		</div>
+	{% endif %}
 
 	<div class="buttonBar">
 		<ul>

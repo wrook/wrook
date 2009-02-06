@@ -22,6 +22,7 @@ def URLMappings():
 		(r'/Themes/Theme/BackgroundImageInfo/(.*)', ThemeBackgroundImageInfo),
 		(r'/Themes/Theme/Stylesheet/(.*)', ThemeStylesheet),
 		(r'/Themes/(.*)/MemberSelect', ThemeMemberSelect),
+		(r'/Themes/(.*)/BookSelect', ThemeBookSelect),
 		(r'/Themes/(.*)', ThemeView)
 	]
 
@@ -94,6 +95,23 @@ class ThemeMemberSelect(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
+class ThemeBookSelect(webapp.RequestHandler):
+	def get(self, themeKey, ):
+		onRequest(self)
+		if self.CurrentMember:
+			if key:
+				theme = Theme.get(key)
+				if theme:
+					currentThemeSelection = self.CurrentMember.currentThemeSelection()
+					if currentThemeSelection:
+						if (theme.key() != currentThemeSelection.key()):
+							theme.selectForMember(self.CurrentMember)
+					else:
+						theme.selectForMember(self.CurrentMember)
+					self.redirect("/")
+				else: self.error(500)
+			else: self.error(404)
+		else: self.requestLogin()
 
 class ThemeView(webapp.RequestHandler):
 	def get(self, key):

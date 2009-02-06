@@ -5,7 +5,7 @@
 		<div class="contentBlock">
 			<div class="blockHeader withSectionMenu">
 				<h1><a href="/Books/{{ book.key() }}">
-					{{ book.Title }}
+					{% trans%}Book{% endtrans %}: {{ book.Title }}
 				</a></h1>
 				{{ bookMacros.tabs_book(book=book, selected=subSection) }}
 				<div class="clearfix"></div>
@@ -27,6 +27,21 @@
 					</div>
 				</div>
 				<div class="sidebar">
+					<div class="panelContent">
+						{% if book.getCover() %}
+							<div style="position:relative">
+								<img src='/Covers/Thumbnail/{{ book.getCover().key() }}?width=180'>
+								{% if book.getCover().isReusable %}
+									<span class="coverTitle" style="width: 160px; font-size: 22px; text-align: center; {% if book.getCover.TitleColor %}color: {{ book.getCover().TitleColor }}{% endif %}" >{{ book.Title }}</span> 
+								{% endif %}
+							</div>
+						{% endif %}
+						{% if userCanEdit %}
+							<div style="margin: 5px 0px; position:relative; clear:right;">
+							{{ wrook.iconButton(label=_("Change cover"), name="editCover", icon="edit-glow", url="/Covers/Select?usage=%s&redirect=/Books/SetCover/%s" % (book.Title, book.key())) }}
+							</div>
+						{% endif %}
+					</div>
 					{% block sidebar %}{% endblock %}
 				</div>
 			</div>

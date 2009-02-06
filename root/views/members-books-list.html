@@ -13,14 +13,14 @@
 {% endblock %}
 
 {% block sidebar %}
-	<div class="sidebarPanel">
-		<h3>{% trans %}Options{% endtrans %}</h3>
-		<div class="sidebarMenu">
-			<ul>
-				{% if visitedMember.key()==currentMember.key() %}
-					<li><a href="/Books/Edit/">{% trans %}Start a new book{% endtrans %}</a></li>
-				{% endif %}
-			</ul>
-		</div>
-	</div>
+{% endblock %}
+
+{% block contentBottom %}
+	{% if visitedMember.key()==currentMember.key() %}
+		{% call wrookMacros.calls_to_action() %}
+			<li class="mainLink"><a href="/Books/Edit/">
+				<span class="bullet spriteIcons icon-main-link"></span><span>{% trans %}Start a new book{% endtrans %}</span></a>
+			</li>
+		{% endcall %}
+	{% endif %}
 {% endblock %}

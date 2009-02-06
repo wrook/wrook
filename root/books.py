@@ -22,6 +22,9 @@ import app
 
 import logging
 
+options = {
+	"wordsPerPage" : 350
+}
 #===============================================================
 # BOOK, CHAPTERS, REVISIONS, TYPEWRITER AND LICENSING
 
@@ -44,6 +47,7 @@ def URLMappings():
 		(r'/Books/(.*)/Talk', Books_Talk),
 		(r'/Books/(.*)/Feed', Books_Feed),
 		(r'/Books/(.*)/Contents', ViewBook_Contents),
+		(r'/Books/(.*)/Chapters/(.*)/StartingPoint/(.*)', handler_chapter_setAsStartingPoint),
 		(r'/Books/(.*)', ViewBook),
 		( '/Covers/', CoverList),
 		(r'/Covers/Thumbnail/(.*)', CoverThumbnail),
@@ -164,10 +168,13 @@ class Book(talk.Topicable):
 			for chapter in self.Chapters:
 				latestRevision = chapter.getLatestRevision()
 				if latestRevision:
-					wordCount += latestRevision.calculateWordCount()
+					wordCount += latestRevision.wordCount()
 			memcache.add(wordCountKey, wordCount)
 		return wordCount
-	
+
+	def pageCount(self):
+		return max(round(self.wordCount()/options["wordsPerPage"]), 1)
+
 	def authorName(self):
 		if self.AttribAuthorIsAuthor: return self.Author.fullname()
 		elif self.AttribAuthorName: return self.AttribAuthorName
@@ -219,6 +226,7 @@ class Chapter(db.Model):
 	Stage = db.StringProperty(required=True, default="planning", choices=set(["planning", "drafting", "writing", "proofing", "final"]))
 	Synopsis = db.TextProperty()
 	Created = db.DateTimeProperty(auto_now_add=True)
+	isReaderStartingPoint = db.BooleanProperty(default=False)
 	isDeleted = db.BooleanProperty(default = False) # An author can mark a chapter as being deleted without loosing the revision history
 
 	def get_verbose_stage(self):
@@ -306,6 +314,7 @@ class Chapter(db.Model):
 					return chapters[i-1]
 			i=i+1
 
+
 class Revision(db.Model):
 	Book = db.ReferenceProperty(Book, collection_name="ChapterRevisions")
 	Chapter = db.ReferenceProperty(Chapter, collection_name="Revisions")
@@ -316,11 +325,22 @@ class Revision(db.Model):
 	Created =  db.DateTimeProperty(auto_now_add=True)
 	isPublished = db.BooleanProperty(default = True)
 	
-	def text_with_linebreaks(self):
+	def text_with_linebreaks(self, wordsCutoff=1000):
 		from feathers import utils
-		return utils.text_to_linebreaks(self.Text)
+		text = "%s<span id='continueReading' /></span>%s" % (
+			self.text_first_words(wordsCutoff=wordsCutoff),
+			self.text_last_words(wordsCutoff=wordsCutoff))
+		return text
 
-	def calculateWordCount(self):
+	def text_first_words(self, wordsCutoff=1000):
+		from feathers import utils
+		return utils.text_to_linebreaks(utils.firstWords(self.Text, wordsCutoff))
+
+	def text_last_words(self, wordsCutoff=1000):
+		from feathers import utils
+		return utils.text_to_linebreaks(utils.lastWords(self.Text, wordsCutoff))
+
+	def wordCount(self):
 		from feathers import utils
 		if self.WordCount: return self.WordCount
 		else:
@@ -513,16 +533,35 @@ class handler_chapter_read(webapp.RequestHandler):
 		if self.CurrentMember:
 			chapter = Chapter.get(key)
 			if chapter:
-				userIsAuthor = (self.CurrentMember.key() == chapter.Book.Author.key())
+				userCanEdit = (self.CurrentMember.key() == chapter.Book.Author.key()) or (self.CurrentMember.isAdmin)
 				self.Model.update({
 					"chapter": chapter,
 					"book": chapter.Book,
-					"userIsAuthor": userIsAuthor
+					"userCanEdit": userCanEdit
 					})
 				chapter.setBookmark(self.CurrentMember)
 				self.render2('views/viewChapter.html')
 			else: self.error(404)
 		else: self.requestLogin(comeback="/ViewChapter/%s" % key)
+
+class handler_chapter_setAsStartingPoint(webapp.RequestHandler):
+	def get(self, bookKey, chapterKey, method):
+		onRequest(self)
+		if self.CurrentMember:
+			book = Book.get(bookKey)
+			chapter = Chapter.get(chapterKey)
+			if (book and chapter):
+				if (book.key() == chapter.Book.key()):
+					userCanEdit = (self.CurrentMember.key() == chapter.Book.Author.key()) or (self.CurrentMember.isAdmin)
+					if userCanEdit:
+						if (method == "Set"):
+							chapter.isReaderStartingPoint = True
+						if (method == "Unset"):
+							chapter.isReaderStartingPoint = False
+					else: self.error(500)
+				else: self.error(500)
+			else: self.error(404)
+		else: self.error(500)
 
 class EditChapterOptions(webapp.RequestHandler):
 	def get( self, key ):

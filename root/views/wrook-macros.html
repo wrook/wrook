@@ -192,8 +192,11 @@ $(document).ready(function(){
 	</div>
 {%- endmacro %}
 
-{% macro iconButton(label, url=None, name="", icon="", isDimmed=False) -%}
-<button class="{{ name }}" {% if url %}onclick="document.location='{{ url }}'"{% endif %}>
+{% macro iconButton(label, alt=None, url=None, name="", icon="", isDimmed=False) -%}
+<button
+	class="{{ name }}"
+	{% if url %}onclick="document.location='{{ url }}'"{% endif %}
+	{% if alt %}alt="{{ alt }}"{% endif %}>
 	<span class="spriteIcons icon-{{ icon }}"></span>
 	<span class="label">
 		{{ label }}
