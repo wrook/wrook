@@ -4,6 +4,8 @@
     <dict>
         <key>fileTriggers</key>
         <dict>
+            <key>-book</key>
+            <string>views\template-book.html</string>
             <key>-d</key>
             <string>stylesheets\template-d.css</string>
             <key>-d.</key>
@@ -164,6 +166,8 @@
             <string>books.py</string>
             <key>books.py</key>
             <string>books.py</string>
+            <key>booksv</key>
+            <string>views\books-view.html</string>
             <key>cac</key>
             <string>feathers\cachetree.py</string>
             <key>cach</key>
@@ -202,6 +206,8 @@
             <string>stylesheets\template-d.css</string>
             <key>d.css</key>
             <string>stylesheets\template-d.css</string>
+            <key>deleteBook</key>
+            <string>views\deleteBook.html</string>
             <key>e2.</key>
             <string>views\template-main-e2.html</string>
             <key>e2.h</key>
@@ -222,6 +228,8 @@
             <string>views\visitorHome.html</string>
             <key>http</key>
             <string>views\http404.html</string>
+            <key>http5</key>
+            <string>views\http500.html</string>
             <key>http500</key>
             <string>views\http500.html</string>
             <key>info</key>

@@ -41,6 +41,12 @@ class RequestHandler(webapp.RequestHandler):
 	CurrentLanguage = None
 	AppConfig = None
 
+	def raise_http404(self):
+		self.error(404)
+		self.Model.update({})
+		self.render2('views/http404.html')
+
+
 	def setVisitedMember(self, member):
 		if member:
 			self.VisitedMember = member

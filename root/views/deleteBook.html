@@ -1,13 +1,11 @@
-﻿{% extends "template-main-d.html" %}
-{% load i18n %}
-{% block pageName %}ViewChapter{% endblock %}
+{% extends "template-main-e2.html" %}
 {% block title %}
 	<h1>
-		{% trans "Delete a book" %}
+		{% trans %}Delete a book{% endtrans %}
 	</h1>
 {% endblock %}
 {% block content %}
-{% blocktrans %}
+{% trans %}
 <p>
 Are you <strong>absolutely</strong> sure that you want to delete this book?
 </p>
@@ -17,14 +15,14 @@ This will also delete all chapters, feedback and bookmarks associated with the b
 <p>
 Once delete, it cannot be undeleted.
 </p>
-{% endblocktrans %}
+{% endtrans %}
 	<p>
-		<a href="/Books/{{ chapter.key }}">{% trans "Cancel and go back" %}</a>
+		<a href="/Books/{{ book.key() }}">{% trans %}Cancel and go back{% endtrans %}</a>
 	</p>
 	<form method="post">
-		<input type="checkbox" value="yes" name="confirmDelete" /><label for="confirmDelete">{% trans "I have read the warning and confirm" %}</label>
+		<input type="checkbox" value="yes" name="confirmDelete" /><label for="confirmDelete">{% trans %}I have read the warning and confirm{% endtrans %}</label>
 		<br/>
 		<br/>
-		<input type="submit" name="doDelete" value="{% trans "Delete" %}"/>
+		<button type="submit" class="formButton"><span>{% trans %}Delete{% endtrans %}</span></button>
 	</form>
 {% endblock %}

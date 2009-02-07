@@ -1,6 +1,6 @@
 {% extends "views/template-book.html" %}
 {% import 'wrook-macros.html' as wrook %}
-{% import 'book-macros.html' as bookMacros %}
+#{% import 'book-macros.html' as bookMacros %}
 {% set section = "book" %}
 {% set subSection = "overview" %}
 {% block pageId %}books-overview{% endblock %}
@@ -150,7 +150,7 @@
 							{% if book.lastRevisedChapter() %}
 								<li><a href="/Typewriter/{{ book.lastRevisedChapter().key() }}">{% trans %}Resume writing{% endtrans %}</a></li>
 							{% endif %}
-							<li><a href="/Books/Delete/{{ book.key() }}">{% trans %}Delete whole book{% endtrans %}</a></li>
+							<li><a href="/Books/{{ book.key() }}/Delete">{% trans %}Delete whole book{% endtrans %}</a></li>
 						{% endif %}
 					</ul>
 				</div>

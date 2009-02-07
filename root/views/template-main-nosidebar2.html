@@ -14,7 +14,6 @@
 	<body class="section-{{ section }}" id="page-{% block pageId %}none{% endblock %}">
 		{% if currentTheme %}
 			<div id="wallpaper">
-				<div id="shadow"></div>
 				<img alt="{% trans %}Wallpaper{% endtrans %}" src="/Themes/Theme/BackgroundImage/{{ currentTheme.key() }}?width=980" />
 				<div class="bgFade"></div>
 			</div>
@@ -23,42 +22,44 @@
 		<div id="page">
 			<div id="halfBakedLogo"><a  id="link-halfBaked" href="/About/Half-Baked-Edition"></a></div>
 			<div id="header">
-				<div id="logo">
-					<a href="/">{% trans %}Wrook{% endtrans %}</a>
-				</div>
-				<div id="nav">
-					{% if currentMember %}
-						<div id="mainMenu">
-							<ul>
-								<li><a id="menu-home" href="/">{% trans %}Home{% endtrans %}</a></li>
-								<li><a id="menu-books" href="/Books">{% trans %}Books{% endtrans %}</a></li>
-								<li><a id="menu-readers" href="/Members">{% trans %}Members{% endtrans %}</a></li>
-								<li>|</li>
-								<li class="secondaryMenuItem"><a id="menu-invites" href="/Invites">{% trans %}Invites{% endtrans %}</a></li>
-								<li class="secondaryMenuItem"><a id="menu-customize" href="/Customize">{% trans %}Customize{% endtrans %}</a></li>
-							</ul>
-						</div>
-						<div id="accessMenu">
-							<ul>
-								<li><a id="menu-accountSettings" href="/Account/View">{% trans %}Account settings{% endtrans %}</a></li>
-								<li><a id="menu-logout" href="/Logout">{% trans %}Logout{% endtrans %}</a></li>
-							</ul>
-						</div>
-					{% else %}
-						<div id="mainMenu">
-							<ul>
-								<li><a id="menu-home" href="/">{% trans %}Home{% endtrans %}</a></li>
-								<li><a id="menu-books" href="/Books">{% trans %}Books{% endtrans %}</a></li>
-								<li><a id="menu-readers" href="/Members">{% trans %}Members{% endtrans %}</a></li>
-							</ul>
-						</div>
-						<div id="accessMenu">
-							<ul>
-								<li><a id="menu-join" href="/Join/">{% trans %}Join{% endtrans %}</a></li>
-								<li><a id="menu-login" href="/Login">{% trans %}Login{% endtrans %}</a></li>
-							</ul>
-						</div>
-					{% endif %}
+				<div id="headerInner">
+					<div id="logo">
+						<a href="/">{% trans %}Wrook{% endtrans %}</a>
+					</div>
+					<div id="nav">
+						{% if currentMember %}
+							<div id="mainMenu">
+								<ul>
+									<li><a id="menu-home" href="/">{% trans %}Home{% endtrans %}</a></li>
+									<li><a id="menu-books" href="/Books">{% trans %}Books{% endtrans %}</a></li>
+									<li><a id="menu-readers" href="/Members">{% trans %}Members{% endtrans %}</a></li>
+									<li>|</li>
+									<li class="secondaryMenuItem"><a id="menu-invites" href="/Invites">{% trans %}Invites{% endtrans %}</a></li>
+									<li class="secondaryMenuItem"><a id="menu-customize" href="/Customize">{% trans %}Customize{% endtrans %}</a></li>
+								</ul>
+							</div>
+							<div id="accessMenu">
+								<ul>
+									<li><a id="menu-accountSettings" href="/Account/View">{% trans %}Account settings{% endtrans %}</a></li>
+									<li><a id="menu-logout" href="/Logout">{% trans %}Logout{% endtrans %}</a></li>
+								</ul>
+							</div>
+						{% else %}
+							<div id="mainMenu">
+								<ul>
+									<li><a id="menu-home" href="/">{% trans %}Home{% endtrans %}</a></li>
+									<li><a id="menu-books" href="/Books">{% trans %}Books{% endtrans %}</a></li>
+									<li><a id="menu-readers" href="/Members">{% trans %}Members{% endtrans %}</a></li>
+								</ul>
+							</div>
+							<div id="accessMenu">
+								<ul>
+									<li><a id="menu-join" href="/Join/">{% trans %}Join{% endtrans %}</a></li>
+									<li><a id="menu-login" href="/Login">{% trans %}Login{% endtrans %}</a></li>
+								</ul>
+							</div>
+						{% endif %}
+					</div>
 				</div>
 			</div>
 			<div id="pageInner">

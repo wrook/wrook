@@ -27,79 +27,94 @@
 				</a>
 			</li>
 		</ul>
+		<div class="socialLinks">
+			<script type="text/javascript">var addthis_pub="mathieusylvain";</script>
+			<a href="http://www.addthis.com/bookmark.php?v=20" onmouseover="return addthis_open(this, '', 'http://www.wrook.org/Books/{{ book.key() }}', 'Book: {{ book.Title }} @ wrook.org')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><img src="http://s7.addthis.com/static/btn/sm-share-en.gif" width="83" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/200/addthis_widget.js"></script>
+		</div>
 	</div>
 {%- endmacro %}
 
 {% macro showChapter(chapter, onlyFirstWords=False, currentMember=None) -%}
-	<div class="chapterInfo">
-		<h1>
-			{% if chapter.Title %}
-				<div style="margin-bottom: 20px; font-size: 0.8em; font-weight: normal;">
+	{% if chapter %}
+		<div class="chapterInfo">
+			<h1>
+				{% if chapter.Title %}
+					<div style="margin-bottom: 20px; font-size: 0.8em; font-weight: normal;">
+						{{ chapter.Name|escape }}
+					</div>
+					{{ chapter.Title|escape }}
+				{% else %}
 					{{ chapter.Name|escape }}
+				{% endif %}
+			</h1>
+		</div>
+		<div>
+			{% if chapter.Synopsis %}
+				<div class="Synopsis">
+					"&#160;{{ chapter.Synopsis|escape }}&#160;"
 				</div>
-				{{ chapter.Title|escape }}
-			{% else %}
-				{{ chapter.Name|escape }}
 			{% endif %}
-		</h1>
-	</div>
-	<div>
-		{% if chapter.Synopsis %}
-			<div class="Synopsis">
-				"&#160;{{ chapter.Synopsis|escape }}&#160;"
-			</div>
-		{% endif %}
-
-		{% set lastRevision=chapter.getLatestRevision() %}
-		{% if chapter.getLatestRevision() %}
-			{% if onlyFirstWords %}
-				<div class="chapterText">
-					{% if lastRevision.wordCount() > 1000 %}
-						{{ chapter.getLatestRevision().text_first_words() }}[ ... ]
-					{% else %}
-						{{ chapter.getLatestRevision().text_with_linebreaks() }}
-					{% endif %}
-
-					<div style="font-size: 1em">
-						{% if not currentMember %}
-							<p><em>
-								{% trans
-								loginURL="/Login?comeback=/ViewChapter/%s#continueReading" % chapter.key(),
-								joinURL="/Join/?comeback=/ViewChapter/%s#continueReading" % chapter.key()
-								%}
-								<strong>This books preview ends here</strong>. To continue reading (without restrictions), you must either <a href="{{loginURL}}">Login</a> or <a href="{{joinURL}}">Sign-Up</a> for a free account.
-								{% endtrans %}	
-							</em></p>
+	
+			{% set lastRevision=chapter.getLatestRevision() %}
+			{% if chapter.getLatestRevision() %}
+				{% if onlyFirstWords %}
+					<div class="chapterText">
+						{% if lastRevision.wordCount() > 1000 %}
+							{{ chapter.getLatestRevision().text_first_words() }}[ ... ]
 						{% else %}
-							{% if lastRevision.wordCount() > 1000 %}
+							{{ chapter.getLatestRevision().text_with_linebreaks() }}
+						{% endif %}
+	
+						<div style="font-size: 1em">
+							{% if not currentMember %}
 								<p><em>
-									{% set continueReadingURL = "/ViewChapter/%s#continueReading" % chapter.key() %}
-									{% trans continueReadingURL = continueReadingURL %}
-									<strong>The preview ends here</strong>. We invite you to <a href="{{continueReadingURL}}">continue reading this chapter</a>.
-									After which, this book will be added to your bookmarks.
+									{% trans
+									loginURL="/Login?comeback=/ViewChapter/%s#continueReading" % chapter.key(),
+									joinURL="/Join/?comeback=/ViewChapter/%s#continueReading" % chapter.key()
+									%}
+									<strong>This books preview ends here</strong>. To continue reading (without restrictions), you must either <a href="{{loginURL}}">Login</a> or <a href="{{joinURL}}">Sign-Up</a> for a free account.
 									{% endtrans %}	
 								</em></p>
 							{% else %}
-								<p><em>
-									{% set continueReadingURL = "/ViewChapter/%s#continueReading" % chapter.nextChapter().key() %}
-									{% trans continueReadingURL=continueReadingURL %}
-									<strong>The preview ends here</strong>. We invite you to <a href="{{continueReadingURL}}">start reading the next chapter</a>.
-									After which, this book will be added to your bookmarks.
-									{% endtrans %}
-								</em></p>
+								{% if lastRevision.wordCount() > 1000 %}
+									<p><em>
+										{% set continueReadingURL = "/ViewChapter/%s#continueReading" % chapter.key() %}
+										{% trans continueReadingURL = continueReadingURL %}
+										<strong>The preview ends here</strong>. We invite you to <a href="{{continueReadingURL}}">continue reading this chapter</a>.
+										After which, this book will be added to your bookmarks.
+										{% endtrans %}	
+									</em></p>
+								{% else %}
+									{% set nextChapter = chapter.nextChapter() %}
+									{% if nextChapter %}
+										<p><em>
+											{% set continueReadingURL = "/ViewChapter/%s#continueReading" % chapter.nextChapter().key() %}
+											{% trans continueReadingURL=continueReadingURL %}
+											<strong>The preview ends here</strong>. We invite you to <a href="{{continueReadingURL}}">start reading the next chapter</a>.
+											After which, this book will be added to your bookmarks.
+											{% endtrans %}
+										</em></p>
+									{% else %}
+										{% set continueReadingURL = None %}
+										<p><em>
+											{% trans %}This was the only and last chapter.{% endtrans %}
+										</em></p>
+									{% endif %}
+								{% endif %}
+								{% if continueReadingURL %}
+									<div style="font-size: 1.2em">
+										<a href="{{continueReadingURL}}">{% trans %}Continue reading...{% endtrans %}</a>
+									</div>
+								{% endif %}
 							{% endif %}
-							<div style="font-size: 1.2em">
-								<a href="{{continueReadingURL}}">{% trans %}Continue reading...{% endtrans %}</a>
-							</div>
-						{% endif %}
+						</div>
 					</div>
-				</div>
-			{% else %}
-				<div class="chapterText">
-					{{ chapter.getLatestRevision().text_with_linebreaks() }}
-				</div>
+				{% else %}
+					<div class="chapterText">
+						{{ chapter.getLatestRevision().text_with_linebreaks() }}
+					</div>
+				{% endif %}
 			{% endif %}
-		{% endif %}
-
-	</div>
+		</div>
+	{% endif %}
 {%- endmacro %}

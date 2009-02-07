@@ -113,6 +113,12 @@ class Replyable(cachetree.Cachable):
 			super(Replyable, self).touch_up(childItem)
 
 class Topicable(cachetree.Cachable):
+
+	def delete_all_topics(self):
+		while True:
+			topics = Topic.all().ancestor(self).fetch(1000)
+			if len(topics)==0: break
+        	else: db.delete(topics)
 	
 	def topics(self, maxResults=999, offset=0):
 		key = "topicable-%s::topics-%s-%s" % (self.key(), maxResults, offset)

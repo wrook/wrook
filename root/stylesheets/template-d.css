@@ -53,23 +53,33 @@ table tr td {
 
 #page {
 	color: #ffffff;
-	margin: 0px auto;
-	width: 980px;
+	width: 100%;
 	min-height: 760px;
 	position: relative;
+	padding: 0px;
+}
+
+#header {
+	position: relative;
+	background: url(/images/background50black.png);
+	height: 45px;
+	width: 100%;
+}
+
+#headerInner {
+	width: 860px;
+	margin: 0px auto;
+	position: relative;
+}
+
+#pageInner {
+	position: relative;
+	top: 0px;
+	width: 960px;
+	margin: 0px auto;
 	text-align: left;
 }
 
-#page .header {
-	position: relative;
-	height: 60px;
-}
-
-#page {
-	position: relative;
-	width: 980px;
-	padding: 0px;
-}
 #page-http500 #pageInner {
 	background: #0000CC !important;
 }
@@ -78,22 +88,12 @@ table tr td {
 }
 
 #wallpaper {
-	position: absolute;
-	width: 980px;
-	top: 60px;
-	left: 50%;
-	margin-left: -490px;
+	position: fixed;
+	top: 0px;
+	width: 100%;
 }
 #wallpaper img {
-	width: 980px;
-}
-#wallpaper #shadow {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 980px;
-	background: url(/images/page-top.png) 0px 0px no-repeat;
-	height: 19px;
+	width: 100%;
 }
 #wallpaper .bgFade {
 	position: relative;
@@ -123,8 +123,8 @@ table tr td {
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	height: 60px;
-	width: 800px;
+	height: 40px;
+	width: 735px;
 	z-index: 1500;
 }
 
@@ -209,10 +209,6 @@ table tr td {
 	text-decoration: none;
 }
 
-#header {
-	height: 60px;
-}
-
 #headerContent {
 	position: relative;
 	text-align: left;
@@ -226,10 +222,10 @@ table tr td {
 #header #logo {
 	position: absolute;
 	display: block;
-	left: 730px;
-	top: 0px;
-	width: 262px;
-	height: 57px;
+	left: 745px;
+	top: 6px;
+	width: 121px;
+	height: 45px;
 	overflow: hidden;
 }
 #header #logo a:visited,
@@ -238,15 +234,12 @@ table tr td {
 	display: block;
 	left: 0px;
 	top: 0px;
-	width: 262px;
-	height: 57px;
-	background: url(/images/logo-smoke.png) no-repeat;
+	width: 121px;
+	height: 45px;
+	background: url(/images/header-logo.png) no-repeat;
 	text-indent: -1000px;
 	z-index: 1000;
 	border: none;
-}
-#header #logo a:hover {
-	background-position: 0px -57px;	
 }
 
 #pageFooter {
@@ -261,6 +254,7 @@ table tr td {
 	position: absolute;
 	left: 12px;
 	bottom: 0px;
+	width: 648px;
 }
 
 .sectionMenu ul {
@@ -311,6 +305,12 @@ table tr td {
 	padding: 8px 16px 0px 0px;
 }
 
+.sectionMenu .socialLinks {
+	position: absolute;
+	top:3px;
+	right: 0px;
+}
+
 .notice {
 	padding: 10px;
 	background: #f7f561;
@@ -354,14 +354,15 @@ table tr td {
 	width: 550px;
 	margin-bottom: 20px;
 }
+
 #bookPageInner {
-	position: relative;
 	top: -5px;
-	left: -5px;
-	width: 550px;
 	border: 1px solid #b5b5b5;
 	background: #ffffff;
 	min-height: 400px;
+	margin: 0px 50%;
+	position: relative;
+	left: -480px
 }
 
 #pageContent {
@@ -369,7 +370,7 @@ table tr td {
 	margin-left: 30px;
 	padding:48px 30px 30px 25px;
 	position:relative;
-	top:10px;
+	top:20px;
 	width:700px;
 }
 
@@ -708,8 +709,8 @@ table tr td {
 
 #halfBakedLogo {
 	position: absolute;
-	top: 45px;
-	left: 950px;
+	top: 90px;
+	left: 1000px;
 	z-index: 2000;
 }
 

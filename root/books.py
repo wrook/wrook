@@ -42,7 +42,7 @@ def URLMappings():
 		(r'/Books/Edit/(.*)', Books_Edit),
 		(r'/Books/SetCover/(.*)', BookSetCover),
 		(r'/Books/ReorderChapters/(.*)', Book_ReorderChapters),
-		(r'/Books/Delete/(.*)', DeleteBook),
+		(r'/Books/(.*)/Delete', DeleteBook),
 		(r'/Books/(.*)/Readers', handler_book_readers),
 		(r'/Books/(.*)/Talk', Books_Talk),
 		(r'/Books/(.*)/Feed', Books_Feed),
@@ -72,6 +72,7 @@ def deleteBook(book):
 		deleteChapter(chapter)
 	#TODO: Also delete topics
 	db.delete(book.Bookmarks)
+	book.delete_all_topics()
 	db.delete(book)
 
 class Cover(db.Model):
@@ -403,6 +404,7 @@ class ChapterFormForCreate(djangoforms.ModelForm):
 		fields = ("Name", "Title", "Stage")
 
 class ViewBook(webapp.RequestHandler):
+
 	def get(self, key):
 		onRequest(self)
 		#Before loading a book from the key, lets try to find it from the Slug
@@ -432,7 +434,7 @@ class ViewBook(webapp.RequestHandler):
 				"userCanEdit": userCanEdit
 				})
 			self.render2('views/books-view.html')
-		else: self.error(404)
+		else: self.raise_http404()
 
 class ViewBook_Contents(webapp.RequestHandler):
 	def get(self, key):
@@ -503,11 +505,11 @@ class DeleteBook(webapp.RequestHandler):
 		if self.CurrentMember:
 			book = Book.get(key)
 			if book:
-	 			userIsAuthor = (self.CurrentMember.key() == book.Author.key())
-				if userIsAuthor:
+	 			userCanEdit = (self.CurrentMember.key() == book.Author.key()) or (self.CurrentMember.isAdmin)
+				if userCanEdit :
 					self.Model.update({"book": book})
-					self.render('views/deleteBook.html')
-				else: return
+					self.render2('views/deleteBook.html')
+				else: self.error(500)
 			else: self.error(404)
 		else: self.requestLogin()
 	
@@ -516,14 +518,14 @@ class DeleteBook(webapp.RequestHandler):
 		if self.CurrentMember:
 			book = Book.get(key)
 			if book:
-	 			userIsAuthor = (self.CurrentMember.key() == book.Author.key())
-				if userIsAuthor:
-					if (self.request.get("doDelete") != "" and self.request.get("confirmDelete") == "yes"):
+	 			userCanEdit = (self.CurrentMember.key() == book.Author.key()) or (self.CurrentMember.isAdmin)
+				if userCanEdit:
+					if (self.request.get("confirmDelete") == "yes"):
 						deleteBook(book)
 						self.redirect("/")
 					else:
-						self.redirect("/Books/Delete/%s" % book.key())
-				else: return
+						self.redirect("/Books/%s/Delete" % book.key())
+				else: self.error(500)
 			else: self.error(404)
 		else: self.requestLogin()
 

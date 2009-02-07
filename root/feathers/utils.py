@@ -26,9 +26,12 @@ def styleSourceToDict(sourceCode):
 	return paramDict
 
 def wordCount(text):
-	words = text.split(None)
-	wordcount = len(words)
-	return wordcount
+	if text:
+		words = text.split(None)
+		wordcount = len(words)
+		return wordcount
+	else:
+		return 0
 
 def firstWords(text, wordsCutoff):
 	if text: return " ".join(text.split(" ")[:wordsCutoff])
