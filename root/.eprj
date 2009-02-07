@@ -261,7 +261,7 @@
             <key>macr</key>
             <string>views\wrook-macros.html</string>
             <key>macro</key>
-            <string>views\book-macros.html</string>
+            <string>views\member-macros.html</string>
             <key>macros</key>
             <string>views\book-macros.html</string>
             <key>main</key>
