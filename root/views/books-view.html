@@ -20,6 +20,8 @@
 			<div style="margin: 5px 0px;">
 				{{ wrook.iconButton(label=_("Edit books details"), name="editDetails", icon="edit-glow", url="/Books/Edit/%s" % book.key()) }}
 				{{ wrook.iconButton(label=_("Edit Licensing"), name="editLicensing", icon="edit-glow", url="/Books/Edit/License/%s" % book.key()) }}
+				{{ wrook.iconButton(label=_("Change cover"), name="editCover", icon="edit-glow", url="/Covers/Select?usage=%s&redirect=/Books/SetCover/%s" % (book.Title, book.key())) }}
+				{{ wrook.iconButton(label=_("Delete whole book"), name="deleteBook", icon="edit-glow", url="/Books/%s/Delete" % book.key()) }}
 			</div>
 		{% endif %}
 		{% if book.Synopsis %}
@@ -139,23 +141,7 @@
 {% endblock %}
 
 {% block sidebar %}
-		{% if userCanEdit %}
-			<div class="sidebarPanel">
-				<h3>
-					{% trans %}Editing Options{% endtrans %}
-				</h3>
-				<div class="sidebarMenu">
-					<ul>
-						{% if userCanEdit %}
-							{% if book.lastRevisedChapter() %}
-								<li><a href="/Typewriter/{{ book.lastRevisedChapter().key() }}">{% trans %}Resume writing{% endtrans %}</a></li>
-							{% endif %}
-							<li><a href="/Books/{{ book.key() }}/Delete">{% trans %}Delete whole book{% endtrans %}</a></li>
-						{% endif %}
-					</ul>
-				</div>
-			</div>
-		{% endif %}
+	{#
 		<div class="sidebarPanel">
 			<div class="sidebarMenu">
 				<ul>
@@ -163,4 +149,5 @@
 				</ul>
 			</div>
 		</div>
+	#}
 {% endblock sidebar %}

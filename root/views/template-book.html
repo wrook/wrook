@@ -36,11 +36,6 @@
 								{% endif %}
 							</div>
 						{% endif %}
-						{% if userCanEdit %}
-							<div style="margin: 5px 0px; position:relative; clear:right;">
-							{{ wrook.iconButton(label=_("Change cover"), name="editCover", icon="edit-glow", url="/Covers/Select?usage=%s&redirect=/Books/SetCover/%s" % (book.Title, book.key())) }}
-							</div>
-						{% endif %}
 					</div>
 					{% block sidebar %}{% endblock %}
 				</div>

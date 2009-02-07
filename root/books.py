@@ -938,16 +938,16 @@ class CoverThumbnail(webapp.RequestHandler):
 		paramWidth = self.request.get("width")
 		if paramWidth == "45":
 			width = 45
-			height = 60
+			height = 77
 		elif paramWidth == "90":
 			width = 90
-			height = 120
+			height = 135
 		elif paramWidth == "180":
 			width = 180
-			height = 240
+			height = 270
 		else:
 			width = 120
-			height = 160
+			height = 180
 		if cover:
 			imageKey = "coverThumb%s-%s" % (width, cover.key())
 			thumbnailData = memcache.get(imageKey)

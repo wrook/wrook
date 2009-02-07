@@ -95,7 +95,7 @@
             <key>boks.p</key>
             <string>books.py</string>
             <key>book</key>
-            <string>books.py</string>
+            <string>views\template-book.html</string>
             <key>book-</key>
             <string>views\books-talk.html</string>
             <key>book-f</key>
@@ -167,6 +167,8 @@
             <key>books.py</key>
             <string>books.py</string>
             <key>booksv</key>
+            <string>views\books-view.html</string>
+            <key>bookv</key>
             <string>views\books-view.html</string>
             <key>cac</key>
             <string>feathers\cachetree.py</string>
