@@ -58,10 +58,11 @@ def onRequest(self):
 	# Use to reference the ongoing request without having to do injection
 	self.Model = {}
 	self.MasterTemplate = os.path.join(os.path.dirname(__file__), "views/template-main-e.html") # Sets the default template to be used by hosted modules
+	self.MasterTemplate2 = "template-main-e2.html"
 	self.MasterTemplateStylesheets = os.path.join(os.path.dirname(__file__), "views/stylesheets.html") # Sets the default template to be used by hosted modules
 	self.MasterTemplateScripts = os.path.join(os.path.dirname(__file__), "views/scripts.html") # Sets the default template to be used by hosted modules
 	self.TemplateBase = os.path.join(os.path.dirname(__file__), "views/template-main.html") # Sets the default template to be used by hosted modules
-	self.TemplateBase2 = os.path.join(os.path.dirname(__file__), "views/template-main2.html") # Sets the default template to be used by hosted modules
+	self.TemplateBase2 = "template-main-e2.html" # Sets the default template to be used by hosted modules
 	self.CurrentMember = membership.loginFromCookies(self) # Load the current member from the google authentication and add it to the requesthandler
 	self.CurrentTheme = getDefaultTheme() # Set the default theme as the current theme
 	self.AppConfig = getWrookAppConfig() # Load the application config from the database
@@ -70,9 +71,11 @@ def onRequest(self):
 	self.Model.update({
 		'random': random.random(),
 		'templateMain': self.MasterTemplate,
+		'templateMain2': self.MasterTemplate2,
 		'templateScripts': self.MasterTemplateScripts,
 		'templateStylesheets': self.MasterTemplateStylesheets,
 		'templateBase': self.TemplateBase,
+		'templateBase2': self.TemplateBase2,
 		'now': datetime.datetime.now(), # Add the current time tot the model
 		'currentMember': self.CurrentMember, # Add the current user to the model
 		'currentTheme': self.CurrentTheme, # Add the default theme to the model

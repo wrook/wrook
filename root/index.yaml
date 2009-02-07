@@ -23,7 +23,7 @@ indexes:
   - name: When
     direction: desc
 
-# Used 854 times in query history.
+# Used 858 times in query history.
 - kind: Chapter
   properties:
   - name: Book
@@ -79,7 +79,7 @@ indexes:
   - name: Sent
     direction: desc
 
-# Used 2821 times in query history.
+# Used 2825 times in query history.
 - kind: Moment
   properties:
   - name: isDefault
@@ -133,7 +133,7 @@ indexes:
   - name: Created
     direction: desc
 
-# Used 2274 times in query history.
+# Used 2286 times in query history.
 - kind: Revision
   properties:
   - name: Chapter

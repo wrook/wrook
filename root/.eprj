@@ -210,6 +210,8 @@
             <string>stylesheets\template-d.css</string>
             <key>deleteBook</key>
             <string>views\deleteBook.html</string>
+            <key>e-viewTheme.html</key>
+            <string>feathers\views\customize-viewTheme.html</string>
             <key>e2.</key>
             <string>views\template-main-e2.html</string>
             <key>e2.h</key>
@@ -337,7 +339,7 @@
             <key>memberpr</key>
             <string>views\MembersProfile.html</string>
             <key>members</key>
-            <string>views\members-neighborhood.html</string>
+            <string>views\members.html</string>
             <key>members-</key>
             <string>views\members-neighborhood.html</string>
             <key>members-b</key>
@@ -610,6 +612,10 @@
             <string>tests\testContentPages.py</string>
             <key>testM</key>
             <string>tests\testMembership.py</string>
+            <key>theme</key>
+            <string>feathers\views\customize-themeEdit.html</string>
+            <key>themeEd</key>
+            <string>feathers\views\customize-themeEdit.html</string>
             <key>topic</key>
             <string>feathers\views\talk-TopicView.html</string>
             <key>topicF</key>
@@ -652,6 +658,10 @@
             <string>views\viewChapter.html</string>
             <key>viewChapter</key>
             <string>views\viewChapter.html</string>
+            <key>viewThe</key>
+            <string>feathers\views\customize-viewThemes.html</string>
+            <key>viewThemes</key>
+            <string>feathers\views\customize-viewThemes.html</string>
             <key>visi</key>
             <string>views\visitorHome.html</string>
             <key>visito</key>

@@ -1,27 +1,26 @@
-﻿{% extends masterTemplate %}
-{% load i18n %}
+{% extends templateMain2 %}
 {% block title %}
 	<h1>
-		{% trans "Theme: " %} {{ theme.Title }}
+		{% trans %}Theme: {% endtrans %} {{ theme.Title }}
 	</h1>
 {% endblock %}
 {% block content %}
 	<table>
 		<tbody>
 			<tr>
-				<th>Submitted by</th>
-				<td><img width="30" style="margin-right:10px; align: middle;" src="{{ theme.SubmitedBy.gravatar30 }}" /><a href="/Members/{{ theme.SubmitedBy.key }}">{{ theme.SubmitedBy.fullname }}</a></td>
+				<th>{% trans %}Submitted by{% endtrans %}</th>
+				<td><img width="30" style="margin-right:10px; align: middle;" src="{{ theme.SubmitedBy.gravatar30() }}" /><a href="/Members/{{ theme.SubmitedBy.key() }}">{{ theme.SubmitedBy.fullname() }}</a></td>
 			</tr>
 			<tr>
-				<th>Title</th>
+				<th>{% trans %}Title{% endtrans %}</th>
 				<td>{{ theme.Title }}</td>
 			</tr>
 			<tr>
-				<th>Description</th>
+				<th>{% trans %}Description{% endtrans %}</th>
 				<td>{{ theme.Description }}</td>
 			</tr>
 			<tr>
-				<th>Shared with everyone</th>
+				<th>{% trans %}Shared with everyone{% endtrans %}</th>
 				<td>{{ theme.isSharedWithEveryone }}</td>
 			</tr>
 			<tr>
@@ -30,9 +29,9 @@
 					<div class="buttonBar">
 						<ul>
 							{% if canEditTheme %}
-								<li><a href="/Themes/Theme/Edit/{{ theme.key }}"><span>{% trans "Edit theme" %}</span></a></li>
+								<li><a href="/Themes/Theme/Edit/{{ theme.key() }}"><span>{% trans %}Edit theme{% endtrans %}</span></a></li>
 							{% endif %}
-							<li><a href="/Themes/{{ theme.key }}/MemberSelect"><span>{% trans "Select for profile" %}</span></a></li>
+							<li><a href="/Themes/{{ theme.key() }}/MemberSelect"><span>{% trans %}Select for profile{% endtrans %}</span></a></li>
 						</ul>
 					</div>
 				</td>

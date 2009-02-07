@@ -1,8 +1,7 @@
-﻿{% extends masterTemplate %}
-{% load i18n %}
+{% extends templateMain2 %}
 {% block title %}
 	<h1>
-		{% trans "Edit Theme" %}
+		{% trans %}Edit Theme{% endtrans %}
 	</h1>
 {% endblock %}
 {% block content %}
@@ -10,25 +9,25 @@
 		<table>
 			{{ form }}
 			<tr>
-				<th>{% trans "Background image" %}</th>
+				<th>{% trans %}Background image{% endtrans %}</th>
 				<td>
 					<input type="file" name="backgroundImageProxy" />
 				</td>
 			</tr>
-			{% if form.instance.is_saved %}
+			{% if form.instance.is_saved() %}
 				<tr>
-					<th>{% trans "Current image" %}</th>
+					<th>{% trans %}Current image{% endtrans %}</th>
 					<td>
-						<img style="margin-top: 10px" src='/Themes/Theme/BackgroundImage/{{ form.instance.key }}'>
+						<img style="margin-top: 10px" src='/Themes/Theme/BackgroundImage/{{ form.instance.key() }}'>
 					</td>
 				</tr>
 			{% endif %}
 			<tr>
 				<td></td>
 				<td>
-					<input type="submit" name="doSave" value="{% trans 'Save' %}" />
-					{% if theme.is_saved %}
-						<input type="submit" name="doDelete" value="{% trans 'Delete' %}" />
+					<input type="submit" name="doSave" value="{% trans %}Save{% endtrans %}" />
+					{% if theme.is_saved() %}
+						<input type="submit" name="doDelete" value="{% trans %}Delete{% endtrans %}" />
 					{% endif %}
 				</td>
 			</tr>

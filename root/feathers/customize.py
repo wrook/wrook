@@ -1,4 +1,4 @@
-﻿#!python
+#!python
 # coding=UTF-8
 
 import os
@@ -127,7 +127,7 @@ class ThemeView(webapp.RequestHandler):
 						'theme': theme
 						})
 					self.TemplateBaseFolder = os.path.dirname(__file__)
-					self.render('views/customize-viewTheme.html')
+					self.render2('views/customize-viewTheme.html')
 				else: self.error(500)
 			else: self.error(404)
 		else: self.requestLogin()
@@ -144,7 +144,7 @@ class ThemeEdit(webapp.RequestHandler):
 				'theme': theme
 				})
 			self.TemplateBaseFolder = os.path.dirname(__file__)
-			self.render('views/customize-themeEdit.html')
+			self.render2('views/customize-themeEdit.html')
 
 	def post(self, key):
 		onRequest(self)
@@ -167,7 +167,7 @@ class ThemeEdit(webapp.RequestHandler):
 					'form': form
 					})
 				self.TemplateBaseFolder = os.path.dirname(__file__)
-				self.render("views/customize-themeEdit.html")
+				self.render2("views/customize-themeEdit.html")
 
 class ThemeEditWithImageUpload(webapp.RequestHandler):
 	def get(self, key):
@@ -181,7 +181,7 @@ class ThemeEditWithImageUpload(webapp.RequestHandler):
 				'theme': theme
 				})
 			self.TemplateBaseFolder = os.path.dirname(__file__)
-			self.render('views/customize-themeEdit.html')
+			self.render2('views/customize-themeEdit.html')
 
 	def post(self, key):
 		onRequest(self)
@@ -207,7 +207,7 @@ class ThemeEditWithImageUpload(webapp.RequestHandler):
 					'form': form
 					})
 				self.TemplateBaseFolder = os.path.dirname(__file__)
-				self.render("views/customize-themeEdit.html")
+				self.render2("views/customize-themeEdit.html")
 
 class ThemeBackgroundImageInfo(webapp.RequestHandler):
 	def get(self, key):
@@ -275,8 +275,7 @@ class ViewThemes(webapp.RequestHandler):
 				"themes": Theme.all()
 				})
 			self.TemplateBaseFolder = os.path.dirname(__file__)
-			self.render("views/customize-viewThemes.html")
-			self.response.out.write(settings.TEMPLATE_DIRS)
+			self.render2("views/customize-viewThemes.html")
 
 class ThemeSelect(webapp.RequestHandler):
 	def get(self):
