@@ -18,8 +18,13 @@
 	{% endif %}
 	{% if userCanEdit %}
 		<div style="margin: 5px 0px;">
-			{{ wrook.iconButton(label=_("Set starting point"), alt="Set this chapter as the readers starting point.", name="setStartingPoint", icon="edit-glow", url="/Books/%s/Chapters/%s/Set" % (book.key(), chapter.key())) }}
+			{{ wrook.iconButton(label=_("Set starting point"), alt=_("Set this chapter as the readers starting point."), name="setStartingPoint", icon="edit-glow", url="/Books/%s/Chapters/%s/Set" % (book.key(), chapter.key())) }}
+			{{ wrook.iconButton(label=_("Edit chapter"), alt="", name="setStartingPoint", icon="edit-glow", url="/Typewriter/%s" % book.key()) }}
+			{{ wrook.iconButton(label=_("Chapter options"), alt="", name="setStartingPoint", icon="edit-glow", url="/EditChapter/%s" % book.key()) }}
+			{{ wrook.iconButton(label=_("Delete chapter"), alt="", name="setStartingPoint", icon="edit-glow", url="/Chapter/Delete/%s" % book.key()) }}
 		</div>
+		<br />
+		<br />
 	{% endif %}
 	
 {% endblock %}
@@ -48,41 +53,4 @@
 {% endblock %}
 
 {% block sidebar %}
-	<div class="sidebarPanel">
-		<h3>{% trans %}Options{% endtrans %}</h3>
-		<div class="sidebarMenu">
-			<ul>
-				{% if chapter.nextChapter() %}
-					<li><a href="/ViewChapter/{{ chapter.nextChapter().key() }}">{% trans %}Next chapter{% endtrans %}</a></li>
-				{% endif %}
-				{% if chapter.previousChapter() %}
-					<li><a href="/ViewChapter/{{ chapter.previousChapter().key() }}">{% trans %}Previous chapter{% endtrans %}</a></li>
-				{% endif %}
-				<li><a href="/Books/{{ chapter.Book.key() }}">{% trans %}Back to cover{% endtrans %}</a></li>
-			</ul>
-		</div>
-	</div>
-
-	{% if userIsAuthor %}
-		<div class="sidebarPanel">
-			<h3>{% trans %}Editing options{% endtrans%}</h3>
-			<div class="sidebarMenu">
-				<ul>
-					<li><a href="/Typewriter/{{ chapter.key() }}">{% trans %}Edit chapter{% endtrans %}</a></li>
-					<li><a href="/EditChapter/{{ chapter.key() }}">{% trans %}Chapter options{% endtrans %}</a></li>
-					<li><a href="/Chapter/Delete/{{ chapter.key() }}">{% trans %}Delete chapter{% endtrans %}</a></li>
-				</ul>
-			</div>
-		</div>
-	{% endif %}
-
-	{% if chapter.Book.NoteFromAuthor %}
-		<div class="sidebarPanel">
-			<h3>{% trans %}Note from the author{% endtrans %}</h3>
-			<div class="NoteFromAuthor">
-				{{ chapter.Book.NoteFromAuthor|escape }}
-			</div>
-		</div>
-	{% endif %}
-
 {% endblock %}

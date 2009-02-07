@@ -1,3 +1,52 @@
+-----------------------------------------------------------------------------
+LAUNCH REQUIREMENTS
+
+Architecture:
+	- Cut chapters into lines and serve smaller chunks
+
+General
+	- Template without sidebar
+	- 30 wallpapers
+	- Tiled wallpapers
+	- Debugged for IE
+	- Specific and relevant icons everywhere
+	- No occurences of the old design
+
+Visitors homepage
+	- Revised text introduction
+	- Video demo
+
+Member homepage
+	- Show stories relevant to the member
+	- "Home" tab visible to the member only
+	- Simplified "Choose a wallpaper"
+
+Member profile
+	- Show stories from this member
+	- Show authored books
+	- Show Bookmarked books
+	- Hide talk
+	- In his list of bookmarks, dont include his own books!!!
+
+Book profile & read book
+	- Simplified "Choose a wallpaper"
+	- Hide talk
+
+Edit book
+	- Set chapter as starting point
+	- Easier to add chapters
+	- Support for html
+	- A better editor
+	- Edit mode for the list of chapters
+	- Open editor from chapter list in a modal
+	- Simpler workflow, only on the book, not the chapters:
+		+ Incomplete/Complete
+		+ Hidden/Visible
+		+ Note about "completeness" from the author
+	
+
+
+
 Investigate: http://www.booksprouts.com/
 Investigate: http://www.shelfari.com/
 Investigate: http://www.feedbooks.com/

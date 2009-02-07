@@ -142,6 +142,8 @@
             <string>views\books-view.html</string>
             <key>books-co</key>
             <string>views\books-viewContents.html</string>
+            <key>books-con</key>
+            <string>views\books-viewContents.html</string>
             <key>books-l</key>
             <string>views\books-talk.html</string>
             <key>books-list</key>
@@ -616,6 +618,8 @@
             <string>feathers\views\customize-themeEdit.html</string>
             <key>themeEd</key>
             <string>feathers\views\customize-themeEdit.html</string>
+            <key>todo</key>
+            <string>specs\todo.txt</string>
             <key>topic</key>
             <string>feathers\views\talk-TopicView.html</string>
             <key>topicF</key>

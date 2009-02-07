@@ -55,23 +55,4 @@
 {% endblock %}
 
 {% block sidebar %}
-		{% if userCanEdit %}
-			<div class="sidebarPanel">
-				<h3>
-					{% trans %}Editing{% endtrans %}
-				</h3>
-				<div class="sidebarMenu">
-					<ul>
-						{% if userIsAuthor %}
-							{% if book.lastRevisedChapter() %}
-								<li><a href="/Typewriter/{{ book.lastRevisedChapter().key() }}">{% trans %}Resume writing{% endtrans %}</a></li>
-							{% endif %}
-						{% endif %}
-						{% if userCanEdit %}
-							<li><a href="/Books/ReorderChapters/{{ book.key() }}">{% trans %}Reorder chapters{% endtrans %}</a></li>
-						{% endif %}
-					</ul>
-				</div>
-			</div>
-		{% endif %}
 {% endblock sidebar %}

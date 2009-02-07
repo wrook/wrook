@@ -186,9 +186,10 @@ $(document).ready(function(){
 	miniMenu.load();
 
 	/* Adjusts the height of the content column to match the height of the sidebar	*/
-	sidebarHeight = $(".sidebar")[0].offsetHeight
-	contentHeight = $(".blockBody .middle")[0].offsetHeight
+	sidebarHeight = $(".sidebar")[0].offsetHeight;
+	//contentHeight = $(".blockBody .middle")[0].offsetHeight
+	contentHeight = $(".blockContent")[0].offsetHeight;
 	if (contentHeight < sidebarHeight) {
-		$(".blockBody .middle")[0].style.height = sidebarHeight + "px"
+		$(".blockContent")[0].style.height = sidebarHeight + "px";
 	}
 });
