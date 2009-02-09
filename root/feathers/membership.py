@@ -232,6 +232,7 @@ class Member(search.SearchableModel):
 		"""Flush the caching entries relating to the member."""
 		memcache.delete("wrookMember-%s" % self.Username)
 		#Refactor: These thumbnail keys should not be needed if the image server is well built
+		memcache.delete("profilePhotoThumb0-%s" % self.key())
 		memcache.delete("profilePhotoThumb30-%s" % self.key())
 		memcache.delete("profilePhotoThumb40-%s" % self.key())
 		memcache.delete("profilePhotoThumb50-%s" % self.key())
@@ -240,6 +241,7 @@ class Member(search.SearchableModel):
 		memcache.delete("profilePhotoThumb120-%s" % self.key())
 		memcache.delete("profilePhotoThumb160-%s" % self.key())
 		memcache.delete("profilePhotoThumb180-%s" % self.key())
+		memcache.delete("wrookMemberThemeSelection-%s" % self.key())
 	
 	def currentThemeSelection(self):
 		cacheKey = "wrookMemberThemeSelection-%s" % self.key()

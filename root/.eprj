@@ -204,6 +204,8 @@
             <string>feathers\customize.py</string>
             <key>customi</key>
             <string>feathers\customize.py</string>
+            <key>customize</key>
+            <string>feathers\customize.py</string>
             <key>d.c</key>
             <string>stylesheets\template-d.css</string>
             <key>d.cs</key>
@@ -341,7 +343,7 @@
             <key>memberpr</key>
             <string>views\MembersProfile.html</string>
             <key>members</key>
-            <string>views\members.html</string>
+            <string>members.py</string>
             <key>members-</key>
             <string>views\members-neighborhood.html</string>
             <key>members-b</key>
@@ -466,6 +468,8 @@
             <string>feathers\views\talk-part-replyForm.html</string>
             <key>reset</key>
             <string>views\resetPassword.html</string>
+            <key>road</key>
+            <string>roadmap.txt</string>
             <key>scr</key>
             <string>views\scripts.html</string>
             <key>scrip</key>

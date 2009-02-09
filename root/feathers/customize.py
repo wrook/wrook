@@ -38,6 +38,7 @@ class Theme(db.Model):
 	Description = db.TextProperty(verbose_name=_("Description"))
 	Created = db.DateTimeProperty(auto_now_add=True, verbose_name=_("Created"))
 	isDefault = db.BooleanProperty(default=False, verbose_name=_("Default theme"))
+	isTiledImage = db.BooleanProperty(default=None, verbose_name=_("Is a tiled images"))
 	SubmitedBy = db.ReferenceProperty(membership.Member, collection_name="SubmitedThemes", verbose_name=_("Submitd by"))
 	BackgroundImage = db.BlobProperty(verbose_name=("Background image"))
 	BackgroundColor = db.StringProperty(default="#000000", verbose_name=_("Background color"))
@@ -54,6 +55,7 @@ class Theme(db.Model):
 	def selectForMember(self, member):
 		if member:
 			selection = ThemeMemberSelection(Member=member, Theme=self)
+			member.flushCache()
 			selection.put()
 			return selection
 		else: return None
@@ -63,6 +65,22 @@ class Theme(db.Model):
 
 	def GetStyle(self):
 		return None;
+
+	def getBackgroundImage(self):
+		if self.BackgroundImage:
+			image = images.Image(self.BackgroundImage)
+			if image: return image
+		return None
+
+	def isTiled(self):
+		if self.isTiledImage==None:
+			image = self.getBackgroundImage()
+			if image:
+				if (image.width<600 or image.height<600):
+					self.isTiledImage = True
+				else: self.isTiledImage = False
+		return self.isTiledImage
+		
 
 def onRequest(request): # Event triggering to let the host application intervene
 	pass
@@ -247,17 +265,20 @@ class ThemeBackgroundImage(webapp.RequestHandler):
 				height = 768
 			elif paramWidth == "980":
 				width = 980
-				height = 735
+				height =835
 			else:
-				width = 160
-				height = 120
+				width = 0
+				height = 0
 			imageKey = "themeThumb" + str(width) + "-%s" % theme.key()
 			thumbnailData = memcache.get(imageKey)
 			thumbnailData = None
 			if thumbnailData is None:
 				image = images.Image(theme.BackgroundImage)
-				image.resize(width, 0)
-				thumbnailData = image.execute_transforms(output_encoding=images.JPEG)
+				if width > 0:
+					image.resize(width, 0)
+					thumbnailData = image.execute_transforms(output_encoding=images.JPEG)
+				else:
+					thumbnailData = image
 				memcache.add(imageKey, thumbnailData)
 
 			self.response.headers['content-type'] = "image/png"

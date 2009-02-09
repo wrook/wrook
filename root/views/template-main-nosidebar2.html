@@ -11,11 +11,17 @@
 		{% endif %}
 {% block htmlHead %}{% endblock %}
 	</head>
-	<body class="section-{{ section }}" id="page-{% block pageId %}none{% endblock %}">
+	<body class="section-{{ section }}" id="page-{% block pageId %}none{% endblock %}"
+		{% if currentTheme.isTiled() %}
+			style="background: url(/Themes/Theme/BackgroundImage/{{ currentTheme.key() }}) repeat;"
+		{% endif %}
+		>
 		{% if currentTheme %}
 			<div id="wallpaper">
-				<img alt="{% trans %}Wallpaper{% endtrans %}" src="/Themes/Theme/BackgroundImage/{{ currentTheme.key() }}?width=980" />
-				<div class="bgFade"></div>
+				{% if not currentTheme.isTiled() %}
+					<img alt="{% trans %}Wallpaper{% endtrans %}" src="/Themes/Theme/BackgroundImage/{{ currentTheme.key() }}?width=980" />
+					<div class="bgFade"></div>
+				{% endif %}
 			</div>
 		{% endif %}
 		<div id="spritesPreload"></div>

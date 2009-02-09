@@ -1,0 +1,116 @@
+-----------------------------------------------------------------------------
+WROOK ROADMAP (PRE-LAUNCH)
+
+-----------------------------------------------------------------------------
+ONGOIN MILESTONES
+
+MILESTONE "MANDIBLE"
+	Goal: Better customization
+	Tasks:
+2	X	General: Tiled wallpapers
+1	-	Member homepage: Simplified "Choose a wallpaper"
+1	-	Book profile: Simplified "Choose a wallpaper"
+2/4
+
+-----------------------------------------------------------------------------
+UPCOMMING MILESTONES
+
+MILESTONE "MAXILLA"
+	Goal: Better editing of book and chapters
+	Tasks:	
+3	-	Edit book: Support for html
+2	-	Edit book: A better editor
+2	-	Edit book: Open editor from chapter list in a modal
+0/7
+
+MILESTONE "TEMPORAL"
+	Goal: Fix biggest issues with the member home and profile
+	Tasks:
+2	-	Member homepage: Show stories relevant to the member
+1	-	Member homepage: "Home" tab visible to the member only
+1	-	Member profile: Show stories from this member
+2	-	Member profile: Show authored books
+2	-	Member profile: Show Bookmarked books
+1	-	Member profile: In his list of bookmarks, dont include his own books!!!
+0/9
+
+MILESTONE "MASTOID"
+	Goal: Better editing of book and chapters
+	Tasks:	
+1	-	Edit book: Set chapter as starting point
+1	-	Edit book: Easier to edit/add/delete chapters
+2	-	Edit book: Edit mode for the list of chapters
+2	-	Edit book: Simpler workflow, only on the book, not the chapters:
+			+ Incomplete/Complete
+			+ Hidden/Visible
+			+ Note about "completeness" from the author
+0/6
+
+MILESTONE "SCAPULA":
+	Goal: More robust architecture, hide incomplete parts and ability to remove any content
+	Tasks:
+6	-	Architecture: Cut chapters into lines and serve smaller chunks
+3	-	Administration: All edit and remove actions secured
+3	-	General: No occurences of the old templates
+1	-	Member profile: Hide talk
+1	-	Book profile: Hide talk
+2	-	Administration: Delete user
+0/16
+
+MILESTONE "CORACOID"
+	Tasks:
+	Goal: Obligations before launch
+8	-	General: Fully localized in English and French
+10	-	General: Debugged for IE
+2	-	Visitors: Revised text introduction
+3	-	Visitors: Video demo
+0/23
+
+MILESTONE "HUMERUS"
+	Goal: Perception management and Aesthitic cleanup
+	Tasks:
+4	-	General: Specific and relevant icons everywhere
+2	-	General: Template without sidebar where possible
+3	-	General: 30 wallpapers/Textures
+1	-	Story: Member has published a new chapter 
+1	-	Story: Member has started reading XXX
+1	-	Story: You have gained a new follower
+0/12
+
+BURNCHART:
+06/02/2009, 0, 73
+07/02/2009, 2, 73
+08/02/2009, ?, 73
+09/02/2009, ?, 73
+10/02/2009, ?, 73
+11/02/2009, ?, 73
+
+-----------------------------------------------------------------------------
+FIRST OFFICIAL LAUNCH
+
+
+-----------------------------------------------------------------------------
+BACKLOG
+		
+	
+-----------------------------------------------------------------------------
+MILESTONE NAMES (BONES)
+
+clavicle
+ribs
+carpal
+radius
+ulna
+sesmoid
+pelvic
+femoral
+sacrum
+ischium
+ilium
+pubis
+femur
+fibula
+tibia
+patella
+tarsals
+talus 
