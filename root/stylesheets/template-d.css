@@ -709,8 +709,8 @@ table tr td {
 
 #halfBakedLogo {
 	position: absolute;
-	top: 90px;
-	left: 1000px;
+	top: -12px;
+	left: 857px;
 	z-index: 2000;
 }
 

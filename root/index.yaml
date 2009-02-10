@@ -36,13 +36,13 @@ indexes:
   - name: Number
     direction: desc
 
-# Used 13 times in query history.
+# Unused in query history -- copied from input.
 - kind: Cover
   properties:
   - name: Created
     direction: desc
 
-# Used 87 times in query history.
+# Unused in query history -- copied from input.
 - kind: Feature
   properties:
   - name: VoteCount
@@ -176,7 +176,7 @@ indexes:
   - name: WhenOccured
     direction: desc
 
-# Used 90 times in query history.
+# Unused in query history -- copied from input.
 - kind: Theme
   properties:
   - name: Created

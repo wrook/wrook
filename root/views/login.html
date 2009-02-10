@@ -1,13 +1,17 @@
-﻿{% extends "template-main-e.html" %}
-{% load i18n %}
+{% extends "template-main-e2.html" %}
 {% block pageId %}login{% endblock %}
-{% block pageTitle %}{% trans "Login" %}{% endblock %}
+{% block pageTitle %}{% trans %}Login{% endtrans %}{% endblock %}
 {% block title %}
 	<h1>
-		{% trans "Login" %}
+		{% trans %}Login{% endtrans %}
 	</h1>
 {% endblock %}
 {% block content %}
+<script>
+$(document).ready(function(){
+	$("#username").focus();
+})
+</script>
 	{% if error %}
 		<div style="margin-bottom: 10px; padding:10px 15px; background: #BB0000; color: #FFFFFF;">
 			{{ error }}
@@ -18,31 +22,31 @@
 		<table>
 			<tr>
 				<td>
-					{% trans "Username or Email" %}
+					{% trans %}Username or Email{% endtrans %}
 					<br />
-					<input style="width:200px;" type="text" name="username" value="{{ username }}" />
+					<input style="width:200px;" type="text" id="username" name="username" value="{{ username }}" />
 				</td>
 			</tr>
 			<tr>
 				<td>
-					{% trans "Password" %}
+					{% trans %}Password{% endtrans %}
 					<br />
-					<input style="width:200px;" type="password" name="password" value="{{ password }}" />
+					<input style="width:200px;" type="password" id="password" name="password" value="{{ password }}" />
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<button name="submit" id="login" value="login"><span>{% trans 'Login' %}</span></button>
-					<span style="margin-left: 20px;"><a href="/ResetPassword/">Forgot your password?</a></span>
+					<button name="submit" id="login" value="login"><span>{% trans %}Login{% endtrans %}</span></button>
+					<span style="margin-left: 20px;"><a href="/ResetPassword/">{% trans %}Forgot your password?{% endtrans %}</a></span>
 				</td>
 			</tr>
 		</table>
 	</form>
 	<p>
-		{% trans 'If you have any difficulties logging in, you can contact the janitor at <a href="mailto:admin@wrook.org">admin@wrook.org</a>.' %}
+		{% trans %}If you have any difficulties logging in, you can contact the janitor at <a href="mailto:admin@wrook.org">admin@wrook.org</a>.{% endtrans %}
 	</p>
 	
 {% endblock %}
 {% block sidebar %}
-	{% include "panels-aboutWrook.html" %}
+	{% include "panels-aboutWrook2.html" %}
 {% endblock %}

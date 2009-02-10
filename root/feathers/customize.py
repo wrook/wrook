@@ -285,14 +285,9 @@ class ThemeBackgroundImage(webapp.RequestHandler):
 				if width > 0:
 					image = images.Image(theme.BackgroundImage)
 					if mode == "fitToBoth":
-#						self.response.out.write("image.height: %s<br/>" % image.height)
-#						self.response.out.write("image.width: %s<br/>" % image.width)
 						currentRatio = float(image.width) / float(image.height)
 						newRatio = width / height
 						diffRatio = currentRatio / newRatio
-#						self.response.out.write("currentRatio: %s<br/>" % currentRatio)
-#						self.response.out.write("newRatrio: %s<br/>" % newRatio)
-#						self.response.out.write("diffRatio: %s<br/>" % diffRatio)
 						if diffRatio > 1:
 							cropOffset = (1-(newRatio / currentRatio)) / 2
 							width = width * diffRatio
@@ -307,9 +302,6 @@ class ThemeBackgroundImage(webapp.RequestHandler):
 							crop180 = 1 - cropOffset
 							crop270 = 0
 							height = height / diffRatio
-						
-#					self.response.out.write("width x height: %s - %s<br/>" % (width, height))
-#					self.response.out.write("crop: %s - %s - %s - %s<br/>" % (crop0, crop90, crop180, crop270))
 
 					image.resize(int(width), int(height))
 					image.crop(float(crop270), float(crop0), float(crop90), float(crop180))

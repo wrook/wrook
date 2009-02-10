@@ -727,7 +727,7 @@ class Login(webapp.RequestHandler):
 				self.Model.update({
 					'error': _("You are already logged in. In order to login again, you must first logout.")
 					})
-				self.render('views/login-already.html')
+				self.render2('views/login-already.html')
 		else:
 			username = self.request.get("username")
 			password = self.request.get("password")
@@ -737,7 +737,7 @@ class Login(webapp.RequestHandler):
 				'username': username,
 				'password': password
 				})
-			self.render('views/login.html')
+			self.render2('views/login.html')
 
 	def post(self):
 		onRequest(self)
@@ -762,7 +762,7 @@ class Login(webapp.RequestHandler):
 			'username': username,
 			'password': password
 			})
-		self.render('views/login.html')
+		self.render2('views/login.html')
 
 
 class PasswordSent(webapp.RequestHandler):
