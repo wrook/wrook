@@ -275,7 +275,7 @@
             <key>macr</key>
             <string>views\wrook-macros.html</string>
             <key>macro</key>
-            <string>customize-macros.html</string>
+            <string>views\wrook-macros.html</string>
             <key>macros</key>
             <string>views\customize-macros.html</string>
             <key>main</key>
@@ -448,6 +448,8 @@
             <string>feathers\views\talk-part-topics.html</string>
             <key>partre</key>
             <string>views\part-replies.html</string>
+            <key>prof</key>
+            <string>views\template-profile2.html</string>
             <key>profi</key>
             <string>views\template-profile.html</string>
             <key>profil</key>
@@ -648,6 +650,8 @@
             <string>feathers\views\customize-viewThemes.html</string>
             <key>todo</key>
             <string>specs\todo.txt</string>
+            <key>tooltip</key>
+            <string>stylesheets\jquery.tooltip.css</string>
             <key>topic</key>
             <string>feathers\views\talk-TopicView.html</string>
             <key>topicF</key>
