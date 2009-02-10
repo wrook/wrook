@@ -85,7 +85,7 @@ indexes:
   - name: Sent
     direction: desc
 
-# Used 2830 times in query history.
+# Used 2831 times in query history.
 - kind: Moment
   properties:
   - name: isDefault
@@ -176,7 +176,7 @@ indexes:
   - name: WhenOccured
     direction: desc
 
-# Used 82 times in query history.
+# Used 90 times in query history.
 - kind: Theme
   properties:
   - name: Created

@@ -43,6 +43,15 @@ class WrookAppConfig(db.Model):
 	DefaultCover = db.ReferenceProperty(books.Cover, verbose_name=_("Default cover"))
 	EncryptionKey = db.StringProperty(verbose_name=_("Encryption key")) # Used when a scecret key is needed for encrypting passwords and other data
 
+def getEnvironment():
+	import os
+	environment = {
+		"isGoogle" : os.environ['SERVER_SOFTWARE'].startswith('Google'),
+		"isDevelopment" : os.environ['SERVER_SOFTWARE'].startswith('Development')
+	}
+	return environment
+
+
 def onRequest(self):
 	'''
 	Initialization method triggered before a request is processed.
@@ -52,6 +61,8 @@ def onRequest(self):
 	import random
 	from feathers import webapp
 	from feathers import membership
+
+
 
 	#TODO: Figure out if this should be somewhere else than in the global scope
 	webapp.currentRequest = self
@@ -69,6 +80,7 @@ def onRequest(self):
 	if self.CurrentMember: translation.activate(self.CurrentMember.PreferedLanguage) # If the is a current member, his prefered language is activated
 	else: translation.activate("en") # If not, the default language is set to english
 	self.Model.update({
+		'environment' : getEnvironment(),
 		'random': random.random(),
 		'templateMain': self.MasterTemplate,
 		'templateMain2': self.MasterTemplate2,
