@@ -1,78 +1,18 @@
-﻿{% extends masterTemplate %}
-{% load i18n %}
-{% block title %}
-	<h1>
-		{% trans "Customize" %}
-	</h1>
-{% endblock %}
+{% extends "template-customize.html" %}
+{% set subSection = "howTo" %}
 {% block content %}
 
-{% blocktrans %} 
-<p>Here you have access to the themes and book covers that are used to personnalize your reading and browsing experience.</p>
-{% endblocktrans %} 
-
 	<h2>
-		{% trans "Latest themes" %}
+		{% trans %}How to customize{% endtrans %}
 	</h2>
-	{% ifnotequal themes.count 0 %}
-{% blocktrans %} 
-<p>You can create your own theme and then choose to share is with other members. Themes can be applied to you profile page or to a specific books.</p>
-{% endblocktrans %} 
-		<div>
-			{% for theme in latestThemes %}
-				<a style="float:left; margin: 0px 10px 10px 0px" href="/Themes/{{ theme.key }}" title="{{ theme.Title }}">
-					<img style="width: 160px; height: 120px;" alt="{{ theme.Title }}" src="/Themes/Theme/BackgroundImage/{{ theme.key }}?width=160" />
-				</a>
-			{% endfor %}
-			<div class="clearfix"></div>
-		</div>
-		<div class="buttonBar">
-			<ul>
-				<li><a href="/Themes"><span>{% trans "Browse all themes" %}</span></a></li>
-			</ul>
-		</div>
-	{% else %}
-		<div>
-			{% trans "Sorry, no themes have been created!" %}
-		</div>
-	{% endifnotequal %}
-
-	<h2>
-		{% trans "Latest covers" %}
-	</h2>
-{% blocktrans %} 
-<p>Every book in our library has a cover to represent it. You can either create your cover with custom artwork or create reusable covers to be shared with other authors.</p>
-{% endblocktrans %} 
-	<div class="coverGallery">
-		{% for cover in latestCovers %}
-			<div class="cover">
-				<a href='/Covers/{{ cover.key }}'>
-					<img src='/Covers/Thumbnail/{{ cover.key }}'>
-					{% if cover.isReusable %}
-						<span class="coverTitle" {% if cover.TitleColor %}style="color: {{ cover.TitleColor }}"{% endif %} >{{ cover.SampleTitle }}</span> 
-					{% endif %}
-				</a>
-			</div>
-		{% endfor %}
-		<div class="buttonBar">
-			<ul>
-				<li><a href="/Covers/"><span>{% trans "Browse all covers" %}</span></a></li>
-			</ul>
-		</div>
-	</div>
+	<p>
+{% trans %}
+On Wrook you can customize two things: <a href="/Customize/Wallpapers">wallpapers</a> and the <a href="/Customize/Covers">covers</a> of the books you publish. Wallpapers can be applied to your own profile or applied to a book profile.
+{% endtrans %}
+	</p>
+	<p>
+{% trans %}
+Aditionnaly, when customizing you content, you can either pick from existing material already shared by other users, or upload your own original content.
+{% endtrans %}
+	</p>
 {% endblock %}
-
-{% block sidebar %}
-	<div class="sidebarPanel">
-		<h3>Options</h3>
-		<div class="sidebarMenu">
-			<ul>
-				{% if currentMember.isAdmin %}
-					<li><a href="/Themes/Select?redirect=/SetDefaultTheme&themeUsage={% trans "Default" %}">{% trans "Select the default theme" %}</a></li>
-				{% endif %}
-				<li><a href="/Themes/Theme/Edit/">{% trans "Create a new theme" %}</a></li>
-			</ul>
-		</div>
-	</div>
-{% endblock %}
-

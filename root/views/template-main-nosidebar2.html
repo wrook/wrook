@@ -12,15 +12,19 @@
 {% block htmlHead %}{% endblock %}
 	</head>
 	<body class="section-{{ section }}" id="page-{% block pageId %}none{% endblock %}"
-		{% if currentTheme.isTiled() %}
-			style="background: url(/Themes/Theme/BackgroundImage/{{ currentTheme.key() }}) repeat;"
+		{% if currentTheme %}
+			{% if currentTheme.isTiled() %}
+				style="background: url(/Themes/Theme/BackgroundImage/{{ currentTheme.key() }}) repeat;"
+			{% endif %}
 		{% endif %}
 		>
 		{% if currentTheme %}
 			<div id="wallpaper">
-				{% if not currentTheme.isTiled() %}
-					<img alt="{% trans %}Wallpaper{% endtrans %}" src="/Themes/Theme/BackgroundImage/{{ currentTheme.key() }}?width=980" />
-					<div class="bgFade"></div>
+				{% if currentTheme %}
+					{% if not currentTheme.isTiled() %}
+						<img alt="{% trans %}Wallpaper{% endtrans %}" src="/Themes/Theme/BackgroundImage/{{ currentTheme.key() }}?width=980" />
+						<div class="bgFade"></div>
+					{% endif %}
 				{% endif %}
 			</div>
 		{% endif %}

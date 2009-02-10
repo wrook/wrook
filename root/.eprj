@@ -180,6 +180,10 @@
             <string>feathers\cachetree.py</string>
             <key>cachetr</key>
             <string>feathers\cachetree.py</string>
+            <key>car</key>
+            <string>scripts\jquery\jquery.jcarousel.js</string>
+            <key>caro</key>
+            <string>scripts\jquery\jquery.jcarousel.js</string>
             <key>chapter</key>
             <string>views\viewChapter.html</string>
             <key>comman</key>
@@ -201,9 +205,11 @@
             <key>cus</key>
             <string>feathers\customize.py</string>
             <key>custom</key>
-            <string>feathers\customize.py</string>
+            <string>views\customize-wallpapers.html</string>
             <key>customi</key>
             <string>feathers\customize.py</string>
+            <key>customiz</key>
+            <string>views\customize.html</string>
             <key>customize</key>
             <string>feathers\customize.py</string>
             <key>d.c</key>
@@ -267,9 +273,9 @@
             <key>macr</key>
             <string>views\wrook-macros.html</string>
             <key>macro</key>
-            <string>views\member-macros.html</string>
+            <string>customize-macros.html</string>
             <key>macros</key>
-            <string>views\book-macros.html</string>
+            <string>views\customize-macros.html</string>
             <key>main</key>
             <string>stylesheets\main.css</string>
             <key>main-</key>
@@ -300,12 +306,14 @@
             <string>makemessages.bat</string>
             <key>meber</key>
             <string>views\memberHome.html</string>
+            <key>mem</key>
+            <string>feathers\membership.py</string>
             <key>memb</key>
             <string>members.py</string>
             <key>membe</key>
             <string>members.py</string>
             <key>member</key>
-            <string>views\members-stories.html</string>
+            <string>views\members-books-list.html</string>
             <key>member-</key>
             <string>views\members-stories.html</string>
             <key>member-bo</key>
@@ -470,7 +478,11 @@
             <string>views\resetPassword.html</string>
             <key>road</key>
             <string>roadmap.txt</string>
+            <key>rod</key>
+            <string>roadmap.txt</string>
             <key>scr</key>
+            <string>views\scripts.html</string>
+            <key>scri</key>
             <string>views\scripts.html</string>
             <key>scrip</key>
             <string>views\scripts.html</string>
@@ -496,6 +508,10 @@
             <string>feathers\views\talk-part-showMoreReplies.html</string>
             <key>sideba</key>
             <string>views\books-view-sidebar.html</string>
+            <key>ski</key>
+            <string>stylesheets\tango\skin.css</string>
+            <key>skin</key>
+            <string>stylesheets\tango\skin.css</string>
             <key>spri</key>
             <string>stylesheets\sprites.css</string>
             <key>sprit</key>
@@ -579,7 +595,7 @@
             <key>templ</key>
             <string>views\template-main-d2.html</string>
             <key>templa</key>
-            <string>stylesheets\template-d.css</string>
+            <string>views\template-profile2.html</string>
             <key>templat</key>
             <string>views\template-main-d.html</string>
             <key>templat-b</key>
@@ -594,6 +610,8 @@
             <string>views\template-book.html</string>
             <key>template-bok</key>
             <string>views\template-book.html</string>
+            <key>template-customize</key>
+            <string>template-customize.html</string>
             <key>template-d</key>
             <string>stylesheets\template-d.css</string>
             <key>template-e</key>
@@ -622,6 +640,8 @@
             <string>feathers\views\customize-themeEdit.html</string>
             <key>themeEd</key>
             <string>feathers\views\customize-themeEdit.html</string>
+            <key>themes</key>
+            <string>feathers\views\customize-viewThemes.html</string>
             <key>todo</key>
             <string>specs\todo.txt</string>
             <key>topic</key>

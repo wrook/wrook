@@ -10,7 +10,8 @@ MILESTONE "MANDIBLE"
 2	X	General: Tiled wallpapers
 1	-	Member homepage: Simplified "Choose a wallpaper"
 1	-	Book profile: Simplified "Choose a wallpaper"
-2/4
+2	-	Multiple upload for wallpapers
+2/6
 
 -----------------------------------------------------------------------------
 UPCOMMING MILESTONES
@@ -80,10 +81,10 @@ MILESTONE "HUMERUS"
 BURNCHART:
 06/02/2009, 0, 73
 07/02/2009, 2, 73
-08/02/2009, ?, 73
-09/02/2009, ?, 73
-10/02/2009, ?, 73
-11/02/2009, ?, 73
+08/02/2009, ?, 75
+09/02/2009, ?, 75
+10/02/2009, ?, 75
+11/02/2009, ?, 75
 
 -----------------------------------------------------------------------------
 FIRST OFFICIAL LAUNCH

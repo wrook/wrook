@@ -1,0 +1,37 @@
+{% extends "template-main-e2.html" %}
+{% import 'customize-macros.html' as customizeMacros %}
+{% import 'wrook-macros.html' as wrookMacros %}
+{% set section="customize" %}
+{% block pageContent %}
+	<div id="pageContent">
+		<div class="contentBlock">
+			<div class="blockHeader withSectionMenu">
+				<h1>
+					{% trans %}Customize{% endtrans %}
+				</h1>
+				{{ customizeMacros.tabs_customize(subSection) }}
+				<div class="clearfix"></div>
+			</div>
+			<div class="blockContent">
+				<div class="sidebar">
+					{% block sidebar %}{% endblock %}
+				</div>
+				<div class="blockBody">
+					<div class="top"></div>
+					<div class="middle">
+						<div id="notices">
+							{% block notices %}{% endblock %}
+						</div>
+						{% include "part-titleBlock2.html" %}
+						{% block content %}{% endblock %}
+					</div>
+					<div class="bottom">
+						{% block contentBottom %}{% endblock %}
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="blockFooter"></div>
+		</div>
+	</div>
+{% endblock %}

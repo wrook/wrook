@@ -9,6 +9,7 @@ type jquery\jquery.autogrow.js >> unpacked.js
 type jquery\jquery.expander.js >> unpacked.js
 type jquery\jquery.validate.js >> unpacked.js
 type jquery\jquery.tooltip.js >> unpacked.js
+type jquery\jquery.jcarousel.js >> unpacked.js
 type main.js >> unpacked.js
 echo Compressing javascripts...
 java -jar %yuicompressor% --type js -o packed.js unpacked.js
@@ -20,6 +21,7 @@ type main.css > unpacked.css
 type sprites.css >> unpacked.css
 type template-d.css >> unpacked.css
 type jquery.tooltip.css >> unpacked.css
+type jquery.jcarousel.css >> unpacked.css
 echo Compressing stylesheets...
 java -jar %yuicompressor% --type css -o packed.css unpacked.css
 del unpacked.css

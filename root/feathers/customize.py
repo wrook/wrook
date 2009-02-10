@@ -44,13 +44,6 @@ class Theme(db.Model):
 	BackgroundColor = db.StringProperty(default="#000000", verbose_name=_("Background color"))
 	StyleSource = db.TextProperty(verbose_name=_("Style source code"), default="")
 	isSharedWithEveryone = db.BooleanProperty(default=True, verbose_name=_("Share with everyone"))
-	#Refactor: Still needed ?
-	# StyleSource = db.TextProperty(verbose_name="Style source code", default=
-# """
-# headerBannerImageURL: ;
-# headerBannerRepeatImageURL: ;
-# WallpaperImageURL: ;
-# """)
 
 	def selectForMember(self, member):
 		if member:
@@ -254,7 +247,20 @@ class ThemeBackgroundImage(webapp.RequestHandler):
 		theme = db.get(key)
 		if theme:
 			paramWidth = self.request.get("width")
-			if paramWidth == "120":
+			mode = "fitWidth"
+			if paramWidth == "80x80":
+				mode = "fitToBoth"
+				width = 80
+				height = 80
+			elif paramWidth == "120x120":
+				mode = "fitToBoth"
+				width = 120
+				height = 120
+			elif paramWidth == "160x160":
+				mode = "fitToBoth"
+				width = 160
+				height = 160
+			elif paramWidth == "120":
 				width = 120
 				height = 90
 			elif paramWidth == "240":
@@ -269,16 +275,47 @@ class ThemeBackgroundImage(webapp.RequestHandler):
 			else:
 				width = 0
 				height = 0
-			imageKey = "themeThumb" + str(width) + "-%s" % theme.key()
+			imageKey = "themeThumb-%s-%s" % (paramWidth, theme.key())
 			thumbnailData = memcache.get(imageKey)
-			thumbnailData = None
 			if thumbnailData is None:
-				image = images.Image(theme.BackgroundImage)
+				crop0 = 0
+				crop90 = 1
+				crop180 = 1
+				crop270 = 0
 				if width > 0:
-					image.resize(width, 0)
+					image = images.Image(theme.BackgroundImage)
+					if mode == "fitToBoth":
+#						self.response.out.write("image.height: %s<br/>" % image.height)
+#						self.response.out.write("image.width: %s<br/>" % image.width)
+						currentRatio = float(image.width) / float(image.height)
+						newRatio = width / height
+						diffRatio = currentRatio / newRatio
+#						self.response.out.write("currentRatio: %s<br/>" % currentRatio)
+#						self.response.out.write("newRatrio: %s<br/>" % newRatio)
+#						self.response.out.write("diffRatio: %s<br/>" % diffRatio)
+						if diffRatio > 1:
+							cropOffset = (1-(newRatio / currentRatio)) / 2
+							width = width * diffRatio
+							crop0 = 0
+							crop90 = 1 - cropOffset
+							crop180 = 1
+							crop270 = cropOffset
+						else:
+							cropOffset = (1-(currentRatio / newRatio)) / 2
+							crop0 = cropOffset
+							crop90 = 1
+							crop180 = 1 - cropOffset
+							crop270 = 0
+							height = height / diffRatio
+						
+#					self.response.out.write("width x height: %s - %s<br/>" % (width, height))
+#					self.response.out.write("crop: %s - %s - %s - %s<br/>" % (crop0, crop90, crop180, crop270))
+
+					image.resize(int(width), int(height))
+					image.crop(float(crop270), float(crop0), float(crop90), float(crop180))
 					thumbnailData = image.execute_transforms(output_encoding=images.JPEG)
 				else:
-					thumbnailData = image
+					thumbnailData = theme.BackgroundImage
 				memcache.add(imageKey, thumbnailData)
 
 			self.response.headers['content-type'] = "image/png"

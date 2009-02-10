@@ -1,11 +1,11 @@
 #!python
 # coding=UTF-8
 
-import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
-from django.conf import settings
+# The following imports are probably not needed anymore... investigate
+#import os
+#os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+#from django.conf import settings
 
-from google.appengine.api import memcache
 from feathers import webapp
 from feathers import membership
 
@@ -22,12 +22,15 @@ def URLMappings():
 		(r'/Members/(.*)/Follow', MembersFollow),
 		(r'/Members/(.*)/StopFollowing', MembersStopFollowing),
 		(r'/Members/(.*)', MembersProfile),
+		( '/Customize/Wallpapers/List/JSON', CustomizeWallpapersListJSON),
+		( '/Customize/Wallpapers', CustomizeWallpapers),
 		( '/Customize', Customize),
 		( '/Suggestions', Suggestions)]
 
 
 class Home(webapp.RequestHandler):
 	def get(self):
+		from google.appengine.api import memcache
 		onRequest(self)
 		if self.CurrentMember:
 			self.setVisitedMember(self.CurrentMember)
@@ -96,11 +99,38 @@ class Customize(webapp.RequestHandler):
 		import books
 		onRequest(self)
 		if self.CurrentMember:
+			self.render2("views/customize.html")
+
+class CustomizeWallpapers(webapp.RequestHandler):
+	def get(self):
+		from feathers import customize
+		import books
+		onRequest(self)
+		if self.CurrentMember:
 			self.Model.update({
-				"latestCovers": books.Cover.all().fetch(limit=3),
-				"latestThemes": customize.Theme.all().fetch(limit=3)
+				"latestThemes": customize.Theme.all().order("-Created").fetch(limit=20)
 				})
-			self.render("views/customize.html")
+			self.render2("views/customize-wallpapers.html")
+
+class CustomizeWallpapersListJSON(webapp.RequestHandler):
+	def get(self):
+		from feathers import customize
+		from django.utils import simplejson
+		import books
+		onRequest(self)
+		if self.CurrentMember:
+			offset = int(self.request.get("offset"))
+			limit = int(self.request.get("limit"))
+			if offset < 300:
+				if limit > 50: limit = 50
+				themes = customize.Theme.all().order("-Created").fetch(limit=limit, offset=offset)
+				wallpapers = []
+				for theme in themes:
+					wallpapers.append({
+						"key": "%s" % theme.key(),
+						"isTiled": theme.isTiled()
+					})
+				self.response.out.write("(%s)" % simplejson.dumps({"wallpapers": wallpapers}))
 
 class Suggestions(webapp.RequestHandler):
 	def get(self):
@@ -112,6 +142,7 @@ class Suggestions(webapp.RequestHandler):
 
 class MembersProfile(webapp.RequestHandler):
 	def get(self, key):
+		from google.appengine.api import memcache
 		import datetime
 		onRequest(self)
 		visitedMember = membership.Member.get(key)

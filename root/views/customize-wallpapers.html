@@ -1,0 +1,93 @@
+{% extends "template-customize.html" %}
+{% set subSection = "wallpapers" %}
+{% block content %}
+	<h2>
+		{% trans %}Click on wallpapers to preview them{% endtrans %}
+	</h2>
+	{% if latestThemes.count!=0 %}
+
+		<script type="text/javascript">
+		jQuery(document).ready(function() {
+
+
+function itemLoadCallback(carousel, state) {
+    if (carousel.has(carousel.last)) return;
+    
+    jQuery.getJSON(
+    	'/Customize/Wallpapers/List/JSON',
+    	{
+            offset: carousel.first-1,
+            limit: (carousel.last - carousel.first) + 5
+        },
+    	function(data) {
+        	itemAddCallback(carousel, carousel.first, carousel.last, data);
+    	}
+	);
+};
+
+function itemAddCallback(carousel, first, last, data) {
+    // Simply add all items at once and set the size accordingly.
+    wallpapers = data.wallpapers
+    for (item in wallpapers) {
+	    html = getItemHTML(wallpapers[item].key, wallpapers[item].isTiled)
+        carousel.add(first+parseInt(item), html);
+    }
+    carousel.size(first + wallpapers.length);
+};
+
+function getItemHTML(key, isTiled) {
+    return '<img onclick="setWallpaperPreview(' + "'" + key + "'" + ',' + isTiled + ')" src="/Themes/Theme/BackgroundImage/' + key + '?width=120x120" width="120" height="120" alt="" />';
+};
+
+
+			jQuery('#wallpapersCarousel').jcarousel({
+				itemLoadCallback: itemLoadCallback
+			}).show();
+		});
+		var wallpaperPreview = "";
+		function setWallpaperPreview(wallpaperId, isTiled) {
+			wallpaperPreview = wallpaperId;
+			if (isTiled) {
+				$("body #wallpaper").remove();
+				$("body")[0].style.background = "url('/Themes/Theme/BackgroundImage/" + wallpaperId + "') repeat";
+			} else {
+				$("body #wallpaper").remove();
+				$("body")[0].style.background = "none";
+				$("body").prepend("<div id='wallpaper'><img src='/Themes/Theme/BackgroundImage/" + wallpaperId + "?width=980' /><div class='bgFade'></div></div>");
+			}
+		}
+		
+		</script>
+		<style>
+			#wallpapersCarousel img {
+				cursor: pointer;
+			}
+		</style>
+
+		<ul class="jcarousel-skin-tango" style="width: 530px;" id="wallpapersCarousel">
+			{#
+			{% for theme in latestThemes %}
+				<li>
+					<img
+						onclick="setWallpaperPreview('{{ theme.key() }}', {% if theme.isTiled() %}true{% else %}false{% endif %});"
+						style="width: 120px; height: 120px;"
+						src="/Themes/Theme/BackgroundImage/{{ theme.key() }}?width=120x120" />
+				</li>
+			{% endfor %}
+			#}
+		</ul>
+	{% else %}
+		<div>
+			{% trans %}Sorry, no wallpapers are available!{% endtrans %}
+		</div>
+	{% endif %}
+
+	<div style="margin: 20px 0px;">
+		<button class="formButton" onclick="window.location='/Themes'"><span>{% trans %}Browse all wallpapers{% endtrans %}</span></button>
+		{% if currentMember.isAdmin %}
+			<button class="formButton" onclick="window.location='/Themes/Select?redirect=/SetDefaultTheme&themeUsage={% trans %}Default{% endtrans %}'"><span>{% trans %}Set the default wallpaper{% endtrans %}</span></button>
+		{% endif %}
+		<button class="formButton" onclick="window.location='/Themes/Theme/Edit/'"><span>{% trans %}Add new wallpapers{% endtrans %}</span></button>
+	</div>
+
+{% endblock %}

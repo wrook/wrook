@@ -1,0 +1,21 @@
+{% macro tabs_customize(selected) -%}
+	<div class="sectionMenu">
+		<ul>
+			<li {% if selected=="howTo" %}class="current"{% endif %}>
+				<a id="menu-customizeHowTo" href="/Customize">
+					<span>{% trans %}How to...{% endtrans %}</span>
+				</a>
+			</li>
+			<li {% if selected=="wallpapers" %}class="current"{% endif %}>
+				<a id="menu-customizeWallpaper" href="/Customize/Wallpapers">
+					<span>{% trans %}Wallpapers{% endtrans %}</span>
+				</a>
+			</li>
+			<li {% if selected=="covers" %}class="current"{% endif %}>
+				<a id="menu-customizeCovers" href="/Customize/Covers">
+					<span>{% trans %}Covers{% endtrans %}</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+{%- endmacro %}
