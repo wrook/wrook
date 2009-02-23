@@ -1,0 +1,61 @@
+{% extends masterTemplate %}
+{% block pageId %}about-OpenSourceLicense{% endblock %}
+{% block pageTitle %}{% trans %}Open Source License{% endtrans %}{% endblock %}
+{% block title %}
+	<h1>
+		{% trans %}Wrook is Open Source!{% endtrans %}
+	</h1>
+{% endblock %}
+
+{% block content %}
+{% trans %}
+<h3>Q: Is Wrook really Open Source?</h3>
+<p>
+Yes, all the source code used on Wrook distributed under an CPAL OSI Approved license. This means other people can freely profit from all the efforts put into designing and programming this service and that wrook can equally profit from the work done by other people with this project.
+</p>
+
+<h3>Q: Is Wrook a commercial service?</h3>
+<p>
+Yes, wrook is also a commercial service. Altough it is uncommon, it is perfectly legal for a commercial venture to release all its software as Open Source. The model followed by Wrook is inspired by a few other companies such as SocialText and Reddit who have also released a lot of their commercial code under Open Source licenses.
+</p>
+
+<h3>Q: Is'nt giving away all your code a little risky for a business?</h3>
+<p>
+Yes it is risky, and we dont fully understand what we're doing. But we're trying this anyway because it feels good to do it and we believe is will bring more solutions than problems.
+</p>
+
+<h3>Q: Under which license is it distributed ?</h3>
+<p>
+Wrook is released under the <a href="/About/CPAL">Common Public Attribution License 1.0</a> (CPAL). This license is OSI approved and has been successfully put to use by other projects. Wrook has chosen this license because we believe it offers a fair tradeoff between what we give away and what we can gain in return. More specifically, this license states that any derivative project will have to:
+</p>
+<ul>
+<li><a href="/About/OpenSourceAttribution">Credit Wrook appropriatly</a> to its own users.</li>
+<li>Share their own code back to the community under that same license.</li>
+</ul>
+
+<h3>Q: How can participate in this project?</h3>
+<p>
+You can participate by coding, testing, designing, writting, translating and proof-reading.
+</p>
+<p>
+But first, you must understand that helping with the project will only bring you fame but not fortune.
+</p>
+<p>
+If you want to code, you can simply visit <storng>GitHub</strong> and download the source code:<br>
+<a href="http://github.com/wrook/wrook/tree/master">http://github.com/wrook/wrook/tree/master</a>
+</p>
+<p>
+If you want to get involved with other parts of the project, just send us a quick email at admin@wrook.org to tell us about what you'd like to do.
+</p>
+
+<h3>Q: I'm an excentric billionnaire and I love Wrook so much that I want to send you a lot of money!</h3>
+<p>
+We're not a tax deductable charity, but you can just send it by paypal to <a href="mailto:admin@wrook.org">admin@wrook.org</a> and we'll try not to spend it all at once like mom always said!
+</p>
+{% endtrans %}
+{% endblock %}
+
+{% block sidebar %}
+	{% include "panels-aboutOpenSource2.html" %}
+	{% include "panels-aboutWrook2.html" %}
+{% endblock %}

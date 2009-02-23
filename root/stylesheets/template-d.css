@@ -119,9 +119,31 @@ table tr td {
 }
 
 
+#header #siteName {
+	position: absolute;
+	display: block;
+	left: 15px;
+}
+#header #siteName h1 {
+	font-size: 1em;
+	font-weight: bold;
+}
+
+#header #siteName h1 a:visited,
+#header #siteName h1 a:link {
+	display: block;
+	text-decoration: none;
+	color: #FFF;
+	padding: 3px 5px;
+}
+#header #siteName h1 a:hover {
+	background: #000;
+	-moz-border-radius: 5px;
+}
+
 #nav {
 	position: absolute;
-	top: 0px;
+	top: 22px;
 	left: 0px;
 	height: 40px;
 	width: 735px;
@@ -130,8 +152,7 @@ table tr td {
 
 #nav #mainMenu {
 	position: absolute;
-	left: 20px;
-	bottom: 5px;
+	left: 15px;
 }
 
 #nav #mainMenu ul {
@@ -142,7 +163,7 @@ table tr td {
 
 #nav #mainMenu ul li {
 	list-style: none;
-	margin: 0px 10px 0px 0px;
+	margin: 0px;
 	padding: 0px;
 	display: inline;
 }
@@ -150,11 +171,16 @@ table tr td {
 #nav #mainMenu ul li a:visited,
 #nav #mainMenu ul li a:link {
 	color: #ffffff;
-	font-size: 1.4em;
+	font-size: 1.3em;
 	text-decoration: none;
+	padding: 3px 5px;
 }
 #nav #mainMenu ul li a:hover {
+	background: #000;
+	-moz-border-radius: 5px;
+	/*
 	text-decoration: underline;
+	*/
 }
 #nav #mainMenu ul li.secondaryMenuItem a:visited,
 #nav #mainMenu ul li.secondaryMenuItem a:link {
@@ -164,7 +190,7 @@ table tr td {
 #nav #accessMenu {
 	position: absolute;
 	right: 0px;
-	bottom: 5px;
+	top: 0px;
 }
 
 #nav #accessMenu ul {
@@ -175,7 +201,7 @@ table tr td {
 
 #nav #accessMenu ul li {
 	list-style: none;
-	margin: 0px 0px 0px 10px;
+	margin: 0px;
 	padding: 0px;
 	display: inline;
 }
@@ -183,11 +209,13 @@ table tr td {
 #nav #accessMenu ul li a:visited,
 #nav #accessMenu ul li a:link {
 	color: #ffffff;
-	font-size: 1.1em;
+	font-size: 1.3em;
 	text-decoration: none;
+	padding: 3px 5px;
 }
 #nav #accessMenu ul li a:hover {
-	text-decoration: underline;
+	background: #000;
+	-moz-border-radius: 5px;
 }
 
 
@@ -218,7 +246,6 @@ table tr td {
 	left: 92px;
 	background: url(/images/background50black.png);
 }
-
 #header #logo {
 	position: absolute;
 	display: block;
@@ -294,11 +321,11 @@ table tr td {
 
 .sectionMenu ul li.current,
 .sectionMenu ul li a:hover {
-	background: url(/images/content-block-body-bg.png) top left no-repeat;
+	background: #FFF;
+	-moz-border-radius: 5px 5px 0px 0px;
 }
 .sectionMenu ul li.current a span,
 .sectionMenu ul li a:hover span {
-	background: url(/images/content-block-body-bg.png) top right no-repeat;
 	color: #000;
 }
 .sectionMenu ul li.current a span {
@@ -318,6 +345,16 @@ table tr td {
 	margin-bottom: 5px;
 	border-collapse: separate;
 }
+
+.errorMessage {
+	padding: 10px;
+	background: #CC0000;
+	position: relative;
+	margin: 10px 0px;
+	color: #FFFFFF;
+	border-collapse: separate;
+}
+
 
 .callsToAction {
 	margin: 10px 0px 0px 0px;
@@ -365,6 +402,7 @@ table tr td {
 	left: -480px
 }
 
+
 #pageContent {
 	color: #000000;
 	margin-left: 30px;
@@ -374,14 +412,14 @@ table tr td {
 	width:700px;
 }
 
-
 .contentBlock {
 	position: relative;
 	width: 860px;
 }
 .contentBlock .blockHeader {
 	position: relative;
-	background: url(/images/content-block-bg.png) top left no-repeat;
+	background: url(/images/background50black.png) repeat;
+	-moz-border-radius: 10px 10px 0px 0px;
 	min-height: 10px;
 }
 
@@ -400,9 +438,29 @@ table tr td {
 	position: relative;
 	width: 650px;
 }
+.page-wide .contentBlock .blockContent .blockBody {
+	width: 840px;
+}
+
+/* NARROW pages */
+.page-narrow .contentBlock {
+	width: 670px;
+	left: 95px;
+}
+.page-narrow .contentBlock .blockHeader {
+	background: url(/images/background50black.png) repeat;
+	-moz-border-radius: 10px 10px 0px 0px;
+}
+.contentBlock .blockFooter {
+	background: url(/images/background50black.png) repeat;
+	-moz-border-radius: 0px 0px 10px 10px;
+}
+/* --- */
+
 .contentBlock .blockContent .blockBody .top {
 	position: relative;
-	background: url(/images/content-block-body-bg.png) top left no-repeat;
+	background: #FFF;
+	-moz-border-radius: 5px 5px 0px 0px;
 	min-height: 1px;
 	padding: 10px  10px 0px  10px;
 	border-bottom: 1px solid #fff;
@@ -415,14 +473,16 @@ table tr td {
 }
 .contentBlock .blockContent .blockBody .bottom {
 	position: relative;
-	background: url(/images/content-block-body-bg.png) bottom left no-repeat;
+	background: #FFF;
+	-moz-border-radius: 0px 0px 5px 5px;
 	min-height: 1px;
 	padding: 0px  10px 10px  10px;
 	border-top: 1px solid #fff;
 }
 
 .contentBlock .blockFooter {
-	background: url(/images/content-block-bg.png) bottom left no-repeat;
+	background: url(/images/background50black.png) repeat;
+	-moz-border-radius: 0px 0px 10px 10px;
 	min-height: 10px;
 }
 
@@ -459,6 +519,9 @@ table tr td {
 
 
 
+/*
+
+LEGACY ???
 
 .section {
 	position: relative;
@@ -516,6 +579,7 @@ table tr td {
 	margin-bottom: 20px;
 }
 
+*/
 
 #pageContent .chapterInfo{
 	text-align: center;

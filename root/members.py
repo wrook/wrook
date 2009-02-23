@@ -24,6 +24,7 @@ def URLMappings():
 		(r'/Members/(.*)', MembersProfile),
 		( '/Customize/Wallpapers/List/JSON', CustomizeWallpapersListJSON),
 		( '/Customize/Wallpapers', CustomizeWallpapers),
+		( '/Customize/Wallpapers/Upload', CustomizeWallpapersUpload),
 		( '/Customize', Customize),
 		( '/Suggestions', Suggestions)]
 
@@ -111,6 +112,12 @@ class CustomizeWallpapers(webapp.RequestHandler):
 				"latestThemes": customize.Theme.all().order("-Created").fetch(limit=20)
 				})
 			self.render2("views/customize-wallpapers.html")
+
+class CustomizeWallpapersUpload(webapp.RequestHandler):
+	def get(self):
+		onRequest(self)
+		if self.CurrentMember:
+			self.render2("views/customize-wallpapers-upload.html")
 
 class CustomizeWallpapersListJSON(webapp.RequestHandler):
 	def get(self):

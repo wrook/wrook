@@ -1,0 +1,11 @@
+{
+	"title": "Queued Photo Uploader (Fixed)",
+	"locked": true,
+	"description": "Showcase with FancyUpload preview version.",
+	"files": [
+		"mootools-1.2-core-nc.js",
+		"../../source-fixed/Swiff.Uploader.js",
+		"../../source-fixed/Fx.ProgressBar.js",
+		"../../source-fixed/FancyUpload2.js"
+	]
+}

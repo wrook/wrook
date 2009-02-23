@@ -10,27 +10,28 @@ from django.conf import settings
 
 
 #Feathers imports
-from feathers import webapp
 from feathers import stories
 from feathers import utils
 from feathers import customize
 from feathers import membership
 from feathers import proforma
 from feathers import talk
+from feathers import webapp
 
 #Wrook modules
 import app
-import about
+#import about - is now dynamically loaded
 import wrookStories
 import admin
 import books
 import members
 
-def integrate_modules(URLMappings):
+#application = None
+
+def hook_modules(URLMappings):
 	#TODO:Figure out a better way of integrating modules
 	# Integrate the about module
-	URLMappings += about.URLMappings()
-	about.onRequest = app.onRequest
+#	URLMappings += about.URLMappings()
 	# Integrate the admin module
 	URLMappings += admin.URLMappings()
 	admin.onRequest = app.onRequest
@@ -65,15 +66,17 @@ def real_main():
 	The basic main function to start the application
 	on the production servers
 	'''
-	webapp.run(application)
+	application = start_application()
+	run(application)
 
 def firepython_main():
 	'''
 	The basic main function to start the application
 	on the production servers
 	'''
+	application = start_application()
 	from firepython.middleware import FirePythonWSGI
-	webapp.run(FirePythonWSGI(application))
+	run(FirePythonWSGI(application))
 
 def profile_log_main():
 	'''
@@ -84,6 +87,8 @@ def profile_log_main():
 	import logging
 	import pstats
 	import StringIO
+
+	application = start_application()
 	prof = cProfile.Profile()
 	prof = prof.runctx("real_main()", globals(), locals())
 	stream = StringIO.StringIO()
@@ -97,6 +102,8 @@ def profile_html_main():
 	This is the main function for profiling to the html output
 	'''
 	import cProfile, pstats
+
+	application = start_application()
 	prof = cProfile.Profile()
 	prof = prof.runctx("real_main()", globals(), locals())
 	print "<div style='text-align:left;font-size:1.1em; color: #000; background: #fff; padding: 20px;'><pre>"
@@ -114,20 +121,37 @@ def profile_firepython_main():
 	import logging
 	import pstats
 	import StringIO
+
+	application = start_application()
 	prof = cProfile.Profile()
 	prof = prof.runctx("firepython_main()", globals(), locals())
 	stream = StringIO.StringIO()
 	stats = pstats.Stats(prof, stream=stream)
 	stats.sort_stats("cumulative")  # Or cumulative
 	stats.print_stats(100)  # 80 = how many to print
-	logging.info("pfff!")
 	logging.info("Profile data:\n%s", stream.getvalue())
 
+def start_application():
+	import pew.addons
+	URLMappings = hook_modules([])
+	addons = pew.addons.Addons()
+	addons.baseFolder = os.path.dirname(__file__)
+	addons.load("modules")
+	addons.load("plugins")
+	application = app.Application(URLMappings, debug=False, addons=addons)
+#	application = app.Application(URLMappings, debug=False)
+#	application.addons = addons
+#	application.addons()
+	return application
+	# Instantiate the main application
 
-application = webapp.Application(
-	integrate_modules([]),
-	debug=False
-	) # Instantiate the main application
+
+
+def run(application):
+	from google.appengine.ext.webapp import util
+	util.run_wsgi_app(application)
+
+
 
 main = real_main
 #main = firepython_main

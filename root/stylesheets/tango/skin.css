@@ -1,6 +1,6 @@
 .jcarousel-skin-tango .jcarousel-container {
-    -moz-border-radius: 5px;
-    background: #E0E0E0;
+	position: relative;
+	left: -5px;
 }
 
 .jcarousel-skin-tango .jcarousel-container-horizontal {
@@ -16,7 +16,7 @@
 
 .jcarousel-skin-tango .jcarousel-clip-horizontal {
     width:  540px;
-    height: 120px;
+    height: 125px;
 }
 
 .jcarousel-skin-tango .jcarousel-clip-vertical {
@@ -27,6 +27,11 @@
 .jcarousel-skin-tango .jcarousel-item {
     width: 120px;
     height: 120px;
+    margin: 3px 8px 3px 3px;
+}
+.jcarousel-skin-tango .jcarousel-item:hover {
+	border: 3px solid #000;
+    margin: 0px 5px 0px 0px;
 }
 
 .jcarousel-skin-tango .jcarousel-item-horizontal {

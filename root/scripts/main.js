@@ -1,4 +1,3 @@
-
 function MiniMenu() {
 	var miniMenu = this;
 	this.isOpen = false;
@@ -20,17 +19,17 @@ function MiniMenu() {
 	};
 
 	this.load = function() {
-		$("body").prepend("<div id='miniMenu'><ul></ul></div>");
-		miniMenu.menu = $("#miniMenu");
+		$j("body").prepend("<div id='miniMenu'><ul></ul></div>");
+		miniMenu.menu = $j("#miniMenu");
 		miniMenu.menuElem = miniMenu.menu[0];
-		miniMenu.menuList = $("#miniMenu ul");
+		miniMenu.menuList = $j("#miniMenu ul");
 		miniMenu.menuListElem = miniMenu.menuList[0];
 		miniMenu.menu.hover(miniMenu.mouseOver, miniMenu.mouseOut);
-		$(".miniMenuAnchor").each(miniMenu.anchorAttach);
+		$j(".miniMenuAnchor").each(miniMenu.anchorAttach);
 	};
 
 	this.close = function() {
-		$("#" + miniMenu.currentAnchorId).removeClass("stayOn");
+		$j("#" + miniMenu.currentAnchorId).removeClass("stayOn");
 		miniMenu.currentAnchorId = "";
 		clearTimeout(miniMenu.timeout);
 		miniMenu.menu.hide();
@@ -57,8 +56,8 @@ function MiniMenu() {
 		miniMenu.contextId = miniMenu.currentAnchorId.substring(0, miniMenu.currentAnchorId.indexOf("-"));
 		miniMenu.itemId = miniMenu.currentAnchorId.substring(miniMenu.currentAnchorId.indexOf("-")+1, 999);
 		var handler = handlers[miniMenu.contextId].handler;
-		$("#" + miniMenu.currentAnchorId).addClass("stayOn");
-		var offset = $(anchorElem).offset();
+		$j("#" + miniMenu.currentAnchorId).addClass("stayOn");
+		var offset = $j(anchorElem).offset();
 		miniMenu.menuElem.style.top = offset.top + "px";
 		miniMenu.menuElem.style.left = (offset.left-110) + "px";
 		miniMenu.menuList.empty();
@@ -71,9 +70,9 @@ function MiniMenu() {
 		}
 		for (item in menuItems) {
 			var menuItem = menuItems[item];
-			var listItem = $("<li><a href='javascript:return false;'>" + menuItem.label + "</a></li>");
+			var listItem = $j("<li><a href='javascript:return false;'>" + menuItem.label + "</a></li>");
 			miniMenu.menuList.append(listItem);
-			var anchor = $("a", listItem).click(getMenuItemCallback(menuItem));
+			var anchor = $j("a", listItem).click(getMenuItemCallback(menuItem));
 		};
 		miniMenu.menu.show();
 		miniMenu.isOpen = true;
@@ -88,12 +87,12 @@ function MiniMenu() {
 	};
 
 	this.anchorMouseOver = function(e) {
-		$(this).addClass("on");
+		$j(this).addClass("on");
 	};
 
 	this.anchorMouseOut = function(e) {
 		if (miniMenu.currentAnchorId == this.id) miniMenu.startClosing();
-		$(this).removeClass("on");
+		$j(this).removeClass("on");
 	};
 
 	this.anchorClick = function(e, anchorElem) {
@@ -101,17 +100,17 @@ function MiniMenu() {
 	};
 
 	this.contextMouseOver = function(e, anchorElem) {
-		$(anchorElem).addClass("hover");
+		$j(anchorElem).addClass("hover");
 	};
 
 	this.contextMouseOut = function(e, anchorElem) {
-		$(anchorElem).removeClass("hover");
+		$j(anchorElem).removeClass("hover");
 	};
 
 	this.anchorAttach = function(i, anchorElem) {
-		$(this).hover(miniMenu.anchorMouseOver, miniMenu.anchorMouseOut);
-		$(this).click(function(e){miniMenu.anchorClick(e, anchorElem)});
-		$(this).parents(".miniMenuContext").hover(function(e){miniMenu.contextMouseOver(e, anchorElem)}, function(e){miniMenu.contextMouseOut(e, anchorElem)});
+		$j(this).hover(miniMenu.anchorMouseOver, miniMenu.anchorMouseOut);
+		$j(this).click(function(e){miniMenu.anchorClick(e, anchorElem)});
+		$j(this).parents(".miniMenuContext").hover(function(e){miniMenu.contextMouseOver(e, anchorElem)}, function(e){miniMenu.contextMouseOut(e, anchorElem)});
 	};
 };
 
@@ -137,7 +136,7 @@ var storyPostHandler = new miniMenuHandler();
 storyPostHandler.addMenuItem("comment", "Comment", function(context, menuItemId, id){
 	$.getJSON("/Talk/Post/" + id + "/Reply/MiniForm/JSON", function(data){
 		if (data.errorCode == 0) {
-			$("#" + id).prepend(data.html);
+			$j("#" + id).prepend(data.html);
 		} else if(data.errorCode > 0) {
 			alert("Oups! A problem occured: " + data.errorMessage + " (Error code:" + data.errorCode + ")");
 		}
@@ -148,7 +147,7 @@ storyPostHandler.addMenuItem("delete", "Delete", function(context, menuItemId, i
 	$.getJSON("/Stories/Post/" + id + "/Delete/JSON", function(data){
 		if (data.errorCode == 0) {
 			console.debug("deleting:", id);
-			$("#" + id).slideUp(1000);
+			$j("#" + id).slideUp(1000);
 		} else if(data.errorCode > 0) {
 			alert("Oups! A problem occured: " + data.errorMessage + " (Error code:" + data.errorCode + ")");
 		}
@@ -165,9 +164,9 @@ topicHandler.addMenuItem("delete", "Delete", function(context, menuITemId, id){
 	$.getJSON("/Talk/Topic/" + id + "/Delete/JSON", function(data){
 		if (data.errorCode == 0) {
 			console.debug("deleting:", id, data);
-			$("#" + id + "-topicMenu").hide();
-			$("#" + id).hide();
-			$("#" + id).after($("<strong>" + data.html + "</strong>"));
+			$j("#" + id + "-topicMenu").hide();
+			$j("#" + id).hide();
+			$j("#" + id).after($j("<strong>" + data.html + "</strong>"));
 		} else if(data.errorCode > 0) {
 			alert("Oups! A problem occured: " + data.errorMessage + " (Error code:" + data.errorCode + ")");
 		}
@@ -180,16 +179,17 @@ miniMenu.registerHandler("storyPost", storyPostHandler);
 miniMenu.registerHandler("storyPostReply", storyPostReplyHandler);
 //REFACTOR: SHIT!!! TEST WITH INSTANCE NAME DIFFERENT FROM miniMenu !!!
 
-$(document).ready(function(){
-	/* DOESNT SEEM TO BE CACHED */
-	// $("head").append('<script type="text/javascript" src="/scripts/main-lazy.js"></script>');
+$j(document).ready(function(){
 	miniMenu.load();
 
+	var offsetLeft = $j("#pageInner").offset().left;
+	$j("body")[0].style.backgroundPosition = offsetLeft + "px 0px";
+
 	/* Adjusts the height of the content column to match the height of the sidebar	*/
-	sidebarHeight = $(".sidebar")[0].offsetHeight;
-	//contentHeight = $(".blockBody .middle")[0].offsetHeight
-	contentHeight = $(".blockContent")[0].offsetHeight;
+	sidebarHeight = $j(".sidebar")[0].offsetHeight;
+	//contentHeight = $j(".blockBody .middle")[0].offsetHeight
+	contentHeight = $j(".blockContent")[0].offsetHeight;
 	if (contentHeight < sidebarHeight) {
-		$(".blockContent")[0].style.height = sidebarHeight + "px";
+		$j(".blockContent")[0].style.height = sidebarHeight + "px";
 	}
 });

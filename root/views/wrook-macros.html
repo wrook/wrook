@@ -158,8 +158,16 @@ $(document).ready(function(){
 	{% endif %}
 {%- endmacro %}
 
-{% macro notice(title, body) -%}
+{% macro notice(title, body="") -%}
 	<div class="notice">
+		{{ corners("white5px") }}
+		<strong>{{ title }}</strong>
+		{{ body }}
+	</div>
+{%- endmacro %}
+
+{% macro error(title, body="") -%}
+	<div class="errorMessage">
 		{{ corners("white5px") }}
 		<strong>{{ title }}</strong>
 		{{ body }}

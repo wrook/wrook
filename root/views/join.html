@@ -1,22 +1,28 @@
-﻿{% extends "template-main-e.html" %}
-{% load i18n %}
+{% extends "template-main-e2.html" %}
+{% import "wrook-macros.html" as wrookMacros %}
 {% block title %}
 	<h1>
-		{% trans "Join Wrook" %}
+		{% trans sitename=appConfig.SiteName %}Join {{ sitename }}{% endtrans %}
 	</h1>
 {% endblock %}
+{% block notices %}
+	{% if not wrookAdmin %}
+		{{ wrookMacros.notice("Attention:", _("There are no members with administrative privileges at the moment. To create this first admin account, fill sign-up form <strong>using the same email address</strong> you have provided during the initial setup. The <strong>default password</strong> created will also be this email address. <strong>You should change it shortly afterward</strong>.")) }}
+	{% endif %}
+
+	{% if error %}
+		{{ wrookMacros.error("Form error: ", error) }}
+	{% endif %}
+
+{% endblock %}
 {% block content %}
-		{% if error %}
-			<div class="error">
-				{{ error }}
-			</div>
-		{% else %}
-			<div class="FriendlyNotice">
-{% blocktrans %}
+		{% if wrookAdmin and not error %}
+			<div>
+{% trans %}
 <p>
 Before you join Wrook, we need to learn a few things about you. After you filled out this form, <strong>we will send you a password by email</strong>.
 </p>
-{% endblocktrans %}
+{% endtrans %}
 			</div>
 		{% endif %}
 		<form method="post">
@@ -24,7 +30,7 @@ Before you join Wrook, we need to learn a few things about you. After you filled
 				<tbody>
 					<tr>
 						<th>
-							<label for="Username">{% trans "Username" %} *</label><br/>
+							<label for="Username">{% trans %}Username{% endtrans %} *</label><br/>
 						</th>
 						<td>
 							<input type="text" style="width:240px" name="Username" value="{{ username|escape }}" />
@@ -32,7 +38,7 @@ Before you join Wrook, we need to learn a few things about you. After you filled
 					</tr>
 					<tr>
 						<th>
-							<label for="Email">{% trans "Email" %} *</label><br/>
+							<label for="Email">{% trans %}Email{% endtrans %} *</label><br/>
 						</th>
 						<td>
 							<input type="text" style="width:240px" name="Email" value="{{ email|escape }}" />
@@ -40,7 +46,7 @@ Before you join Wrook, we need to learn a few things about you. After you filled
 					</tr>
 					<tr>
 						<th>
-							<label for="Firstname">{% trans "Firstname" %} *</label><br/>
+							<label for="Firstname">{% trans %}Firstname{% endtrans %} *</label><br/>
 						</th>
 						<td>
 							<input type="text" style="width:240px" name="Firstname" value="{{ firstname|escape }}" />
@@ -48,7 +54,7 @@ Before you join Wrook, we need to learn a few things about you. After you filled
 					</tr>
 					<tr>
 						<th>
-							<label for="Lastname">{% trans "Lastname" %} *</label><br/>
+							<label for="Lastname">{% trans %}Lastname{% endtrans %} *</label><br/>
 						</th>
 						<td>
 							<input type="text" style="width:240px" name="Lastname" value="{{ lastname|escape }}" />
@@ -56,24 +62,24 @@ Before you join Wrook, we need to learn a few things about you. After you filled
 					</tr>
 					<tr>
 						<th>
-							<label for="PreferedLanguage">{% trans "Prefered language" %}</label><br/>
+							<label for="PreferedLanguage">{% trans %}Prefered language{% endtrans %}</label><br/>
 						</th>
 						<td>
 							<select name="PreferedLanguage" style="width:120px">
-								<option {% ifequal preferedLanguage "en" %}selected="selected"{% endifequal %} value="en">English</option>
-								<option {% ifequal preferedLanguage "fr" %}selected="selected"{% endifequal %} value="fr">Français</option>
+								<option {% if preferedLanguage=="en" %}selected="selected"{% endif %} value="en">English</option>
+								<option {% if preferedLanguage=="fr" %}selected="selected"{% endif %} value="fr">Français</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<th>
-							<label for="Gender">{% trans "Gender" %}</label><br/>
+							<label for="Gender">{% trans %}Gender{% endtrans %}</label><br/>
 						</th>
 						<td>
 							<select name="Gender" style="width:120px">
-								<option {% ifequal preferedLanguage "" %}selected="selected"{% endifequal %} value="">{% trans "Select one..." %}</option>
-								<option {% ifequal preferedLanguage "male" %}selected="selected"{% endifequal %} value="male">{% trans "Male" %}</option>
-								<option {% ifequal preferedLanguage "female" %}selected="selected"{% endifequal %} value="female">{% trans "Female" %}</option>
+								<option {% if preferedLanguage=="" %}selected="selected"{% endif %} value="">{% trans %}Select one...{% endtrans %}</option>
+								<option {% if preferedLanguage=="male" %}selected="selected"{% endif %} value="male">{% trans %}Male{% endtrans %}</option>
+								<option {% if preferedLanguage=="female" %}selected="selected"{% endif %} value="female">{% trans %}Female{% endtrans %}</option>
 							</select>
 						</td>
 					</tr>
@@ -81,7 +87,7 @@ Before you join Wrook, we need to learn a few things about you. After you filled
 						<td>
 						</td>
 						<td>
-							<button name="action"><span>{% trans 'Join' %}</span></button>
+							<button name="action"><span>{% trans %}Join{% endtrans %}</span></button>
 						</td>
 					</tr>
 				</tbody>
@@ -91,5 +97,5 @@ Before you join Wrook, we need to learn a few things about you. After you filled
 
 {% endblock %}
 {% block sidebar %}
-	{% include "panels-aboutWrook.html" %}
+	{% include "panels-aboutWrook2.html" %}
 {% endblock %}

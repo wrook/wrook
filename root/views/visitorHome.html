@@ -31,6 +31,6 @@
 	</div>
 {% endblock %}
 
-{% block sidebarBottom %}
-	{% include "panels-aboutWrook2.html" %}
+{% block sidebar %}
+	{{ addons("pew://visitor.home.module.wrook.org/sidebar").get() }}
 {% endblock %}

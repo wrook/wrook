@@ -6,7 +6,7 @@ api_version: 1
 default_expiration: "21d"
 
 handlers:
-- url: /admin/.*
+- url: /_admin/.*
   script: $PYTHON_LIB/google/appengine/ext/admin
   login: admin
 
@@ -43,3 +43,5 @@ handlers:
 
 - url: /.*
   script: wrook.py
+
+

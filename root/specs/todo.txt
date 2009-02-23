@@ -1,4 +1,16 @@
 
+- Only load module with ID's
+- Provide pew methods for providing a list of addon to activate
+- Only activate modules which are on the list of inclusions
+- Show id's in module details
+- Add plugin activation in the setup process
+- Provide a straightforward way to configure a plugin
+	* load/edit/validate a json
+	* alert if setup json data is invalid
+	* persist json addon configs in their own google table 
+
+Read: http://www.pbs.org/mediashift/2009/02/your-guide-to-e-books043.html
+Investigate: http://shortcovers.com/
 Investigate: http://www.booksprouts.com/
 Investigate: http://www.shelfari.com/
 Investigate: http://www.feedbooks.com/

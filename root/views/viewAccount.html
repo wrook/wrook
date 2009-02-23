@@ -1,12 +1,12 @@
-{% extends "template-main-e2.html" %}
+{% extends "template-profile2.html" %}
+{% import 'wrook-macros.html' as wrook %}
+{% set subSection = "accountSettings" %}
 {% block pageId %}account-view{% endblock %}
 {% block pageTitle %}{% trans %}Your account{% endtrans %}{% endblock %}
-{% block title %}
-	<h1>
-		{% trans %}Your account{% endtrans %}
-	</h1>
-{% endblock %}
 {% block content %}
+	<h1>
+		{% trans %}Your account settings{% endtrans %}
+	</h1>
 	<table>
 		<tbody>
 			<tr>
@@ -37,30 +37,23 @@
 					{% endif %}
 				</td>
 			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<div class="buttonBar">
-						<ul>
-							<li><a id="btnEditAccount" href="/EditAccount"><span>
-								{% trans %}Edit account{% endtrans %}
-							</span></a></li>
-						</ul>
-					</div>
-				</td>
-			</tr>
 		</tbody>
 	</table>
 {% endblock %}
 
-{% block sidebar %}
-	<div class="sidebarPanel">
-		<h3>{% trans %}Options{% endtrans %}</h3>
-		<div class="sidebarMenu">
-			<ul>
-				<li><a id="sidebarMenu-changePassword" href="/Account/ChangePassword">{% trans %}Change password{% endtrans %}</a></li>
-				<li><a id="sidebarMenu-changeProfilePhoto" href="/Account/ChangeProfilePhoto">{% trans %}Change profile photo{% endtrans %}</a></li>
-			</ul>
-		</div>
-	</div>
+{% block contentBottom %}
+	{% call wrook.calls_to_action() %}
+		<li class="mainLink"><a id="btnEditAccount" href="/EditAccount">
+			<span class="bullet spriteIcons icon-main-link"></span>
+			<span>{% trans %}Edit settings{% endtrans %}
+		</span></a></li>
+		<li><span class="separator">|</span></li>
+		<li><a id="sidebarMenu-changePassword" href="/Account/ChangePassword"><span>
+			{% trans %}Change password{% endtrans %}
+		</span></a></li>
+		<li><span class="separator">|</span></li>
+		<li><a id="sidebarMenu-changeProfilePhoto" href="/Account/ChangeProfilePhoto"><span>
+			{% trans %}Change photo{% endtrans %}
+		</span></a></li>
+	{% endcall %}
 {% endblock %}

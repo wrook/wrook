@@ -1,0 +1,15 @@
+{% extends "template-main-e2.html" %}
+{% block title %}
+	<h1>
+		{% trans %}Setup Saved{% endtrans %}
+	</h1>
+{% endblock %}
+{% block content %}
+	<form method="post">
+{% trans %}
+<p>
+Your settings have been saved. Now, to <strong>continue with the setup</strong> you must create a first member which will have administrative priviledges. To do so, simply fill out the sign-up form.
+</p>
+{% endtrans %}
+<a href="/Join/">{% trans %}Continue to the sign-up form{% endtrans %}</a>
+{% endblock %}

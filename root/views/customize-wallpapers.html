@@ -1,14 +1,19 @@
 {% extends "template-customize.html" %}
+{% import 'wrook-macros.html' as wrook %}
 {% set subSection = "wallpapers" %}
+{% block htmlHead %}
+{% endblock %}
 {% block content %}
 	<h2>
-		{% trans %}Click on wallpapers to preview them{% endtrans %}
+		{% trans %}Browse wallpapers{% endtrans %}
 	</h2>
+
+
+
 	{% if latestThemes.count!=0 %}
 
 		<script type="text/javascript">
 		jQuery(document).ready(function() {
-
 
 function itemLoadCallback(carousel, state) {
     if (carousel.has(carousel.last)) return;
@@ -48,12 +53,13 @@ function getItemHTML(key, isTiled) {
 		function setWallpaperPreview(wallpaperId, isTiled) {
 			wallpaperPreview = wallpaperId;
 			if (isTiled) {
-				$("body #wallpaper").remove();
-				$("body")[0].style.background = "url('/Themes/Theme/BackgroundImage/" + wallpaperId + "') repeat";
+				$j("body #wallpaper").remove();
+				$j("body")[0].style.backgroundImage = "url(/Themes/Theme/BackgroundImage/" + wallpaperId + ")";
+				$j("body")[0].style.backgroundRepeat = "repeat";
 			} else {
-				$("body #wallpaper").remove();
-				$("body")[0].style.background = "none";
-				$("body").prepend("<div id='wallpaper'><img src='/Themes/Theme/BackgroundImage/" + wallpaperId + "?width=980' /><div class='bgFade'></div></div>");
+				$j("body #wallpaper").remove();
+				$j("body")[0].style.background = "none";
+				$j("body").prepend("<div id='wallpaper'><img src='/Themes/Theme/BackgroundImage/" + wallpaperId + "?width=980' /><div class='bgFade'></div></div>");
 			}
 		}
 		
@@ -82,12 +88,23 @@ function getItemHTML(key, isTiled) {
 		</div>
 	{% endif %}
 
+
 	<div style="margin: 20px 0px;">
-		<button class="formButton" onclick="window.location='/Themes'"><span>{% trans %}Browse all wallpapers{% endtrans %}</span></button>
 		{% if currentMember.isAdmin %}
 			<button class="formButton" onclick="window.location='/Themes/Select?redirect=/SetDefaultTheme&themeUsage={% trans %}Default{% endtrans %}'"><span>{% trans %}Set the default wallpaper{% endtrans %}</span></button>
 		{% endif %}
+		{#
+		<button class="formButton" onclick="window.location='/Themes'"><span>{% trans %}Browse all wallpapers{% endtrans %}</span></button>
 		<button class="formButton" onclick="window.location='/Themes/Theme/Edit/'"><span>{% trans %}Add new wallpapers{% endtrans %}</span></button>
+		#}
 	</div>
 
+{% endblock %}
+
+{% block contentBottom %}
+	{% call wrook.calls_to_action() %}
+		<li class="mainLink"><a href="/Customize/Wallpapers/Upload">
+			<span class="bullet spriteIcons icon-main-link"></span><span>{% trans %}Upload wallpapers{% endtrans %}</span></a>
+		</li>
+	{% endcall %}
 {% endblock %}

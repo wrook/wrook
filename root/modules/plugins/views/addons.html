@@ -1,0 +1,188 @@
+{% extends masterTemplate %}
+{% block pageId %}addons{% endblock %}
+{% block pageTitle %}{% trans %}Addons{% endtrans %}{% endblock %}
+{% block title %}
+	<h1>
+		{% trans %}Addons{% endtrans %}
+	</h1>
+{% endblock %}
+
+{% block content %}
+<style>
+.addons-list {
+	
+}
+.addons-list ul {
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+.addons-list ul li {
+	position: relative;
+	margin: 0px;
+	list-style: none;
+	border-top: 1px dotted #DDD;
+}
+.addons-list ul li span.addonStatus {
+	position: absolute;
+	right: 0px;
+	top: 10px;
+	display: block;
+}
+.toggleNextSibbling {
+	padding: 10px 0px;
+}
+.toggleNextSibbling.hover {
+	color: #0000EE;
+	cursor: pointer;
+	text-decoration: underline;
+}
+.addonInfo {
+	display: none;	
+	background: #EEE;
+	padding: 10px;
+	margin: 0px 0px 10px 0px;
+	-moz-border-radius: 10px;
+}
+
+.addonInfo-detailsList {
+	-moz-border-radius: 5px;
+	background: #FFF;
+}
+.addonInfo-detailsList ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+.addonInfo-detailsList ul li {
+	font-size: 0.8em;
+	padding: 5px;
+	list-style: none;
+	margin: 0px;
+	margin-bottom: 1px dotted #DDD;
+}
+
+.addonInfo-detailsList ul li.meta-description {
+	font-size: 1.2em;
+}
+
+.addonInfo-detailsList ul li h3 {
+	margin: 0px 0px 5px 0px;
+	padding: 0px
+}
+.addonInfo-detailsList ul li .pageDesription {
+	color: #AAA;
+}
+
+
+</style>
+<script>
+$j(document).ready(function(){
+	$j(".toggleNextSibbling").click(function(){
+		$(this).next().toggle(250);
+	}).hover(
+		function () {
+			$(this).addClass("hover");
+		}, 
+		function () {
+			$(this).removeClass("hover");
+		}
+	)
+	
+})
+</script>
+	<h2>Modules</h2>
+	<div class="addons-list">
+		<ul>
+			{% for id, version, addon in addons.addons %}
+				{% if addon.meta %}
+					<li>
+						<div class="addonTitle toggleNextSibbling">
+							<span>
+								<strong>
+									{{ addon.meta.get("name") }}
+								</strong>
+								- v{{ addon.meta.get("version") }}
+							</span>
+							<span class="addonStatus">
+								active
+							</span>
+						</div>
+						<div class="addonInfo">
+							<div class="addonInfo-detailsList addonInfo-meta">
+								<ul>
+									{% if addon.meta.get("description") %}
+										<li class="meta-description">
+											<span>{{ addon.meta.get("description") }}</span>
+										</li>
+									{% endif %}
+									<li>
+										{% set mapping = addon.parseMappings("wsgi")%}
+										{% if mapping %}
+											<h3>Pages:</h3>
+											{% for url, handler in mapping %}
+												{% if handler.meta %}
+													{% if handler.meta.get("url") %}
+														<a href="{{ handler.meta.get("url") }}">{{ handler.meta.get("title") }}</a>
+													{% else %}
+														{{ handler.meta.get("title") }}
+													{% endif %}
+													{% if handler.meta.get("description") %}
+													: <span class="pageDesription">{{ handler.meta.get("description")}}</span>
+													{% endif %}
+													<br/>
+												{% endif %}
+											{% endfor %}
+										{% else %}
+											No additionnal pages.
+										{% endif %}
+									</li>
+									<li>
+										{% set mapping = addon.parseMappings("pew")%}
+										{% if mapping %}
+											<h3>Functionnalities:</h3>
+											{% for url, handler in mapping %}
+												{% if handler.meta %}
+													{% if handler.meta.get("uri") %}
+														<a href="javascript:alert('Request with: {{ addon.meta.get("uri")+handler.meta.get("uri") }}')">{{ handler.meta.get("title") }}</a>
+													{% else %}
+														{{ handler.meta.get("title") }}
+													{% endif %}
+													{% if handler.meta.get("description") %}
+													: <span class="pageDesription">{{ handler.meta.get("description")}}</span>
+													{% endif %}
+													<br/>
+												{% endif %}
+											{% endfor %}
+										{% else %}
+											No additionnal functionnalities.
+										{% endif %}
+									</li>
+									{% if addon.meta.get("author") %}
+										<li>
+											<strong>{% trans %}Author:{% endtrans %}</strong>
+											<span>{{ addon.meta.get("author") }}</span>
+										</li>
+									{% endif %}
+									{% if addon.meta.get("url") %}
+										<li>
+											<strong>{% trans %}Homepage:{% endtrans %}</strong>
+											<span><a href="{{ addon.meta.get("url") }}">{{ addon.meta.get("url") }}</a></span>
+										</li>
+									{% endif %}
+								</ul>
+							</div>
+						</div>
+					</li>
+			{% else %}
+				<li>No metadata available for this addon.</li>
+			{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}

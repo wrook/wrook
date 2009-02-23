@@ -16,20 +16,20 @@ indexes:
   - name: Title
     direction: desc
 
-# Used 523 times in query history.
+# Unused in query history -- copied from input.
 - kind: Bookmark
   properties:
   - name: Author
   - name: When
     direction: desc
 
-# Used 870 times in query history.
+# Unused in query history -- copied from input.
 - kind: Chapter
   properties:
   - name: Book
   - name: Number
 
-# Used 2 times in query history.
+# Unused in query history -- copied from input.
 - kind: Chapter
   properties:
   - name: Book
@@ -48,7 +48,7 @@ indexes:
   - name: VoteCount
     direction: desc
 
-# Used 16 times in query history.
+# Unused in query history -- copied from input.
 - kind: Feature
   properties:
   - name: VoteCount
@@ -56,14 +56,14 @@ indexes:
   - name: Created
     direction: desc
 
-# Used 56 times in query history.
+# Unused in query history -- copied from input.
 - kind: Feature
   properties:
   - name: isDone
   - name: Done
     direction: desc
 
-# Used 94 times in query history.
+# Unused in query history -- copied from input.
 - kind: Feature
   properties:
   - name: isDone
@@ -78,21 +78,21 @@ indexes:
   - name: date
     direction: desc
 
-# Used 83 times in query history.
+# Unused in query history -- copied from input.
 - kind: Message
   properties:
   - name: Book
   - name: Sent
     direction: desc
 
-# Used 2831 times in query history.
+# Used 44 times in query history.
 - kind: Moment
   properties:
   - name: isDefault
   - name: Priority
     direction: desc
 
-# Used 7 times in query history.
+# Unused in query history -- copied from input.
 - kind: Read
   properties:
   - name: Author
@@ -119,41 +119,41 @@ indexes:
   - name: When
     direction: desc
 
-# Used 1311 times in query history.
+# Unused in query history -- copied from input.
 - kind: Reply
   ancestor: yes
   properties:
   - name: Sent
 
-# Used 1397 times in query history.
+# Unused in query history -- copied from input.
 - kind: Reply
   ancestor: yes
   properties:
   - name: Sent
     direction: desc
 
-# Used 1074 times in query history.
+# Unused in query history -- copied from input.
 - kind: Revision
   properties:
   - name: Book
   - name: Created
     direction: desc
 
-# Used 2315 times in query history.
+# Unused in query history -- copied from input.
 - kind: Revision
   properties:
   - name: Chapter
   - name: Created
     direction: desc
 
-# Used 19 times in query history.
+# Unused in query history -- copied from input.
 - kind: Revision
   properties:
   - name: Chapter
   - name: Version
     direction: desc
 
-# Used 249 times in query history.
+# Unused in query history -- copied from input.
 - kind: StoryPost
   properties:
   - name: Member
@@ -161,14 +161,14 @@ indexes:
   - name: WhenOccured
     direction: desc
 
-# Used 451 times in query history.
+# Unused in query history -- copied from input.
 - kind: StoryPost
   properties:
   - name: Member
   - name: WhenOccured
     direction: desc
 
-# Used 3 times in query history.
+# Unused in query history -- copied from input.
 - kind: StoryPost
   properties:
   - name: Member
@@ -182,31 +182,31 @@ indexes:
   - name: Created
     direction: desc
 
-# Used 803 times in query history.
+# Unused in query history -- copied from input.
 - kind: ThemeMemberSelection
   properties:
   - name: Member
   - name: WhenSelected
     direction: desc
 
-# Used 2 times in query history.
+# Unused in query history -- copied from input.
 - kind: Topic
   ancestor: yes
 
-# Used 132 times in query history.
+# Unused in query history -- copied from input.
 - kind: Topic
   ancestor: yes
   properties:
   - name: Sent
 
-# Used 173 times in query history.
+# Unused in query history -- copied from input.
 - kind: Topic
   ancestor: yes
   properties:
   - name: Sent
     direction: desc
 
-# Used 57 times in query history.
+# Unused in query history -- copied from input.
 - kind: Vote
   properties:
   - name: Member

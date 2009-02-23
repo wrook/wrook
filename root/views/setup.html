@@ -1,0 +1,24 @@
+{% extends "template-main-e2.html" %}
+{% block title %}
+	<h1>
+		{% trans %}Setup{% endtrans %}
+	</h1>
+{% endblock %}
+{% block content %}
+	<form method="post">
+{% trans %}
+<p>
+To continue the setup, fill out this form carefully.
+</p>
+{% endtrans %}
+		<table>
+			{{ form }}
+			<tr>
+				<td></td>
+				<td>
+					<button>{% trans %}Submit{% endtrans %}</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+{% endblock %}

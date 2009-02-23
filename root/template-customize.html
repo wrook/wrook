@@ -1,9 +1,10 @@
-{% extends "template-main-e2.html" %}
+{% extends "views/template-main-nosidebar2.html" %}
 {% import 'customize-macros.html' as customizeMacros %}
 {% import 'wrook-macros.html' as wrookMacros %}
 {% set section="customize" %}
+{% set currentTheme=None %}
 {% block pageContent %}
-	<div id="pageContent">
+	<div id="pageContent" class="page-narrow">
 		<div class="contentBlock">
 			<div class="blockHeader withSectionMenu">
 				<h1>

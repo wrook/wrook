@@ -6,6 +6,8 @@
         <dict>
             <key>-book</key>
             <string>views\template-book.html</string>
+            <key>-comple</key>
+            <string>views\setup-complete.html</string>
             <key>-d</key>
             <string>stylesheets\template-d.css</string>
             <key>-d.</key>
@@ -59,13 +61,15 @@
             <key>STYLE</key>
             <string>views\stylesheets.html</string>
             <key>about</key>
-            <string>about.py</string>
+            <string>modules\about\about.py</string>
             <key>aboutw</key>
             <string>views\panels-aboutWrook.html</string>
             <key>account</key>
             <string>views\viewAccount.html</string>
+            <key>addons</key>
+            <string>modules\plugins\views\addons.html</string>
             <key>admin</key>
-            <string>adminCommands.py</string>
+            <string>admin.py</string>
             <key>analy</key>
             <string>views\analytics.html</string>
             <key>ap</key>
@@ -73,7 +77,7 @@
             <key>app</key>
             <string>app.py</string>
             <key>app.</key>
-            <string>app.py</string>
+            <string>app.yaml</string>
             <key>app.p</key>
             <string>app.py</string>
             <key>app.y</key>
@@ -98,10 +102,12 @@
             <string>views\template-book.html</string>
             <key>book-</key>
             <string>views\books-talk.html</string>
+            <key>book-con</key>
+            <string>views\books-viewContents.html</string>
             <key>book-f</key>
             <string>views\books-feed.html</string>
             <key>book-m</key>
-            <string>views\book-macros.html</string>
+            <string>views\books-view.html</string>
             <key>book-ma</key>
             <string>views\book-macros.html</string>
             <key>book-rea</key>
@@ -144,6 +150,8 @@
             <string>views\books-viewContents.html</string>
             <key>books-con</key>
             <string>views\books-viewContents.html</string>
+            <key>books-e</key>
+            <string>views\books-edit.html</string>
             <key>books-l</key>
             <string>views\books-talk.html</string>
             <key>books-list</key>
@@ -190,6 +198,8 @@
             <string>views\admin-commands.html</string>
             <key>command</key>
             <string>wrook-commands.py</string>
+            <key>complete</key>
+            <string>views\setup-complete.html</string>
             <key>conten</key>
             <string>views\books-viewContents.html</string>
             <key>content</key>
@@ -205,7 +215,7 @@
             <key>cus</key>
             <string>feathers\customize.py</string>
             <key>custom</key>
-            <string>views\customize-wallpapers.html</string>
+            <string>feathers\customize.py</string>
             <key>customi</key>
             <string>feathers\customize.py</string>
             <key>customiz</key>
@@ -213,7 +223,7 @@
             <key>customize</key>
             <string>feathers\customize.py</string>
             <key>d.</key>
-            <string>stylesheets\template-d.css</string>
+            <string>views\template-main-d.html</string>
             <key>d.c</key>
             <string>stylesheets\template-d.css</string>
             <key>d.cs</key>
@@ -224,10 +234,14 @@
             <string>views\deleteBook.html</string>
             <key>e-viewTheme.html</key>
             <string>feathers\views\customize-viewTheme.html</string>
+            <key>e2</key>
+            <string>views\template-main-e2.html</string>
             <key>e2.</key>
             <string>views\template-main-e2.html</string>
             <key>e2.h</key>
             <string>views\template-main-e2.html</string>
+            <key>editA</key>
+            <string>views\editAccount.html</string>
             <key>emoiz</key>
             <string>memoize.py</string>
             <key>example</key>
@@ -236,6 +250,8 @@
             <string>scripts\jquery\jquery.expander.js</string>
             <key>form</key>
             <string>feathers\views\talk-comment-miniForm.html</string>
+            <key>go</key>
+            <string>GO.BAT</string>
             <key>half</key>
             <string>views\about-halfBakedEdition.html</string>
             <key>halfb</key>
@@ -250,8 +266,18 @@
             <string>views\http500.html</string>
             <key>info</key>
             <string>views\section-bookInfo.html</string>
+            <key>jCas</key>
+            <string>stylesheets\jquery.jcarousel.css</string>
             <key>join</key>
             <string>views\join.html</string>
+            <key>jq</key>
+            <string>scripts\jquery\jquery-1.3.1.js</string>
+            <key>jque</key>
+            <string>scripts\jquery\jquery-1.3.1.js</string>
+            <key>jquer</key>
+            <string>scripts\jquery\jquery-1.3.1.js</string>
+            <key>jquery</key>
+            <string>scripts\jquery\jquery-1.3.1.js</string>
             <key>lab</key>
             <string>feathers\labs.py</string>
             <key>labs</key>
@@ -279,13 +305,15 @@
             <key>macros</key>
             <string>views\customize-macros.html</string>
             <key>main</key>
-            <string>stylesheets\main.css</string>
+            <string>scripts\main.js</string>
             <key>main-</key>
             <string>views\template-main-e.html</string>
             <key>main-d</key>
             <string>views\template-main-d2.html</string>
             <key>main-e</key>
             <string>views\template-main-e.html</string>
+            <key>main-e2</key>
+            <string>views\template-main-e2.html</string>
             <key>main.</key>
             <string>scripts\main.js</string>
             <key>main.c</key>
@@ -315,7 +343,7 @@
             <key>membe</key>
             <string>members.py</string>
             <key>member</key>
-            <string>views\members-books-list.html</string>
+            <string>views\members-covers-list.html</string>
             <key>member-</key>
             <string>views\members-stories.html</string>
             <key>member-bo</key>
@@ -353,7 +381,7 @@
             <key>memberpr</key>
             <string>views\MembersProfile.html</string>
             <key>members</key>
-            <string>members.py</string>
+            <string>feathers\membership.py</string>
             <key>members-</key>
             <string>views\members-neighborhood.html</string>
             <key>members-b</key>
@@ -409,9 +437,11 @@
             <key>nosideb</key>
             <string>views\template-main-nosidebar2.html</string>
             <key>nosideba</key>
-            <string>views\template-main-nosidebar.html</string>
+            <string>views\template-main-nosidebar2.html</string>
             <key>old</key>
             <string>old_wrook.py</string>
+            <key>opensour</key>
+            <string>views\panels-aboutOpenSource.html</string>
             <key>pac</key>
             <string>pack.bat</string>
             <key>pack</key>
@@ -448,6 +478,12 @@
             <string>feathers\views\talk-part-topics.html</string>
             <key>partre</key>
             <string>views\part-replies.html</string>
+            <key>password</key>
+            <string>views\passwordSent.html</string>
+            <key>plugin</key>
+            <string>pew\plugins.py</string>
+            <key>plugins</key>
+            <string>plugins.py</string>
             <key>prof</key>
             <string>views\template-profile2.html</string>
             <key>profi</key>
@@ -508,12 +544,26 @@
             <string>tests\selenium.py</string>
             <key>settin</key>
             <string>settings.py</string>
+            <key>setting</key>
+            <string>settings.py</string>
+            <key>setu</key>
+            <string>firepython\setup.py</string>
+            <key>setup</key>
+            <string>views\setup.html</string>
+            <key>setup.h</key>
+            <string>views\setup.html</string>
+            <key>setup.ht</key>
+            <string>views\setup.html</string>
             <key>showMoreR</key>
             <string>feathers\views\talk-part-showMoreReplies.html</string>
             <key>showMoreReplies</key>
             <string>feathers\views\talk-part-showMoreReplies.html</string>
+            <key>sideb</key>
+            <string>views\template-main-nosidebar2.html</string>
             <key>sideba</key>
             <string>views\books-view-sidebar.html</string>
+            <key>sidebar</key>
+            <string>views\template-main-nosidebar2.html</string>
             <key>ski</key>
             <string>stylesheets\tango\skin.css</string>
             <key>skin</key>
@@ -601,7 +651,7 @@
             <key>templ</key>
             <string>views\template-main-d2.html</string>
             <key>templa</key>
-            <string>views\template-profile2.html</string>
+            <string>views\template-main.html</string>
             <key>templat</key>
             <string>views\template-main-d.html</string>
             <key>templat-b</key>
@@ -618,14 +668,24 @@
             <string>views\template-book.html</string>
             <key>template-customize</key>
             <string>template-customize.html</string>
+            <key>template-customize.</key>
+            <string>template-customize.html</string>
+            <key>template-customize.html</key>
+            <string>template-customize.html</string>
             <key>template-d</key>
+            <string>stylesheets\template-d.css</string>
+            <key>template-d.</key>
             <string>stylesheets\template-d.css</string>
             <key>template-e</key>
             <string>views\template-main-e.html</string>
+            <key>template-ma</key>
+            <string>views\template-main2.html</string>
             <key>template-mai</key>
             <string>views\template-main.html</string>
             <key>template-main-e2</key>
             <string>views\template-main-e2.html</string>
+            <key>template-main-wide.html</key>
+            <string>views\template-main-wide.html</string>
             <key>template-pro</key>
             <string>views\template-profile2.html</string>
             <key>template-prof</key>
@@ -637,7 +697,9 @@
             <key>template-profile2.</key>
             <string>views\template-profile2.html</string>
             <key>test</key>
-            <string>tests\testMembership.py</string>
+            <string>jinja2\tests.py</string>
+            <key>test.p</key>
+            <string>plugins\wrookTest\wrookTest.py</string>
             <key>testC</key>
             <string>tests\testContentPages.py</string>
             <key>testM</key>
@@ -648,6 +710,8 @@
             <string>feathers\views\customize-themeEdit.html</string>
             <key>themes</key>
             <string>feathers\views\customize-viewThemes.html</string>
+            <key>tod</key>
+            <string>specs\todo.txt</string>
             <key>todo</key>
             <string>specs\todo.txt</string>
             <key>tooltip</key>
@@ -686,10 +750,14 @@
             <string>scripts\WrookTypewriter\WrookTypewriter.js</string>
             <key>typew</key>
             <string>scripts\WrookTypewriter\WrookTypewriter.html</string>
+            <key>unit</key>
+            <string>tests\unittestgui-3.py</string>
+            <key>uservoi</key>
+            <string>modules\uservoice\uservoice.py</string>
             <key>utils</key>
             <string>feathers\utils.py</string>
             <key>view</key>
-            <string>views\viewChapter.html</string>
+            <string>views\viewAccount.html</string>
             <key>viewC</key>
             <string>views\viewChapter.html</string>
             <key>viewChapter</key>
@@ -700,15 +768,29 @@
             <string>feathers\views\customize-viewThemes.html</string>
             <key>visi</key>
             <string>views\visitorHome.html</string>
+            <key>visio</key>
+            <string>views\visitorHome.html</string>
             <key>visito</key>
             <string>views\visitorHome.html</string>
             <key>visitor</key>
             <string>views\visitorHome.html</string>
             <key>visitorH</key>
             <string>views\visitorHome.html</string>
+            <key>visitorHome</key>
+            <string>views\visitorHome.html</string>
             <key>visitorhom</key>
             <string>views\visitorHome.html</string>
+            <key>wall</key>
+            <string>views\customize-wallpapers.html</string>
+            <key>wallp</key>
+            <string>views\customize-wallpapers.html</string>
+            <key>wallpa</key>
+            <string>views\customize-wallpapers-upload.html</string>
+            <key>wallpap</key>
+            <string>views\customize-wallpapers.html</string>
             <key>we</key>
+            <string>feathers\webapp.py</string>
+            <key>web</key>
             <string>feathers\webapp.py</string>
             <key>weba</key>
             <string>feathers\webapp.py</string>
@@ -718,9 +800,13 @@
             <string>feathers\webapp.py</string>
             <key>who</key>
             <string>views\about-who.html</string>
+            <key>wook-ma</key>
+            <string>views\wrook-macros.html</string>
             <key>wro</key>
             <string>wrook.py</string>
             <key>wrok</key>
+            <string>views\wrook-macros.html</string>
+            <key>wrokMAc</key>
             <string>views\wrook-macros.html</string>
             <key>wrook</key>
             <string>wrook.py</string>
@@ -730,10 +816,14 @@
             <string>views\wrook-macros.html</string>
             <key>wrook.</key>
             <string>views\wrook-macros.html</string>
+            <key>wrookMacro</key>
+            <string>views\wrook-macros.html</string>
             <key>wrookSt</key>
             <string>wrookStories.py</string>
             <key>wrookSto</key>
             <string>wrookStories.py</string>
+            <key>wrookTe</key>
+            <string>plugins\wrookTest\wrookTest.py</string>
             <key>wrookm</key>
             <string>views\wrook-macros.html</string>
             <key>wrookma</key>
@@ -746,6 +836,8 @@
             <string>wrookStories.py</string>
             <key>wrookst</key>
             <string>wrookStories.py</string>
+            <key>wrookte</key>
+            <string>plugins\wrookTest\wrookTest.py</string>
         </dict>
     </dict>
 </plist>

@@ -6,23 +6,11 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 from google.appengine.ext import webapp
 
-class Application(webapp.WSGIApplication):
-	pass
-
-def run(application):
-	from google.appengine.ext.webapp import util
-	util.run_wsgi_app(application)
-
-def render(template_name, model):
+def render(template_name, model, template_dirs=[]):
 	import django_trans_patch as translation
 	from jinja2 import Environment
 	from jinja2 import FileSystemLoader
 	from jinja2 import TemplateNotFound
-	template_dirs = [
-		os.path.dirname(__file__),
-		os.path.join(os.path.dirname(__file__), 'views'),
-		os.path.join(os.path.dirname(__file__), '..'),
-		os.path.join(os.path.dirname(__file__), '../views')]
 	env = Environment(
 		loader = FileSystemLoader(template_dirs),
 		extensions=['jinja2.ext.i18n'])
@@ -40,6 +28,14 @@ class RequestHandler(webapp.RequestHandler):
 	CurrentTheme = None
 	CurrentLanguage = None
 	AppConfig = None
+
+	def get_template_directories(self):
+		return [
+			os.path.dirname(__file__),
+			os.path.join(os.path.dirname(__file__), 'views'),
+			os.path.join(os.path.dirname(__file__), '..'),
+			os.path.join(os.path.dirname(__file__), '../views')]
+		
 
 	def raise_http404(self):
 		self.error(404)
@@ -75,8 +71,8 @@ class RequestHandler(webapp.RequestHandler):
 		return templateText # returns the rendered template
 
 	def render2(self, template_name=""):
-		self.Model.update({"masterTemplate": self.MasterTemplate}) # Includes the path of the MasterTemplate in he model
-		self.response.out.write(render(template_name, self.Model))
+		self.Model.update({"masterTemplate": self.MasterTemplate2}) # Includes the path of the MasterTemplate in he model
+		self.response.out.write(render(template_name, self.Model, self.get_template_directories()))
 
 	def requestLogin(self, comeback=None):
 		self.redirect("/Login?comeback=%s" % comeback)

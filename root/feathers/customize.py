@@ -18,6 +18,7 @@ def URLMappings():
 		('/Themes', ViewThemes),
 		('/Themes/Select', ThemeSelect),
 		(r'/Themes/Theme/Edit/(.*)', ThemeEditWithImageUpload),
+		( '/Themes/Upload', ThemeUploadNew),
 		(r'/Themes/Theme/BackgroundImage/(.*)', ThemeBackgroundImage),
 		(r'/Themes/Theme/BackgroundImageInfo/(.*)', ThemeBackgroundImageInfo),
 		(r'/Themes/Theme/Stylesheet/(.*)', ThemeStylesheet),
@@ -219,6 +220,31 @@ class ThemeEditWithImageUpload(webapp.RequestHandler):
 					})
 				self.TemplateBaseFolder = os.path.dirname(__file__)
 				self.render2("views/customize-themeEdit.html")
+
+
+class ThemeUploadNew(webapp.RequestHandler):
+	def post(self):
+		from django.utils import simplejson
+		onRequest(self)
+		if self.CurrentMember:
+			imageData = self.request.get('photoupload')
+			if imageData:
+				image = images.Image(imageData)
+				if image:
+					theme = Theme()
+					theme.BackgroundImage = db.Blob(imageData)
+					theme.SubmitedBy = self.CurrentMember
+					theme.isSharedWithEveryone = True
+					theme.put()
+					result = {"result":"success", "size":_("Image received (%s x %s)!") % (image.width, image.height)}
+				else:
+					result = {"result":"failed", "error":_("This file was not a recognized image")}
+			else:
+				result = {"result":"failed", "error":_("No file data was received")}
+		else:
+			result = {"result":"failed", "error":_("You must be logged-in to upload an image.(%s)" % self.debug)}
+		self.response.out.write("%s" % simplejson.dumps(result))
+
 
 class ThemeBackgroundImageInfo(webapp.RequestHandler):
 	def get(self, key):

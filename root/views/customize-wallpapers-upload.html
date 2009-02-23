@@ -1,0 +1,122 @@
+{% extends "template-customize.html" %}
+{% import 'wrook-macros.html' as wrook %}
+{% set subSection = "wallpapers" %}
+{% block htmlHead %}
+	<script type="text/javascript" src="/scripts/mootools/mootools-1.2.1-core-yc.js"></script>
+	<script type="text/javascript" src="/scripts/fancyupload/source/Swiff.Uploader.js"></script>
+	<script type="text/javascript" src="/scripts/fancyupload/source/Fx.ProgressBar.js"></script>
+	<script type="text/javascript" src="/scripts/fancyupload/source/FancyUpload2.js"></script>
+	
+	<script type="text/javascript" charset="utf-8">
+	
+	window.addEvent('load', function() {
+	
+		var swiffy = new FancyUpload2($('demo-status'), $('demo-list'), {
+			url: $('form-demo').action,
+			fieldName: 'photoupload',
+			path: '/scripts/fancyupload/source/Swiff.Uploader.swf',
+			limitSize: 2 * 1024 * 1024, // 2Mb
+			onLoad: function() {
+				$('demo-status').removeClass('hide');
+				$('demo-fallback').destroy();
+			},
+			// The changed parts!
+			debug: false, // enable logs, uses console.log
+			target: 'demo-browse' // the element for the overlay (Flash 10 only)
+		});
+	
+		/**
+		 * Various interactions
+		 */
+	
+		$('demo-browse').addEvent('click', function() {
+			/**
+			 * Doesn't work anymore with Flash 10: swiffy.browse();
+			 * FancyUpload moves the Flash movie as overlay over the link.
+			 * (see opeion "target" above)
+			 */
+			swiffy.browse();
+			return false;
+		});
+	
+		/**
+		 * The *NEW* way to set the typeFilter, since Flash 10 does not call
+		 * swiffy.browse(), we need to change the type manually before the browse-click.
+		 */
+		$('demo-select-images').addEvent('change', function() {
+			var filter = null;
+			if (this.checked) {
+				filter = {'Images (*.jpg, *.jpeg, *.gif, *.png)': '*.jpg; *.jpeg; *.gif; *.png'};
+			}
+			swiffy.options.typeFilter = filter;
+		});
+	
+		$('demo-clear').addEvent('click', function() {
+			swiffy.removeFile();
+			return false;
+		});
+	
+		$('demo-upload').addEvent('click', function() {
+			swiffy.upload();
+			return false;
+		});
+	
+	});
+	
+	</script>
+{% endblock %}
+	
+
+{% block content %}
+
+	<h2>Upload your wallpapers</h2>
+	
+	
+	<link rel="stylesheet" href="/scripts/fancyupload/showcase/photoqueue/style.css" type="text/css" media="screen" charset="utf-8">
+	<form action="/Themes/Upload?username={{ currentMember.Username }}&credentialsHash={{ currentMember.Password }}" method="post" enctype="multipart/form-data" id="form-demo">
+		<fieldset id="demo-fallback">
+			<p>
+				Selected your photo to upload.<br />
+				<strong>This form is just an example fallback for the unobtrusive behaviour of FancyUpload.</strong>
+			</p>
+			<label for="demo-photoupload">
+				Upload Photos:
+				<input type="file" name="photoupload" id="demo-photoupload" />
+			</label>
+			<input type="submit" name="submit" />
+		</fieldset>
+	
+		<div id="demo-status" class="hide">
+			<p>
+				<a href="#" id="demo-browse"><strong style="font-size: 1.5em">Browse Files</strong></a> |
+				<a href="#" id="demo-clear">Clear List</a> |
+				<button href="#" id="demo-upload"><span>Start Upload</span></button>
+				
+				<input style="display:none" type="checkbox" checked="checked" id="demo-select-images" />
+			</p>
+			<div>
+				<strong class="overall-title">Overall progress</strong><br />
+				<img src="/scripts/fancyupload/assets/progress-bar/bar.gif" class="progress overall-progress" />
+			</div>
+			<div>
+				<strong class="current-title">File Progress</strong><br />
+				<img src="/scripts/fancyupload/assets/progress-bar/bar.gif" class="progress current-progress" />
+			</div>
+			<div class="current-text"></div>
+		</div>
+	
+		<ul id="demo-list"></ul>
+	
+	</form>
+
+{% endblock %}
+
+{% block contentBottom %}
+	{% call wrook.calls_to_action() %}
+		<li class="mainLink"><a href="/Customize/Wallpapers">
+			<span class="bullet spriteIcons icon-main-link"></span><span>{% trans %}Back{% endtrans %}</span></a>
+		</li>
+	{% endcall %}
+{% endblock %}
+
+

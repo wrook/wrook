@@ -1,4 +1,4 @@
-﻿#!python
+#!python
 # coding=UTF-8
 
 """
@@ -68,13 +68,19 @@ def loginFromCookies(requestHandler):
 	Get the currently authentified member from the encrypted credentials in the cookies.
 	"""
 	# Get the member either from his username or email address
+	method = "cookie"
 	member = getMemberFromCredentials(requestHandler.request.cookies.get('username', ''))
+	if not member and requestHandler.request.get('username'):
+		method = "post"
+		member = getMemberFromCredentials(requestHandler.request.get('username'));
 	if member:
 		# If the encrypted password match with the cookie, the login is considered successfull
-		if requestHandler.request.cookies.get('credentialsHash', '') == member.Password:
-			return member
+		if method=="cookie":
+			if requestHandler.request.cookies.get('credentialsHash', '') == member.Password: return member
+		else:
+			if requestHandler.request.get('credentialsHash') == member.Password: return member
 	# If not succeeded, clear the invalid cookie
-	logout(requestHandler)
+	if method=="cookie": logout(requestHandler)
 	return None
 
 class LoginResult():
@@ -646,6 +652,7 @@ class ProfilePhotoImage(webapp.RequestHandler):
 
 class Join(webapp.RequestHandler):
 	def get(self, key):
+		import app
 		onRequest(self)
 		if self.CurrentMember:
 			self.redirect("/") # Refactor: This special case should be handled: "Accept invite while being already logged in"
@@ -653,17 +660,19 @@ class Join(webapp.RequestHandler):
 			if key: invite = Invite.get(key)
 			else: invite = Invite()
 			self.Model.update({
+				"wrookAdmin": app.getWrookAdmin(),
 				"invite": invite,
 				"email": invite.Email.strip().lower(),
 				"firstname": invite.Firstname.strip(),
 				"lastname": invite.Lastname.strip()
 				})
-			self.render('views/join.html')
+			self.render2('views/join.html')
 	
 	def post(self, key): #TODO: Refactor -  This handler should be moved to the membership module and actuel business logic should be in separate methods
+		import app
 		onRequest(self)
 		if key: invite = Invite.get(key)
-		else: invite = Invite()
+		else: invite = None
 		username = self.request.get("Username").strip().lower() #TODO: Stripping and lowercasing should also be in the class logic
 		email = self.request.get("Email").strip().lower() #TODO: Stripping and lowercasing should also be in the class logic
 		firstname = self.request.get("Firstname").strip()
@@ -683,6 +692,16 @@ class Join(webapp.RequestHandler):
 		elif (getMemberFromCredentials(username)): #TODO: Refactor -  This constraint should be built into the Member entity
 			isValid = False
 			error = _("This username address is already used by another member")
+
+		# If no admin is setup and the email matches the one in the config. Gite admin rights
+		admin = app.getWrookAdmin()
+		if not admin:
+			isNewAdmin = True
+			wrookAppConfig = app.getWrookAppConfig(flushCache=True)
+			if (wrookAppConfig.SiteAdminEmail.lower() != email):
+				isValid = False
+				error = _("The email address provided does not match the site administrator email provided during the initial setup.")
+
 		if (not isValid):
 			self.Model.update({
 				'username': username,
@@ -693,7 +712,7 @@ class Join(webapp.RequestHandler):
 				'preferedLanguage': preferedLanguage,
 				'error': error
 				})
-			self.render("views/join.html")
+			self.render2("views/join.html")
 		else:
 			member = Member(
 				Username = username,
@@ -705,14 +724,21 @@ class Join(webapp.RequestHandler):
 				)
 			member.Firstname = firstname
 			member.Lastname = lastname
-			# attribute assignation is repeated for them to be catched by the searchable model
-			member.save()
-			member.resetPassword(self.AppConfig.EncryptionKey)
+
+			if isNewAdmin:
+				member.isAdmin = True
+				member.save() # attribute assignation is repeated for them to be catched by the searchable model
+				member.setPassword(email, self.AppConfig.EncryptionKey)
+			else:
+				member.save() # attribute assignation is repeated for them to be catched by the searchable model
+				member.resetPassword(self.AppConfig.EncryptionKey)
+
 			if invite:
 				invite.AcceptedMember = member
 				invite.Status = "accepted"
 				invite.WhenAccepted = datetime.datetime.now()
 				invite.put()
+
 			self.redirect("/ResetPassword/%s" % member.key())
 
 
@@ -771,7 +797,7 @@ class PasswordSent(webapp.RequestHandler):
 		member = Member.get(key)
 		if member:
 			self.Model.update({"member": member})
-			self.render('views/passwordSent.html')
+			self.render2('views/passwordSent.html')
 		else: self.error(404)
 
 class ResetPassword(webapp.RequestHandler):

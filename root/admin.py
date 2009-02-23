@@ -1,7 +1,14 @@
 #!python
 # coding=UTF-8
 
+#Django imports
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+from django.utils import translation
+from django.utils.translation import gettext as _
+from django.conf import settings
 
+from google.appengine.ext.db import djangoforms
 from google.appengine.ext import db
 from google.appengine.api import memcache
 
@@ -96,9 +103,65 @@ class set_default_theme(webapp.RequestHandler):
 		else: self.requestLogin()
 
 
+
+class SetupForm(djangoforms.ModelForm):
+	'''
+	Form used to do the initial setup
+	'''
+	class Meta:
+		import app
+		model = app.WrookAppConfig
+		fields = (
+			"SiteName",
+			"SiteTagline",
+			"SiteDescription",
+			"SiteAdminEmail",
+			"SiteAdminName",
+			"EncryptionKey"
+			)
+
+
+class handler_setup(webapp.RequestHandler):
+	def get(self):
+		import app
+		onRequest(self, isSetup=True)
+		wrookAppConfig = app.getWrookAppConfig(flushCache=True, createIfNone=True)
+		form = SetupForm(instance=wrookAppConfig)
+		self.Model.update({
+			"form": form
+			})
+		self.render2("views/setup.html")
+	
+	def post(self):
+		import app
+		onRequest(self, isSetup=True)
+		wrookAppConfig = app.getWrookAppConfig(flushCache=True, createIfNone=True)
+
+		form = SetupForm(data=self.request.POST, instance=wrookAppConfig)
+		if form.is_valid():
+			# Save the form, and redirect to the view page
+			entity = form.save(commit=False)
+			entity.SetupComplete = True
+			entity.put()
+			wrookAppConfig = app.getWrookAppConfig(flushCache=True, createIfNone=True)
+			self.redirect("/admin/setup/complete")
+		else:
+			self.Model.update({
+				"form": form
+				})
+			self.render2("views/setup.html")
+
+class handler_setup_complete(webapp.RequestHandler):
+	def get(self):
+		onRequest(self, isSetup=True)
+		self.render2("views/setup-complete.html")
+
+
 def URLMappings():
 	return [
 		( '/SetDefaultTheme', set_default_theme),
 		( '/Admin/Commands', AdminCommands), # Refactor: move to an admin module?
 		(r'/Admin/Commands/(.*)', AdminCommands), # Refactor: move to an admin module?
-		( '/Test', Test)] # Refactor: move to an admin module?
+		( '/Test', Test), # Refactor: move to an admin module?
+		(r'/admin/setup', handler_setup),
+		(r'/admin/setup/complete', handler_setup_complete)]

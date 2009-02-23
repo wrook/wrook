@@ -2,16 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		{% include templateStylesheets %}
-		<script type="text/javascript" src="/scripts/jquery/jquery-1.2.6.min.js"></script>
-		<title>Wrook: {% block pageTitle %}Readers, Writers, Words{% endblock %}</title>
-		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-		<meta http-equiv="pragma" content="no-cache" />
+		{% include "scripts-head.html" %}
+		{% include "meta.html" %}
 		{% if currentMember %}
 			<meta name="wrook.username" content="{{ currentMember.Username }}" />
 		{% endif %}
-{% block htmlHead %}{% endblock %}
+		<title>Wrook: {% block pageTitle %}Readers, Writers, Words{% endblock %}</title>
+		{% block htmlHead %}{% endblock %}
 	</head>
-	<body id="page-{% block pageId %}none{% endblock %}">
+	<body id="page-{% block pageId %}none{% endblock %}" style="border: 20px solid #000;">
 		{% if currentTheme %}
 			<div id="wallpaper">
 				<div id="shadow"></div>
