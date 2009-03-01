@@ -1,7 +1,11 @@
 #!python
 # coding=UTF-8
 
-#Django imports
+#TODO: Refactor.... dependencies on app should be removed
+import app
+import pew.addons as addons
+
+#Django imports for localization
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from django.utils import translation
@@ -12,26 +16,74 @@ from google.appengine.ext.db import djangoforms
 from google.appengine.ext import db
 from google.appengine.api import memcache
 
-from feathers import webapp, customize
+class AdminModule(addons.Addon):
+
+	def init(self):
+		self.meta = {
+			"uri": "pew://admin.modules.wrook.org",
+			"version": "1.0",
+			"name": "Admin module",
+			"description": "",
+			"author": "Mathieu Sylvain",
+			"homepage": "http://www.wrook.org",
+			"optionsHelp": "",
+			"description": "Administration console for wrook."
+			}
+
+		self.mappings = [
+			( 'pew://navigation.wrook.org/main-menu', insert_link_in_main_menu),
+			( 'wsgi:/SetDefaultTheme', set_default_theme),
+			( 'wsgi:/admin/commands', AdminCommands), # Refactor: move to an admin module?
+			(r'wsgi:/admin/commands/(.*)', AdminCommands), # Refactor: move to an admin module?
+			( 'wsgi:/Test', Test),
+			(r'wsgi:/admin', handler_admin),
+			(r'wsgi:/admin/setup', handler_setup),
+			(r'wsgi:/admin/setup/complete', handler_setup_complete)
+			]
+
+
+class insert_link_in_main_menu(addons.Handler):
+	meta = {
+		"title": "Insert link in main menu",
+		"description": "Insert a link in the main menu pointing to the admin panel home"
+		}
+	def call(self, params=None, context=None):
+		request = context
+		if request.CurrentMember:
+			if request.CurrentMember.isAdmin:
+				return {
+					"id": "mainMenu-Admin",
+					"label": _("Admin"),
+					"url": "/admin",
+					"isSecondary": True
+					}
+
+
+#TODO: Refactor.... this should not need to be in this modules
+class RequestHandler(app.RequestHandler):
+
+	def get_template_directories(self):
+		import os
+		dirs = super(RequestHandler, self).get_template_directories()
+		dirs += [os.path.join(os.path.dirname(__file__), "views")]
+		return dirs
 
 class CommandResult(db.Model):
+	"""
+	Result data from an admin command
+	"""
 	ErrorCode = db.IntegerProperty(default="0") # 0 = no errors
 	Message = db.TextProperty(default="")
 
-class Command(db.Model):
-	Title = db.StringProperty(default="")
-	Description = db.TextProperty(default="")
-	Code = db.TextProperty(default="")
-
-class AdminCommands(webapp.RequestHandler):
+class AdminCommands(RequestHandler):
 	def get(self):
-		onRequest(self)
+		self.onRequest()
 #		if self.CurrentMember:
-		self.render('views/admin-commands.html')
+		self.render('admin-commands.html')
 #		else: self.requestLogin()
-	
+
 	def post(self, key):
-		onRequest(self)
+		self.onRequest()
 #		if self.CurrentMember:
 		if (key == "doDefaultAllBookStatus"):
 			operationResults = self.doDefaultAllBookStatus()
@@ -44,7 +96,7 @@ class AdminCommands(webapp.RequestHandler):
 		else:
 			operationResults = CommandResult(ErrorCode=1, Message=_("No commands have been processed. Missing parameters!"))
 		self.Model.update({"operationResults": operationResults})
-		self.render('views/admin-commands.html')
+		self.render('admin-commands.html')
 #		else: self.requestLogin()
 	
 	def doDefaultAllBookStatus(self):
@@ -77,16 +129,39 @@ class AdminCommands(webapp.RequestHandler):
 		result = CommandResult(ErrorCode=0, Message=_("All chapter numbers have been reseted to 0!"))
 		return result
 
-class Test(webapp.RequestHandler):
+class insert_admin_menu(addons.Handler):
+	meta = {
+		"title": "Insert admin menu",
+		"description": "Insert menu items for the admin section.",
+		"uri": "/insert_admin_menu"
+		}
+
+	def get(self):
+		html = self.addon.render("panels-aboutWrook2.html", self.get_template_directories())
+		return html
+
+	#TODO: Refactor... duplicate in the request handler		
+	def get_template_directories(self):
+		import os
+		dirs = []
+		dirs += [os.path.join(os.path.dirname(__file__), "views")]
+		return dirs
+
+
+class Test(RequestHandler):
 	def get(self):
 		import _runtest
 		self.response.out.write(_runtest.getTestResults())
 
-class set_default_theme(webapp.RequestHandler): 
+class set_default_theme(RequestHandler): 
+	meta = {
+		"title": "Set default theme",
+		"description": "Service page to sets the default theme for the the whole site."
+		}
 	#TODO: Refactor -  Move back to the Customize module
 	def get(self):
-		import app
-		onRequest(self)
+		from feathers import customize
+		self.onRequest()
 		if self.CurrentMember:
 			theme = customize.Theme.get(self.request.get("selectedTheme"))
 			if theme and self.CurrentMember.isAdmin:
@@ -109,7 +184,6 @@ class SetupForm(djangoforms.ModelForm):
 	Form used to do the initial setup
 	'''
 	class Meta:
-		import app
 		model = app.WrookAppConfig
 		fields = (
 			"SiteName",
@@ -121,20 +195,36 @@ class SetupForm(djangoforms.ModelForm):
 			)
 
 
-class handler_setup(webapp.RequestHandler):
+
+class handler_admin(RequestHandler):
+	meta = {
+		"title": "Admin home",
+		"description": "Home of the administrative console.",
+		"url": "/admin"
+		}
 	def get(self):
-		import app
-		onRequest(self, isSetup=True)
+		self.onRequest(isSetup=True)
+		self.Model.update({
+			})
+		self.render("home.html")
+
+class handler_setup(RequestHandler):
+	meta = {
+		"title": "Setup",
+		"description": "Basic setup screen for the site.",
+		"url": "/admin/setup"
+		}
+	def get(self):
+		self.onRequest(isSetup=True)
 		wrookAppConfig = app.getWrookAppConfig(flushCache=True, createIfNone=True)
 		form = SetupForm(instance=wrookAppConfig)
 		self.Model.update({
 			"form": form
 			})
-		self.render2("views/setup.html")
+		self.render("setup.html")
 	
 	def post(self):
-		import app
-		onRequest(self, isSetup=True)
+		self.onRequest(isSetup=True)
 		wrookAppConfig = app.getWrookAppConfig(flushCache=True, createIfNone=True)
 
 		form = SetupForm(data=self.request.POST, instance=wrookAppConfig)
@@ -149,19 +239,16 @@ class handler_setup(webapp.RequestHandler):
 			self.Model.update({
 				"form": form
 				})
-			self.render2("views/setup.html")
+			self.render("setup.html")
 
-class handler_setup_complete(webapp.RequestHandler):
+class handler_setup_complete(RequestHandler):
+	meta = {
+		"title": "Setup completed",
+		"description": "Page shown once setup has been completed.",
+		"url": "/admin/setup/complete"
+		}
 	def get(self):
-		onRequest(self, isSetup=True)
-		self.render2("views/setup-complete.html")
+		self.onRequest(isSetup=True)
+		self.render("setup-complete.html")
 
 
-def URLMappings():
-	return [
-		( '/SetDefaultTheme', set_default_theme),
-		( '/Admin/Commands', AdminCommands), # Refactor: move to an admin module?
-		(r'/Admin/Commands/(.*)', AdminCommands), # Refactor: move to an admin module?
-		( '/Test', Test), # Refactor: move to an admin module?
-		(r'/admin/setup', handler_setup),
-		(r'/admin/setup/complete', handler_setup_complete)]

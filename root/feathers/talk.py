@@ -11,9 +11,9 @@ from google.appengine.ext.webapp import template
 from django.utils import translation
 from django.utils.translation import gettext as _
 
-import webapp
-import membership
-import cachetree
+from feathers import webapp
+from feathers import membership
+from feathers import cachetree
 
 import logging
 

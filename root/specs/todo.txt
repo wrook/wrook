@@ -1,3 +1,11 @@
+URGENT : Bring back the commit batch file from git
+
+- Setup spriting in the build process
+- Setup Smushing of images in the build process
+- Setup a global "environment-" variable (debug/dev/qa/staging/prod)
+- Create a object grid sheet for whole project (object oriented front-end)
+- Build a presentable public roadmap (review existing roadmaps before)
+
 
 - Only load module with ID's
 - Provide pew methods for providing a list of addon to activate

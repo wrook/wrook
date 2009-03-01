@@ -48,5 +48,5 @@ $(document).ready(function(){
 	
 {% endblock %}
 {% block sidebar %}
-	{% include "panels-aboutWrook2.html" %}
+	{{ addons("pew://login.membership.module.wrook.org/sidebar").get() }}
 {% endblock %}

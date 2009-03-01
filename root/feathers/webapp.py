@@ -17,7 +17,9 @@ def render(template_name, model, template_dirs=[]):
 	env.install_gettext_translations(translation)
 	try: template = env.get_template(template_name)
 	except TemplateNotFound: raise TemplateNotFound(template_name)
-	return template.render(model)
+	result = template.render(model)
+	return result
+
 
 class RequestHandler(webapp.RequestHandler):
 	Model = {}
@@ -71,7 +73,7 @@ class RequestHandler(webapp.RequestHandler):
 		return templateText # returns the rendered template
 
 	def render2(self, template_name=""):
-		self.Model.update({"masterTemplate": self.MasterTemplate2}) # Includes the path of the MasterTemplate in he model
+		self.Model.update({"masterTemplate": self.MasterTemplate}) # Includes the path of the MasterTemplate in he model
 		self.response.out.write(render(template_name, self.Model, self.get_template_directories()))
 
 	def requestLogin(self, comeback=None):

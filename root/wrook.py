@@ -1,13 +1,8 @@
-﻿#!python
+#!python
 # coding=UTF-8
 '''
 Wrook's main module
 '''
-
-import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
-from django.conf import settings
-
 
 #Feathers imports
 from feathers import stories
@@ -16,46 +11,35 @@ from feathers import customize
 from feathers import membership
 from feathers import proforma
 from feathers import talk
-from feathers import webapp
+from feathers import webapp # Still necessary here for the exception handling class
 
-#Wrook modules
+#Import static wrook modules
 import app
-#import about - is now dynamically loaded
-import wrookStories
-import admin
 import books
 import members
 
-#application = None
-
 def hook_modules(URLMappings):
-	#TODO:Figure out a better way of integrating modules
-	# Integrate the about module
-#	URLMappings += about.URLMappings()
-	# Integrate the admin module
-	URLMappings += admin.URLMappings()
-	admin.onRequest = app.onRequest
 	# Integrate the admin module
 	URLMappings += books.URLMappings()
-	books.onRequest = app.onRequest
+	books.onRequest = app.RequestHandler.onRequest
 	# Integrate the stories module
 	URLMappings += stories.URLMappings()
-	stories.onRequest = app.onRequest
+	stories.onRequest = app.RequestHandler.onRequest
 	# Integrates the Customize module
 	URLMappings += customize.URLMappings()
-	customize.onRequest = app.onRequest
+	customize.onRequest = app.RequestHandler.onRequest
 	# Integrates the Membership module
 	URLMappings += membership.URLMappings()
-	membership.onRequest = app.onRequest
+	membership.onRequest = app.RequestHandler.onRequest
 	# Integrates the Membership module
 	URLMappings += proforma.URLMappings()
-	proforma.onRequest = app.onRequest
+	proforma.onRequest = app.RequestHandler.onRequest
 	# Integrate the Talk module
 	URLMappings += talk.URLMappings()
-	talk.onRequest = app.onRequest
+	talk.onRequest = app.RequestHandler.onRequest
 	# Integrate the Members module
 	URLMappings += members.URLMappings()
-	members.onRequest = app.onRequest
+	#members.onRequest = app.RequestHandler.onRequest
 	webapp.RequestHandler.handle_exception = app.handle_exception
 	# Integrate the main App module
 	URLMappings += app.URLMappings()
@@ -102,7 +86,6 @@ def profile_html_main():
 	This is the main function for profiling to the html output
 	'''
 	import cProfile, pstats
-
 	application = start_application()
 	prof = cProfile.Profile()
 	prof = prof.runctx("real_main()", globals(), locals())
@@ -132,26 +115,29 @@ def profile_firepython_main():
 	logging.info("Profile data:\n%s", stream.getvalue())
 
 def start_application():
+	'''
+	Instanciate the application object and its addons
+	'''
+	import os
 	import pew.addons
 	URLMappings = hook_modules([])
+	# Load addons from the modules and plugins folders
 	addons = pew.addons.Addons()
 	addons.baseFolder = os.path.dirname(__file__)
 	addons.load("modules")
 	addons.load("plugins")
-	application = app.Application(URLMappings, debug=False, addons=addons)
-#	application = app.Application(URLMappings, debug=False)
-#	application.addons = addons
-#	application.addons()
-	return application
 	# Instantiate the main application
+	application = app.Application(URLMappings, debug=False, addons=addons)
+	return application
 
 
 
 def run(application):
+	'''
+	Run the application with the google webap utility
+	'''
 	from google.appengine.ext.webapp import util
 	util.run_wsgi_app(application)
-
-
 
 main = real_main
 #main = firepython_main

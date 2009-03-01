@@ -45,7 +45,7 @@
             <key>.html</key>
             <string>views\about-who.html</string>
             <key>.js</key>
-            <string>scripts\main.js</string>
+            <string>diff_match_patch\diff_match_patch_uncompressed.js</string>
             <key>.py</key>
             <string>feathers\customize.py</string>
             <key>404</key>
@@ -58,17 +58,31 @@
             <string>books.py</string>
             <key>BOOKS.</key>
             <string>books.py</string>
+            <key>CUSTOM</key>
+            <string>feathers\customize.py</string>
+            <key>MembersProfile-About.html</key>
+            <string>views\MembersProfile-About.html</string>
+            <key>MembersProfile.html</key>
+            <string>views\MembersProfile.html</string>
+            <key>SCRIPT</key>
+            <string>views\scripts.html</string>
             <key>STYLE</key>
             <string>views\stylesheets.html</string>
+            <key>WEBAPP</key>
+            <string>feathers\webapp.py</string>
             <key>about</key>
             <string>modules\about\about.py</string>
             <key>aboutw</key>
             <string>views\panels-aboutWrook.html</string>
             <key>account</key>
             <string>views\viewAccount.html</string>
+            <key>addon</key>
+            <string>pew\addons.py</string>
             <key>addons</key>
             <string>modules\plugins\views\addons.html</string>
             <key>admin</key>
+            <string>modules\admin\admin.py</string>
+            <key>admin.py</key>
             <string>admin.py</string>
             <key>analy</key>
             <string>views\analytics.html</string>
@@ -257,7 +271,7 @@
             <key>halfb</key>
             <string>views\about-halfBakedEdition.html</string>
             <key>home</key>
-            <string>views\visitorHome.html</string>
+            <string>modules\admin\views\home.html</string>
             <key>http</key>
             <string>views\http404.html</string>
             <key>http5</key>
@@ -295,7 +309,7 @@
             <key>logi</key>
             <string>views\login.html</string>
             <key>login</key>
-            <string>views\login-already.html</string>
+            <string>views\login.html</string>
             <key>login.h</key>
             <string>views\login.html</string>
             <key>macr</key>
@@ -303,7 +317,7 @@
             <key>macro</key>
             <string>views\wrook-macros.html</string>
             <key>macros</key>
-            <string>views\customize-macros.html</string>
+            <string>views\member-macros.html</string>
             <key>main</key>
             <string>scripts\main.js</string>
             <key>main-</key>
@@ -381,7 +395,7 @@
             <key>memberpr</key>
             <string>views\MembersProfile.html</string>
             <key>members</key>
-            <string>feathers\membership.py</string>
+            <string>members.py</string>
             <key>members-</key>
             <string>views\members-neighborhood.html</string>
             <key>members-b</key>
@@ -422,6 +436,8 @@
             <string>members.py</string>
             <key>memoiz</key>
             <string>memoize.py</string>
+            <key>meta</key>
+            <string>views\meta.html</string>
             <key>new</key>
             <string>views\newChapter.html</string>
             <key>newme</key>
@@ -536,6 +552,8 @@
             <string>feathers\views\talk-script-topicForm.js</string>
             <key>scripts</key>
             <string>feathers\views\scripts.html</string>
+            <key>scripts-head.html</key>
+            <string>views\scripts-head.html</string>
             <key>section</key>
             <string>views\section-bookInfo.html</string>
             <key>section-bookInfo.html</key>
@@ -561,7 +579,7 @@
             <key>sideb</key>
             <string>views\template-main-nosidebar2.html</string>
             <key>sideba</key>
-            <string>views\books-view-sidebar.html</string>
+            <string>views\template-main-nosidebar2.html</string>
             <key>sidebar</key>
             <string>views\template-main-nosidebar2.html</string>
             <key>ski</key>
@@ -595,6 +613,8 @@
             <key>style</key>
             <string>views\stylesheets.html</string>
             <key>styles</key>
+            <string>views\stylesheets.html</string>
+            <key>stylesheets.html</key>
             <string>views\stylesheets.html</string>
             <key>sugges</key>
             <string>views\member-suggestions.html</string>
@@ -684,6 +704,8 @@
             <string>views\template-main.html</string>
             <key>template-main-e2</key>
             <string>views\template-main-e2.html</string>
+            <key>template-main-e2.html</key>
+            <string>views\template-main-e2.html</string>
             <key>template-main-wide.html</key>
             <string>views\template-main-wide.html</string>
             <key>template-pro</key>
@@ -693,6 +715,8 @@
             <key>template-profil</key>
             <string>views\template-profile2.html</string>
             <key>template-profile</key>
+            <string>views\template-profile2.html</string>
+            <key>template-profile2</key>
             <string>views\template-profile2.html</string>
             <key>template-profile2.</key>
             <string>views\template-profile2.html</string>

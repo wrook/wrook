@@ -1,0 +1,134 @@
+{% extends "template-main-e2.html" %}
+{% block title %}
+	<h1>
+		{% trans %}Administration{% endtrans %}
+	</h1>
+{% endblock %}
+{% block content %}
+<style>
+
+#adminMenu {
+	width: 200px;
+	float: right;
+	position: relative;
+	top: -13px;
+	left: 15px;
+}
+
+.accordionMenu ul,
+.accordionMenu ul ul {
+	list-style-type:none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+.accordionMenu ul ul {
+	display: none;
+}
+.accordionMenu ul a {
+	display: block;
+	text-decoration: none;
+	-moz-border-radius: 0px 5px 5px 0px;
+	font-size: 1.2em;
+	border-left: 5px solid #000;
+}
+
+.accordionMenu ul li {
+	list-style-type:none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.accordionMenu ul li a {
+	background: #333;
+	color: #fff;	
+	padding: 5px 10px;
+}
+
+.accordionMenu ul li a:hover {
+	background: #000;
+}
+
+.accordionMenu ul ul li a:link,
+.accordionMenu ul ul li a:visited {
+	background: #ccc;
+	border-left: 5px solid #aaa;
+	color: #000;
+	font-size: 1em;
+	pading: 5px 10px;
+}
+
+.accordionMenu ul li ul li a:hover {
+	background: #999;
+	border-left: 5px solid #777;
+	color: #000;
+}
+
+</style>
+	
+	<div id="adminMenu" class="accordionMenu">
+		<ul>
+			<li>
+				<a href="#">Overview</a>
+				<ul>
+					<li>
+						<a href="/admin">Overview</a>
+					</li>
+					<li>
+						<a href="/admin/setup">Basic setup</a>
+					</li>
+				</ul>
+			</li>
+			{% set menuItems=addons("pew://admin.wrook.org/menu").call() %}
+			{% if menuItems %}
+				{% for item in menuItems %}
+					{% if item %}
+					<li>
+						<a
+						{% if item.get("url") %}
+							href="{{ item.get("url") }}"
+						{% else %}
+							href="#"
+						{% endif %}
+						>{{ item.get("label") }}</a>
+						{% if item.get("items") %}
+							<ul>
+								{% for subItem in item.get("items") %}
+									<li><a href="{{ subItem.get("url") }}">{{ subItem.get("label") }}</a></li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+					</li>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</ul>
+	</div>
+<script type="text/javascript">
+
+$j(document).ready(function() {
+	$j('.accordionMenu a').click(function(e) {
+		var list = $j(this).next();
+		var parentList = $j(this.parentNode.parentNode);
+		if((list.is('ul')) && (list.is(':visible'))) {
+			list.slideUp('normal');
+			e.preventDefault();
+		}
+		if((list.is('ul')) && (!list.is(':visible'))) {
+			$j('ul:visible', parentList).slideUp('normal');
+			list.slideDown('normal');
+			e.preventDefault();
+		}
+	});
+});
+
+</script>
+
+	<h2>Overview</h2>
+	<p>
+		This administration console lets you manage your book server and all its addons.
+	</p>
+
+<div class="clearfix"></div>
+
+{% endblock %}

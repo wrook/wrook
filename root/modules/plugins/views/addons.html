@@ -29,7 +29,22 @@
 	right: 0px;
 	top: 10px;
 	display: block;
+	font-weight: bold;
 }
+
+span.addonStatus.statusDisabled {
+	color: #999999;
+}
+
+span.addonStatus.statusBroken {
+	color: #FF0000;
+}
+span.addonStatus.statusEnabled {
+	color: #00CC00;
+}
+
+
+
 .toggleNextSibbling {
 	padding: 10px 0px;
 }
@@ -76,6 +91,7 @@
 }
 
 
+
 </style>
 <script>
 $j(document).ready(function(){
@@ -105,9 +121,19 @@ $j(document).ready(function(){
 								</strong>
 								- v{{ addon.meta.get("version") }}
 							</span>
-							<span class="addonStatus">
-								active
-							</span>
+							{% if addon.meta.get("isEnabled")==True %}
+								<span class="addonStatus statusEnabled">
+									ok!
+								</span>
+							{% elif addon.meta.get("isEnabled")==False %}
+								<span class="addonStatus statusDisabled">
+									disabled
+								</span>
+							{% else %}
+								<span class="addonStatus statusBroken">
+									broken
+								</span>
+							{% endif %}
 						</div>
 						<div class="addonInfo">
 							<div class="addonInfo-detailsList addonInfo-meta">

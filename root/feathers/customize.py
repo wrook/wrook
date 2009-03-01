@@ -10,8 +10,9 @@ from google.appengine.api import images, memcache
 from google.appengine.ext import db
 from google.appengine.ext.db import djangoforms
 from django.utils.translation import gettext as _
-from feathers import membership, utils, webapp
-
+from feathers import membership
+from feathers import utils
+import app
 
 def URLMappings():
 	return [
@@ -74,11 +75,22 @@ class Theme(db.Model):
 					self.isTiledImage = True
 				else: self.isTiledImage = False
 		return self.isTiledImage
+
+
+class Moment(db.Model):
+	'''
+	A moment according to the system.
+	
+	Moments define periodes of the year where specific customization of the site occurs
+	These moments can change de default, the palette, special messages to the user
+	'''
+	Title = db.StringProperty()
+	Begins = db.DateTimeProperty()
+	Ends = db.DateTimeProperty()
+	Created = db.DateTimeProperty(auto_now_add=True)
+	isDefault = db.BooleanProperty(default=False)
+	Priority = db.IntegerProperty(required=True, default=0)
 		
-
-def onRequest(request): # Event triggering to let the host application intervene
-	pass
-
 class ThemeMemberSelection(db.Model):
 	WhenSelected = db.DateTimeProperty(auto_now_add=True, verbose_name=_("When selected"))
 	Member = db.ReferenceProperty(membership.Member, collection_name="ThemeSelections", verbose_name=_("Member"))
@@ -89,9 +101,9 @@ class ThemeSimpleForm(djangoforms.ModelForm):
 		model = Theme
 		fields = ('Title', 'Description', "isSharedWithEveryone", "BackgroundColor")
 
-class ThemeMemberSelect(webapp.RequestHandler):
+class ThemeMemberSelect(app.RequestHandler):
 	def get(self, key):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			if key:
 				theme = Theme.get(key)
@@ -107,9 +119,9 @@ class ThemeMemberSelect(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-class ThemeBookSelect(webapp.RequestHandler):
+class ThemeBookSelect(app.RequestHandler):
 	def get(self, themeKey, ):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			if key:
 				theme = Theme.get(key)
@@ -125,9 +137,9 @@ class ThemeBookSelect(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-class ThemeView(webapp.RequestHandler):
+class ThemeView(app.RequestHandler):
 	def get(self, key):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			if key:
 				theme = Theme.get(key)
@@ -144,9 +156,9 @@ class ThemeView(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-class ThemeEdit(webapp.RequestHandler):
+class ThemeEdit(app.RequestHandler):
 	def get(self, key):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			if key == "": theme = Theme(SubmitedBy = self.CurrentMember)
 			else: theme = Theme.get(key) 
@@ -159,7 +171,7 @@ class ThemeEdit(webapp.RequestHandler):
 			self.render2('views/customize-themeEdit.html')
 
 	def post(self, key):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			if key == "": theme = Theme(SubmitedBy = self.CurrentMember)
 			else: theme = Theme.get(key) 
@@ -181,9 +193,9 @@ class ThemeEdit(webapp.RequestHandler):
 				self.TemplateBaseFolder = os.path.dirname(__file__)
 				self.render2("views/customize-themeEdit.html")
 
-class ThemeEditWithImageUpload(webapp.RequestHandler):
+class ThemeEditWithImageUpload(app.RequestHandler):
 	def get(self, key):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			if key == "": theme = Theme(SubmitedBy = self.CurrentMember)
 			else: theme = Theme.get(key) 
@@ -196,7 +208,7 @@ class ThemeEditWithImageUpload(webapp.RequestHandler):
 			self.render2('views/customize-themeEdit.html')
 
 	def post(self, key):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			if key == "": theme = Theme(SubmitedBy = self.CurrentMember)
 			else: theme = Theme.get(key) 
@@ -222,10 +234,10 @@ class ThemeEditWithImageUpload(webapp.RequestHandler):
 				self.render2("views/customize-themeEdit.html")
 
 
-class ThemeUploadNew(webapp.RequestHandler):
+class ThemeUploadNew(app.RequestHandler):
 	def post(self):
 		from django.utils import simplejson
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			imageData = self.request.get('photoupload')
 			if imageData:
@@ -246,7 +258,7 @@ class ThemeUploadNew(webapp.RequestHandler):
 		self.response.out.write("%s" % simplejson.dumps(result))
 
 
-class ThemeBackgroundImageInfo(webapp.RequestHandler):
+class ThemeBackgroundImageInfo(app.RequestHandler):
 	def get(self, key):
 		import getimageinfo
 		theme = db.get(key)
@@ -268,7 +280,7 @@ print pixels[
 
 """
 
-class ThemeBackgroundImage(webapp.RequestHandler):
+class ThemeBackgroundImage(app.RequestHandler):
 	def get(self, key):
 		theme = db.get(key)
 		if theme:
@@ -343,9 +355,9 @@ class ThemeBackgroundImage(webapp.RequestHandler):
 		else:
 			self.error(404)
 
-class ViewThemes(webapp.RequestHandler):
+class ViewThemes(app.RequestHandler):
 	def get(self):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.Model.update({
 				"themes": Theme.all()
@@ -353,9 +365,9 @@ class ViewThemes(webapp.RequestHandler):
 			self.TemplateBaseFolder = os.path.dirname(__file__)
 			self.render2("views/customize-viewThemes.html")
 
-class ThemeSelect(webapp.RequestHandler):
+class ThemeSelect(app.RequestHandler):
 	def get(self):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.Model.update({
 				"themes": Theme.all(),
@@ -365,9 +377,9 @@ class ThemeSelect(webapp.RequestHandler):
 			self.TemplateBaseFolder = os.path.dirname(__file__)
 			self.render("views/customize-selectTheme.html")
 
-class ThemeStylesheet(webapp.RequestHandler):
+class ThemeStylesheet(app.RequestHandler):
 	def get(self, key):
-		onRequest(self)
+		self.onRequest()
 		theme = Theme.get(key)
 		self.Model.update(utils.styleSourceToDict(theme.StyleSource))
 		self.response.headers["Content-Type"] = "text/css"

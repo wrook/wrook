@@ -18,7 +18,10 @@ class AboutPlugin(addons.Addon):
 			"optionsHelp": "",
 			"description": "Series of pages describing what the current site is about."
 			}
+
 		self.mappings = [
+			( "pew://join.membership.module.wrook.org/sidebar", sidebar_panel),
+			( "pew://login.membership.module.wrook.org/sidebar", sidebar_panel),
 			( "pew://visitor.home.module.wrook.org/sidebar", sidebar_panel),
 			( "wsgi:/About/OpenSourceAttribution", open_source_attribution),
 			( "wsgi:/About/OpenSourceLicense", open_source_license),
@@ -35,7 +38,7 @@ class sidebar_panel(addons.Handler):
 		"uri": "/sidebarPane"
 		}
 
-	def get(self):
+	def get(self, params=None, context=None):
 		html = self.addon.render("panels-aboutWrook2.html", self.get_template_directories())
 		return html
 

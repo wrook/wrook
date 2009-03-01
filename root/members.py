@@ -8,6 +8,7 @@
 
 from feathers import webapp
 from feathers import membership
+import app
 
 def URLMappings():
 	return [
@@ -29,10 +30,10 @@ def URLMappings():
 		( '/Suggestions', Suggestions)]
 
 
-class Home(webapp.RequestHandler):
+class Home(app.RequestHandler):
 	def get(self):
 		from google.appengine.api import memcache
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.setVisitedMember(self.CurrentMember)
 			BeginnerBook = []
@@ -51,11 +52,11 @@ class Home(webapp.RequestHandler):
 		else:
 			self.render2('views/visitorHome.html')
 
-class MembersFeedRSS(webapp.RequestHandler):
+class MembersFeedRSS(app.RequestHandler):
 	def get(self, key):
 		import datetime
 		import PyRSS2Gen
-		onRequest(self)
+		self.onRequest()
 		member = membership.Member.get(key)
 		if member:
 			self.setVisitedMember(member)
@@ -81,9 +82,9 @@ class MembersFeedRSS(webapp.RequestHandler):
 			self.response.out.write(rss.to_xml())
 		else: self.error(404)
 
-class MembersFeed(webapp.RequestHandler):
+class MembersFeed(app.RequestHandler):
 	def get(self, key):
-		onRequest(self)
+		self.onRequest()
 		member = membership.Member.get(key)
 		if member:
 			self.setVisitedMember(member)
@@ -94,37 +95,37 @@ class MembersFeed(webapp.RequestHandler):
 			self.render2('views/members-stories.html')
 		else: self.error(404)
 
-class Customize(webapp.RequestHandler):
+class Customize(app.RequestHandler):
 	def get(self):
 		from feathers import customize
 		import books
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.render2("views/customize.html")
 
-class CustomizeWallpapers(webapp.RequestHandler):
+class CustomizeWallpapers(app.RequestHandler):
 	def get(self):
 		from feathers import customize
 		import books
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.Model.update({
 				"latestThemes": customize.Theme.all().order("-Created").fetch(limit=20)
 				})
 			self.render2("views/customize-wallpapers.html")
 
-class CustomizeWallpapersUpload(webapp.RequestHandler):
+class CustomizeWallpapersUpload(app.RequestHandler):
 	def get(self):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.render2("views/customize-wallpapers-upload.html")
 
-class CustomizeWallpapersListJSON(webapp.RequestHandler):
+class CustomizeWallpapersListJSON(app.RequestHandler):
 	def get(self):
 		from feathers import customize
 		from django.utils import simplejson
 		import books
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			offset = int(self.request.get("offset"))
 			limit = int(self.request.get("limit"))
@@ -139,21 +140,24 @@ class CustomizeWallpapersListJSON(webapp.RequestHandler):
 					})
 				self.response.out.write("(%s)" % simplejson.dumps({"wallpapers": wallpapers}))
 
-class Suggestions(webapp.RequestHandler):
+class Suggestions(app.RequestHandler):
 	def get(self):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.setVisitedMember(self.CurrentMember)
 			self.render("views/member-suggestions.html")
 		else: self.requestLogin()
 
-class MembersProfile(webapp.RequestHandler):
+class MembersProfile(app.RequestHandler):
 	def get(self, key):
 		from google.appengine.api import memcache
 		import datetime
-		onRequest(self)
+		self.onRequest()
 		visitedMember = membership.Member.get(key)
+		import logging
 		if visitedMember:
+			logging.info("visitedMember: %s" % visitedMember)
+			logging.info("key: %s" % key)
 			self.setVisitedMember(visitedMember)
 			cacheKey = "wrookMemberPosts-Preview-%s" % visitedMember.key()
 			posts = memcache.get(cacheKey)
@@ -167,10 +171,10 @@ class MembersProfile(webapp.RequestHandler):
 			self.render2('views/MembersProfile.html')
 		else: self.error(404)
 
-class MembersFollow(webapp.RequestHandler):
+class MembersFollow(app.RequestHandler):
 	def get(self, key):
 		from django.utils import simplejson
-		onRequest(self)
+		self.onRequest()
 		member = membership.Member.get(key)
 		if self.CurrentMember!=None and member!=None:
 			newRelationship = self.CurrentMember.start_follower_relationship_with(member)
@@ -188,10 +192,10 @@ class MembersFollow(webapp.RequestHandler):
 				"errorMessage": _("An error occured! Sorry!")
 				}))
 
-class MembersStopFollowing(webapp.RequestHandler):
+class MembersStopFollowing(app.RequestHandler):
 	def get(self, key):
 		from django.utils import simplejson
-		onRequest(self)
+		self.onRequest()
 		member = membership.Member.get(key)
 		if self.CurrentMember!=None and member!=None:
 			result = self.CurrentMember.stop_follower_relationship_with(member)
@@ -217,9 +221,9 @@ def get_search_members(searchCriteria):
 	logging.debug("criteria: %s" % searchCriteria)
 	return membership.Member.all().search(searchCriteria).fetch(limit=40)
 
-class Members(webapp.RequestHandler):
+class Members(app.RequestHandler):
 	def get(self):
-		onRequest(self)
+		self.onRequest()
 		searchCriteria = self.request.get("searchCriteria")
 		if searchCriteria: members = get_search_members(searchCriteria)
 		else: members = get_featured_members()
@@ -228,9 +232,9 @@ class Members(webapp.RequestHandler):
 			'searchCriteria': searchCriteria})
 		self.render2('views/members.html')
 
-class MembersCoversList(webapp.RequestHandler):
+class MembersCoversList(app.RequestHandler):
 	def get(self, key):
-		onRequest(self)
+		self.onRequest()
 		visitedMember = membership.Member.get(key)
 		if visitedMember:
 			self.setVisitedMember(visitedMember)
@@ -245,9 +249,9 @@ class MembersCoversList(webapp.RequestHandler):
 			self.render2('views/members-covers-list.html')
 		else: self.error(404)
 
-class MembersBooksList(webapp.RequestHandler):
+class MembersBooksList(app.RequestHandler):
 	def get(self, key):
-		onRequest(self)
+		self.onRequest()
 		visitedMember = membership.Member.get(key)
 		if visitedMember:
 			self.setVisitedMember(visitedMember)
@@ -262,9 +266,9 @@ class MembersBooksList(webapp.RequestHandler):
 			self.render2('views/members-books-list.html')
 		else: self.error(404)
 
-class MembersBookmarks(webapp.RequestHandler):
+class MembersBookmarks(app.RequestHandler):
 	def get(self, key):
-		onRequest(self)
+		self.onRequest()
 		visitedMember = membership.Member.get(key)
 		if visitedMember:
 			self.setVisitedMember(visitedMember)
@@ -279,9 +283,9 @@ class MembersBookmarks(webapp.RequestHandler):
 			self.render2('views/members-bookmarks-list.html')
 		else: self.error(404)
 
-class MembersNeighborhood(webapp.RequestHandler):
+class MembersNeighborhood(app.RequestHandler):
 	def get(self, key):
-		onRequest(self)
+		self.onRequest()
 		visitedMember = membership.Member.get(key)
 		if visitedMember:
 			self.setVisitedMember(visitedMember)

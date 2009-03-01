@@ -20,7 +20,8 @@ from google.appengine.api import images
 from google.appengine.api import mail
 from google.appengine.api import memcache
 from django.utils.translation import gettext as _
-from feathers import utils, webapp
+from feathers import utils
+import app
 import cookies
 
 # Not used anymore, but kept here as a reminder of how to get the hostname... remove later
@@ -60,6 +61,8 @@ def getMemberFromCredentials(username): # Username or Email
 				member = member[0]
 			else: return False
 	memcache.add(cacheKey, member)
+	import logging
+	logging.info("getMemberFromCredentials(%s)" % username)
 	return member
 
 #Refactor: This should take the username and creds in param.... not the request handler
@@ -90,6 +93,8 @@ class LoginResult():
 		self.ErrorMessage = ErrorMessage
 
 def memberLogin(requestHandler, username, password):
+	import logging
+	logging.info("memberLogin(%s,%s)" % (username, password))
 	member = getMemberFromCredentials(username)
 	if not member:
 		return LoginResult(1, _("Wrong username or bad password."), None)
@@ -97,7 +102,12 @@ def memberLogin(requestHandler, username, password):
 		if not member.Password:
 			return LoginResult(2, _('Your account does not have a password. Use the "Reset password" option to create a new one.'), None)
 		else:
-			if member.Password != member.getEncryptedPassword(password, requestHandler.AppConfig.EncryptionKey):
+			logging.info("encryption key: %s" % requestHandler.AppConfig.EncryptionKey)
+			
+			encrypted_password = member.getEncryptedPassword(password, requestHandler.AppConfig.EncryptionKey)
+			logging.info("submited password: %s" % encrypted_password)
+			logging.info("account  password: %s" % member.Password)
+			if member.Password != encrypted_password:
 				return LoginResult(1, _("Wrong username or bad password."), None)
 	member.login(requestHandler)
 	return LoginResult(0, "", Member)
@@ -146,11 +156,12 @@ class Member(search.SearchableModel):
 	Created = db.DateTimeProperty(auto_now_add=True)
 	isAdmin = db.BooleanProperty(default=False)
 
-	def test(self):
-		return "e".encode()
-
 	# Refactor: This method should be implemented as a setter on the password property
 	def setPassword(self, password, secretEncryptionKey):
+		import logging
+		logging.info("submited password: %s" % password)
+		logging.info("encryption key: %s" % secretEncryptionKey)
+			
 		"""Encrypt and set a new password on the user."""
 		# Store the encrypted password if one is successfully obtained
 		encryptedPassword = self.getEncryptedPassword(password, secretEncryptionKey)
@@ -514,9 +525,9 @@ The Wrook Team
 '''))
 
 
-class Invites(webapp.RequestHandler):
+class Invites(app.RequestHandler):
 	def get(self):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			invites = self.CurrentMember.SentInvites
 			if self.CurrentMember.isAdmin:
@@ -532,9 +543,9 @@ class InviteForm(djangoforms.ModelForm):
 		fields = ("Firstname","Lastname","Email", "PersonalMessage")
 
 
-class InviteEdit(webapp.RequestHandler):
+class InviteEdit(app.RequestHandler):
 	def get(self, key):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			if key: invite = Invite.get(key)
 			else: invite = Invite(FromMember = self.CurrentMember)
@@ -560,7 +571,7 @@ class InviteEdit(webapp.RequestHandler):
 			else: self.error(404)
 	
 	def post(self, key):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			if key: invite = Invite.get(key)
 			else: invite = Invite(FromMember = self.CurrentMember)
@@ -598,9 +609,9 @@ class InviteEdit(webapp.RequestHandler):
 			else: self.error(404)
 
 
-class ProfilePhotoImage(webapp.RequestHandler):
+class ProfilePhotoImage(app.RequestHandler):
 	def get(self, key):
-		onRequest(self)
+		self.onRequest()
 		member = Member.get(key)
 		if member:
 			if member.ProfilePhoto:
@@ -650,10 +661,10 @@ class ProfilePhotoImage(webapp.RequestHandler):
 		else:
 			self.error(404)
 
-class Join(webapp.RequestHandler):
+class Join(app.RequestHandler):
 	def get(self, key):
 		import app
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.redirect("/") # Refactor: This special case should be handled: "Accept invite while being already logged in"
 		else:
@@ -670,7 +681,7 @@ class Join(webapp.RequestHandler):
 	
 	def post(self, key): #TODO: Refactor -  This handler should be moved to the membership module and actuel business logic should be in separate methods
 		import app
-		onRequest(self)
+		self.onRequest()
 		if key: invite = Invite.get(key)
 		else: invite = None
 		username = self.request.get("Username").strip().lower() #TODO: Stripping and lowercasing should also be in the class logic
@@ -729,22 +740,23 @@ class Join(webapp.RequestHandler):
 				member.isAdmin = True
 				member.save() # attribute assignation is repeated for them to be catched by the searchable model
 				member.setPassword(email, self.AppConfig.EncryptionKey)
+				self.redirect("/Login")
 			else:
 				member.save() # attribute assignation is repeated for them to be catched by the searchable model
 				member.resetPassword(self.AppConfig.EncryptionKey)
+				self.redirect("/ResetPassword/%s" % member.key())
 
-			if invite:
-				invite.AcceptedMember = member
-				invite.Status = "accepted"
-				invite.WhenAccepted = datetime.datetime.now()
-				invite.put()
-
-			self.redirect("/ResetPassword/%s" % member.key())
+#			if invite:
+#				invite.AcceptedMember = member
+#				invite.Status = "accepted"
+#				invite.WhenAccepted = datetime.datetime.now()
+#				invite.put()
 
 
-class Login(webapp.RequestHandler):
+
+class Login(app.RequestHandler):
 	def get(self):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			if comeback:
 				self.redirect(comeback)
@@ -766,7 +778,7 @@ class Login(webapp.RequestHandler):
 			self.render2('views/login.html')
 
 	def post(self):
-		onRequest(self)
+		self.onRequest()
 		username = self.request.get("username")
 		password = self.request.get("password")
 		comeback = self.request.get("comeback")
@@ -791,18 +803,18 @@ class Login(webapp.RequestHandler):
 		self.render2('views/login.html')
 
 
-class PasswordSent(webapp.RequestHandler):
+class PasswordSent(app.RequestHandler):
 	def get(self, key):
-		onRequest(self)
+		self.onRequest()
 		member = Member.get(key)
 		if member:
 			self.Model.update({"member": member})
 			self.render2('views/passwordSent.html')
 		else: self.error(404)
 
-class ResetPassword(webapp.RequestHandler):
+class ResetPassword(app.RequestHandler):
 	def get(self, key):
-		onRequest(self)
+		self.onRequest()
 		if key:
 			member = Member.get(key)
 			if member:
@@ -814,7 +826,7 @@ class ResetPassword(webapp.RequestHandler):
 			self.render("views/resetPassword.html")
 	
 	def post(self, key):
-		onRequest(self)
+		self.onRequest()
 		if not key:
 			usernameOrEmail = self.request.get("usernameOrEmail")
 			if usernameOrEmail:
@@ -831,14 +843,14 @@ class ResetPassword(webapp.RequestHandler):
 				self.render("views/resetPassword.html")
 		else: self.error(404)
 
-class Logout(webapp.RequestHandler):
+class Logout(app.RequestHandler):
 	def get(self):
 		logout(self)
 		self.redirect("/")
 
-class AccountView(webapp.RequestHandler):
+class AccountView(app.RequestHandler):
 	def get(self):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.setVisitedMember(self.CurrentMember)
 			self.Model.update({
@@ -847,9 +859,9 @@ class AccountView(webapp.RequestHandler):
 			self.render2('views/viewAccount.html')
 		else: self.requestLogin()
 
-class EditAccount(webapp.RequestHandler):
+class EditAccount(app.RequestHandler):
 	def get(self):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.setVisitedMember(self.CurrentMember)
 			if self.CurrentMember.ProfilePhoto: hasProfilePhoto = True
@@ -867,7 +879,7 @@ class EditAccount(webapp.RequestHandler):
 		else: self.requestLogin()
 	
 	def post(self):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.CurrentMember.flushCache()
 			self.setVisitedMember(self.CurrentMember)
@@ -904,9 +916,9 @@ class EditAccount(webapp.RequestHandler):
 				self.redirect("/Account/View")
 		else: self.requestLogin()
 
-class AccountChangeProfilePhoto(webapp.RequestHandler):
+class AccountChangeProfilePhoto(app.RequestHandler):
 	def get(self):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.setVisitedMember(self.CurrentMember)
 			self.Model.update({
@@ -916,7 +928,7 @@ class AccountChangeProfilePhoto(webapp.RequestHandler):
 		else: self.requestLogin()
 	
 	def post(self):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.setVisitedMember(self.CurrentMember)
 			tmpProfilePhoto = self.request.get("profilePhotoProxy")
@@ -937,16 +949,16 @@ class AccountChangeProfilePhoto(webapp.RequestHandler):
 		else: self.requestLogin()
 
 
-class AccountChangePassword(webapp.RequestHandler):
+class AccountChangePassword(app.RequestHandler):
 	def get(self):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.setVisitedMember(self.CurrentMember)
 			self.render('views/account-changePassword.html')
 		else: self.requestLogin()
 	
 	def post(self):
-		onRequest(self)
+		self.onRequest()
 		if self.CurrentMember:
 			self.setVisitedMember(self.CurrentMember)
 			oldPassword = self.request.get("oldPassword")

@@ -1,4 +1,6 @@
-{% if environment.isGoogle %}
+{% if not environment %}
+	<script type="text/javascript" src="/scripts/packed.js"></script>
+{% elif environment.isGoogle %}
 	<script type="text/javascript" src="/scripts/packed.js"></script>
 {% else %}
 	<script type="text/javascript" src="/scripts/jquery/jquery.form.js"></script>

@@ -35,7 +35,7 @@ class script(addons.Handler):
 		"uri": "/script"
 		}
 
-	def get(self):
+	def get(self, params=None, context=None):
 		content = "<script src='http://%s/pages/general/widgets/tab.js?alignment=%s&amp;color=%s' type='text/javascript'></script>"
 		return content % (
 			self.addon.options.get("domain"),

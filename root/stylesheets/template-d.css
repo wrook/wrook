@@ -20,7 +20,7 @@ h1 {
 }
 
 h2 {
-	padding: 10px 0px 10px 0px;
+	padding: 0px 0px 10px 0px;
 	margin: 0px;
 	font-size: 1.4em;
 	color: #000000;
@@ -62,7 +62,6 @@ table tr td {
 #header {
 	position: relative;
 	background: url(/images/background50black.png);
-	height: 45px;
 	width: 100%;
 }
 
@@ -119,104 +118,126 @@ table tr td {
 }
 
 
-#header #siteName {
-	position: absolute;
-	display: block;
-	left: 15px;
-}
-#header #siteName h1 {
-	font-size: 1em;
-	font-weight: bold;
+
+#serverInfoBar {
+	position: relative;
+	background: #000000;
+	color: #FFFFFF;
+	width: 100%;
+	text-align: center;
 }
 
-#header #siteName h1 a:visited,
-#header #siteName h1 a:link {
+#serverInfoBar-inner {
+	position: relative;
+	width: 860px;
+	text-align: left;
+	margin: 0px auto;
+}
+
+#siteName {
+	position: relative;
 	display: block;
+	left: 3px;
+	padding-left: 13px;
+	background: url(../images/ebookServerLogo.png) 0px 3px no-repeat;
+}
+#siteName h1 {
+	font-size: 1.1em;
+	margin: 0px;
+	padding: 0px;
+	font-weight: normal;
+	padding: 5px 5px 7px 5px;
+}
+
+#siteName h1 a:visited,
+#siteName h1 a:link {
 	text-decoration: none;
 	color: #FFF;
-	padding: 3px 5px;
 }
-#header #siteName h1 a:hover {
-	background: #000;
-	-moz-border-radius: 5px;
+#siteName h1 a:hover {
+	text-decoration: underline;
+}
+#siteTagline {
+	font-weight: normal;
+	color: #999999;
 }
 
+
 #nav {
-	position: absolute;
-	top: 22px;
-	left: 0px;
-	height: 40px;
-	width: 735px;
-	z-index: 1500;
+	position: relative;
+	text-align: left;
 }
 
 #nav #mainMenu {
-	position: absolute;
+	position: relative;
 	left: 15px;
 }
 
 #nav #mainMenu ul {
+	position: relative;
 	list-style: none;
 	margin: 0px;
-	padding: 0px;
+	padding: 10px 0px;
 }
 
 #nav #mainMenu ul li {
+	position: relative;
 	list-style: none;
 	margin: 0px;
-	padding: 0px;
 	display: inline;
 }
 
 #nav #mainMenu ul li a:visited,
 #nav #mainMenu ul li a:link {
+	position: relative;
 	color: #ffffff;
-	font-size: 1.3em;
+	font-size: 1.5em;
 	text-decoration: none;
-	padding: 3px 5px;
+	padding: 5px 5px;
 }
 #nav #mainMenu ul li a:hover {
 	background: #000;
 	-moz-border-radius: 5px;
-	/*
-	text-decoration: underline;
-	*/
 }
-#nav #mainMenu ul li.secondaryMenuItem a:visited,
-#nav #mainMenu ul li.secondaryMenuItem a:link {
-	font-size: 1.1em;
+#nav #mainMenu ul .secondaryMenuItem a:visited,
+#nav #mainMenu ul .secondaryMenuItem a:link {
+	font-size: 1.3em;
 }
 
-#nav #accessMenu {
+/**
+ * @component
+ * @name: accessMenu
+*/
+#accessMenu {
 	position: absolute;
 	right: 0px;
 	top: 0px;
 }
 
-#nav #accessMenu ul {
+#accessMenu ul {
 	list-style: none;
 	margin: 0px;
-	padding: 0px;
+	padding: 4px 0px 2px 0px;
 }
 
-#nav #accessMenu ul li {
+#accessMenu ul li {
 	list-style: none;
 	margin: 0px;
 	padding: 0px;
 	display: inline;
 }
 
-#nav #accessMenu ul li a:visited,
-#nav #accessMenu ul li a:link {
+#accessMenu ul li a:visited,
+#accessMenu ul li a:link {
 	color: #ffffff;
-	font-size: 1.3em;
+	font-size: 1.2em;
 	text-decoration: none;
-	padding: 3px 5px;
+	padding: 0px 5px;
 }
-#nav #accessMenu ul li a:hover {
-	background: #000;
-	-moz-border-radius: 5px;
+#accessMenu ul li a:hover {
+	text-decoration: underline;
 }
+/* @end */
 
 
 #memberAvatar {
@@ -224,7 +245,9 @@ table tr td {
 	height: 180px;
 	width: 180px;
 	margin-left: 10px;
+	overflow: hidden;
 }
+
 #memberName {
 	position: absolute;
 	top: 16px;
@@ -246,27 +269,9 @@ table tr td {
 	left: 92px;
 	background: url(/images/background50black.png);
 }
-#header #logo {
-	position: absolute;
-	display: block;
-	left: 745px;
-	top: 6px;
-	width: 121px;
-	height: 45px;
-	overflow: hidden;
-}
-#header #logo a:visited,
-#header #logo a:link {
-	position: absolute;
-	display: block;
-	left: 0px;
-	top: 0px;
-	width: 121px;
-	height: 45px;
-	background: url(/images/header-logo.png) no-repeat;
-	text-indent: -1000px;
-	z-index: 1000;
-	border: none;
+
+#logo {
+	display: none;
 }
 
 #pageFooter {
@@ -306,30 +311,28 @@ table tr td {
 	display: block;
 	position: relative;
 	left: 0px;
-	margin: 0px 0px 0px 0px;
-	padding: 0px 5px 0px 0px;
+	margin: 0px;
+	padding: 0px;
 	color: #fff;
 	text-decoration: none;
+	background: url(/images/background50black.png) repeat;
+	-moz-border-radius: 5px 5px 0px 0px;
 }
 .sectionMenu ul li a span {
 	display: block;
 	position: relative;
-	left: 10px;
 	margin: 0px 0px 0px 0px;
-	padding: 4px 8px 4px 0px;
+	padding: 4px 8px 4px 8px;
 }
 
-.sectionMenu ul li.current,
+.sectionMenu ul li.current a,
 .sectionMenu ul li a:hover {
-	background: #FFF;
+	background: #FFFFFF !important;
 	-moz-border-radius: 5px 5px 0px 0px;
 }
 .sectionMenu ul li.current a span,
 .sectionMenu ul li a:hover span {
 	color: #000;
-}
-.sectionMenu ul li.current a span {
-	padding: 8px 16px 0px 0px;
 }
 
 .sectionMenu .socialLinks {
@@ -468,7 +471,7 @@ table tr td {
 .contentBlock .blockContent .blockBody .middle {
 	position: relative;
 	background: #fff;
-	padding: 0px 10px 0px 20px;
+	padding: 0px 10px 0px 10px;
 	border: 1px solid #fff;
 }
 .contentBlock .blockContent .blockBody .bottom {
@@ -517,69 +520,6 @@ table tr td {
 
 
 
-
-
-/*
-
-LEGACY ???
-
-.section {
-	position: relative;
-	background: url(../images/pageSection-shadow.png) no-repeat;
-	width: 712px;
-}
-
-.sectionHeader.withProfileMenu {
-	background: url(../images/pageSection-shadow.png) no-repeat;
-}
-
-.sectionHeader.withProfileMenu {
-	position: relative;
-	padding-left: 65px;
-	height: 60px;
-}
-.sectionHeader h1 {
-	font-family: courier new, courier, serif;
-	color: #FFFFFF;
-	font-size: 1.8em;
-	padding: 10px 0px 0px 10px;
-	min-height: 24px;
-	font-weight: bold;
-	width: 580px;
-}
-
-.sectionHeader h1 a:visited,
-.sectionHeader h1 a:link {
-	color: #FFFFFF;
-	text-decoration: none;
-}
-
-.sectionBody {
-	position: relative;
-	margin: 10px 10px 0px 10px;
-	background: #fff;
-	color: #000;
-}
-.sectionBodyContent {
-	position: relative;
-	padding: 10px 20px 10px 20px;
-}
-.sectionBodyFooter {
-	padding: 5px 0px 5px 10px;
-	margin: 0px 10px 0px 10px;
-	background: #e6e6e6;
-	color: #000;
-	min-height: 24px;
-}
-
-.sectionFooter {
-	background: url(../images/pageSection-shadow.png) bottom left no-repeat;
-	width: 712px;
-	height: 10px;
-	margin-bottom: 20px;
-}
-
-*/
 
 #pageContent .chapterInfo{
 	text-align: center;
@@ -665,21 +605,6 @@ LEGACY ???
 }
 
 
-#siteBar {
-	position: relative;
-	background: #000000;
-	color: #FFFFFF;
-	height: 50px;
-	position: absolute;
-	top: 0px;
-	right: 0px;
-}
-
-#siteBarContent {
-	position: relative;
-	margin: 0px 0px 0px 200px;
-}
-
 #currentMemberAvatar {
 	margin-left: 5px;
 }
@@ -691,17 +616,6 @@ LEGACY ???
 	top: 0px;
 	right: 0px;
 	overflow: visible;
-}
-
-
-#sidebar-content {
-	background: url(/images/logoAndBackground.png) 0px -93px no-repeat;
-	padding: 0px;
-	margin: 0px 0px 0px 0px;
-}
-#sidebar-footer {
-	height: 150px;
-	background: url(/images/logoAndBackground.png) left bottom no-repeat;
 }
 
 .sidebarPanel {
@@ -770,22 +684,6 @@ LEGACY ???
 
 
 
-
-#halfBakedLogo {
-	position: absolute;
-	top: -12px;
-	left: 857px;
-	z-index: 2000;
-}
-
-#halfBakedLogo a {
-	display: block;
-	width: 82px;
-	height: 83px;
-	background: url(/images/half-baked-small.png) no-repeat;
-}
-
-
 #secondarySidebar {
 	padding: 10px;
 	position: absolute;
@@ -804,9 +702,6 @@ LEGACY ???
 	font-size: 1.5em;
 	font-weight: normal;
 }
-
-
-
 
 
 

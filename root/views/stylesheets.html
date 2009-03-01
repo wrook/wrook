@@ -1,4 +1,6 @@
-{% if environment.isGoogle %}
+{% if not environment %}
+	<link rel="stylesheet" type="text/css" href="/stylesheets/packed.css" />
+{% elif environment.isGoogle %}
 	<link rel="stylesheet" type="text/css" href="/stylesheets/packed.css" />
 {% else %}
 	<link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />

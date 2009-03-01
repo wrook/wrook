@@ -97,5 +97,5 @@ Before you join Wrook, we need to learn a few things about you. After you filled
 
 {% endblock %}
 {% block sidebar %}
-	{% include "panels-aboutWrook2.html" %}
+	{{ addons("pew://join.membership.module.wrook.org/sidebar").get() }}
 {% endblock %}

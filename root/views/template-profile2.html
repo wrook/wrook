@@ -56,7 +56,11 @@ $(document).ready(function(){
 				<h1><a href="/Members/{{ visitedMember.key() }}">
 					{{ visitedMember.fullname() }}
 				</a></h1>
-				{% set _isCurrentMember = (visitedMember.key()==currentMember.key()) %}
+				{% if currentMember %}
+					{% set _isCurrentMember = (visitedMember.key()==currentMember.key()) %}
+				{% else %}
+					{% set _isCurrentMember = False %}
+				{% endif %}
 				{{ memberMacros.tabs_profile(visitedMember, subSection, isCurrentMember==_isCurrentMember) }}
 				<div class="clearfix"></div>
 			</div>
@@ -74,32 +78,34 @@ $(document).ready(function(){
 							</a>
 						</div>
 					{% endif %}
-					{% if currentMember.key() != visitedMember.key() %}
-						<div class="sidebarPanel">
-							<div class="sidebarMenu">
-								<ul>
-									{% if currentMember.get_relationship_status(visitedMember, "follower") == "ok" %}
-										<li>
-											<a id="doStopFollowing" href="#">
-												<span class="spriteIcons icon-profile-added"></span>
-												<span class="label">
-													{% trans %}Following{% endtrans %}
-												</span>
-											</a>
-										</li>
-									{% else %}
-										<li>
-											<a id="doFollow" href="#">
-												<span class="spriteIcons icon-profile-add"></span>
-												<span class="label">
-													{% trans %}Follow!{% endtrans %}
-												</span>
-											</a>
-										</li>
-									{% endif %}
-								</ul>
+					{% if currentMember %}
+						{% if currentMember.key() != visitedMember.key() %}
+							<div class="sidebarPanel">
+								<div class="sidebarMenu">
+									<ul>
+										{% if currentMember.get_relationship_status(visitedMember, "follower") == "ok" %}
+											<li>
+												<a id="doStopFollowing" href="#">
+													<span class="spriteIcons icon-profile-added"></span>
+													<span class="label">
+														{% trans %}Following{% endtrans %}
+													</span>
+												</a>
+											</li>
+										{% else %}
+											<li>
+												<a id="doFollow" href="#">
+													<span class="spriteIcons icon-profile-add"></span>
+													<span class="label">
+														{% trans %}Follow!{% endtrans %}
+													</span>
+												</a>
+											</li>
+										{% endif %}
+									</ul>
+								</div>
 							</div>
-						</div>
+						{% endif %}
 					{% endif %}
 					{% block sidebar %}{% endblock %}
 				</div>

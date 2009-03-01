@@ -5,6 +5,27 @@
 # Read original article at http://pytute.blogspot.com/2007/04/python-plugin-system.html
 
 import re
+from google.appengine.ext import db
+
+
+class pew_addon_profile(db.Model):
+	uri = db.StringProperty(default="pew://", verbose_name=_("URI"))
+	isEnabled = db.BooleanProperty(default=False, verbose_name=_("Is enabled?"))
+	options = db.TextProperty(default=None, verbose_name=_("Options"))
+
+def get_pew_addon_profile(uri, enabledByDefault=False):
+	#load or create a addon profile from the datastore or cache
+
+	#TODO: Add duplicate detection and removal to enforce unique uri
+	addonProfiles = pew_addon_profile.all().filter("uri =",uri).fetch(1)
+	#TODO: Add caching
+	if len(addonProfiles) > 0:
+		return addonProfiles[0]
+	else:
+		addonProfile = pew_addon_profile(uri=uri)
+		if enabledByDefault: addonProfile.isEnabled = True
+		addonProfile.put()
+		return addonProfile
 
 class Handler():
 	"""
@@ -46,13 +67,14 @@ class Addon():
 	mappings = []
 	defaultOptions = {}
 	options = {}
+	WSGIApplication = None
+	WSGIRequest = None
 
 	def __init__(self, data=None):
-		if data:
-			paramOptions = data["options"]
-			self.options = {}
-			if self.defaultOptions: self.options.extend(self.defaultOptions)
-			if paramOptions: self.options.extend(paramOptions)
+		paramOptions = data.get("options")
+		self.options = {}
+		if self.defaultOptions: self.options.extend(self.defaultOptions)
+		if paramOptions: self.options.extend(paramOptions)
 		self.init()
 
 	def init(self):
@@ -67,8 +89,7 @@ class Addon():
 					_mappings += [(url[len(scheme)+1:], handler)]
 		return _mappings
 
-	def render(self, template_name="", template_dirs=[]):
-		model = []
+	def render(self, template_name="", context=None, template_dirs=[]):
 
 		import django_trans_patch as translation
 		from jinja2 import Environment
@@ -81,17 +102,21 @@ class Addon():
 
 		try: template = env.get_template(template_name)
 		except TemplateNotFound: raise TemplateNotFound(template_name)
-		return template.render(model)
+		return template.render(context)
 
 
 class Addons():
 
+	WSGIRequest = None
+	WSGIApplication = None
 	_addonMappings = []
 	_addonMappingsCompiled = []
 	_wsgiHandlers = []
 	_selection = []
 	matches = []
 	addons = []
+	baseFolder = ""
+	context=None
 
 	def __init__(self):
 		self._addonMappings = []
@@ -101,6 +126,7 @@ class Addons():
 		self.matches = []
 		self.addons = []
 		self.baseFolder = ""
+		self.context = None
 
 	def __call__(self, uri):
 		""" Finds the matching handlers according to the addon uri requested. """
@@ -133,12 +159,25 @@ class Addons():
 		for addon in imported_addons:
 			addonInstance = addon.addon({})
 			if addonInstance.meta:
+
+				#Get the persistence data for this addon
+				enabledByDefault = False
+				if addonInstance.meta.get("enabledByDefault")==True: enabledByDefault = True
+
+				addonProfile = get_pew_addon_profile(addonInstance.meta["uri"], enabledByDefault=enabledByDefault)
+				if addonProfile:
+					addonInstance.meta["options"] = addonProfile.options
+					addonInstance.meta["isEnabled"] = addonProfile.isEnabled
+				else:
+					addonInstance.meta["options"] = None
+					addonInstance.meta["isEnabled"] = "broken"
+
 				self.addons += [(
 					addonInstance.meta["uri"],
 					addonInstance.meta["version"],
 					addonInstance
 					)]
-				
+
 			wsgiHandlers = addonInstance.parseMappings("wsgi")
 			if wsgiHandlers: self._wsgiHandlers += wsgiHandlers 
 
@@ -179,15 +218,26 @@ class Addons():
 #		self._addonMappings = url_mapping
 		return url_mapping
 	
-	def get(self):
-		""" Return the concatenated html of all addon responses. """
+	def get(self, params=None):
+		""" Return concatenated string of all responses. """
 		content = ""
 		if self.matches:
 			for handler, args, addon in self.matches:
 				if handler:
 					handlerInstance = handler(addon)
-					_content = handlerInstance.get()
+					_content = handlerInstance.get(params=params, context=self.context)
 					if _content: content += _content
 		return content
+
+	def call(self, params=None):
+		""" Return an array of the data response from each addon. """
+		data = []
+		if self.matches:
+			for handler, args, addon in self.matches:
+				if handler:
+					handlerInstance = handler(addon)
+					_data = handlerInstance.call(params=params, context=self.context)
+					if _data: data += [_data]
+		return data
 
 

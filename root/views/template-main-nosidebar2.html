@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		{% include "views/stylesheets.html" %}
@@ -9,9 +10,7 @@
 		{% endif %}
 		{% if appConfig %}
 			<title>
-				{% trans sitename=appConfig.SiteName %}
-					{{ sitename }} eBook Server
-				{% endtrans %}
+				{% trans sitename=appConfig.SiteName %}{{ sitename }} eBook Server{% endtrans %}
 				: {% block pageTitle %}{{ appConfig.SiteTagline }}{% endblock %}
 			</title>
 			{% block htmlHead %}{% endblock %}
@@ -38,39 +37,77 @@
 		{% endif %}
 		<div id="spritesPreload"></div>
 		<div id="page">
+			<div id="serverInfoBar">
+				<div id="serverInfoBar-inner">
+					{% if appConfig %}
+						<div id="siteName">
+							<h1>
+								<a href="/">
+									{% trans sitename=appConfig.SiteName %}
+										<strong>{{ sitename }}</strong> Book Server
+									{% endtrans %}
+								</a>
+								{% if appConfig.SiteTagline %}
+									<span id="siteTagline">&#160;&#160;:&#160;&#160;{{ appConfig.SiteTagline }}</span>
+								{% endif %}
+							</h1>
+						</div>
+					{% endif %}
+					{% if currentMember %}
+						<div id="accessMenu">
+							<ul>
+								<li><a id="menu-accountSettings" href="/Account/View">
+									{% trans %}Account settings{% endtrans %}
+								</a></li>
+								<li><a id="menu-logout" href="/Logout">
+									{% trans %}Logout{% endtrans %}
+								</a></li>
+							</ul>
+						</div>
+					{% else %}
+						<div id="accessMenu">
+							<ul>
+								<li><a id="menu-join" href="/Join/">{% trans %}Join{% endtrans %}</a></li>
+								<li><a id="menu-login" href="/Login">{% trans %}Login{% endtrans %}</a></li>
+							</ul>
+						</div>
+					{% endif %}
+				</div>
+			</div>
 			<div id="header">
 				<div id="headerInner">
-					<div id="halfBakedLogo"><a  id="link-halfBaked" href="/About/Half-Baked-Edition"></a></div>
-					<div id="logo">
-						<a href="/">{% trans %}Wrook{% endtrans %}</a>
-					</div>
-					<div id="siteName">
-						<h1>
-							<a href="/">
-								{% trans sitename=appConfig.SiteName %}
-									{{ sitename }} eBook Server
-								{% endtrans %}
-							</a>
-						</h1>
-					</div>
+					<div id="logo"></div>
 					<div id="nav">
 						{% if currentMember %}
+							{% set menuItems=addons("pew://navigation.wrook.org/main-menu").call() %}
 							<div id="mainMenu">
 								<ul>
 									<li><a id="menu-home" href="/">{% trans %}Home{% endtrans %}</a></li>
 									<li><a id="menu-books" href="/Books">{% trans %}Books{% endtrans %}</a></li>
 									<li><a id="menu-readers" href="/Members">{% trans %}Members{% endtrans %}</a></li>
+									{% for item in menuItems %}
+										{% if not item["isSecondary"] %}
+											<li class="secondaryMenuItem">
+												<a id="menu-{{ item['id'] }}" href="{{ item['url'] }}">
+													{{ item['label'] }}
+												</a>
+											</li>
+										{% endif %}
+									{% endfor %}
 									<li>|</li>
 									{#
 									<li class="secondaryMenuItem"><a id="menu-invites" href="/Invites">{% trans %}Invites{% endtrans %}</a></li>
 									#}
 									<li class="secondaryMenuItem"><a id="menu-customize" href="/Customize">{% trans %}Customize{% endtrans %}</a></li>
-								</ul>
-							</div>
-							<div id="accessMenu">
-								<ul>
-									<li><a id="menu-accountSettings" href="/Account/View">{% trans %}Account settings{% endtrans %}</a></li>
-									<li><a id="menu-logout" href="/Logout">{% trans %}Logout{% endtrans %}</a></li>
+									{% for item in menuItems %}
+										{% if item["isSecondary"] %}
+											<li class="secondaryMenuItem">
+												<a id="menu-{{ item['id'] }}" href="{{ item['url'] }}">
+													{{ item['label'] }}
+												</a>
+											</li>
+										{% endif %}
+									{% endfor %}
 								</ul>
 							</div>
 						{% else %}
@@ -79,12 +116,6 @@
 									<li><a id="menu-home" href="/">{% trans %}Home{% endtrans %}</a></li>
 									<li><a id="menu-books" href="/Books">{% trans %}Books{% endtrans %}</a></li>
 									<li><a id="menu-readers" href="/Members">{% trans %}Members{% endtrans %}</a></li>
-								</ul>
-							</div>
-							<div id="accessMenu">
-								<ul>
-									<li><a id="menu-join" href="/Join/">{% trans %}Join{% endtrans %}</a></li>
-									<li><a id="menu-login" href="/Login">{% trans %}Login{% endtrans %}</a></li>
 								</ul>
 							</div>
 						{% endif %}
@@ -103,6 +134,8 @@
 			</div>
 		</div>
 		{% include "views/scripts.html" %}
-		{{ addons("pew://templates.wrook.org/all/body-end").get() }}
+		{% if addons %}
+			{{ addons("pew://templates.wrook.org/all/body-end").get() }}
+		{% endif %}
 	</body>
 </html>
