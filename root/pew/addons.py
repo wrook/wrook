@@ -90,7 +90,6 @@ class Addon():
 		return _mappings
 
 	def render(self, template_name="", context=None, template_dirs=[]):
-
 		import django_trans_patch as translation
 		from jinja2 import Environment
 		from jinja2 import FileSystemLoader

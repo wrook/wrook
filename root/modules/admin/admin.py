@@ -129,23 +129,6 @@ class AdminCommands(RequestHandler):
 		result = CommandResult(ErrorCode=0, Message=_("All chapter numbers have been reseted to 0!"))
 		return result
 
-class insert_admin_menu(addons.Handler):
-	meta = {
-		"title": "Insert admin menu",
-		"description": "Insert menu items for the admin section.",
-		"uri": "/insert_admin_menu"
-		}
-
-	def get(self):
-		html = self.addon.render("panels-aboutWrook2.html", self.get_template_directories())
-		return html
-
-	#TODO: Refactor... duplicate in the request handler		
-	def get_template_directories(self):
-		import os
-		dirs = []
-		dirs += [os.path.join(os.path.dirname(__file__), "views")]
-		return dirs
 
 
 class Test(RequestHandler):

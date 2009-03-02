@@ -79,7 +79,7 @@
             <key>addon</key>
             <string>pew\addons.py</string>
             <key>addons</key>
-            <string>modules\plugins\views\addons.html</string>
+            <string>pew\addons.py</string>
             <key>admin</key>
             <string>modules\admin\admin.py</string>
             <key>admin.py</key>

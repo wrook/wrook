@@ -18,6 +18,7 @@ URGENT : Bring back the commit batch file from git
 	* persist json addon configs in their own google table 
 
 Read: http://www.pbs.org/mediashift/2009/02/your-guide-to-e-books043.html
+Investigate: http://weread.com/
 Investigate: http://shortcovers.com/
 Investigate: http://www.booksprouts.com/
 Investigate: http://www.shelfari.com/

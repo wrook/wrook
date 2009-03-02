@@ -15,7 +15,7 @@ from google.appengine.ext.db import djangoforms
 from google.appengine.api import memcache
 from google.appengine.api import images
 
-from feathers import webapp
+#from feathers import webapp
 from feathers import talk
 
 import app
@@ -58,6 +58,10 @@ def URLMappings():
 		( '/Covers/SetDefault', CoverSetDefault),
 		( '/Covers/Select', CoverSelect),
 		(r'/Covers/(.*)', CoverView)]
+
+
+class RequestHandler(app.RequestHandler):
+	pass
 
 def deleteChapter(chapter):
 	#TODO: Refactor -  Put back in the chapter object
@@ -403,7 +407,7 @@ class ChapterFormForCreate(djangoforms.ModelForm):
 		model = Chapter
 		fields = ("Name", "Title", "Stage")
 
-class ViewBook(webapp.RequestHandler):
+class ViewBook(RequestHandler):
 
 	def get(self, key):
 		onRequest(self)
@@ -436,7 +440,7 @@ class ViewBook(webapp.RequestHandler):
 			self.render2('views/books-view.html')
 		else: self.raise_http404()
 
-class ViewBook_Contents(webapp.RequestHandler):
+class ViewBook_Contents(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		#Before loading a book from the key, lets try to find it from the Slug
@@ -469,7 +473,7 @@ class ViewBook_Contents(webapp.RequestHandler):
 		else: self.error(404)
 
 
-class DeleteChapter(webapp.RequestHandler):
+class DeleteChapter(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -499,7 +503,7 @@ class DeleteChapter(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-class DeleteBook(webapp.RequestHandler):
+class DeleteBook(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -529,7 +533,7 @@ class DeleteBook(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-class handler_chapter_read(webapp.RequestHandler):
+class handler_chapter_read(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -546,7 +550,7 @@ class handler_chapter_read(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.requestLogin(comeback="/ViewChapter/%s" % key)
 
-class handler_chapter_setAsStartingPoint(webapp.RequestHandler):
+class handler_chapter_setAsStartingPoint(RequestHandler):
 	def get(self, bookKey, chapterKey, method):
 		onRequest(self)
 		if self.CurrentMember:
@@ -565,7 +569,7 @@ class handler_chapter_setAsStartingPoint(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.error(500)
 
-class EditChapterOptions(webapp.RequestHandler):
+class EditChapterOptions(RequestHandler):
 	def get( self, key ):
 		onRequest(self)
 		if self.CurrentMember:
@@ -603,7 +607,7 @@ class EditChapterOptions(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-class Books(webapp.RequestHandler):
+class Books(RequestHandler):
 	def get(self):
 		onRequest(self)
 		stage = self.request.get("stage")
@@ -618,7 +622,7 @@ class Books(webapp.RequestHandler):
 			self.Model.update({'books': Book.all()})
 		self.render2('views/books.html')
 
-class Books_Edit(webapp.RequestHandler):
+class Books_Edit(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -652,7 +656,7 @@ class Books_Edit(webapp.RequestHandler):
 				self.render("views/books-edit.html")
 		else: self.requestLogin()
 
-class Books_Talk(webapp.RequestHandler):
+class Books_Talk(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		book = Book.get(key)
@@ -661,7 +665,7 @@ class Books_Talk(webapp.RequestHandler):
 			self.render2('views/books-talk.html')
 		else: self.error(404)
 
-class Books_Feed(webapp.RequestHandler):
+class Books_Feed(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		book = Book.get(key)
@@ -678,7 +682,7 @@ class Books_Feed(webapp.RequestHandler):
 			self.render2('views/books-feed.html')
 		else: self.error(404)
 
-class handler_book_readers(webapp.RequestHandler):
+class handler_book_readers(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		book = Book.get(key)
@@ -688,7 +692,7 @@ class handler_book_readers(webapp.RequestHandler):
 		else: self.error(404)
 
 
-class Book_ReorderChapters(webapp.RequestHandler):
+class Book_ReorderChapters(RequestHandler):
 	def get(self, key):
 		from feathers import utils
 		chapterCount = utils.buildCountingList(50)
@@ -735,7 +739,7 @@ class Book_ReorderChapters(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-class Books_Edit_License(webapp.RequestHandler):
+class Books_Edit_License(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -770,7 +774,7 @@ class Books_Edit_License(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-class NewChapter(webapp.RequestHandler):
+class NewChapter(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -813,7 +817,7 @@ class NewChapter(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-class Typewriter(webapp.RequestHandler):
+class Typewriter(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -845,7 +849,7 @@ class CoverForm(djangoforms.ModelForm):
 		model = Cover
 		fields = ("SampleTitle", "TitleColor", "isReusable")
 
-class CoverSetDefault(webapp.RequestHandler):
+class CoverSetDefault(RequestHandler):
 	from feathers import proforma
 	#TODO: Refactor -  should be secure for admins???
 	def get(self):
@@ -868,7 +872,7 @@ class CoverSetDefault(webapp.RequestHandler):
 			else: self.error(500)
 		else: self.requestLogin()
 
-class BookSetCover(webapp.RequestHandler):
+class BookSetCover(RequestHandler):
 	def get(self, key):
 		from feathers import proforma
 		onRequest(self)
@@ -890,7 +894,7 @@ class BookSetCover(webapp.RequestHandler):
 			else: self.error(500)
 		else: self.requestLogin()
 
-class CoverEdit(webapp.RequestHandler):
+class CoverEdit(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -929,7 +933,7 @@ class CoverEdit(webapp.RequestHandler):
 				self.render("views/cover-edit.html")
 		else: self.requestLogin()
 
-class CoverThumbnail(webapp.RequestHandler):
+class CoverThumbnail(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		if key: cover = db.get(key)
@@ -962,7 +966,7 @@ class CoverThumbnail(webapp.RequestHandler):
 			self.response.out.write(thumbnailData)
 		else: self.error(404)
 
-class CoverImage(webapp.RequestHandler):
+class CoverImage(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		cover = Cover.get(key)
@@ -994,7 +998,7 @@ class CoverImage(webapp.RequestHandler):
 			self.error(404)
 	
 
-class CoverList(webapp.RequestHandler):
+class CoverList(RequestHandler):
 	def get(self):
 		onRequest(self)
 		self.Model.update({
@@ -1002,7 +1006,7 @@ class CoverList(webapp.RequestHandler):
 			})
 		self.render2('views/covers-list.html')
 
-class CoverSelect(webapp.RequestHandler):
+class CoverSelect(RequestHandler):
 	def get(self):
 		onRequest(self)
 		if self.CurrentMember:
@@ -1016,7 +1020,7 @@ class CoverSelect(webapp.RequestHandler):
 			self.render('views/covers-select.html')
 		else: self.requestLogin()
 
-class CoverView(webapp.RequestHandler):
+class CoverView(RequestHandler):
 	def get(self, key):
 		import app
 		onRequest(self)
@@ -1031,7 +1035,7 @@ class CoverView(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-class CoverShare(webapp.RequestHandler):
+class CoverShare(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		if self.CurrentMember:
@@ -1043,7 +1047,7 @@ class CoverShare(webapp.RequestHandler):
 			else: self.error(404)
 		else: self.requestLogin()
 
-class CoverUnshare(webapp.RequestHandler):
+class CoverUnshare(RequestHandler):
 	def get(self, key):
 		onRequest(self)
 		if self.CurrentMember:
